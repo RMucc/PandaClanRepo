@@ -480,6 +480,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8515807485063710007, guid: ae2d54a112c67544d9e945049f3710fc, type: 3}
+      propertyPath: dashForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8515807485063710007, guid: ae2d54a112c67544d9e945049f3710fc, type: 3}
+      propertyPath: dashSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8515807485063710007, guid: ae2d54a112c67544d9e945049f3710fc, type: 3}
+      propertyPath: dashDebounce
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8515807485063710007, guid: ae2d54a112c67544d9e945049f3710fc, type: 3}
+      propertyPath: dashDuration
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8515807485063710007, guid: ae2d54a112c67544d9e945049f3710fc, type: 3}
+      propertyPath: dashCooldownTime
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

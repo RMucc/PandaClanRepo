@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class RyansPlayerController : MonoBehaviour
 {
@@ -21,15 +22,28 @@ public class RyansPlayerController : MonoBehaviour
     //Player Private Variables
     private Vector3 playerVel;
     private Vector3 move;
+    private Vector3 dashMove;
     private bool groundedPlayer;
     private int jumpCount;
     private bool isShooting;
     private int originalHP;
+    private float originalPlayerVel;
+
+    //Dashing Variables
+    [SerializeField] float dashSpeed;
+    [SerializeField] float dashDuration;
+    [SerializeField] float dashDebounce;
+    [SerializeField] bool isDashing;
+    private float dashCount;
+    private float originalDashDebounce;
+    [SerializeField] float dashCooldownTime;
 
     // Start is called before the first frame update
     void Start()
     {
         originalHP = HP;
+        //originalPlayerVel = playerVel.x;
+        originalDashDebounce = dashDebounce;
     }
 
     // Update is called once per frame
@@ -60,8 +74,48 @@ public class RyansPlayerController : MonoBehaviour
             playerVel.y = jumpHeight;
             jumpCount++;
         }
+        //Check for double press D
+        if (Input.GetKeyDown(KeyCode.D) && !isDashing)
+        {
+            //Set Dash Count to how many taps you want minus 1
+            if (dashDebounce > 0 && dashCount == 1)
+            {
+                isDashing = true;
+                StartCoroutine(DashRight());
+            }
+            else
+            {
+                dashDebounce = originalDashDebounce;
+                dashCount += 1;
+            }
+        }
+        //Check for double press A
+        if (Input.GetKeyDown(KeyCode.A) && !isDashing)
+        {
+            //Set Dash Count to how many taps you want minus 1
+            if (dashDebounce > 0 && dashCount == 1)
+            {
+                StartCoroutine(DashLeft());
+            }
+            else
+            {
+                dashDebounce = originalDashDebounce;
+                dashCount += 1;
+            }
+        }
         playerVel.y += gravity * Time.deltaTime;
         controller.Move(playerVel * Time.deltaTime);
+
+
+        //Dash Debounce
+        if(dashDebounce  > 0)
+        {
+            dashDebounce -= 1 * Time.deltaTime;
+        }
+        else
+        {
+            dashCount = 0;
+        }
     }
 
     IEnumerator Shoot()
@@ -79,5 +133,33 @@ public class RyansPlayerController : MonoBehaviour
         }
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
+    }
+
+    IEnumerator DashRight()
+    {
+        float startTime = Time.time;
+        while(Time.time < startTime + dashDuration)
+        {
+            controller.Move(transform.right * dashSpeed * Time.deltaTime);
+            yield return null;
+        }
+        StartCoroutine(DashCoolDown());
+
+    }
+    IEnumerator DashLeft()
+    {
+        float startTime = Time.time;
+        while (Time.time < startTime + dashDuration)
+        {
+            controller.Move(-transform.right * dashSpeed * Time.deltaTime);
+            yield return null;
+        }
+        StartCoroutine(DashCoolDown());
+    }
+
+    IEnumerator DashCoolDown()
+    {
+        yield return new WaitForSeconds(dashCooldownTime);
+        isDashing = false;
     }
 }

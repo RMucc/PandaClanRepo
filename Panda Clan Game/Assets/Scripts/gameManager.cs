@@ -11,6 +11,7 @@ public class gameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
 
     public bool isPaused;
+    int enemyCount;
 
     //Place Holder
     //public bool isShopping;
@@ -50,5 +51,11 @@ public class gameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(false);
         menuActive = null;
+    }
+
+    public void updateGameGoal(int amount)
+    {
+        enemyCount += amount;
+
     }
 }

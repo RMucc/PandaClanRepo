@@ -749,11 +749,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: cc2e8672-b734-4939-abdd-976b71db924a
+  cloudProjectId: acb1b0e9-5dd3-429c-adf5-9db5c77ab328
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Panda Clan Game 2024-01-10_17-07-55
-  organizationId: rjmucc
+  projectName: Panda Clan Game
+  organizationId: kinggengar
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

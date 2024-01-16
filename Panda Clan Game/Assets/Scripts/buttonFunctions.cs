@@ -25,7 +25,8 @@ public class buttonFunctions : MonoBehaviour
 
     public void respawn()
     {
-        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameManager.instance.stateResume();
 
     }
 

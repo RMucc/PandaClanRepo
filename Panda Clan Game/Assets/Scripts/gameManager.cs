@@ -75,7 +75,7 @@ public class GameManager : MonoBehaviour
             menuActive.SetActive(true);
         }
     }
-
+    //a
     public void youSuck()
     {
         statePaused();

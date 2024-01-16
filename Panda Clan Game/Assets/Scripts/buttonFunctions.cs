@@ -8,13 +8,13 @@ public class buttonFunctions : MonoBehaviour
     //Pause Screen Buttons
     public void resume()
     {
-        gameManager.instance.stateResume();
+        GameManager.instance.stateResume();
     }
 
     public void restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        gameManager.instance.stateResume();
+        GameManager.instance.stateResume();
     }
 
     public void Quit()

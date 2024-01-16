@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class gameManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    public static gameManager instance;
+    public static GameManager instance;
 
     [SerializeField] GameObject menuActive; //Non tierd implementation. Will probably be changed later.
     //[SerializeField] GameObject menuTemp (Place holder for menu list??)
     [SerializeField] GameObject menuPause;
-
+    public GameObject player;
+    public RyansPlayerController playerScript;
     public bool isPaused;
     int enemyCount;
 
@@ -21,7 +22,8 @@ public class gameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-
+        player = GameObject.FindWithTag("Player");
+        playerScript = player.GetComponent<RyansPlayerController>();
     }
 
     // Update is called once per frame
@@ -56,6 +58,5 @@ public class gameManager : MonoBehaviour
     public void updateGameGoal(int amount)
     {
         enemyCount += amount;
-
     }
 }

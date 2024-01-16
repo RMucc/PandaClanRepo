@@ -129,7 +129,9 @@ MonoBehaviour:
   controller: {fileID: 2335441938592587263}
   HP: 5
   playerSpeed: 6
-  playerSpringSpeed: 12
+  playerSprintSpeed: 12
+  playerStamina: 5
+  playerStaminaRecover: 5
   jumpHeight: 12
   jumpMax: 2
   gravity: -25
@@ -142,6 +144,7 @@ MonoBehaviour:
   dashDebounce: 0.25
   isDashing: 0
   dashCooldownTime: 1.5
+  healthMax: 3
 --- !u!136 &1411126265662101492
 CapsuleCollider:
   m_ObjectHideFlags: 0

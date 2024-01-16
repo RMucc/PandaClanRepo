@@ -9,7 +9,9 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     [SerializeField] CharacterController controller;
     [SerializeField] int HP;
     [SerializeField] float playerSpeed;
-    [SerializeField] float playerSpringSpeed;
+    [SerializeField] float playerSprintSpeed;
+    [SerializeField] float playerStamina;
+    [SerializeField] float playerStaminaRecover;
     [SerializeField] float jumpHeight;
     [SerializeField] float jumpMax;
     [SerializeField] float gravity;
@@ -24,13 +26,20 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     private Vector3 playerVel;
     private Vector3 move;
     private Vector3 dashMove;
-    private bool groundedPlayer;
     private int jumpCount;
+
+    //Bool Values
+    private bool groundedPlayer;
     private bool isShooting;
     private bool isSprinting;
+    private bool isStaminaRecovering;
+
+    //Original Values
     private int originalHP;
     private float originalPlayerVel;
     private float originalPlayerSpeed;
+    private int originalHealthMax;
+    private float originalPlayerStamina;
 
     //Dashing Variables
     [SerializeField] float dashSpeed;
@@ -41,11 +50,16 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     private float originalDashDebounce;
     [SerializeField] float dashCooldownTime;
 
+    //Stat Variables for Player
+    public int healthMax;
+
     // Start is called before the first frame update
     void Start()
     {
+        originalHealthMax = healthMax;
         originalHP = HP;
         originalPlayerSpeed = playerSpeed;
+        originalPlayerStamina = playerStamina;
         //originalPlayerVel = playerVel.x;
         originalDashDebounce = dashDebounce;
     }
@@ -73,21 +87,24 @@ public class RyansPlayerController : MonoBehaviour, IDamage
 
         move = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
         controller.Move(move * playerSpeed * Time.deltaTime);
-
+        //Jump Input
         if(Input.GetButtonDown("Jump") && jumpCount < jumpMax)
         {
             playerVel.y = jumpHeight;
             jumpCount++;
         }
-        if(Input.GetKeyDown(KeyCode.LeftShift) && !isShooting)
+        //Sprint Input
+        if(Input.GetKeyDown(KeyCode.LeftShift) && !isShooting && !isStaminaRecovering)
         {
-            playerSpeed = playerSpringSpeed;
+            StartCoroutine(Sprint());
         }
         if(Input.GetKeyUp(KeyCode.LeftShift))
         {
             playerSpeed = originalPlayerSpeed;
+            isSprinting = false;
+            StopCoroutine(Sprint());
         }
-        //Check for double press D
+        //Forward Dash Input
         if (Input.GetKeyDown(KeyCode.W) && !isDashing)
         {
             //Set Dash Count to how many taps you want minus 1
@@ -102,6 +119,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 dashCount += 1;
             }
         }
+        //Backward Dash Input
         if (Input.GetKeyDown(KeyCode.S) && !isDashing)
         {
             //Set Dash Count to how many taps you want minus 1
@@ -116,6 +134,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 dashCount += 1;
             }
         }
+        //Right Dash Input
         if (Input.GetKeyDown(KeyCode.D) && !isDashing)
         {
             //Set Dash Count to how many taps you want minus 1
@@ -130,7 +149,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 dashCount += 1;
             }
         }
-        //Check for double press A
+        //Left Dash Input
         if (Input.GetKeyDown(KeyCode.A) && !isDashing)
         {
             //Set Dash Count to how many taps you want minus 1
@@ -157,6 +176,22 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         {
             dashCount = 0;
         }
+    }
+
+    IEnumerator Sprint()
+    {
+        isSprinting = true;
+        playerSpeed = playerSprintSpeed;
+        yield return new WaitForSeconds(playerStamina);
+        playerSpeed = originalPlayerSpeed;
+        isSprinting = false;
+        isStaminaRecovering = true;
+        StartCoroutine(SprintRecover());
+    }
+    IEnumerator SprintRecover()
+    {
+        yield return new WaitForSeconds(playerStaminaRecover);
+        isStaminaRecovering = false;
     }
     IEnumerator DashForward()
     {
@@ -227,18 +262,30 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
+        //Update UI Here
 
         if (HP <= 0)
         {
+            healthMax -= 1;
 
+            if(healthMax <= 0)
+            {
+                //Bring up You Lose Menu
+            }
+            else
+            {
+                respawn();
+            }
         }
     }
 
     public void respawn()
     {
         HP = originalHP;
+        //Update the UI Here
 
         controller.enabled = false;
         transform.position = GameManager.instance.playerSpawnPos.transform.position;
+        controller.enabled = true;
     }
 }

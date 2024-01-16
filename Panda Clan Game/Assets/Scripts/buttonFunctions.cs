@@ -23,6 +23,12 @@ public class buttonFunctions : MonoBehaviour
 
     }
 
+    public void respawn()
+    {
+        
+
+    }
+
     //Shop Buttons
 
 

@@ -9,6 +9,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     [SerializeField] CharacterController controller;
     [SerializeField] int HP;
     [SerializeField] float playerSpeed;
+    [SerializeField] float playerSpringSpeed;
     [SerializeField] float jumpHeight;
     [SerializeField] float jumpMax;
     [SerializeField] float gravity;
@@ -26,8 +27,10 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     private bool groundedPlayer;
     private int jumpCount;
     private bool isShooting;
+    private bool isSprinting;
     private int originalHP;
     private float originalPlayerVel;
+    private float originalPlayerSpeed;
 
     //Dashing Variables
     [SerializeField] float dashSpeed;
@@ -42,6 +45,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     void Start()
     {
         originalHP = HP;
+        originalPlayerSpeed = playerSpeed;
         //originalPlayerVel = playerVel.x;
         originalDashDebounce = dashDebounce;
     }
@@ -74,6 +78,14 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         {
             playerVel.y = jumpHeight;
             jumpCount++;
+        }
+        if(Input.GetKeyDown(KeyCode.LeftShift) && !isShooting)
+        {
+            playerSpeed = playerSpringSpeed;
+        }
+        if(Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            playerSpeed = originalPlayerSpeed;
         }
         //Check for double press D
         if (Input.GetKeyDown(KeyCode.D) && !isDashing)

@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     
     public GameObject player;
     public RyansPlayerController playerScript;
+    public GameObject playerSpawnPos;
 
     public bool isPaused;
     int enemyCount;
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<RyansPlayerController>();
+        //playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
 
     }
 
@@ -68,12 +70,12 @@ public class GameManager : MonoBehaviour
     {
         enemyCount += amount;
 
-        //if (enemyCount <= 0)
-        //{
-        //    statePaused();
-        //    menuActive = menuWin;
-        //    menuActive.SetActive(true); 
-        //}
+        if (enemyCount <= 0)
+        {
+            statePaused();
+            menuActive = menuWin;
+            menuActive.SetActive(true);
+        }
     }
 
     public void youSuck()

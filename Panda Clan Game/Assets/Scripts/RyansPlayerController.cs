@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class RyansPlayerController : MonoBehaviour
+public class RyansPlayerController : MonoBehaviour, IDamage
 {
     //Player Movement Variables
     [SerializeField] CharacterController controller;
@@ -64,6 +64,7 @@ public class RyansPlayerController : MonoBehaviour
         if(groundedPlayer)
         {
             jumpCount = 0;
+            playerVel.y = 0;
         }
 
         move = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
@@ -118,23 +119,6 @@ public class RyansPlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator Shoot()
-    {
-        isShooting = true;
-
-        RaycastHit hit;
-        if(Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(.5f, .5f)), out hit, shootDistance))
-        {
-            IDamage dmg = hit.collider.GetComponent<IDamage>();
-            if(dmg != null)
-            {
-                dmg.TakeDamage(shootDamage);
-            }
-        }
-        yield return new WaitForSeconds(shootRate);
-        isShooting = false;
-    }
-
     IEnumerator DashRight()
     {
         float startTime = Time.time;
@@ -161,5 +145,40 @@ public class RyansPlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(dashCooldownTime);
         isDashing = false;
+    }
+
+    IEnumerator Shoot()
+    {
+        isShooting = true;
+
+        RaycastHit hit;
+        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(.5f, .5f)), out hit, shootDistance))
+        {
+            IDamage dmg = hit.collider.GetComponent<IDamage>();
+            if (dmg != null)
+            {
+                dmg.TakeDamage(shootDamage);
+            }
+        }
+        yield return new WaitForSeconds(shootRate);
+        isShooting = false;
+    }
+
+    public void TakeDamage(int amount)
+    {
+        HP -= amount;
+
+        if (HP <= 0)
+        {
+
+        }
+    }
+
+    public void respawn()
+    {
+        HP = originalHP;
+
+        controller.enabled = false;
+        transform.position = GameManager.instance.playerSpawnPos.transform.position;
     }
 }

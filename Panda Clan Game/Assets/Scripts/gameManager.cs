@@ -1,16 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    [SerializeField] GameObject menuActive; //Non tierd implementation. Will probably be changed later.
-    //[SerializeField] GameObject menuTemp (Place holder for menu list??)
+    [SerializeField] GameObject menuActive; 
     [SerializeField] GameObject menuPause;
+    [SerializeField] GameObject menuResume;
+    [SerializeField] GameObject menuWin;
+    [SerializeField] GameObject menuLose;
+    public GameObject damageScreen;
+    public Image HPBar;
+    
     public GameObject player;
     public RyansPlayerController playerScript;
+
     public bool isPaused;
     int enemyCount;
 
@@ -22,8 +29,9 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        player = GameObject.FindWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<RyansPlayerController>();
+
     }
 
     // Update is called once per frame
@@ -55,8 +63,23 @@ public class GameManager : MonoBehaviour
         menuActive = null;
     }
 
+
     public void updateGameGoal(int amount)
     {
         enemyCount += amount;
+
+        //if (enemyCount <= 0)
+        //{
+        //    statePaused();
+        //    menuActive = menuWin;
+        //    menuActive.SetActive(true); 
+        //}
+    }
+
+    public void youSuck()
+    {
+        statePaused();
+        menuActive = menuLose;
+        menuActive.SetActive(true);
     }
 }

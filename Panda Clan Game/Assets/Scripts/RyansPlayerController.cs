@@ -88,6 +88,34 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             playerSpeed = originalPlayerSpeed;
         }
         //Check for double press D
+        if (Input.GetKeyDown(KeyCode.W) && !isDashing)
+        {
+            //Set Dash Count to how many taps you want minus 1
+            if (dashDebounce > 0 && dashCount == 1)
+            {
+                isDashing = true;
+                StartCoroutine(DashForward());
+            }
+            else
+            {
+                dashDebounce = originalDashDebounce;
+                dashCount += 1;
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.S) && !isDashing)
+        {
+            //Set Dash Count to how many taps you want minus 1
+            if (dashDebounce > 0 && dashCount == 1)
+            {
+                isDashing = true;
+                StartCoroutine(DashBackward());
+            }
+            else
+            {
+                dashDebounce = originalDashDebounce;
+                dashCount += 1;
+            }
+        }
         if (Input.GetKeyDown(KeyCode.D) && !isDashing)
         {
             //Set Dash Count to how many taps you want minus 1
@@ -130,7 +158,27 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             dashCount = 0;
         }
     }
+    IEnumerator DashForward()
+    {
+        float startTime = Time.time;
+        while (Time.time < startTime + dashDuration)
+        {
+            controller.Move(transform.forward * dashSpeed * Time.deltaTime);
+            yield return null;
+        }
+        StartCoroutine(DashCoolDown());
+    }
 
+    IEnumerator DashBackward()
+    {
+        float startTime = Time.time;
+        while (Time.time < startTime + dashDuration)
+        {
+            controller.Move(-transform.forward * dashSpeed * Time.deltaTime);
+            yield return null;
+        }
+        StartCoroutine(DashCoolDown());
+    }
     IEnumerator DashRight()
     {
         float startTime = Time.time;

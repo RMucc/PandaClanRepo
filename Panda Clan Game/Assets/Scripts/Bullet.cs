@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
 
         IDamage damageable = other.GetComponent<IDamage>();
 
-        if (damageable != null)
+        if (damageable != null && other.gameObject.tag == "Player")
         {
             damageable.TakeDamage(damage);
         }

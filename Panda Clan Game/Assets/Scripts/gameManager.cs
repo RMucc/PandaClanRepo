@@ -7,7 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    [SerializeField] GameObject menuActive; 
+    [SerializeField] GameObject menuActive;
+    [SerializeField] GameObject stamninaVisable;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
@@ -15,7 +16,7 @@ public class GameManager : MonoBehaviour
     public Image HPBar;
     public Image AMMOBar;
     public Image StaminaWheel;
-    
+
     public GameObject player;
     public RyansPlayerController playerScript;
     public GameObject playerSpawnPos;
@@ -43,9 +44,9 @@ public class GameManager : MonoBehaviour
 
     public void statePaused() //Reuseable for shops and other screens I guess
     {
-        isPaused= !isPaused;
+        isPaused = !isPaused;
         Time.timeScale = 0;
-        Cursor.visible= true;
+        Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
     }
 
@@ -70,12 +71,22 @@ public class GameManager : MonoBehaviour
             menuActive.SetActive(true);
         }
     }
-    
+
     public void youSuck()
     {
         statePaused();
         menuActive = menuLose;
         menuActive.SetActive(true);
+    }
+
+    public void showStamina()
+    {
+        stamninaVisable.SetActive(true);
+    }
+
+    public void hideStamina()
+    {
+        stamninaVisable.SetActive(false);
     }
 
 

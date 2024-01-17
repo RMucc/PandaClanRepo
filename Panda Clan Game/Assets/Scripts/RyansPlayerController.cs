@@ -262,7 +262,8 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
-        //Update UI Here
+        flashScreen();
+        updatePlayerUI();
 
         if (HP <= 0)
         {
@@ -282,7 +283,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     public void respawn()
     {
         HP = originalHP;
-        //Update the UI Here
+        updatePlayerUI();
 
         controller.enabled = false;
         transform.position = GameManager.instance.playerSpawnPos.transform.position;
@@ -293,5 +294,12 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         GameManager.instance.HPBar.fillAmount = (float)HP / originalHP;
         //Ammo update when ammo is added
         //Stamina update
+    }
+
+    IEnumerator flashScreen()
+    {
+        GameManager.instance.damageScreen.SetActive(true);
+        yield return new WaitForSeconds(0.2f);
+        GameManager.instance.damageScreen.SetActive(false);
     }
 }

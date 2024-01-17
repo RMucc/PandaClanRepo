@@ -270,7 +270,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
 
             if(healthMax <= 0)
             {
-                //Bring up You Lose Menu
+                GameManager.instance.youSuck();
             }
             else
             {
@@ -287,5 +287,11 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         controller.enabled = false;
         transform.position = GameManager.instance.playerSpawnPos.transform.position;
         controller.enabled = true;
+    }
+
+    public void updatePlayerUI() {
+        GameManager.instance.HPBar.fillAmount = (float)HP / originalHP;
+        //Ammo update when ammo is added
+        //Stamina update
     }
 }

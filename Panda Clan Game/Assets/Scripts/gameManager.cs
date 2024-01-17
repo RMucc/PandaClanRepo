@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     public GameObject damageScreen;
     public Image HPBar;
+    public Image AMMOBar;
+    public Image StaminaWheel;
     
     public GameObject player;
     public RyansPlayerController playerScript;
@@ -21,11 +23,6 @@ public class GameManager : MonoBehaviour
     public bool isPaused;
     int enemyCount;
 
-    //Place Holder
-    //public bool isShopping;
-
-
-    // Start is called before the first frame update
     void Awake()
     {
         instance = this;
@@ -34,7 +31,6 @@ public class GameManager : MonoBehaviour
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetButtonDown("Cancel") && menuActive == null)
@@ -45,7 +41,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void statePaused() //Reuseable for shops and other screens
+    public void statePaused() //Reuseable for shops and other screens I guess
     {
         isPaused= !isPaused;
         Time.timeScale = 0;
@@ -63,7 +59,6 @@ public class GameManager : MonoBehaviour
         menuActive = null;
     }
 
-
     public void updateGameGoal(int amount)
     {
         enemyCount += amount;
@@ -75,11 +70,13 @@ public class GameManager : MonoBehaviour
             menuActive.SetActive(true);
         }
     }
-    //a
+    
     public void youSuck()
     {
         statePaused();
         menuActive = menuLose;
         menuActive.SetActive(true);
     }
+
+
 }

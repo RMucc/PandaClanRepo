@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] int speed;
     [SerializeField] int destroyTime;
     [SerializeField] int damage;
+    [SerializeField] bool enemyBullet;
 
     void Start()
     {
@@ -24,7 +25,7 @@ public class Bullet : MonoBehaviour
 
         IDamage damageable = other.GetComponent<IDamage>();
 
-        if (damageable != null && other.gameObject.tag == "Player")
+        if (damageable != null && other.gameObject.tag == "Player" && enemyBullet)
         {
             damageable.TakeDamage(damage);
         }

@@ -385,7 +385,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             EffectHolder = Instantiate(gunList[bulletType].bulletHitEffect, hit.point, Quaternion.Euler(0, 180, 0));
             Destroy(EffectHolder, 2);
             IDamage dmg = hit.collider.GetComponent<IDamage>();
-            if (dmg != null && hit.collider.gameObject.transform != this.transform)
+            if (dmg != null && hit.collider.gameObject.transform != this.transform )
             {
                 dmg.TakeDamage(gunList[bulletType].shootDamage);
             }

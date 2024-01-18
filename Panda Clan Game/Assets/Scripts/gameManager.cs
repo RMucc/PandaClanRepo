@@ -27,14 +27,17 @@ public class GameManager : MonoBehaviour
     public bool isPaused;
     int enemyCount;
 
+    
     public enum BulletType
     {
         None,
         Shotgun,
         SMG,
         AR
-    }
+    } 
+    
 
+    #region AWAKE CODE
     void Awake()
     {
         instance = this;
@@ -42,7 +45,9 @@ public class GameManager : MonoBehaviour
         playerScript = player.GetComponent<RyansPlayerController>();
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
     }
+    #endregion
 
+    #region UPDATE CODE
     void Update()
     {
         if (Input.GetButtonDown("Cancel") && menuActive == null)
@@ -52,7 +57,9 @@ public class GameManager : MonoBehaviour
             menuActive.SetActive(isPaused);
         }
     }
+    #endregion
 
+    #region PAUSE/RESUME MENU CODE
     public void statePaused() //Reuseable for shops and other screens I guess
     {
         isPaused = !isPaused;
@@ -70,7 +77,9 @@ public class GameManager : MonoBehaviour
         menuActive.SetActive(false);
         menuActive = null;
     }
+    #endregion
 
+    #region GAME GOAL
     public void updateGameGoal(int amount)
     {
         enemyCount += amount;
@@ -81,15 +90,19 @@ public class GameManager : MonoBehaviour
             menuActive = menuWin;
             menuActive.SetActive(true);
         }
-    }
+    } 
+    #endregion
 
+    #region LOSE youSuck()
     public void youSuck()
     {
         statePaused();
         menuActive = menuLose;
         menuActive.SetActive(true);
     }
+    #endregion
 
+    #region Stamina Visuals Code
     public void showStamina()
     {
         stamninaVisable.SetActive(true);
@@ -99,7 +112,9 @@ public class GameManager : MonoBehaviour
     {
         stamninaVisable.SetActive(false);
     }
+    #endregion
 
+    #region RELOAD VISUAL CODE
     public void showReload()
     {
         reload.SetActive(true);
@@ -111,4 +126,5 @@ public class GameManager : MonoBehaviour
         reload.SetActive(false);
         noReload.SetActive(true);
     }
+    #endregion
 }

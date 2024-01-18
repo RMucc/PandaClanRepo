@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Timers;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -36,5 +37,21 @@ public class CameraController : MonoBehaviour
         xRot = Mathf.Clamp(xRot, lockVertMin, lockVertMax);
         transform.localRotation = Quaternion.Euler(xRot, 0, 0);
         transform.parent.Rotate(Vector3.up * mouseX);
+    }
+
+    public IEnumerator Shake(float duration, float magntiude)
+    {
+        Vector3 originalPos = transform.localPosition;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            float x = Random.Range(-1, 1f) * magntiude;
+            float y = Random.Range(-1, 1f) * magntiude;
+            transform.localPosition = new Vector3(x, y, originalPos.z);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+        transform.localPosition = originalPos;
     }
 }

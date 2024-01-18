@@ -9,8 +9,8 @@ public class DashEnemyAI : MonoBehaviour, IDamage
     [SerializeField] NavMeshAgent agent;
     [SerializeField] int HP;
     [SerializeField] float attackRate;
-    // Create a Scriptable Object for a guns infomation and model which also uses the [CreateAssetMenu] to be able to save it as a pre-fab. A variable will store the enemys gun type here.
-    [SerializeField] int AmmoAddedOnDeath = 5;
+    [SerializeField] bool effectGameGoal;
+
     [Header("Dash Variables\n")]
     [SerializeField] float TimeToWait;
     [SerializeField] float dashTime;
@@ -20,13 +20,10 @@ public class DashEnemyAI : MonoBehaviour, IDamage
     [SerializeField] int explosionDamage;
 
 
-
-
-
     float speed;
-    bool isShooting;
     bool playerInRange;
     bool dashing;
+    bool exploding;
     Color storedColor;
 
 
@@ -38,6 +35,7 @@ public class DashEnemyAI : MonoBehaviour, IDamage
         speed = agent.speed;
         StartCoroutine(Dash());
         dashing = false;
+        exploding = false;
     }
 
     IEnumerator Dash()
@@ -60,35 +58,28 @@ public class DashEnemyAI : MonoBehaviour, IDamage
     void Update()
     {
         agent.SetDestination(GameManager.instance.player.transform.position);
-
-        if (playerInRange && dashing)
+        if (playerInRange && dashing && !exploding) 
         {
             Explode();
         }
-        //Check to see if player is within range and once in range will explode and despawn.
-    }
-
-    IEnumerator shoot()
-    {
-        isShooting = true;
-
-        yield return new WaitForSeconds(attackRate);
-        isShooting = false;
     }
 
     public void TakeDamage(int amount)
     {
-        if (dashing) // Can only damage enemy if they are in dash mode
+        if (dashing) // player can only damage enemy if they are in dash mode
         {
             HP -= amount;
             StartCoroutine(flashRed());
         }
         if (HP <= 0)
         {
-            GameManager.instance.updateGameGoal(-1);
+            if (effectGameGoal)
+            {
+                GameManager.instance.updateGameGoal(-1);
+            }
+            // Add grenades to players inventory.
             Explode();
             Destroy(gameObject);
-            //Intiate explosion on death and if player kills this enemy give player gernades.
         }
     }
     IEnumerator flashRed()
@@ -100,6 +91,8 @@ public class DashEnemyAI : MonoBehaviour, IDamage
 
     void Explode()
     {
+        Debug.Log("Here");
+        exploding = true;
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRange);
 
         foreach (Collider toDamage in colliders)
@@ -111,21 +104,29 @@ public class DashEnemyAI : MonoBehaviour, IDamage
             //    rb.AddExplosionForce(explosionForce, transform.position, explosionRange);
             //}
             IDamage dmg = toDamage.GetComponent<IDamage>();
-            if (dmg != null)
+            if (dmg != null && toDamage.gameObject.transform != this.transform)
             {
-                dmg.TakeDamage(explosionDamage/2);
+                Destroy(gameObject);
             }
         }
+        Debug.Log("Here2");
         Destroy(gameObject);
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
-        playerInRange = true;
+        if (other.tag == "Player")
+        {
+            playerInRange = true;
+        }
     }
 
-    private void OnTriggerExt(Collider other)
+    private void OnTriggerExit(Collider other)
     {
-        playerInRange = false;
+        if (other.tag == "Player")
+        {
+            playerInRange = false;
+        }
     }
 }

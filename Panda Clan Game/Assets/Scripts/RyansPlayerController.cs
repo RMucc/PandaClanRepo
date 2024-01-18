@@ -5,6 +5,12 @@ using UnityEngine.EventSystems;
 
 public class RyansPlayerController : MonoBehaviour, IDamage
 {
+    [Header("Debugging")]
+    [SerializeField] GunStats gunToAdd;
+    [SerializeField] int ammoToAdd;
+
+
+    [Header("Player Movement Variables\n")]
     //Player Movement Variables
     [SerializeField] CharacterController controller;
     [SerializeField] int HP;
@@ -16,24 +22,53 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     [SerializeField] float jumpMax;
     [SerializeField] float gravity;
 
+    [Header("Player Gun Variables\n")]
     //Player Gun Variables
     [SerializeField] int shootDamage;
     [SerializeField] float shootRate;
     [SerializeField] int shootDistance;
-    [SerializeField] GameObject cube;
+    [SerializeField] float bulletSpread;
+    [SerializeField] float reloadTime;
+    [SerializeField] int bulletsPerTap;
+    [SerializeField] bool allowButtonHold;
+    [SerializeField] int magazineSize;
+    [SerializeField] int bulletsLeftInMag;
+    [SerializeField] ParticleSystem bulletHitEffect;
+    [SerializeField] GameObject bullet;
+    float timeBetweenShots; // for burst weapons
+    [SerializeField] GameManager.BulletType bulletType;
+    ParticleSystem EffectHolder;
+    float cameraShakeDuration; // for camera shake
+    float cameraShakeMagnitude; // for camera shake
 
+    Dictionary<GameManager.BulletType, GunStats> gunList;
+
+    bool readyToShoot;
+    bool reloading;
+    bool shooting;
+
+    [SerializeField] int ARbulletsTotal;
+    [SerializeField] int ShotgunbulletsTotal;
+    [SerializeField] int SMGbulletsTotal;
+
+    [SerializeField] Transform shootPos;
+    [SerializeField] CameraController cameraController;
+
+    [Header("Player Private Variables\n")]
     //Player Private Variables
     private Vector3 playerVel;
     private Vector3 move;
     private Vector3 dashMove;
     private int jumpCount;
 
+    [Header("Bool Values\n")]
     //Bool Values
     private bool groundedPlayer;
     private bool isShooting;
     private bool isSprinting;
     private bool isStaminaRecovering;
 
+    [Header("Original Values\n")]
     //Original Values
     private int originalHP;
     private float originalPlayerVel;
@@ -41,6 +76,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     private int originalHealthMax;
     private float originalPlayerStamina;
 
+    [Header("Dashing Values\n")]
     //Dashing Variables
     [SerializeField] float dashSpeed;
     [SerializeField] float dashDuration;
@@ -50,18 +86,23 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     private float originalDashDebounce;
     [SerializeField] float dashCooldownTime;
 
+    [Header("Stats Variables for Player\n")]
     //Stat Variables for Player
     public int healthMax;
 
     // Start is called before the first frame update
     void Start()
     {
+        gunList = new Dictionary<GameManager.BulletType, GunStats>();
         originalHealthMax = healthMax;
         originalHP = HP;
         originalPlayerSpeed = playerSpeed;
         originalPlayerStamina = playerStamina;
         //originalPlayerVel = playerVel.x;
         originalDashDebounce = dashDebounce;
+        readyToShoot = true;
+        isShooting = false;
+        AddDrops(gunToAdd, ammoToAdd);
     }
 
     // Update is called once per frame
@@ -69,17 +110,42 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     {
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.green);
 
-        if(Input.GetButton("Shoot") && !isShooting)
+        if (allowButtonHold && !isShooting)
         {
-            StartCoroutine(Shoot());
+            shooting = Input.GetButton("Shoot");
         }
+        else
+        {
+            shooting = Input.GetButtonDown("Shoot");
+        }
+
+        if (Input.GetButtonDown("Reload") && gunList[bulletType].bulletsLeftInMag < magazineSize && !reloading)
+        {
+            StartCoroutine(Reload());
+        }
+
+        if (readyToShoot && shooting && !reloading && gunList[bulletType].bulletsLeftInMag > 0)
+        {
+            for (int i = gunList[bulletType].bulletsPerTap; i > 0; i--)
+            {
+                StartCoroutine(Shoot());
+            }
+        }
+        else if (gunList[bulletType].bulletsLeftInMag == 0 && !reloading)
+        {
+            StartCoroutine(Reload());
+        }
+        //if (Input.GetButton("Shoot"))
+        //{
+        //    StartCoroutine(Shoot());
+        //}
         Movement();
     }
 
     void Movement()
     {
         groundedPlayer = controller.isGrounded;
-        if(groundedPlayer)
+        if (groundedPlayer)
         {
             jumpCount = 0;
             playerVel.y = 0;
@@ -88,17 +154,17 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         move = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
         controller.Move(move * playerSpeed * Time.deltaTime);
         //Jump Input
-        if(Input.GetButtonDown("Jump") && jumpCount < jumpMax)
+        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
         {
             playerVel.y = jumpHeight;
             jumpCount++;
         }
         //Sprint Input
-        if(Input.GetKeyDown(KeyCode.LeftShift) && !isShooting && !isStaminaRecovering)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !isShooting && !isStaminaRecovering)
         {
             StartCoroutine(Sprint());
         }
-        if(Input.GetKeyUp(KeyCode.LeftShift))
+        if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             playerSpeed = originalPlayerSpeed;
             isSprinting = false;
@@ -168,7 +234,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
 
 
         //Dash Debounce
-        if(dashDebounce  > 0)
+        if (dashDebounce > 0)
         {
             dashDebounce -= 1 * Time.deltaTime;
         }
@@ -217,7 +283,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     IEnumerator DashRight()
     {
         float startTime = Time.time;
-        while(Time.time < startTime + dashDuration)
+        while (Time.time < startTime + dashDuration)
         {
             controller.Move(transform.right * dashSpeed * Time.deltaTime);
             yield return null;
@@ -242,21 +308,134 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         isDashing = false;
     }
 
+    IEnumerator Reload()
+    {
+        reloading = true;
+        // Notify player they are reloading
+        yield return new WaitForSeconds(gunList[bulletType].reloadTime);
+
+        switch (bulletType)
+        {
+            case GameManager.BulletType.Shotgun:
+                if (ShotgunbulletsTotal >= gunList[bulletType].magazineSize)
+                {
+                    gunList[bulletType].bulletsLeftInMag = gunList[bulletType].magazineSize;
+                    ShotgunbulletsTotal -= gunList[bulletType].magazineSize;
+                }
+                else if (ShotgunbulletsTotal > 0)
+                {
+                    gunList[bulletType].bulletsLeftInMag += ShotgunbulletsTotal;
+                    ShotgunbulletsTotal = 0;
+                }
+                else
+                {
+                    // Notify player they are fully out of shotgun Ammo;
+                }
+                break;
+            case GameManager.BulletType.AR:
+                if (ARbulletsTotal >= gunList[bulletType].magazineSize)
+                {
+                    gunList[bulletType].bulletsLeftInMag = gunList[bulletType].magazineSize;
+                    ARbulletsTotal -= gunList[bulletType].magazineSize;
+                }
+                else if (ARbulletsTotal > 0)
+                {
+                    gunList[bulletType].bulletsLeftInMag += ARbulletsTotal;
+                    ARbulletsTotal = 0;
+                }
+                else
+                {
+                    // Notify player they are fully out of AR Ammo;
+                }
+                break;
+            case GameManager.BulletType.SMG:
+                if (SMGbulletsTotal >= gunList[bulletType].magazineSize)
+                {
+                    gunList[bulletType].bulletsLeftInMag = gunList[bulletType].magazineSize;
+                    SMGbulletsTotal -= gunList[bulletType].magazineSize;
+                }
+                else if (SMGbulletsTotal > 0)
+                {
+                    gunList[bulletType].bulletsLeftInMag += SMGbulletsTotal;
+                    SMGbulletsTotal = 0;
+                }
+                else
+                {
+                    // Notify player they are fully out of SMG Ammo;
+                }
+                break;
+        }
+        bulletsLeftInMag = magazineSize;
+        reloading = false;
+    }
+
     IEnumerator Shoot()
     {
         isShooting = true;
-
+        readyToShoot = false;
+        float x = Random.Range(-gunList[bulletType].bulletSpread, gunList[bulletType].bulletSpread);
+        float y = Random.Range(-gunList[bulletType].bulletSpread, gunList[bulletType].bulletSpread);
+        Vector3 direction = Camera.main.transform.forward + new Vector3(x, y, 0);
+        GameObject _bullet = Instantiate(gunList[bulletType].bullet, shootPos.transform.position, Quaternion.LookRotation(direction));
+        Debug.DrawRay(shootPos.transform.position, direction * gunList[bulletType].shootDistance, Color.red, 1f);
         RaycastHit hit;
-        if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector2(.5f, .5f)), out hit, shootDistance))
+        if (Physics.Raycast(shootPos.transform.position, direction, out hit, gunList[bulletType].shootDistance))
         {
+            EffectHolder = new ParticleSystem();
+            EffectHolder = Instantiate(gunList[bulletType].bulletHitEffect, hit.point, Quaternion.Euler(0, 180, 0));
+            Destroy(EffectHolder, 2);
             IDamage dmg = hit.collider.GetComponent<IDamage>();
-            if (dmg != null)
+            if (dmg != null && hit.collider.gameObject.transform != this.transform)
             {
-                dmg.TakeDamage(shootDamage);
+                dmg.TakeDamage(gunList[bulletType].shootDamage);
             }
         }
-        yield return new WaitForSeconds(shootRate);
+        //StartCoroutine(cameraController.Shake(cameraShakeDuration, cameraShakeMagnitude)); For potential future camera shake
+        Destroy(_bullet, gunList[bulletType].BulletExistanceTime); // Destorying the "bullet" after a certain amount of time dependent on the variable in the gunStats variable
+        yield return new WaitForSeconds(gunList[bulletType].shootRate);
         isShooting = false;
+        readyToShoot = true;
+        Mathf.Clamp(gunList[bulletType].bulletsLeftInMag--, 0, 300);
+    }
+
+    public void AddDrops(GunStats gun = null, int AmmoChange = 0)
+    {
+        if (gun != null && !gunList.ContainsKey(gun.bulletType))
+        {
+            gunList.Add(gun.bulletType, gun);
+            bulletType = gun.bulletType;
+        }
+        //shootDamage = gun.shootDamage;
+        //shootRate = gun.shootRate;
+        //shootDistance = gun.shootDistance;
+        //bulletSpread = gun.bulletSpread;
+        //reloadTime = gun.reloadTime;
+        //timeBetweenShots = gun.timeBetweenShots;
+        //bulletsPerTap = gun.bulletsPerTap;
+        //allowButtonHold = gun.allowButtonHold;
+        //magazineSize = gun.magazineSize;
+        //bulletsLeftInMag = gun.bulletsLeftInMag;
+        //cameraShakeDuration = gun.cameraShakeDuration;
+        //cameraShakeMagnitude = gun.cameraShakeMagnitude;
+        //bulletHitEffect = gun.bulletHitEffect;
+        //bullet = gun.bullet;
+
+
+        if (AmmoChange != 0)
+        {
+            switch (bulletType)
+            {
+                case GameManager.BulletType.Shotgun:
+                    ShotgunbulletsTotal += AmmoChange;
+                    break;
+                case GameManager.BulletType.AR:
+                    ARbulletsTotal += AmmoChange;
+                    break;
+                case GameManager.BulletType.SMG:
+                    SMGbulletsTotal += AmmoChange;
+                    break;
+            }
+        }
     }
 
     public void TakeDamage(int amount)
@@ -269,7 +448,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         {
             healthMax -= 1;
 
-            if(healthMax <= 0)
+            if (healthMax <= 0)
             {
                 GameManager.instance.youSuck();
             }
@@ -290,7 +469,8 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         controller.enabled = true;
     }
 
-    public void updatePlayerUI() {
+    public void updatePlayerUI()
+    {
         GameManager.instance.HPBar.fillAmount = (float)HP / originalHP;
         //Ammo update when ammo is added
         //Stamina update
@@ -302,4 +482,5 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         yield return new WaitForSeconds(0.2f);
         GameManager.instance.damageScreen.SetActive(false);
     }
+
 }

@@ -125,7 +125,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1500742070780517675
 Transform:
   m_ObjectHideFlags: 0
@@ -157,8 +157,9 @@ MonoBehaviour:
   model: {fileID: 6552325313151814438}
   agent: {fileID: 6238920843736491151}
   HP: 10
-  attackRate: 0
-  AmmoAddedOnDeath: 5
+  attackDamage: 0
+  effectGameGoal: 1
+  AmmoStolenOnDeath: 0
 --- !u!195 &6238920843736491151
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -518,7 +518,7 @@ PrefabInstance:
     - target: {fileID: 8515807485063710007, guid: ae2d54a112c67544d9e945049f3710fc, type: 3}
       propertyPath: gunToAdd
       value: 
-      objectReference: {fileID: 11400000, guid: 9cdfbf8351e13cd44b51e9059de153e2, type: 2}
+      objectReference: {fileID: 11400000, guid: ecdb7869593087345b258face1e020cc, type: 2}
     - target: {fileID: 8515807485063710007, guid: ae2d54a112c67544d9e945049f3710fc, type: 3}
       propertyPath: shootPos
       value: 

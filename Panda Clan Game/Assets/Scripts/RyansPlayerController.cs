@@ -108,9 +108,9 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * shootDistance, Color.green);
+        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * gunList[bulletType].shootDistance, Color.green);
 
-        if (allowButtonHold && !isShooting)
+        if (gunList[bulletType].allowButtonHold && !isShooting)
         {
             shooting = Input.GetButton("Shoot");
         }
@@ -119,7 +119,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             shooting = Input.GetButtonDown("Shoot");
         }
 
-        if (Input.GetButtonDown("Reload") && gunList[bulletType].bulletsLeftInMag < magazineSize && !reloading)
+        if (Input.GetButtonDown("Reload") && gunList[bulletType].bulletsLeftInMag < gunList[bulletType].magazineSize && !reloading)
         {
             StartCoroutine(Reload());
         }
@@ -365,7 +365,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 }
                 break;
         }
-        bulletsLeftInMag = magazineSize;
+        gunList[bulletType].bulletsLeftInMag = gunList[bulletType].magazineSize;
         reloading = false;
     }
 

@@ -15,6 +15,7 @@ public class RangedEnemyAI : MonoBehaviour, IDamage
     [SerializeField] bool effectGameGoal;
     [SerializeField] int AmmoAddedOnDeath;
     [SerializeField] int playerFaceSpeed;
+    [SerializeField] float bulletSpread;
     [SerializeField] GameObject headPos;
 
     Vector3 playerDir;
@@ -47,8 +48,11 @@ public class RangedEnemyAI : MonoBehaviour, IDamage
 
     IEnumerator shoot()
     {
+        float x = Random.Range(-bulletSpread, bulletSpread);
+        float y = Random.Range(-bulletSpread, bulletSpread);
+        Vector3 direction = shootPos.transform.forward + new Vector3(x, y, 0);
         isShooting = true;
-        Instantiate(bullet, shootPos.position, transform.rotation);
+        Instantiate(bullet, shootPos.position, Quaternion.LookRotation(direction));
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }

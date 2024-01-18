@@ -867,6 +867,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuActive: {fileID: 0}
+  textActive: {fileID: 0}
+  noReload: {fileID: 0}
+  reload: {fileID: 0}
   stamninaVisable: {fileID: 0}
   menuPause: {fileID: 0}
   menuWin: {fileID: 0}
@@ -1155,7 +1158,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6232163740477263120, guid: d994c8ed7832e5c4d953790060ca417a, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1285,6 +1288,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1718576647}
     - target: {fileID: 2924825895792774001, guid: b71842b5ca0a87944856e343fbaba398, type: 3}
+      propertyPath: bulletSpread
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 2924825895792774001, guid: b71842b5ca0a87944856e343fbaba398, type: 3}
+      propertyPath: effectGameGoal
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2924825895792774001, guid: b71842b5ca0a87944856e343fbaba398, type: 3}
       propertyPath: playerFaceSpeed
       value: 100
       objectReference: {fileID: 0}
@@ -1302,7 +1313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4240346518832343959, guid: b71842b5ca0a87944856e343fbaba398, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6725417697252174840, guid: b71842b5ca0a87944856e343fbaba398, type: 3}
       propertyPath: m_Enabled

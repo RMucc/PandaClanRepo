@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4240346518832343959}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.21, y: 1, z: -4}
+  m_LocalPosition: {x: 3.21, y: -61.5, z: 39.0895}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -61,6 +61,7 @@ MonoBehaviour:
   effectGameGoal: 1
   AmmoAddedOnDeath: 5
   playerFaceSpeed: 100
+  bulletSpread: 0
   headPos: {fileID: 6010052193166790481}
 --- !u!195 &4223591056742101865
 NavMeshAgent:

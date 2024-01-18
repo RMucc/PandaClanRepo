@@ -37,6 +37,7 @@ Transform:
   - {fileID: 8851068296045960198}
   - {fileID: 6516535372482501243}
   - {fileID: 6806603147041139166}
+  - {fileID: 6190351647220179867}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2924825895792774001
@@ -57,11 +58,12 @@ MonoBehaviour:
   bullet: {fileID: 8262477620160788249, guid: 153c7fba034da9345a43d39a3eee9393, type: 3}
   shootPos: {fileID: 6516535372482501243}
   shootRate: 1
-  gun: {fileID: 0}
-  effectGameGoal: 1
-  AmmoAddedOnDeath: 5
-  playerFaceSpeed: 0
-  headPos: {fileID: 6010052193166790481}
+  gun: {fileID: 11400000, guid: 9cdfbf8351e13cd44b51e9059de153e2, type: 2}
+  effectGameGoal: 0
+  AmmoAddedOnDeath: 30
+  playerFaceSpeed: 100
+  bulletSpread: 0.07
+  headPos: {fileID: 5282340144138172483}
 --- !u!195 &4223591056742101865
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -76,7 +78,7 @@ NavMeshAgent:
   m_Acceleration: 15
   avoidancePriority: 50
   m_AngularSpeed: 360
-  m_StoppingDistance: 50
+  m_StoppingDistance: 20
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -157,6 +159,37 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &5282340144138172483
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6190351647220179867}
+  m_Layer: 0
+  m_Name: headPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6190351647220179867
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5282340144138172483}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.488, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8369198999157408456}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5519610135960526679
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,7 +322,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}

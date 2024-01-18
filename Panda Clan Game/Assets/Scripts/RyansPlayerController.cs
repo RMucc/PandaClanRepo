@@ -154,12 +154,15 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         move = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
         controller.Move(move * playerSpeed * Time.deltaTime);
         //Jump Input
+        #region Jump Input
         if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
         {
             playerVel.y = jumpHeight;
             jumpCount++;
         }
+        #endregion
         //Sprint Input
+        #region Sprint Input
         if (Input.GetKeyDown(KeyCode.LeftShift) && !isShooting && !isStaminaRecovering)
         {
             StartCoroutine(Sprint());
@@ -170,7 +173,9 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             isSprinting = false;
             StopCoroutine(Sprint());
         }
+        #endregion
         //Forward Dash Input
+        #region Forward Dash Input
         if (Input.GetKeyDown(KeyCode.W) && !isDashing)
         {
             //Set Dash Count to how many taps you want minus 1
@@ -185,7 +190,9 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 dashCount += 1;
             }
         }
+        #endregion
         //Backward Dash Input
+        #region Backward Dash Input
         if (Input.GetKeyDown(KeyCode.S) && !isDashing)
         {
             //Set Dash Count to how many taps you want minus 1
@@ -200,7 +207,9 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 dashCount += 1;
             }
         }
+        #endregion
         //Right Dash Input
+        #region Right Dash Input
         if (Input.GetKeyDown(KeyCode.D) && !isDashing)
         {
             //Set Dash Count to how many taps you want minus 1
@@ -215,7 +224,9 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 dashCount += 1;
             }
         }
+        #endregion
         //Left Dash Input
+        #region Left Dash Input
         if (Input.GetKeyDown(KeyCode.A) && !isDashing)
         {
             //Set Dash Count to how many taps you want minus 1
@@ -228,12 +239,14 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 dashDebounce = originalDashDebounce;
                 dashCount += 1;
             }
-        }
+        } 
+        #endregion
         playerVel.y += gravity * Time.deltaTime;
         controller.Move(playerVel * Time.deltaTime);
 
 
         //Dash Debounce
+        #region Dash Debounce
         if (dashDebounce > 0)
         {
             dashDebounce -= 1 * Time.deltaTime;
@@ -241,9 +254,11 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         else
         {
             dashCount = 0;
-        }
+        } 
+        #endregion
     }
 
+    #region Sprint IEnumerator
     IEnumerator Sprint()
     {
         isSprinting = true;
@@ -254,11 +269,15 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         isStaminaRecovering = true;
         StartCoroutine(SprintRecover());
     }
+    #endregion
+    #region Sprint Recover IEnumerator
     IEnumerator SprintRecover()
     {
         yield return new WaitForSeconds(playerStaminaRecover);
         isStaminaRecovering = false;
     }
+    #endregion
+    #region Dash Forward IEnumerator
     IEnumerator DashForward()
     {
         float startTime = Time.time;
@@ -269,7 +288,9 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         }
         StartCoroutine(DashCoolDown());
     }
+    #endregion
 
+    #region Dash Backward IEnumerator
     IEnumerator DashBackward()
     {
         float startTime = Time.time;
@@ -280,6 +301,8 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         }
         StartCoroutine(DashCoolDown());
     }
+    #endregion
+    #region Dash Right IEnumerator
     IEnumerator DashRight()
     {
         float startTime = Time.time;
@@ -291,6 +314,8 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         StartCoroutine(DashCoolDown());
 
     }
+    #endregion
+    #region Dash Left IEnumerator
     IEnumerator DashLeft()
     {
         float startTime = Time.time;
@@ -301,12 +326,15 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         }
         StartCoroutine(DashCoolDown());
     }
+    #endregion
 
+    #region Dash Cooldown IEnumerator
     IEnumerator DashCoolDown()
     {
         yield return new WaitForSeconds(dashCooldownTime);
         isDashing = false;
-    }
+    } 
+    #endregion
 
     IEnumerator Reload()
     {

@@ -367,6 +367,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         }
         gunList[bulletType].bulletsLeftInMag = gunList[bulletType].magazineSize;
         reloading = false;
+        updatePlayerUI();
     }
 
     IEnumerator Shoot()
@@ -378,7 +379,6 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         Vector3 direction = Camera.main.transform.forward + new Vector3(x, y, 0);
         GameObject _bullet = Instantiate(gunList[bulletType].bullet, shootPos.transform.position, Quaternion.LookRotation(direction));
         Debug.DrawRay(shootPos.transform.position, direction * gunList[bulletType].shootDistance, Color.red, 1f);
-        updatePlayerUI();
         RaycastHit hit;
         if (Physics.Raycast(shootPos.transform.position, direction, out hit, gunList[bulletType].shootDistance))
         {
@@ -397,6 +397,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         isShooting = false;
         readyToShoot = true;
         Mathf.Clamp(gunList[bulletType].bulletsLeftInMag--, 0, 300);
+        updatePlayerUI();
     }
 
     public void AddDrops(GunStats gun = null, int AmmoChange = 0)

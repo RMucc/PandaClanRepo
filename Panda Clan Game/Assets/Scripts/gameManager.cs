@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [SerializeField] GameObject menuActive;
+    [SerializeField] GameObject textActive;
+    [SerializeField] GameObject noReload;
+    [SerializeField] GameObject reload;
     [SerializeField] GameObject stamninaVisable;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
@@ -16,11 +19,11 @@ public class GameManager : MonoBehaviour
     public Image HPBar;
     public Image AMMOBar;
     public Image StaminaWheel;
-
+    
     public GameObject player;
     public RyansPlayerController playerScript;
     public GameObject playerSpawnPos;
-
+    
     public bool isPaused;
     int enemyCount;
 
@@ -97,5 +100,15 @@ public class GameManager : MonoBehaviour
         stamninaVisable.SetActive(false);
     }
 
+    public void showReload()
+    {
+        reload.SetActive(true);
+        noReload.SetActive(false);
+    }
 
+    public void hideReload()
+    {
+        reload.SetActive(false);
+        noReload.SetActive(true);
+    }
 }

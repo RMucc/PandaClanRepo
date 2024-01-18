@@ -311,7 +311,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     IEnumerator Reload()
     {
         reloading = true;
-        // Notify player they are reloading
+        GameManager.instance.showReload();
         yield return new WaitForSeconds(gunList[bulletType].reloadTime);
 
         switch (bulletType)
@@ -367,6 +367,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         }
         gunList[bulletType].bulletsLeftInMag = gunList[bulletType].magazineSize;
         reloading = false;
+        GameManager.instance.hideReload();
         updatePlayerUI();
     }
 

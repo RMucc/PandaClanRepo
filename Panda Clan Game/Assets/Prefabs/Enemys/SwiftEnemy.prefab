@@ -56,7 +56,7 @@ MonoBehaviour:
   attackRange: 0
   attackDamage: 0
   AttackPos: {fileID: 0}
-  gun: {fileID: 0}
+  gun: {fileID: 11400000, guid: ecdb7869593087345b258face1e020cc, type: 2}
   effectGameGoal: 1
   AmmoAddedOnDeath: 5
 --- !u!195 &5212780036080170378

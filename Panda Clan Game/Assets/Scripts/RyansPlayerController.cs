@@ -472,7 +472,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
-        flashScreen();
+        StartCoroutine(flashScreen());
         updatePlayerUI();
 
         if (HP <= 0)
@@ -505,6 +505,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         GameManager.instance.HPBar.fillAmount = (float)HP / originalHP;
         //Ammo update when ammo is added
         GameManager.instance.AMMOBar.fillAmount = gunList[bulletType].bulletsLeftInMag / (float)gunList[bulletType].magazineSize;
+        
         //Stamina update
     }
 

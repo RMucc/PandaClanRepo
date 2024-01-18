@@ -24,6 +24,14 @@ public class GameManager : MonoBehaviour
     public bool isPaused;
     int enemyCount;
 
+    public enum BulletType
+    {
+        None,
+        Shotgun,
+        SMG,
+        AR
+    }
+
     void Awake()
     {
         instance = this;

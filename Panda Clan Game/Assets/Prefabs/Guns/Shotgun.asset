@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72b1d1e87552d9649aad5d6f881cbfdc, type: 3}
+  m_Name: Shotgun
+  m_EditorClassIdentifier: 
+  shootDamage: 1
+  shootRate: 1
+  shootDistance: 5
+  bulletSpread: 0.3
+  reloadTime: 4
+  timeBetweenShots: 0
+  bulletsPerTap: 5
+  allowButtonHold: 0
+  magazineSize: 15
+  bulletsLeftInMag: 5
+  cameraShakeDuration: 0
+  cameraShakeMagnitude: 0
+  bulletHitEffect: {fileID: 4795005520586895817, guid: 5a0d6e30b8b210446898f46ca9fa976d, type: 3}
+  bullet: {fileID: 8262477620160788249, guid: 7c0aa55b1c752f646a18c1b0c17fd581, type: 3}
+  bulletType: 1
+  BulletExistanceTime: 0.2

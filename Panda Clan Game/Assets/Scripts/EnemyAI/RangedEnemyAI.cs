@@ -11,31 +11,37 @@ public class RangedEnemyAI : MonoBehaviour, IDamage
     [SerializeField] GameObject bullet;
     [SerializeField] Transform shootPos;
     [SerializeField] float shootRate;
+    [SerializeField] GunStats gun;
+    [SerializeField] bool effectGameGoal;
+    [SerializeField] int AmmoAddedOnDeath;
+    [SerializeField] int playerFaceSpeed;
+    [SerializeField] GameObject headPos;
 
-
-    // Create a Scriptable Object for a guns infomation and model which also uses the [CreateAssetMenu] to be able to save it as a pre-fab. A variable will store the enemys gun type here.
-    [SerializeField] int AmmoAddedOnDeath = 5;
-
+    Vector3 playerDir;
 
     bool isShooting;
     bool playerInRange;
 
     Color stored;
 
-    // Start is called before the first frame update
     void Start()
     {
         GameManager.instance.updateGameGoal(1);
         stored = model.material.color;
     }
 
-    // Update is called once per frame
     void Update()
     {
         agent.SetDestination(GameManager.instance.player.transform.position);
         if (!isShooting)
         {
             StartCoroutine(shoot());
+        }
+
+        if (agent.remainingDistance < agent.stoppingDistance)
+        {
+            playerDir = GameManager.instance.player.transform.position - headPos.transform.position;
+            faceTarget();
         }
     }
 
@@ -53,7 +59,11 @@ public class RangedEnemyAI : MonoBehaviour, IDamage
         StartCoroutine(flashRed());
         if (HP <= 0)
         {
-            GameManager.instance.updateGameGoal(-1);
+            GameManager.instance.playerScript.AddDrops(gun, AmmoAddedOnDeath);
+            if (effectGameGoal)
+            {
+                GameManager.instance.updateGameGoal(-1);
+            }
             Destroy(gameObject);
         }
     }
@@ -62,5 +72,11 @@ public class RangedEnemyAI : MonoBehaviour, IDamage
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
         model.material.color = stored;
+    }
+
+    void faceTarget()
+    {
+        Quaternion rot = Quaternion.LookRotation(playerDir);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);
     }
 }

@@ -30,11 +30,12 @@ Transform:
   m_GameObject: {fileID: 2563448271053573273}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.113122, y: 1, z: -5.75}
+  m_LocalPosition: {x: 0.125, y: -61.425, z: -20.999998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6665014347278758832}
+  - {fileID: 1626130712105596178}
   - {fileID: 5384965951796322209}
   - {fileID: 971213025749954438}
   m_Father: {fileID: 0}
@@ -127,35 +128,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84b1a35ed3e40dc41839fa3665c86825, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunToAdd: {fileID: 11400000, guid: ecdb7869593087345b258face1e020cc, type: 2}
+  ammoToAdd: 30
   controller: {fileID: 2335441938592587263}
-  HP: 5
-  playerSpeed: 6
+  HP: 100
+  playerSpeed: 10
   playerSprintSpeed: 12
   playerStamina: 5
   playerStaminaRecover: 5
   jumpHeight: 12
   jumpMax: 2
-  gravity: -25
-  shootDamage: 1
-  shootRate: 0.5
-  shootDistance: 10
+  gravity: -45
+  shootDamage: 20
+  shootRate: 0.2
+  shootDistance: 20
   bulletSpread: 0
-  reloadTime: 0
-  timeBetweenShots: 0
-  bulletsPerTap: 0
-  allowButtonHold: 0
-  magazineSize: 0
-  bulletsLeftInMag: 0
-  cameraShakeDuration: 0
-  cameraShakeMagnitude: 0
-  bulletHitEffect: {fileID: 0}
-  bullet: {fileID: 0}
-  bulletType: 0
+  reloadTime: 3
+  bulletsPerTap: 1
+  allowButtonHold: 1
+  magazineSize: 100
+  bulletsLeftInMag: 100
+  bulletHitEffect: {fileID: 4795005520586895817, guid: e2a1aba4053b4074486c5cc23329e4d9, type: 3}
+  bullet: {fileID: 8262477620160788249, guid: 08194839b88e25746875f447cdb0b50a, type: 3}
+  bulletType: 3
   ARbulletsTotal: 0
   ShotgunbulletsTotal: 0
   SMGbulletsTotal: 0
-  shootPos: {fileID: 0}
-  cameraController: {fileID: 0}
+  shootPos: {fileID: 2233577734215513461}
+  cameraController: {fileID: 5258733471359811859}
   dashSpeed: 20
   dashDuration: 0.25
   dashDebounce: 0.25
@@ -216,7 +216,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.67499995, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2233577734215513461}
   m_Father: {fileID: 5913392083894742486}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &7823434161294850160
@@ -399,6 +400,68 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &6447347507392132455
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2233577734215513461}
+  m_Layer: 0
+  m_Name: ShootPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2233577734215513461
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6447347507392132455}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.11399984, y: -0.246, z: 0.91399765}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5384965951796322209}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8101570450682765502
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1626130712105596178}
+  m_Layer: 0
+  m_Name: CameraHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1626130712105596178
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8101570450682765502}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.67499995, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5913392083894742486}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8879757362197440036
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,7 +472,7 @@ GameObject:
   m_Component:
   - component: {fileID: 971213025749954438}
   m_Layer: 0
-  m_Name: CameraHolder
+  m_Name: CameraHolderForCameraShake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -424,7 +487,7 @@ Transform:
   m_GameObject: {fileID: 8879757362197440036}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.67499995, z: 0}
+  m_LocalPosition: {x: 0, y: 0.67499995, z: 0.368}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

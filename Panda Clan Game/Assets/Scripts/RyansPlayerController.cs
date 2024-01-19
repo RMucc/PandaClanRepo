@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -40,6 +41,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     ParticleSystem EffectHolder;
     float cameraShakeDuration; // for camera shake
     float cameraShakeMagnitude; // for camera shake
+
 
     Dictionary<GameManager.BulletType, GunStats> gunList;
 
@@ -239,7 +241,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 dashDebounce = originalDashDebounce;
                 dashCount += 1;
             }
-        } 
+        }
         #endregion
         playerVel.y += gravity * Time.deltaTime;
         controller.Move(playerVel * Time.deltaTime);
@@ -254,7 +256,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         else
         {
             dashCount = 0;
-        } 
+        }
         #endregion
     }
 
@@ -333,9 +335,10 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     {
         yield return new WaitForSeconds(dashCooldownTime);
         isDashing = false;
-    } 
+    }
     #endregion
 
+    #region Weapon System
     IEnumerator Reload()
     {
         reloading = true;
@@ -415,7 +418,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             EffectHolder = Instantiate(gunList[bulletType].bulletHitEffect, hit.point, Quaternion.Euler(0, 180, 0));
             Destroy(EffectHolder, 2);
             IDamage dmg = hit.collider.GetComponent<IDamage>();
-            if (dmg != null && hit.collider.gameObject.transform != this.transform )
+            if (dmg != null && hit.collider.gameObject.transform != this.transform)
             {
                 dmg.TakeDamage(gunList[bulletType].shootDamage);
             }
@@ -436,21 +439,6 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             gunList.Add(gun.bulletType, gun);
             bulletType = gun.bulletType;
         }
-        //shootDamage = gun.shootDamage;
-        //shootRate = gun.shootRate;
-        //shootDistance = gun.shootDistance;
-        //bulletSpread = gun.bulletSpread;
-        //reloadTime = gun.reloadTime;
-        //timeBetweenShots = gun.timeBetweenShots;
-        //bulletsPerTap = gun.bulletsPerTap;
-        //allowButtonHold = gun.allowButtonHold;
-        //magazineSize = gun.magazineSize;
-        //bulletsLeftInMag = gun.bulletsLeftInMag;
-        //cameraShakeDuration = gun.cameraShakeDuration;
-        //cameraShakeMagnitude = gun.cameraShakeMagnitude;
-        //bulletHitEffect = gun.bulletHitEffect;
-        //bullet = gun.bullet;
-
 
         if (AmmoChange != 0)
         {
@@ -468,6 +456,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             }
         }
     }
+    #endregion
 
     public void TakeDamage(int amount)
     {
@@ -502,18 +491,41 @@ public class RyansPlayerController : MonoBehaviour, IDamage
 
     public void updatePlayerUI()
     {
-        GameManager.instance.HPBar.fillAmount = (float)HP / originalHP;
+        try // for debugging purposes
+        {
+            GameManager.instance.HPBar.fillAmount = (float)HP / originalHP;
+            GameManager.instance.AMMOBar.fillAmount = gunList[bulletType].bulletsLeftInMag / (float)gunList[bulletType].magazineSize;
+        }
+        catch (System.Exception e)
+        {
+            print("error : missing HPBar");
+        }
         //Ammo update when ammo is added
-        GameManager.instance.AMMOBar.fillAmount = gunList[bulletType].bulletsLeftInMag / (float)gunList[bulletType].magazineSize;
-        
+
         //Stamina update
     }
 
     IEnumerator flashScreen()
     {
-        GameManager.instance.damageScreen.SetActive(true);
+        try
+        {
+            GameManager.instance.damageScreen.SetActive(true);
+        }
+        catch (System.Exception)
+        {
+            print("error: damageScreen missing from GameManager");
+        }
+
         yield return new WaitForSeconds(0.2f);
-        GameManager.instance.damageScreen.SetActive(false);
+
+        try
+        {
+            GameManager.instance.damageScreen.SetActive(false);
+        }
+        catch (System.Exception)
+        {
+            print("error: damageScreen missing from GameManager");
+        }
     }
 
 }

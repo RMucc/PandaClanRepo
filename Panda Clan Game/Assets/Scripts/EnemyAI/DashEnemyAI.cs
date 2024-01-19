@@ -8,20 +8,28 @@ public class DashEnemyAI : MonoBehaviour, IDamage
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] int HP;
-    [SerializeField] float attackRate;
     [SerializeField] bool effectGameGoal;
 
     [Header("Dash Variables\n")]
     [SerializeField] float TimeToWait;
     [SerializeField] float dashTime;
     [SerializeField] float speedMultiplier;
+
+
+    [Header("Explosion Variables\n")]
     [SerializeField] int explosionRange;
     [SerializeField] int explosionForce;
     [SerializeField] int explosionDamage;
+    [SerializeField] float timefromYellowToBlack;
+    [SerializeField] int tickCount;
+    [SerializeField] ParticleSystem explosionEffect;
+    [SerializeField] bool showExplosionRange;
+    [SerializeField] SphereCollider explosionRangeSP;
 
 
     float speed;
     bool playerInRange;
+    bool readyToDestroy;
     bool dashing;
     bool exploding;
     Color storedColor;
@@ -51,17 +59,21 @@ public class DashEnemyAI : MonoBehaviour, IDamage
         model.material.color = storedColor;
         agent.speed = speed;
         agent.acceleration = agent.speed;
-        StartCoroutine(Dash());
+        if (!exploding)
+        {
+            StartCoroutine(Dash());
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         agent.SetDestination(GameManager.instance.player.transform.position);
-        if (playerInRange && dashing && !exploding) 
+        if (playerInRange && dashing && !exploding)
         {
             Explode();
         }
+        ShowRange();
     }
 
     public void TakeDamage(int amount)
@@ -91,26 +103,8 @@ public class DashEnemyAI : MonoBehaviour, IDamage
 
     void Explode()
     {
-        Debug.Log("Here");
         exploding = true;
-        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRange);
-
-        foreach (Collider toDamage in colliders)
-        {
-            // Add Force
-            //Rigidbody rb = toDamage.GetComponent<Rigidbody>();
-            //if (rb != null)
-            //{
-            //    rb.AddExplosionForce(explosionForce, transform.position, explosionRange);
-            //}
-            IDamage dmg = toDamage.GetComponent<IDamage>();
-            if (dmg != null && toDamage.gameObject.transform != this.transform)
-            {
-                Destroy(gameObject);
-            }
-        }
-        Debug.Log("Here2");
-        Destroy(gameObject);
+        StartCoroutine(explodeFlash());
     }
 
 
@@ -129,4 +123,46 @@ public class DashEnemyAI : MonoBehaviour, IDamage
             playerInRange = false;
         }
     }
+
+    IEnumerator explodeFlash()
+    {
+        for (int i = tickCount; i > 0; i--)
+        {
+            model.material.color = Color.yellow;
+            yield return new WaitForSeconds(timefromYellowToBlack);
+            model.material.color = Color.black;
+            yield return new WaitForSeconds(timefromYellowToBlack);
+        }
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRange);
+
+        foreach (Collider toDamage in colliders)
+        {
+            // Add Force
+            //Rigidbody rb = toDamage.GetComponent<Rigidbody>();
+            //if (rb != null)
+            //{
+            //    rb.AddExplosionForce(explosionForce, transform.position, explosionRange);
+            //}
+            IDamage dmg = toDamage.GetComponent<IDamage>();
+            if (dmg != null && toDamage.gameObject.transform != this.transform)
+            {
+                dmg.TakeDamage(explosionDamage / 2); // Becuase the range goes over both the player's controller and capsule collider causing this to run twice.
+            }
+        }
+        if (explosionEffect != null)
+        {
+            Instantiate(explosionEffect, transform.position, Quaternion.LookRotation(transform.forward));
+        }
+        Destroy(gameObject);
+    }
+
+    void ShowRange()
+    {
+        if (explosionRangeSP != null)
+        {
+            explosionRangeSP.radius = explosionRange;
+        }
+    }
 }
+

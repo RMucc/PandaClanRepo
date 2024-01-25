@@ -23,9 +23,10 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public RyansPlayerController playerScript;
     public GameObject playerSpawnPos;
+    //public GameObject nextLevel2;
     
     public bool isPaused;
-    int enemyCount;
+    public int enemyCount;
 
     
     public enum BulletType

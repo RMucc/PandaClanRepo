@@ -21,6 +21,8 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     [SerializeField] float jumpHeight;
     [SerializeField] float jumpMax;
     [SerializeField] float gravity;
+    Coroutine sprint;
+    Coroutine sprintRecover;
 
     [Header("Player Gun Variables\n")]
     //Player Gun Variables
@@ -165,13 +167,13 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         #region Sprint Input
         if (Input.GetKeyDown(KeyCode.LeftShift) && !isShooting && !isStaminaRecovering)
         {
-            StartCoroutine(Sprint());
+            sprint = StartCoroutine(Sprint());
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             playerSpeed = originalPlayerSpeed;
             isSprinting = false;
-            StopCoroutine(Sprint());
+            StopCoroutine(sprint);
         }
         #endregion
         //Forward Dash Input
@@ -267,7 +269,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         playerSpeed = originalPlayerSpeed;
         isSprinting = false;
         isStaminaRecovering = true;
-        StartCoroutine(SprintRecover());
+        sprintRecover = StartCoroutine(SprintRecover());
     }
     #endregion
     #region Sprint Recover IEnumerator

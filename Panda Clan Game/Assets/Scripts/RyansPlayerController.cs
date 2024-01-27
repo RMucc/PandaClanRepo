@@ -189,19 +189,23 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         {
             isSprinting = false;
             playerSpeed = originalPlayerSpeed;
-
             sprintRecover = StartCoroutine(SprintRecover());
         }
         #endregion
         //Forward Dash Input
         #region Forward Dash Input
-        if (Input.GetKeyDown(KeyCode.W) && !isDashing)
+        if (Input.GetKeyDown(KeyCode.W) && !isDashing && isStamRecovered)
         {
             //Set Dash Count to how many taps you want minus 1
             if (dashDebounce > 0 && dashCount == 1)
             {
-                isDashing = true;
-                StartCoroutine(DashForward());
+                StamDash();
+                if(canDash)
+                {
+                    isDashing = true;
+                    StartCoroutine(DashForward());
+                    sprintRecover = StartCoroutine(SprintRecover());
+                }
             }
             else
             {
@@ -212,13 +216,18 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         #endregion
         //Backward Dash Input
         #region Backward Dash Input
-        if (Input.GetKeyDown(KeyCode.S) && !isDashing)
+        if (Input.GetKeyDown(KeyCode.S) && !isDashing && isStamRecovered)
         {
             //Set Dash Count to how many taps you want minus 1
             if (dashDebounce > 0 && dashCount == 1)
             {
-                isDashing = true;
-                StartCoroutine(DashBackward());
+                StamDash();
+                if(canDash)
+                {
+                    isDashing = true;
+                    StartCoroutine(DashBackward());
+                    sprintRecover = StartCoroutine(SprintRecover());
+                }
             }
             else
             {
@@ -229,13 +238,18 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         #endregion
         //Right Dash Input
         #region Right Dash Input
-        if (Input.GetKeyDown(KeyCode.D) && !isDashing)
+        if (Input.GetKeyDown(KeyCode.D) && !isDashing && isStamRecovered)
         {
             //Set Dash Count to how many taps you want minus 1
             if (dashDebounce > 0 && dashCount == 1)
             {
-                isDashing = true;
-                StartCoroutine(DashRight());
+                StamDash();
+                if(canDash)
+                {
+                    isDashing = true;
+                    StartCoroutine(DashRight());
+                    sprintRecover = StartCoroutine(SprintRecover());
+                }
             }
             else
             {
@@ -246,12 +260,18 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         #endregion
         //Left Dash Input
         #region Left Dash Input
-        if (Input.GetKeyDown(KeyCode.A) && !isDashing)
+        if (Input.GetKeyDown(KeyCode.A) && !isDashing && isStamRecovered)
         {
             //Set Dash Count to how many taps you want minus 1
             if (dashDebounce > 0 && dashCount == 1)
             {
-                StartCoroutine(DashLeft());
+                StamDash();
+                if(canDash)
+                {
+                    isDashing = true;
+                    StartCoroutine(DashLeft());
+                    sprintRecover = StartCoroutine(SprintRecover());
+                }
             }
             else
             {
@@ -263,12 +283,11 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         playerVel.y += gravity * Time.deltaTime;
         controller.Move(playerVel * Time.deltaTime);
 
-
-        //Dash Debounce
+        //Dash Debounce (Handles how long you have to press the specific key twice to dash)
         #region Dash Debounce
         if (dashDebounce > 0)
         {
-            dashDebounce -= 1 * Time.deltaTime;
+            dashDebounce -= .5f * Time.deltaTime;
         }
         else
         {
@@ -276,6 +295,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         } 
         #endregion
     }
+    //Sprinting Function (Will Call Sprint IEnumerator Function in here)
     #region Sprinting Function
     public void Sprinting()
     {
@@ -286,36 +306,25 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             sprint = StartCoroutine(Sprint());
         }
     }
+    #endregion
+    //StamDash Cost Function (Whenever dashing, will take away stam)
+    #region StamDash Cost Function
     public void StamDash()
     {
         if (playerStam - dashCost >= 0)
         {
             playerStam -= dashCost;
-            //Allow player to dash
+            //Make UI stam bar equal to playerStam here
+
             canDash = true;
-            //UpdateStam(1);
         }
         else
         {
             canDash = false;
         }
     }
-    /*void UpdateStam(int amount)
-    {
-        //Put updating Stam Wheel UI here
-        // Example - (UIfillbar = playerStam / maxStam)
-        if (amount == 0)
-        {
-            //Set Stam Wheel to transparent (alpha to 0)
-
-        }
-        else
-        {
-            //Set Stam wheel to visible (alpha is 1)
-
-        }
-    }*/
-
+    #endregion
+    //Sprint IEnumerator (Handles the Stam drain when sprinting)
     #region Sprint IEnumerator
     IEnumerator Sprint()
     {
@@ -325,6 +334,8 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             if(playerStam > 0)
             {
                 playerStam -= stamDrain;
+                //Make UI stam bar equal to playerStam here
+
             }
             else
             {
@@ -337,6 +348,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         }
     }
     #endregion
+    //Sprint Recover IEnumerator (Handles Stam regen when not sprinting or dashing)
     #region Sprint Recover IEnumerator
     IEnumerator SprintRecover()
     {
@@ -344,7 +356,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         while(playerStam < maxStam)
         {
             playerStam += stamRegen;
-            //Set UI bar equal to playerStam here
+            //Make UI stam bar equal to playerStam here
 
             yield return new WaitForSeconds(.1f);
         }
@@ -354,9 +366,9 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             isStamRecovered = true;
             StopCoroutine(sprintRecover);
         }
-        //isStamRecovered = false;
     }
     #endregion
+    //Dash Forward IEnumerator (Handles moving the player foward dash)
     #region Dash Forward IEnumerator
     IEnumerator DashForward()
     {
@@ -369,7 +381,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         StartCoroutine(DashCoolDown());
     }
     #endregion
-
+    //Dash Backward IEnumrator (Handles moving the player backward dash)
     #region Dash Backward IEnumerator
     IEnumerator DashBackward()
     {
@@ -382,6 +394,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         StartCoroutine(DashCoolDown());
     }
     #endregion
+    //Dash Right IEnumerator (Handles moving the player right dash)
     #region Dash Right IEnumerator
     IEnumerator DashRight()
     {
@@ -395,6 +408,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
 
     }
     #endregion
+    //Dash Left IEnumerator (Handles moving the player left dash)
     #region Dash Left IEnumerator
     IEnumerator DashLeft()
     {
@@ -407,7 +421,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         StartCoroutine(DashCoolDown());
     }
     #endregion
-
+    //Dash CoolDown IEnumerator Handles the cooldown between dashing)
     #region Dash Cooldown IEnumerator
     IEnumerator DashCoolDown()
     {

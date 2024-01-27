@@ -2149,11 +2149,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8515807485063710007, guid: ae2d54a112c67544d9e945049f3710fc, type: 3}
       propertyPath: stamDrain
-      value: 30
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8515807485063710007, guid: ae2d54a112c67544d9e945049f3710fc, type: 3}
       propertyPath: stamRegen
-      value: 20
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8515807485063710007, guid: ae2d54a112c67544d9e945049f3710fc, type: 3}
       propertyPath: playerStam

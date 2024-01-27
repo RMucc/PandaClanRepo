@@ -175,33 +175,22 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         #region Sprint Input
         if (Input.GetKeyDown(KeyCode.LeftShift) && !isShooting && isStamRecovered)
         {
-            //sprint = StartCoroutine(Sprint());
+            if(sprintRecover != null)
+            {
+                StopCoroutine(sprintRecover);
+            }
             if (playerStam > 0)
             {
                 isSprinting = true;
-                sprint = StartCoroutine(Sprinting());
+                Sprinting();
             }
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            StopCoroutine(sprint);
             isSprinting = false;
             playerSpeed = originalPlayerSpeed;
-            if (playerStam <= maxStam)
-            {
-                playerStam += stamRegen * Time.deltaTime;
-                UpdateStam(1);
-                if (playerStam >= maxStam)
-                {
-                    playerSpeed = originalPlayerSpeed;
-                    //Set Stam Wheel to transparent (alpha to 0)
 
-                    isStamRecovered = true;
-                }
-            }
-            //playerSpeed = originalPlayerSpeed;
-            //isSprinting = false;
-            //StopCoroutine(sprint);
+            sprintRecover = StartCoroutine(SprintRecover());
         }
         #endregion
         //Forward Dash Input
@@ -287,60 +276,35 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         } 
         #endregion
     }
-    IEnumerator Sprinting()
-    {
-        if (isStamRecovered)
-        {
-            isSprinting = true;
-            playerSpeed = playerSprintSpeed;
-            playerStam -= stamDrain * Time.deltaTime;
-            yield return new WaitForSeconds(playerStam / maxStam);
-            UpdateStam(1);
-            if (playerStam <= 0)
-            {
-                isStamRecovered = false;
-                playerSpeed = originalPlayerSpeed;
-                //Set Stam Wheel to transparent (alpha to 0)
-
-            }
-        }
-    }
-    /*public void Sprinting()
+    #region Sprinting Function
+    public void Sprinting()
     {
         if(isStamRecovered)
         {
             isSprinting = true;
             playerSpeed = playerSprintSpeed;
-            playerStam -= stamDrain * Time.deltaTime;
-            UpdateStam(1);
-            if(playerStam <= 0)
-            {
-                isStamRecovered = false;
-                playerSpeed = originalPlayerSpeed;
-                //Set Stam Wheel to transparent (alpha to 0)
-
-            }
+            sprint = StartCoroutine(Sprint());
         }
-    }*/
+    }
     public void StamDash()
     {
-        if(playerStam >= maxStam * dashCost / maxStam)
+        if (playerStam - dashCost >= 0)
         {
             playerStam -= dashCost;
             //Allow player to dash
             canDash = true;
-            UpdateStam(1);
+            //UpdateStam(1);
         }
         else
         {
             canDash = false;
         }
     }
-    void UpdateStam(int amount)
+    /*void UpdateStam(int amount)
     {
         //Put updating Stam Wheel UI here
         // Example - (UIfillbar = playerStam / maxStam)
-        if(amount == 0)
+        if (amount == 0)
         {
             //Set Stam Wheel to transparent (alpha to 0)
 
@@ -350,26 +314,48 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             //Set Stam wheel to visible (alpha is 1)
 
         }
-    }
+    }*/
 
     #region Sprint IEnumerator
-    /*IEnumerator Sprint()
+    IEnumerator Sprint()
     {
-        isSprinting = true;
-        playerSpeed = playerSprintSpeed;
-        yield return new WaitForSeconds(playerStam);
-        playerSpeed = originalPlayerSpeed;
-        isSprinting = false;
-        isStamRecovered = true;
-        sprintRecover = StartCoroutine(SprintRecover());
+        yield return new WaitForSeconds(0);
+        while(isSprinting)
+        {
+            if(playerStam > 0)
+            {
+                playerStam -= stamDrain;
+            }
+            else
+            {
+                playerSpeed = originalPlayerSpeed;
+                isStamRecovered = false;
+                isSprinting = false;
+                StopCoroutine(sprint);
+            }
+            yield return new WaitForSeconds(.1f);
+        }
     }
     #endregion
     #region Sprint Recover IEnumerator
     IEnumerator SprintRecover()
     {
-        yield return new WaitForSeconds(playerStamRecover);
-        isStamRecovered = false;
-    }*/
+        yield return new WaitForSeconds(0);
+        while(playerStam < maxStam)
+        {
+            playerStam += stamRegen;
+            //Set UI bar equal to playerStam here
+
+            yield return new WaitForSeconds(.1f);
+        }
+        
+        if(playerStam >= maxStam)
+        {
+            isStamRecovered = true;
+            StopCoroutine(sprintRecover);
+        }
+        //isStamRecovered = false;
+    }
     #endregion
     #region Dash Forward IEnumerator
     IEnumerator DashForward()

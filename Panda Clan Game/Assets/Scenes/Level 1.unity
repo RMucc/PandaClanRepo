@@ -2147,6 +2147,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8515807485063710007, guid: ae2d54a112c67544d9e945049f3710fc, type: 3}
+      propertyPath: stamDrain
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 8515807485063710007, guid: ae2d54a112c67544d9e945049f3710fc, type: 3}
+      propertyPath: stamRegen
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8515807485063710007, guid: ae2d54a112c67544d9e945049f3710fc, type: 3}
+      propertyPath: playerStam
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8515807485063710007, guid: ae2d54a112c67544d9e945049f3710fc, type: 3}
+      propertyPath: playerSprintSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8515807485063710007, guid: ae2d54a112c67544d9e945049f3710fc, type: 3}
+      propertyPath: playerStamRecover
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

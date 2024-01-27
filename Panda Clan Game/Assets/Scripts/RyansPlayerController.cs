@@ -15,14 +15,23 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     [SerializeField] CharacterController controller;
     [SerializeField] int HP;
     [SerializeField] float playerSpeed;
-    [SerializeField] float playerSprintSpeed;
-    [SerializeField] float playerStamina;
-    [SerializeField] float playerStaminaRecover;
     [SerializeField] float jumpHeight;
     [SerializeField] float jumpMax;
     [SerializeField] float gravity;
     Coroutine sprint;
     Coroutine sprintRecover;
+
+    [Header("Player Stamina/Regen Variables")]
+    [SerializeField] float maxStam = 100.0f;
+    [SerializeField] float dashCost = 20.0f;
+    public bool isSprinting = false;
+    public bool isStamRecovered = true;
+    [Range(0, 50)][SerializeField] float stamDrain = .1f;
+    [Range(0, 50)][SerializeField] float stamRegen = .1f;
+
+    [SerializeField] float playerSprintSpeed;
+    [SerializeField] float playerStam;
+    //[SerializeField] float playerStamRecover;
 
     [Header("Player Gun Variables\n")]
     //Player Gun Variables
@@ -67,8 +76,6 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     //Bool Values
     private bool groundedPlayer;
     private bool isShooting;
-    private bool isSprinting;
-    private bool isStaminaRecovering;
 
     [Header("Original Values\n")]
     //Original Values
@@ -87,6 +94,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     private float dashCount;
     private float originalDashDebounce;
     [SerializeField] float dashCooldownTime;
+    private bool canDash = true;
 
     [Header("Stats Variables for Player\n")]
     //Stat Variables for Player
@@ -99,7 +107,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         originalHealthMax = healthMax;
         originalHP = HP;
         originalPlayerSpeed = playerSpeed;
-        originalPlayerStamina = playerStamina;
+        originalPlayerStamina = playerStam;
         //originalPlayerVel = playerVel.x;
         originalDashDebounce = dashDebounce;
         readyToShoot = true;
@@ -165,15 +173,35 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         #endregion
         //Sprint Input
         #region Sprint Input
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !isShooting && !isStaminaRecovering)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !isShooting && isStamRecovered)
         {
-            sprint = StartCoroutine(Sprint());
+            //sprint = StartCoroutine(Sprint());
+            if (playerStam > 0)
+            {
+                isSprinting = true;
+                sprint = StartCoroutine(Sprinting());
+            }
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
-            playerSpeed = originalPlayerSpeed;
-            isSprinting = false;
             StopCoroutine(sprint);
+            isSprinting = false;
+            playerSpeed = originalPlayerSpeed;
+            if (playerStam <= maxStam)
+            {
+                playerStam += stamRegen * Time.deltaTime;
+                UpdateStam(1);
+                if (playerStam >= maxStam)
+                {
+                    playerSpeed = originalPlayerSpeed;
+                    //Set Stam Wheel to transparent (alpha to 0)
+
+                    isStamRecovered = true;
+                }
+            }
+            //playerSpeed = originalPlayerSpeed;
+            //isSprinting = false;
+            //StopCoroutine(sprint);
         }
         #endregion
         //Forward Dash Input
@@ -259,25 +287,89 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         } 
         #endregion
     }
+    IEnumerator Sprinting()
+    {
+        if (isStamRecovered)
+        {
+            isSprinting = true;
+            playerSpeed = playerSprintSpeed;
+            playerStam -= stamDrain * Time.deltaTime;
+            yield return new WaitForSeconds(playerStam / maxStam);
+            UpdateStam(1);
+            if (playerStam <= 0)
+            {
+                isStamRecovered = false;
+                playerSpeed = originalPlayerSpeed;
+                //Set Stam Wheel to transparent (alpha to 0)
+
+            }
+        }
+    }
+    /*public void Sprinting()
+    {
+        if(isStamRecovered)
+        {
+            isSprinting = true;
+            playerSpeed = playerSprintSpeed;
+            playerStam -= stamDrain * Time.deltaTime;
+            UpdateStam(1);
+            if(playerStam <= 0)
+            {
+                isStamRecovered = false;
+                playerSpeed = originalPlayerSpeed;
+                //Set Stam Wheel to transparent (alpha to 0)
+
+            }
+        }
+    }*/
+    public void StamDash()
+    {
+        if(playerStam >= maxStam * dashCost / maxStam)
+        {
+            playerStam -= dashCost;
+            //Allow player to dash
+            canDash = true;
+            UpdateStam(1);
+        }
+        else
+        {
+            canDash = false;
+        }
+    }
+    void UpdateStam(int amount)
+    {
+        //Put updating Stam Wheel UI here
+        // Example - (UIfillbar = playerStam / maxStam)
+        if(amount == 0)
+        {
+            //Set Stam Wheel to transparent (alpha to 0)
+
+        }
+        else
+        {
+            //Set Stam wheel to visible (alpha is 1)
+
+        }
+    }
 
     #region Sprint IEnumerator
-    IEnumerator Sprint()
+    /*IEnumerator Sprint()
     {
         isSprinting = true;
         playerSpeed = playerSprintSpeed;
-        yield return new WaitForSeconds(playerStamina);
+        yield return new WaitForSeconds(playerStam);
         playerSpeed = originalPlayerSpeed;
         isSprinting = false;
-        isStaminaRecovering = true;
+        isStamRecovered = true;
         sprintRecover = StartCoroutine(SprintRecover());
     }
     #endregion
     #region Sprint Recover IEnumerator
     IEnumerator SprintRecover()
     {
-        yield return new WaitForSeconds(playerStaminaRecover);
-        isStaminaRecovering = false;
-    }
+        yield return new WaitForSeconds(playerStamRecover);
+        isStamRecovered = false;
+    }*/
     #endregion
     #region Dash Forward IEnumerator
     IEnumerator DashForward()

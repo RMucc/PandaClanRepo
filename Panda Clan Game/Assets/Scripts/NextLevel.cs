@@ -25,11 +25,13 @@ public class NextLevel : MonoBehaviour
             //if Player has killed all the enemies, ask if Player would like to move on to the next level
             if(GameManager.instance.enemyCount <= 0)
             {
-                
+                //Ask if player would like to leave or come back when ready
+
             }
             //If there are still enemies left, player cannot move on to the next level. Complete the wave first
             else
             {
+                //Give a friendly reminder to finish the level first
 
             }
         }
@@ -44,6 +46,7 @@ public class NextLevel : MonoBehaviour
         //If Player is found with trigger
         if (other.CompareTag("Player"))
         {
+            //Close the prompt UI
 
         }
     }

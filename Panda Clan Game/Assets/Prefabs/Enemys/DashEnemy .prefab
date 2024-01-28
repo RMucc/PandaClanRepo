@@ -157,11 +157,18 @@ MonoBehaviour:
   model: {fileID: 1718076467476447341}
   agent: {fileID: 308651904451800833}
   HP: 5
-  attackRate: 0
-  AmmoAddedOnDeath: 5
+  effectGameGoal: 0
   TimeToWait: 3
-  DashTime: 1
+  dashTime: 1
   speedMultiplier: 4
+  explosionRange: 10
+  explosionForce: 5
+  explosionDamage: 30
+  timefromYellowToBlack: 0.2
+  tickCount: 3
+  explosionEffect: {fileID: 5974255581125294848, guid: eba3b15c075cbba4bae37eb0758a42cd, type: 3}
+  showExplosionRange: 0
+  explosionRangeSP: {fileID: 0}
 --- !u!195 &308651904451800833
 NavMeshAgent:
   m_ObjectHideFlags: 0

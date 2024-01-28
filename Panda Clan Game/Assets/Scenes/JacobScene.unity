@@ -770,49 +770,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1467208999205356328, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 400
-      objectReference: {fileID: 0}
-    - target: {fileID: 2090384934727963731, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2240392096118306570, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 400
-      objectReference: {fileID: 0}
-    - target: {fileID: 2364976365698493607, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
-      propertyPath: m_text
-      value: Give Up!
-      objectReference: {fileID: 0}
-    - target: {fileID: 4216165443267743903, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 24
-      objectReference: {fileID: 0}
-    - target: {fileID: 5713658740901130897, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -89
-      objectReference: {fileID: 0}
-    - target: {fileID: 6703908020812874568, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128515560032646281, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7483503311532101132, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
-    - target: {fileID: 8742666400863547517, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 3718614959143942404, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}

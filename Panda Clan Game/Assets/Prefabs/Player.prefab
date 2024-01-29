@@ -133,12 +133,17 @@ MonoBehaviour:
   controller: {fileID: 2335441938592587263}
   HP: 100
   playerSpeed: 10
-  playerSprintSpeed: 12
-  playerStamina: 5
-  playerStaminaRecover: 5
   jumpHeight: 12
   jumpMax: 2
   gravity: -45
+  maxStam: 100
+  dashCost: 20
+  isSprinting: 0
+  isStamRecovered: 1
+  stamDrain: 10
+  stamRegen: 5
+  playerSprintSpeed: 12
+  playerStam: 0
   shootDamage: 20
   shootRate: 0.2
   shootDistance: 20

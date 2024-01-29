@@ -109,8 +109,8 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         originalHealthMax = healthMax;
         originalHP = HP;
         originalPlayerSpeed = playerSpeed;
+        playerStam = maxStam;
         originalPlayerStamina = playerStam;
-        //originalPlayerVel = playerVel.x;
         originalDashDebounce = dashDebounce;
         readyToShoot = true;
         isShooting = false;

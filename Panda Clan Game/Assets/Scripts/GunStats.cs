@@ -22,4 +22,10 @@ public class GunStats : ScriptableObject
     public GameObject bullet;
     public GameManager.BulletType bulletType;
     public float BulletExistanceTime;
+
+
+    private void OnValidate()
+    {
+        bulletsLeftInMag = magazineSize;
+    }
 }

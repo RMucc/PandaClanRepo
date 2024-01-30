@@ -447,8 +447,16 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     #region Weapon System
     IEnumerator Reload()
     {
+        Debug.Log("Reload Called");
         reloading = true;
-        GameManager.instance.showReload();
+        try
+        {
+            GameManager.instance.showReload();
+        }
+        catch (System.Exception)
+        {
+            print("error: Reload couldn't be shown");
+        }
         yield return new WaitForSeconds(gunList[bulletType].reloadTime);
 
         switch (bulletType)
@@ -467,6 +475,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 }
                 else
                 {
+                    print("Out of Ammo");
                     // Notify player they are fully out of shotgun Ammo;
                 }
                 break;
@@ -483,6 +492,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 }
                 else
                 {
+                    print("Out of Ammo");
                     // Notify player they are fully out of AR Ammo;
                 }
                 break;
@@ -499,6 +509,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 }
                 else
                 {
+                    print("Out of Ammo");
                     // Notify player they are fully out of SMG Ammo;
                 }
                 break;

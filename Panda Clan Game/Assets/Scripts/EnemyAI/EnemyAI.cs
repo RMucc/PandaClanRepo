@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,6 +16,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] GunStats gun;
     [SerializeField] bool effectGameGoal;
     [SerializeField] int AmmoAddedOnDeath;
+    [SerializeField] GameObject DamagePopUp;
 
     bool isAttacking;
     bool playerInRange;
@@ -58,18 +60,36 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     public void TakeDamage(int amount)
     {
-        Debug.Log(amount);
         HP -= amount;
         StartCoroutine(flashRed());
+        CreatePopUp(this.transform.position, amount.ToString());
+    }
+
+    public void CreatePopUp(Vector3 position, string text)
+    {
+        //Randomize Position
+        GameObject popUp = Instantiate(DamagePopUp, position, Quaternion.identity);
+        TextMeshProUGUI temp = popUp.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        if (temp != null)
+        {
+            temp.text = text;
+        }
+        else
+        {
+            Debug.Log("Enemy Error: Not finding text gameobject");
+        }
         if (HP <= 0)
         {
+            temp.color = Color.black;
             GameManager.instance.playerScript.AddDrops(gun, AmmoAddedOnDeath);
             if (effectGameGoal)
             {
                 GameManager.instance.updateGameGoal(-1);
             }
             Destroy(gameObject);
+            //Add loot drops.
         }
+        // Critical will be yellow
     }
     IEnumerator flashRed()
     {

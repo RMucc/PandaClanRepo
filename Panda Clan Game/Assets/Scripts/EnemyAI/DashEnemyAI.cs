@@ -91,7 +91,6 @@ public class DashEnemyAI : MonoBehaviour, IDamage
             }
             // Add grenades to players inventory.
             Explode();
-            Destroy(gameObject);
         }
     }
     IEnumerator flashRed()

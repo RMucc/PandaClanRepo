@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72b1d1e87552d9649aad5d6f881cbfdc, type: 3}
   m_Name: SMG
   m_EditorClassIdentifier: 
-  shootDamage: 1
+  shootDamage: 10
   shootRate: 0.1
   shootDistance: 10
   bulletSpread: 0.1

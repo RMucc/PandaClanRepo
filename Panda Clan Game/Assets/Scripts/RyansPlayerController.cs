@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using TMPro;
+using UnityEngine.UIElements;
 
 public class RyansPlayerController : MonoBehaviour, IDamage
 {
@@ -52,8 +53,15 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     ParticleSystem EffectHolder;
     float cameraShakeDuration; // for camera shake
     float cameraShakeMagnitude; // for camera shake
-    int activeWeap;
+    int activeWeapon;
+    int solveCrit;
+    [SerializeField] bool useCrit;
+    [SerializeField] int critRate; // The higher this number is the lower the crit chance since it's going to be based off of a random range of 1 to this int.
+    [SerializeField] int critMultiplier; //The higher this number the lower the crit damage applied will be. Will crash if equal to 0.
+    int damageHolder;
 
+    [SerializeField] float popUpPosRand;
+    [SerializeField] GameObject DamagePopUp;
 
     Dictionary<GameManager.BulletType, GunStats> gunList;
 
@@ -538,7 +546,20 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             IDamage dmg = hit.collider.GetComponent<IDamage>();
             if (dmg != null && hit.collider.gameObject.transform != this.transform)
             {
-                dmg.TakeDamage(gunList[bulletType].shootDamage);
+                solveCrit = Random.Range(1, critRate);
+                Debug.Log("CritRate = " + critRate );
+                if (useCrit && solveCrit == 1)
+                {
+                    //Debug.Log("CRITICAL DAMAGE!   -Continued\n" + "Added Damage should be: " + (gunList[bulletType].shootDamage * (int)critMultiplier).ToString() + "\n" + "Crit Damage should be: " + (gunList[bulletType].shootDamage + (gunList[bulletType].shootDamage * (int)critMultiplier)).ToString() + "\n" + "Normal Damage should be: " + gunList[bulletType].shootDamage.ToString());
+                    damageHolder = gunList[bulletType].shootDamage + (gunList[bulletType].shootDamage / critMultiplier); 
+                    dmg.TakeDamage(gunList[bulletType].shootDamage + (gunList[bulletType].shootDamage / critMultiplier));
+                }
+                else
+                {
+                    damageHolder = gunList[bulletType].shootDamage;
+                    dmg.TakeDamage(gunList[bulletType].shootDamage);
+                }
+                CreatePopUp(hit);
             }
         }
         //StartCoroutine(cameraController.Shake(cameraShakeDuration, cameraShakeMagnitude)); For potential future camera shake
@@ -548,6 +569,41 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         readyToShoot = true;
         Mathf.Clamp(gunList[bulletType].bulletsLeftInMag--, 0, 300);
         updatePlayerUI();
+    }
+
+    public void CreatePopUp(RaycastHit hit)
+    {
+        Transform hitGameobjectTransform = hit.collider.gameObject.transform;
+
+        //Randomize Position
+        GameObject popUp = Instantiate(DamagePopUp, new Vector3(hitGameobjectTransform.position.x + Random.Range(0, popUpPosRand), hitGameobjectTransform.position.y + Random.Range(0, popUpPosRand), hitGameobjectTransform.position.z + Random.Range(0, popUpPosRand)), Quaternion.identity);
+        TextMeshProUGUI temp = popUp.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        if (temp != null)
+        {
+            temp.text = damageHolder.ToString(); 
+        }
+        else
+        {
+            Debug.Log("Enemy Error: Not finding text gameobject");
+        }
+        BaseEnemyAI baseEnemyAI = hit.collider.gameObject.GetComponent<BaseEnemyAI>();
+        temp.color = Color.red;
+        if (baseEnemyAI != null)
+        {
+            if (baseEnemyAI.HP <= 0)
+            {
+                temp.fontSize += 4;
+                temp.color = Color.black;
+
+            }
+            else if (useCrit && solveCrit == 1)
+            {
+                temp.fontSize += 2;
+                temp.color = Color.yellow; // why doesnt this work although its passing through
+                Debug.Log("Call Check"); // Call Check
+            }
+        }
+        solveCrit = 0;
     }
 
     public void AddDrops(GunStats gun = null, int AmmoChange = 0)
@@ -564,18 +620,18 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             {
                 case GameManager.BulletType.Shotgun:
                     ShotgunbulletsTotal += AmmoChange;
-                    activeWeap = 1;
+                    activeWeapon = 1;
                     updatePlayerUI();
                     break;
                 case GameManager.BulletType.AR:
                     ARbulletsTotal += AmmoChange;
-                    activeWeap = 2;
+                    activeWeapon = 2;
                     updatePlayerUI();
                     break;
                 case GameManager.BulletType.SMG:
                     SMGbulletsTotal += AmmoChange;
                     gunList[bulletType].bulletsLeftInMag = gunList[bulletType].magazineSize;
-                    activeWeap = 3;
+                    activeWeapon = 3;
                     updatePlayerUI();
                     break;
             }
@@ -621,7 +677,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             GameManager.instance.HPBar.fillAmount = (float)HP / originalHP;
             GameManager.instance.AMMOBar.fillAmount = gunList[bulletType].bulletsLeftInMag / (float)gunList[bulletType].magazineSize;
 
-            switch (activeWeap)
+            switch (activeWeapon)
             {
                 case 1:
                     GameManager.instance.AMMOReserve.fillAmount = ShotgunbulletsTotal / ShotgunbulletsTotalR;
@@ -645,7 +701,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     }
     public void stUpdate()
     {
-        
+
         GameManager.instance.StaminaWheel.fillAmount = playerStam / maxStam;
     }
 

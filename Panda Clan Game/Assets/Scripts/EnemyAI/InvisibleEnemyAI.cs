@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class InvisbleEnemyAI : MonoBehaviour, IDamage
+public class InvisbleEnemyAI : BaseEnemyAI, IDamage
 {
-    [SerializeField] Renderer model;
-    [SerializeField] NavMeshAgent agent;
-    [SerializeField] int HP;
     [SerializeField] int attackDamage;
     [SerializeField] bool effectGameGoal;
     [SerializeField] int AmmoStolenOnDeath;

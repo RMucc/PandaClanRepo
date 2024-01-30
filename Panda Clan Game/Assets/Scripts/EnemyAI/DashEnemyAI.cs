@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class DashEnemyAI : MonoBehaviour, IDamage
+public class DashEnemyAI : BaseEnemyAI, IDamage
 {
-    [SerializeField] Renderer model;
-    [SerializeField] NavMeshAgent agent;
-    [SerializeField] int HP;
     [SerializeField] bool effectGameGoal;
 
     [Header("Dash Variables\n")]

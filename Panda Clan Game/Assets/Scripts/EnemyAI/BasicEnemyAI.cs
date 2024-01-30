@@ -4,11 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAI : MonoBehaviour, IDamage
+public class BasicEnemyAI : BaseEnemyAI, IDamage
 {
-    [SerializeField] Renderer model;
-    [SerializeField] NavMeshAgent agent;
-    [SerializeField] int HP;
     [SerializeField] float attackRate;
     [SerializeField] float attackRange;
     [SerializeField] int attackDamage;
@@ -63,25 +60,9 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         HP -= amount;
         StartCoroutine(flashRed());
-        CreatePopUp(new Vector3(transform.position.x + Random.Range(0, popUpPosRand), transform.position.y + Random.Range(0, popUpPosRand), transform.position.z + Random.Range(0, popUpPosRand)), amount.ToString());
-    }
-
-    public void CreatePopUp(Vector3 position, string text)
-    {
-        //Randomize Position
-        GameObject popUp = Instantiate(DamagePopUp, position, Quaternion.identity);
-        TextMeshProUGUI temp = popUp.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        if (temp != null)
-        {
-            temp.text = text;
-        }
-        else
-        {
-            Debug.Log("Enemy Error: Not finding text gameobject");
-        }
         if (HP <= 0)
         {
-            temp.color = Color.black;
+            //temp.color = Color.black;
             GameManager.instance.playerScript.AddDrops(gun, AmmoAddedOnDeath);
             if (effectGameGoal)
             {
@@ -90,6 +71,22 @@ public class EnemyAI : MonoBehaviour, IDamage
             Destroy(gameObject);
             //Add loot drops.
         }
+        //CreatePopUp(new Vector3(transform.position.x + Random.Range(0, popUpPosRand), transform.position.y + Random.Range(0, popUpPosRand), transform.position.z + Random.Range(0, popUpPosRand)), amount.ToString());
+    }
+
+    public void CreatePopUp(Vector3 position, string text)
+    {
+        //Randomize Position
+        //GameObject popUp = Instantiate(DamagePopUp, position, Quaternion.identity);
+        //TextMeshProUGUI temp = popUp.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        //if (temp != null)
+        //{
+        //    temp.text = text;
+        //}
+        //else
+        //{
+        //    Debug.Log("Enemy Error: Not finding text gameobject");
+        //}
         // Critical will be yellow
     }
     IEnumerator flashRed()

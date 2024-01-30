@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72b1d1e87552d9649aad5d6f881cbfdc, type: 3}
   m_Name: AR
   m_EditorClassIdentifier: 
-  shootDamage: 2
+  shootDamage: 10
   shootRate: 0.2
   shootDistance: 25
   bulletSpread: 0
@@ -21,7 +21,7 @@ MonoBehaviour:
   bulletsPerTap: 1
   allowButtonHold: 1
   magazineSize: 15
-  bulletsLeftInMag: 15
+  bulletsLeftInMag: 4
   cameraShakeDuration: 0
   cameraShakeMagnitude: 0
   bulletHitEffect: {fileID: 4795005520586895817, guid: e2a1aba4053b4074486c5cc23329e4d9, type: 3}

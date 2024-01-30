@@ -52,6 +52,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     ParticleSystem EffectHolder;
     float cameraShakeDuration; // for camera shake
     float cameraShakeMagnitude; // for camera shake
+    int activeWeap;
 
 
     Dictionary<GameManager.BulletType, GunStats> gunList;
@@ -63,6 +64,9 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     [SerializeField] int ARbulletsTotal;
     [SerializeField] int ShotgunbulletsTotal;
     [SerializeField] int SMGbulletsTotal;
+    float ARbulletsTotalR;       //These are needed so I can use division for fillamount
+    float ShotgunbulletsTotalR;  //These are needed so I can use division for fillamount
+    float SMGbulletsTotalR;      //These are needed so I can use division for fillamount
 
     [SerializeField] Transform shootPos;
     [SerializeField] CameraController cameraController;
@@ -106,6 +110,9 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     void Start()
     {
         gunList = new Dictionary<GameManager.BulletType, GunStats>();
+        ARbulletsTotalR = ARbulletsTotal;
+        ShotgunbulletsTotalR = ShotgunbulletsTotal;
+        SMGbulletsTotalR = SMGbulletsTotal;
         originalHealthMax = healthMax;
         originalHP = HP;
         originalPlayerSpeed = playerSpeed;
@@ -121,7 +128,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     void Update()
     {
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * gunList[bulletType].shootDistance, Color.green);
-
+        stFX();
         if (gunList[bulletType].allowButtonHold && !isShooting)
         {
             shooting = Input.GetButton("Shoot");
@@ -177,7 +184,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         #region Sprint Input
         if (Input.GetKeyDown(KeyCode.LeftShift) && !isShooting && isStamRecovered)
         {
-            if(sprintRecover != null)
+            if (sprintRecover != null)
             {
                 StopCoroutine(sprintRecover);
             }
@@ -202,7 +209,8 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             if (dashDebounce > 0 && dashCount == 1)
             {
                 StamDash();
-                if(canDash)
+                stUpdate();
+                if (canDash)
                 {
                     isDashing = true;
                     StartCoroutine(DashForward());
@@ -224,7 +232,8 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             if (dashDebounce > 0 && dashCount == 1)
             {
                 StamDash();
-                if(canDash)
+                stUpdate();
+                if (canDash)
                 {
                     isDashing = true;
                     StartCoroutine(DashBackward());
@@ -246,7 +255,8 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             if (dashDebounce > 0 && dashCount == 1)
             {
                 StamDash();
-                if(canDash)
+                stUpdate();
+                if (canDash)
                 {
                     isDashing = true;
                     StartCoroutine(DashRight());
@@ -268,7 +278,8 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             if (dashDebounce > 0 && dashCount == 1)
             {
                 StamDash();
-                if(canDash)
+                stUpdate();
+                if (canDash)
                 {
                     isDashing = true;
                     StartCoroutine(DashLeft());
@@ -301,7 +312,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     #region Sprinting Function
     public void Sprinting()
     {
-        if(isStamRecovered)
+        if (isStamRecovered)
         {
             isSprinting = true;
             playerSpeed = playerSprintSpeed;
@@ -313,10 +324,10 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     #region StamDash Cost Function
     public void StamDash()
     {
-        if (playerStam - dashCost >= 0)
+        if (playerStam - dashCost > 0)
         {
             playerStam -= dashCost;
-            //Make UI stam bar equal to playerStam here
+            //stUpdate();
 
             canDash = true;
         }
@@ -331,12 +342,12 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     IEnumerator Sprint()
     {
         yield return new WaitForSeconds(0);
-        while(isSprinting)
+        while (isSprinting)
         {
-            if(playerStam > 0)
+            if (playerStam > 0)
             {
                 playerStam -= stamDrain;
-                //Make UI stam bar equal to playerStam here
+                stUpdate();
 
             }
             else
@@ -355,15 +366,15 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     IEnumerator SprintRecover()
     {
         yield return new WaitForSeconds(0);
-        while(playerStam < maxStam)
+        while (playerStam < maxStam)
         {
             playerStam += stamRegen;
-            //Make UI stam bar equal to playerStam here
+            stUpdate();
 
             yield return new WaitForSeconds(.1f);
         }
-        
-        if(playerStam >= maxStam)
+
+        if (playerStam >= maxStam)
         {
             isStamRecovered = true;
             StopCoroutine(sprintRecover);
@@ -427,6 +438,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     #region Dash Cooldown IEnumerator
     IEnumerator DashCoolDown()
     {
+        stUpdate();
         yield return new WaitForSeconds(dashCooldownTime);
         isDashing = false;
     }
@@ -445,7 +457,8 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 if (ShotgunbulletsTotal >= gunList[bulletType].magazineSize)
                 {
                     gunList[bulletType].bulletsLeftInMag = gunList[bulletType].magazineSize;
-                    ShotgunbulletsTotal -= gunList[bulletType].magazineSize;
+                    ShotgunbulletsTotal -= gunList[bulletType].magazineSize - gunList[bulletType].bulletsLeftInMag; //Had to add this to your reload
+                    //Before, it was taking a flat rate of magazine size instead of the difference between what's left in current mag and full mag -J.G 
                 }
                 else if (ShotgunbulletsTotal > 0)
                 {
@@ -461,7 +474,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 if (ARbulletsTotal >= gunList[bulletType].magazineSize)
                 {
                     gunList[bulletType].bulletsLeftInMag = gunList[bulletType].magazineSize;
-                    ARbulletsTotal -= gunList[bulletType].magazineSize;
+                    ARbulletsTotal -= gunList[bulletType].magazineSize - gunList[bulletType].bulletsLeftInMag;
                 }
                 else if (ARbulletsTotal > 0)
                 {
@@ -477,7 +490,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 if (SMGbulletsTotal >= gunList[bulletType].magazineSize)
                 {
                     gunList[bulletType].bulletsLeftInMag = gunList[bulletType].magazineSize;
-                    SMGbulletsTotal -= gunList[bulletType].magazineSize;
+                    SMGbulletsTotal -= gunList[bulletType].magazineSize - gunList[bulletType].bulletsLeftInMag;
                 }
                 else if (SMGbulletsTotal > 0)
                 {
@@ -540,12 +553,19 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             {
                 case GameManager.BulletType.Shotgun:
                     ShotgunbulletsTotal += AmmoChange;
+                    activeWeap = 1;
+                    updatePlayerUI();
                     break;
                 case GameManager.BulletType.AR:
                     ARbulletsTotal += AmmoChange;
+                    activeWeap = 2;
+                    updatePlayerUI();
                     break;
                 case GameManager.BulletType.SMG:
                     SMGbulletsTotal += AmmoChange;
+                    gunList[bulletType].bulletsLeftInMag = gunList[bulletType].magazineSize;
+                    activeWeap = 3;
+                    updatePlayerUI();
                     break;
             }
         }
@@ -589,14 +609,33 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         {
             GameManager.instance.HPBar.fillAmount = (float)HP / originalHP;
             GameManager.instance.AMMOBar.fillAmount = gunList[bulletType].bulletsLeftInMag / (float)gunList[bulletType].magazineSize;
+
+            switch (activeWeap)
+            {
+                case 1:
+                    GameManager.instance.AMMOReserve.fillAmount = ShotgunbulletsTotal / ShotgunbulletsTotalR;
+                    break;
+
+                case 2:
+                    GameManager.instance.AMMOReserve.fillAmount = ARbulletsTotal / ARbulletsTotalR;
+                    break;
+
+                case 3:
+                    GameManager.instance.AMMOReserve.fillAmount = SMGbulletsTotal / SMGbulletsTotalR;
+                    break;
+
+            }
+
         }
         catch (System.Exception e)
         {
             print("error : missing HPBar");
         }
-        //Ammo update when ammo is added
-
-        //Stamina update
+    }
+    public void stUpdate()
+    {
+        
+        GameManager.instance.StaminaWheel.fillAmount = playerStam / maxStam;
     }
 
     IEnumerator flashScreen()
@@ -619,6 +658,17 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         catch (System.Exception)
         {
             print("error: damageScreen missing from GameManager");
+        }
+    }
+    public void stFX()
+    {
+        if (playerStam == maxStam)
+        {
+            GameManager.instance.hideStamina();
+        }
+        else
+        {
+            GameManager.instance.showStamina();
         }
     }
 

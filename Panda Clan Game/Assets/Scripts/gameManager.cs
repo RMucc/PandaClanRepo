@@ -15,28 +15,32 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] GameObject test1;
+    [SerializeField] GameObject test2;
+    [SerializeField] GameObject test3;
     public GameObject damageScreen;
     public Image HPBar;
     public Image AMMOBar;
+    public Image AMMOReserve;
     public Image StaminaWheel;
-    
+
     public GameObject player;
     public RyansPlayerController playerScript;
     public GameObject playerSpawnPos;
     //public GameObject nextLevel2;
-    
+
     public bool isPaused;
     public int enemyCount;
 
-    
+
     public enum BulletType
     {
         None,
         Shotgun,
         SMG,
         AR
-    } 
-    
+    }
+
 
     #region AWAKE CODE
     void Awake()
@@ -91,7 +95,7 @@ public class GameManager : MonoBehaviour
             menuActive = menuWin;
             menuActive.SetActive(true);
         }
-    } 
+    }
     #endregion
 
     #region LOSE youSuck()
@@ -128,4 +132,35 @@ public class GameManager : MonoBehaviour
         noReload.SetActive(true);
     }
     #endregion
+
+    #region TEST
+
+    public void showTEST1()
+    {
+        test1.SetActive(true);
+        test2.SetActive(false);
+        test3.SetActive(false);
+    }
+    public void hideTESTS()
+    {
+        test1.SetActive(false);
+        test2.SetActive(false);
+        test3.SetActive(false);
+    }
+    public void showTEST2()
+    {
+        test1.SetActive(false);
+        test2.SetActive(true);
+        test3.SetActive(false);
+    }
+    public void showTEST3()
+    {
+        test1.SetActive(false);
+        test2.SetActive(false);
+        test3.SetActive(true);
+    }
+    #endregion
+
+
+
 }

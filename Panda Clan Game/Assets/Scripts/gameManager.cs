@@ -110,12 +110,26 @@ public class GameManager : MonoBehaviour
     #region Stamina Visuals Code
     public void showStamina()
     {
-        stamninaVisable.SetActive(true);
+        try
+        {
+            stamninaVisable.SetActive(true);
+        }
+        catch (System.Exception)
+        {
+            print("error: Variable staminaVisable might not be assigned");
+        }
     }
 
     public void hideStamina()
     {
-        stamninaVisable.SetActive(false);
+        try
+        {
+            stamninaVisable.SetActive(false);
+        }
+        catch (System.Exception)
+        {
+            print("error: Variable staminaVisable might not be assigned");
+        }
     }
     #endregion
 

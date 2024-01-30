@@ -16,6 +16,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] GunStats gun;
     [SerializeField] bool effectGameGoal;
     [SerializeField] int AmmoAddedOnDeath;
+    [SerializeField] float popUpPosRand;
     [SerializeField] GameObject DamagePopUp;
 
     bool isAttacking;
@@ -62,7 +63,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         HP -= amount;
         StartCoroutine(flashRed());
-        CreatePopUp(this.transform.position, amount.ToString());
+        CreatePopUp(new Vector3(transform.position.x + Random.Range(0, popUpPosRand), transform.position.y + Random.Range(0, popUpPosRand), transform.position.z + Random.Range(0, popUpPosRand)), amount.ToString());
     }
 
     public void CreatePopUp(Vector3 position, string text)

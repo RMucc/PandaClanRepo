@@ -7,9 +7,12 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     [SerializeField] GameObject[] objectToSpawn;
-    [SerializeField] int numToSpawn;
     [SerializeField] float timeBetweenSpawns;
     [SerializeField] Transform[] spawnPos;
+    [SerializeField] int wave1EnemyAmount;
+    [SerializeField] int wave2EnemyAmount;
+    [SerializeField] int wave3EnemyAmount;
+    private int totalEnemyAmount;
     private int enemies;
     private int spawnCount;
     private bool isSpawning;
@@ -19,7 +22,8 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //GameManager.instance.updateGameGoal(numToSpawn);
+        totalEnemyAmount = wave1EnemyAmount + wave2EnemyAmount + wave3EnemyAmount;
+        GameManager.instance.updateGameGoal(totalEnemyAmount - 1);
     }
 
     // Update is called once per frame
@@ -36,15 +40,15 @@ public class Spawner : MonoBehaviour
     {
         if (wave == 1 && !isSpawning)
         {
-            WaveSpawn(5);
+            WaveSpawn(wave1EnemyAmount);
         }
         else if (wave == 2 && !isSpawning)
         {
-            WaveSpawn(9);
+            WaveSpawn(wave2EnemyAmount);
         }
         else if (wave == 3 && !isSpawning)
         {
-            WaveSpawn(11);
+            WaveSpawn(wave3EnemyAmount);
         }
         yield return new WaitForSeconds(timeBetweenSpawns);
     }

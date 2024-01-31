@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
 
     public bool isPaused;
     public int enemyCount;
+    public int enemyGoal;
 
 
     public enum BulletType
@@ -87,14 +88,17 @@ public class GameManager : MonoBehaviour
     #region GAME GOAL
     public void updateGameGoal(int amount)
     {
-        enemyCount += amount;
-
-        if (enemyCount <= 0)
+        enemyGoal += amount;
+        if (enemyGoal <= 0)
         {
             statePaused();
             menuActive = menuWin;
             menuActive.SetActive(true);
         }
+    }
+    public void updateEnemyAmount(int amount)
+    {
+        enemyCount += amount;
     }
     #endregion
 

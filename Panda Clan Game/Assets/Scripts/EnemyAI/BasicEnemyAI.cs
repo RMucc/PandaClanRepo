@@ -23,7 +23,7 @@ public class BasicEnemyAI : BaseEnemyAI, IDamage
 
     void Start()
     {
-        GameManager.instance.updateGameGoal(1);
+        GameManager.instance.updateEnemyAmount(1);
         stored = model.material.color;
     }
 
@@ -67,6 +67,7 @@ public class BasicEnemyAI : BaseEnemyAI, IDamage
             if (effectGameGoal)
             {
                 GameManager.instance.updateGameGoal(-1);
+                GameManager.instance.updateEnemyAmount(-1);
             }
             Destroy(gameObject);
             //Add loot drops.

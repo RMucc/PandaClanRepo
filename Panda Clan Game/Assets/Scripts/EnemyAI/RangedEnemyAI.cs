@@ -24,7 +24,7 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
 
     void Start()
     {
-        GameManager.instance.updateGameGoal(1);
+        GameManager.instance.updateEnemyAmount(1);
         stored = model.material.color;
     }
 
@@ -64,6 +64,7 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
             if (effectGameGoal)
             {
                 GameManager.instance.updateGameGoal(-1);
+                GameManager.instance.updateEnemyAmount(-1);
             }
             Destroy(gameObject);
         }

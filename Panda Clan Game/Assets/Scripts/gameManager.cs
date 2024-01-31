@@ -120,10 +120,13 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Update Scene Bool
-    public void CallBeforeLoadingSceneTwo()
+    public void CallToTurnOnLevel2()
+    {
+        level2 = true;
+    }
+    public void CallToTurnOffLevel1()
     {
         level1 = false;
-        level2 = true;
     }
 
 

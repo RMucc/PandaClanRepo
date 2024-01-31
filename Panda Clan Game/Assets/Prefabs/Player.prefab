@@ -142,8 +142,8 @@ MonoBehaviour:
   isStamRecovered: 1
   stamDrain: 10
   stamRegen: 5
-  playerSprintSpeed: 12
-  playerStam: 0
+  playerSprintSpeed: 20
+  playerStam: 100
   shootDamage: 20
   shootRate: 0.2
   shootDistance: 20
@@ -156,6 +156,11 @@ MonoBehaviour:
   bulletHitEffect: {fileID: 4795005520586895817, guid: e2a1aba4053b4074486c5cc23329e4d9, type: 3}
   bullet: {fileID: 8262477620160788249, guid: 08194839b88e25746875f447cdb0b50a, type: 3}
   bulletType: 3
+  useCrit: 0
+  critRate: 0
+  critMultiplier: 0
+  popUpPosRand: 0
+  DamagePopUp: {fileID: 0}
   ARbulletsTotal: 0
   ShotgunbulletsTotal: 0
   SMGbulletsTotal: 0

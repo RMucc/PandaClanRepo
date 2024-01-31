@@ -25,6 +25,11 @@ public class buttonFunctions : MonoBehaviour
 
     }
 
+    public void continueGame()
+    {
+        GameManager.instance.stateResume();
+    }
+
     public void respawn()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

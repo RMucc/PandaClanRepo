@@ -23,7 +23,7 @@ public class Spawner : MonoBehaviour
     void Start()
     {
         totalEnemyAmount = wave1EnemyAmount + wave2EnemyAmount + wave3EnemyAmount;
-        GameManager.instance.updateGameGoal(totalEnemyAmount - 1);
+        GameManager.instance.updateGameGoal(totalEnemyAmount);
     }
 
     // Update is called once per frame
@@ -72,7 +72,7 @@ public class Spawner : MonoBehaviour
             spawnCount = 0;
         }
     }
-
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

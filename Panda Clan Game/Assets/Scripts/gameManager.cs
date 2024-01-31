@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject stamninaVisable;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
+    [SerializeField] GameObject level1MenuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject test1;
     [SerializeField] GameObject test2;
@@ -30,6 +32,10 @@ public class GameManager : MonoBehaviour
     //public GameObject nextLevel2;
 
     public bool isPaused;
+    public static bool level1;
+    public static bool level2;
+    public bool levelOne;
+    public bool levelTwo;
     public int enemyCount;
     public int enemyGoal;
 
@@ -46,6 +52,9 @@ public class GameManager : MonoBehaviour
     #region AWAKE CODE
     void Awake()
     {
+        level1 = true;
+        levelOne = level1;
+        levelTwo = level2;
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<RyansPlayerController>();
@@ -89,7 +98,15 @@ public class GameManager : MonoBehaviour
     public void updateGameGoal(int amount)
     {
         enemyGoal += amount;
-        if (enemyGoal <= 0)
+        //Should pull up a win menu that we can close out of so that we can move on to the next level
+        if (enemyGoal <= 0 && level1 == true)
+        {
+            statePaused();
+            menuActive = level1MenuWin;
+            menuActive.SetActive(true);
+        }
+        //Should pull up the win menu (No level after this so give option to restart or leave)
+        if (enemyGoal <= 0 && level2 == true)
         {
             statePaused();
             menuActive = menuWin;
@@ -102,12 +119,29 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+    #region Update Scene Bool
+    public void CallBeforeLoadingSceneTwo()
+    {
+        level1 = false;
+        level2 = true;
+    }
+
+
+    #endregion
+
     #region LOSE youSuck()
     public void youSuck()
     {
         statePaused();
         menuActive = menuLose;
         menuActive.SetActive(true);
+    }
+    #endregion
+
+    #region Next Level
+    public void LoadNextScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     #endregion
 

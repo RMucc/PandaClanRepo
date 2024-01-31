@@ -4,7 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Player Spawn Pos
+  - Level 1
+  - Level 2
   layers:
   - Default
   - TransparentFX

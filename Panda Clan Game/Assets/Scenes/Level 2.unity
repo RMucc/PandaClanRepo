@@ -1667,7 +1667,7 @@ GameObject:
   - component: {fileID: 397450899}
   m_Layer: 0
   m_Name: Spawner
-  m_TagString: Untagged
+  m_TagString: Level 2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5077,8 +5077,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3067573623821199699, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
+      propertyPath: level1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3067573623821199699, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
       propertyPath: enemyGoal
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7483503311532101132, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
       propertyPath: m_Name
@@ -9950,6 +9954,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 2026602530}
   - {fileID: 1220159117}
+  - {fileID: 397450901}
   - {fileID: 767464616}
   - {fileID: 1416034645}
   - {fileID: 7631549568714411028}
@@ -10032,4 +10037,3 @@ SceneRoots:
   - {fileID: 541708321}
   - {fileID: 1219478071}
   - {fileID: 50921270}
-  - {fileID: 397450901}

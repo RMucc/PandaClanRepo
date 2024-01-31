@@ -559,7 +559,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                     damageHolder = gunList[bulletType].shootDamage;
                     dmg.TakeDamage(gunList[bulletType].shootDamage);
                 }
-                CreatePopUp(hit);
+                //CreatePopUp(hit);
             }
         }
         //StartCoroutine(cameraController.Shake(cameraShakeDuration, cameraShakeMagnitude)); For potential future camera shake

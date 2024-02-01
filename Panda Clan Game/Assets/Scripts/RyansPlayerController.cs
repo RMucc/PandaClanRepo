@@ -546,11 +546,11 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             if (dmg != null && hit.collider.gameObject.transform != this.transform)
             {
                 solveCrit = Random.Range(1, critRate);
-                Debug.Log("CritRate = " + critRate );
+                Debug.Log("CritRate = " + critRate);
                 if (useCrit && solveCrit == 1)
                 {
                     //Debug.Log("CRITICAL DAMAGE!   -Continued\n" + "Added Damage should be: " + (gunList[bulletType].shootDamage * (int)critMultiplier).ToString() + "\n" + "Crit Damage should be: " + (gunList[bulletType].shootDamage + (gunList[bulletType].shootDamage * (int)critMultiplier)).ToString() + "\n" + "Normal Damage should be: " + gunList[bulletType].shootDamage.ToString());
-                    damageHolder = gunList[bulletType].shootDamage + (gunList[bulletType].shootDamage / critMultiplier); 
+                    damageHolder = gunList[bulletType].shootDamage + (gunList[bulletType].shootDamage / critMultiplier);
                     dmg.TakeDamage(gunList[bulletType].shootDamage + (gunList[bulletType].shootDamage / critMultiplier));
                 }
                 else
@@ -579,7 +579,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         TextMeshProUGUI temp = popUp.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         if (temp != null)
         {
-            temp.text = damageHolder.ToString(); 
+            temp.text = damageHolder.ToString();
         }
         else
         {
@@ -638,6 +638,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     }
     #endregion
 
+    #region DAMAGE
     public void TakeDamage(int amount)
     {
         HP -= amount;
@@ -658,6 +659,29 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             }
         }
     }
+    IEnumerator flashScreen()
+    {
+        try
+        {
+            GameManager.instance.damageScreen.SetActive(true);
+        }
+        catch (System.Exception)
+        {
+            print("error: damageScreen missing from GameManager");
+        }
+
+        yield return new WaitForSeconds(0.2f);
+
+        try
+        {
+            GameManager.instance.damageScreen.SetActive(false);
+        }
+        catch (System.Exception)
+        {
+            print("error: damageScreen missing from GameManager");
+        }
+    }
+    #endregion
 
     public void respawn()
     {
@@ -669,6 +693,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         controller.enabled = true;
     }
 
+    #region UI features
     public void updatePlayerUI()
     {
         try // for debugging purposes
@@ -703,29 +728,6 @@ public class RyansPlayerController : MonoBehaviour, IDamage
 
         GameManager.instance.StaminaWheel.fillAmount = playerStam / maxStam;
     }
-
-    IEnumerator flashScreen()
-    {
-        try
-        {
-            GameManager.instance.damageScreen.SetActive(true);
-        }
-        catch (System.Exception)
-        {
-            print("error: damageScreen missing from GameManager");
-        }
-
-        yield return new WaitForSeconds(0.2f);
-
-        try
-        {
-            GameManager.instance.damageScreen.SetActive(false);
-        }
-        catch (System.Exception)
-        {
-            print("error: damageScreen missing from GameManager");
-        }
-    }
     public void stFX()
     {
         if (playerStam == maxStam)
@@ -737,5 +739,6 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             GameManager.instance.showStamina();
         }
     }
+    #endregion
 
 }

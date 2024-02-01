@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject test1; //Out of Stamina text
     [SerializeField] GameObject test2; //Out of Ammo text
     [SerializeField] GameObject test3; //DANGER low health text
+    [SerializeField] GameObject enemiesLeft; //Text for current enemy count
     public GameObject damageScreen;
     public Image HPBar;
     public Image AMMOBar;

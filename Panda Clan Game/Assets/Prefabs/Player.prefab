@@ -140,7 +140,7 @@ MonoBehaviour:
   dashCost: 20
   isSprinting: 0
   isStamRecovered: 1
-  stamDrain: 10
+  stamDrain: 5
   stamRegen: 5
   playerSprintSpeed: 20
   playerStam: 100
@@ -155,6 +155,8 @@ MonoBehaviour:
   bulletsLeftInMag: 100
   bulletHitEffect: {fileID: 4795005520586895817, guid: e2a1aba4053b4074486c5cc23329e4d9, type: 3}
   bullet: {fileID: 8262477620160788249, guid: 08194839b88e25746875f447cdb0b50a, type: 3}
+  shootPos: {fileID: 2233577734215513461}
+  cameraController: {fileID: 5258733471359811859}
   bulletType: 3
   useCrit: 0
   critRate: 0
@@ -164,8 +166,6 @@ MonoBehaviour:
   ARbulletsTotal: 0
   ShotgunbulletsTotal: 0
   SMGbulletsTotal: 0
-  shootPos: {fileID: 2233577734215513461}
-  cameraController: {fileID: 5258733471359811859}
   dashSpeed: 20
   dashDuration: 0.25
   dashDebounce: 0.25

@@ -17,9 +17,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject level1MenuWin;
     [SerializeField] GameObject menuLose;
-    [SerializeField] GameObject test1;
-    [SerializeField] GameObject test2;
-    [SerializeField] GameObject test3;
+    [SerializeField] GameObject test1; //Out of Stamina text
+    [SerializeField] GameObject test2; //Out of Ammo text
+    [SerializeField] GameObject test3; //DANGER low health text
     public GameObject damageScreen;
     public Image HPBar;
     public Image AMMOBar;
@@ -215,7 +215,4 @@ public class GameManager : MonoBehaviour
         test3.SetActive(true);
     }
     #endregion
-
-
-
 }

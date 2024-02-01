@@ -473,8 +473,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 if (ShotgunbulletsTotal >= gunList[bulletType].magazineSize)
                 {
                     gunList[bulletType].bulletsLeftInMag = gunList[bulletType].magazineSize;
-                    ShotgunbulletsTotal -= gunList[bulletType].magazineSize - gunList[bulletType].bulletsLeftInMag; //Had to add this to your reload
-                    //Before, it was taking a flat rate of magazine size instead of the difference between what's left in current mag and full mag -J.G 
+                    ShotgunbulletsTotal -= gunList[bulletType].magazineSize - gunList[bulletType].bulletsLeftInMag;
                 }
                 else if (ShotgunbulletsTotal > 0)
                 {
@@ -484,7 +483,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 else
                 {
                     print("Out of Ammo");
-                    // Notify player they are fully out of shotgun Ammo;
+                    //Out of Ammo display
                 }
                 break;
             case GameManager.BulletType.AR:
@@ -501,7 +500,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 else
                 {
                     print("Out of Ammo");
-                    // Notify player they are fully out of AR Ammo;
+                    //Out of Ammo display
                 }
                 break;
             case GameManager.BulletType.SMG:
@@ -518,7 +517,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 else
                 {
                     print("Out of Ammo");
-                    // Notify player they are fully out of SMG Ammo;
+                    //Out of Ammo display
                 }
                 break;
         }

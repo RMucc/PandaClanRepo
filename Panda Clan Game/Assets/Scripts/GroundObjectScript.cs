@@ -13,7 +13,7 @@ public class GroundObjectScript : MonoBehaviour
     [SerializeField] float objectUpMovementSpeed;
     float floatSpeed;
     float rotateSpeed;
-    bool startFloat;
+    [SerializeField] bool startFloat;
 
     [Header("-----  Components  -----\n")]
     [SerializeField] Rigidbody rb;
@@ -27,8 +27,11 @@ public class GroundObjectScript : MonoBehaviour
     public void Start()
     {
         Physics.IgnoreLayerCollision(3, 6);
-        rb.velocity = transform.forward * objectForwardMovementSpeed;
-        rb.velocity += transform.up * objectUpMovementSpeed;
+        if (rb != null)
+        {
+            rb.velocity = transform.forward * objectForwardMovementSpeed;
+            rb.velocity += transform.up * objectUpMovementSpeed;
+        }
         if (transform.parent == null)
         {
             floatSpeed = Random.Range(floatSpeedMin, floatSpeedMax);

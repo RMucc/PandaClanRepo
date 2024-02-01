@@ -27,6 +27,7 @@ public class buttonFunctions : MonoBehaviour
 
     public void continueGame()
     {
+
         GameManager.instance.stateResume();
     }
 

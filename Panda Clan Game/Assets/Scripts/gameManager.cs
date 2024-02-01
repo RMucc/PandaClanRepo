@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     public int enemyCount;
     public int enemyGoal;
 
+    public GameObject ArrowToNext;
 
     public enum BulletType
     {
@@ -112,7 +113,10 @@ public class GameManager : MonoBehaviour
             statePaused();
             try
             {
-
+                if (ArrowToNext != null)
+                {
+                    ArrowToNext.SetActive(true);
+                }
                 menuActive = level1MenuWin;
                 menuActive.SetActive(true);
             }

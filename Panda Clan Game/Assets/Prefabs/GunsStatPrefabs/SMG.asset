@@ -10,21 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72b1d1e87552d9649aad5d6f881cbfdc, type: 3}
-  m_Name: AR
+  m_Name: SMG
   m_EditorClassIdentifier: 
   shootDamage: 10
-  shootRate: 0.2
-  shootDistance: 25
-  bulletSpread: 0
-  reloadTime: 3
+  shootRate: 0.1
+  shootDistance: 10
+  bulletSpread: 0.1
+  reloadTime: 2
   timeBetweenShots: 0
   bulletsPerTap: 1
   allowButtonHold: 1
   magazineSize: 15
-  bulletsLeftInMag: 4
+  bulletsLeftInMag: 15
   cameraShakeDuration: 0
   cameraShakeMagnitude: 0
-  bulletHitEffect: {fileID: 4795005520586895817, guid: e2a1aba4053b4074486c5cc23329e4d9, type: 3}
-  bullet: {fileID: 8262477620160788249, guid: 08194839b88e25746875f447cdb0b50a, type: 3}
-  bulletType: 3
-  BulletExistanceTime: 5
+  bulletHitEffect: {fileID: 4795005520586895817, guid: 0b5937c7f85d8d54fa5dfa2258d0d6b3, type: 3}
+  bullet: {fileID: 8262477620160788249, guid: e7b64788644515747a7b718564f4f9c0, type: 3}
+  bulletType: 2
+  BulletExistanceTime: 4
+  weaponPrefabSkin: {fileID: 1095254202041702, guid: 6273e2936e9d6a24e9f64c7c70d6bd19, type: 3}

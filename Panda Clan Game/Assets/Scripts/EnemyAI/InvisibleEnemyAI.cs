@@ -62,6 +62,8 @@ public class InvisbleEnemyAI : BaseEnemyAI, IDamage
             if (effectGameGoal)
             {
                 GameManager.instance.updateGameGoal(-1);
+                GameManager.instance.updateEnemyAmount(-1);
+
             }
             IDamage dmg = other.gameObject.GetComponent<IDamage>();
             dmg.TakeDamage(attackDamage);

@@ -22,6 +22,8 @@ public class GunStats : ScriptableObject
     public GameObject bullet;
     public GameManager.BulletType bulletType;
     public float BulletExistanceTime;
+    public GameObject weaponPrefabSkin;
+
 
 
     private void OnValidate()

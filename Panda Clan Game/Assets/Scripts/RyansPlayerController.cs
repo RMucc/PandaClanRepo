@@ -49,6 +49,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     [SerializeField] ParticleSystem bulletHitEffect;
     [SerializeField] GameObject bullet;
     [SerializeField] Transform shootPos;
+    [SerializeField] Transform gunPosition;
     [SerializeField] CameraController cameraController;
     [SerializeField] GameManager.BulletType bulletType;
     ParticleSystem EffectHolder;
@@ -56,6 +57,8 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     float cameraShakeDuration; // for camera shake
     float cameraShakeMagnitude; // for camera shake
     int activeWeapon;
+    GameObject gunOut;
+
     [Header("Player Critical Damage Variables\n")]
     [SerializeField] bool useCrit;
     [SerializeField] int critRate; // The higher this number is the lower the crit chance since it's going to be based off of a random range of 1 to this int.
@@ -536,7 +539,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         float x = Random.Range(-gunList[bulletType].bulletSpread, gunList[bulletType].bulletSpread);
         float y = Random.Range(-gunList[bulletType].bulletSpread, gunList[bulletType].bulletSpread);
         Vector3 direction = Camera.main.transform.forward + new Vector3(x, y, 0);
-        GameObject _bullet = Instantiate(gunList[bulletType].bullet, shootPos.transform.position, Quaternion.LookRotation(direction));
+        GameObject _bullet = Instantiate(gunList[bulletType].bullet, gunOut.transform.GetChild(0).transform.position, Quaternion.LookRotation(direction));
         Debug.DrawRay(shootPos.transform.position, direction * gunList[bulletType].shootDistance, Color.red, 1f);
         RaycastHit hit;
         if (Physics.Raycast(shootPos.transform.position, direction, out hit, gunList[bulletType].shootDistance))
@@ -551,7 +554,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 if (useCrit && solveCrit == 1)
                 {
                     //Debug.Log("CRITICAL DAMAGE!   -Continued\n" + "Added Damage should be: " + (gunList[bulletType].shootDamage * (int)critMultiplier).ToString() + "\n" + "Crit Damage should be: " + (gunList[bulletType].shootDamage + (gunList[bulletType].shootDamage * (int)critMultiplier)).ToString() + "\n" + "Normal Damage should be: " + gunList[bulletType].shootDamage.ToString());
-                    damageHolder = gunList[bulletType].shootDamage + (gunList[bulletType].shootDamage / critMultiplier); 
+                    damageHolder = gunList[bulletType].shootDamage + (gunList[bulletType].shootDamage / critMultiplier);
                     dmg.TakeDamage(gunList[bulletType].shootDamage + (gunList[bulletType].shootDamage / critMultiplier));
                 }
                 else
@@ -580,7 +583,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         TextMeshProUGUI temp = popUp.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         if (temp != null)
         {
-            temp.text = damageHolder.ToString(); 
+            temp.text = damageHolder.ToString();
         }
         else
         {
@@ -599,7 +602,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             else if (useCrit && solveCrit == 1)
             {
                 temp.fontSize += 2;
-                temp.color = Color.yellow; 
+                temp.color = Color.yellow;
             }
         }
         solveCrit = 0;
@@ -611,6 +614,11 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         {
             gunList.Add(gun.bulletType, gun);
             bulletType = gun.bulletType;
+            if (gunOut != null)
+            {
+                Destroy(gunOut);
+            }
+            gunOut = Instantiate(gun.weaponPrefabSkin, gunPosition.transform);
         }
 
         if (AmmoChange != 0)

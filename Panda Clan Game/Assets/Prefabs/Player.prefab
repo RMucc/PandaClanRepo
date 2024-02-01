@@ -160,7 +160,7 @@ MonoBehaviour:
   critRate: 0
   critMultiplier: 0
   popUpPosRand: 0
-  DamagePopUp: {fileID: 0}
+  DamagePopUp: {fileID: 3011575219265090607, guid: 8f2bffcb7d4e6974ea22d205069525a8, type: 3}
   ARbulletsTotal: 0
   ShotgunbulletsTotal: 0
   SMGbulletsTotal: 0

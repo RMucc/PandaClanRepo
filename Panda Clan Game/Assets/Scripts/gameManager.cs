@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
     #region AWAKE CODE
     void Awake()
     {
-        if(!isNotLevel1)
+        if (!isNotLevel1)
         {
             level1 = true;
         }
@@ -106,8 +106,16 @@ public class GameManager : MonoBehaviour
         if (enemyGoal <= 0 && level1 == true)
         {
             statePaused();
-            menuActive = level1MenuWin;
-            menuActive.SetActive(true);
+            try
+            {
+
+                menuActive = level1MenuWin;
+                menuActive.SetActive(true);
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogWarning("error: level1MenuWin not found");
+            }
         }
         //Should pull up the win menu (No level after this so give option to restart or leave)
         if (enemyGoal <= 0 && level2 == true)

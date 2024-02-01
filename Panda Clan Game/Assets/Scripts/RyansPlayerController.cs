@@ -48,16 +48,19 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     [SerializeField] int bulletsLeftInMag;
     [SerializeField] ParticleSystem bulletHitEffect;
     [SerializeField] GameObject bullet;
-    float timeBetweenShots; // for burst weapons
+    [SerializeField] Transform shootPos;
+    [SerializeField] CameraController cameraController;
     [SerializeField] GameManager.BulletType bulletType;
     ParticleSystem EffectHolder;
+    float timeBetweenShots; // for burst weapons
     float cameraShakeDuration; // for camera shake
     float cameraShakeMagnitude; // for camera shake
     int activeWeapon;
-    int solveCrit;
+    [Header("Player Critical Damage Variables\n")]
     [SerializeField] bool useCrit;
     [SerializeField] int critRate; // The higher this number is the lower the crit chance since it's going to be based off of a random range of 1 to this int.
     [SerializeField] int critMultiplier; //The higher this number the lower the crit damage applied will be. Will crash if equal to 0.
+    int solveCrit;
     int damageHolder;
 
     [SerializeField] float popUpPosRand;
@@ -68,7 +71,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     bool readyToShoot;
     bool reloading;
     bool shooting;
-
+    [Header("Player Total Ammo Variables\n")]
     [SerializeField] int ARbulletsTotal;
     [SerializeField] int ShotgunbulletsTotal;
     [SerializeField] int SMGbulletsTotal;
@@ -76,8 +79,6 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     float ShotgunbulletsTotalR;  //These are needed so I can use division for fillamount
     float SMGbulletsTotalR;      //These are needed so I can use division for fillamount
 
-    [SerializeField] Transform shootPos;
-    [SerializeField] CameraController cameraController;
 
     [Header("Player Private Variables\n")]
     //Player Private Variables
@@ -547,7 +548,6 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             if (dmg != null && hit.collider.gameObject.transform != this.transform)
             {
                 solveCrit = Random.Range(1, critRate);
-                Debug.Log("CritRate = " + critRate );
                 if (useCrit && solveCrit == 1)
                 {
                     //Debug.Log("CRITICAL DAMAGE!   -Continued\n" + "Added Damage should be: " + (gunList[bulletType].shootDamage * (int)critMultiplier).ToString() + "\n" + "Crit Damage should be: " + (gunList[bulletType].shootDamage + (gunList[bulletType].shootDamage * (int)critMultiplier)).ToString() + "\n" + "Normal Damage should be: " + gunList[bulletType].shootDamage.ToString());
@@ -559,7 +559,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                     damageHolder = gunList[bulletType].shootDamage;
                     dmg.TakeDamage(gunList[bulletType].shootDamage);
                 }
-                //CreatePopUp(hit);
+                CreatePopUp(hit);
             }
         }
         //StartCoroutine(cameraController.Shake(cameraShakeDuration, cameraShakeMagnitude)); For potential future camera shake
@@ -592,15 +592,14 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         {
             if (baseEnemyAI.HP <= 0)
             {
-                temp.fontSize += 4;
+                temp.fontSize += 5;
                 temp.color = Color.black;
 
             }
             else if (useCrit && solveCrit == 1)
             {
                 temp.fontSize += 2;
-                temp.color = Color.yellow; // why doesnt this work although its passing through
-                Debug.Log("Call Check"); // Call Check
+                temp.color = Color.yellow; 
             }
         }
         solveCrit = 0;

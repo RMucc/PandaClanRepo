@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,10 +15,10 @@ public class BasicEnemyAI : BaseEnemyAI, IDamage
     [SerializeField] bool effectGameGoal;
     [SerializeField] int AmmoAddedOnDeath;
     [SerializeField] float popUpPosRand;
-    [SerializeField] GameObject DamagePopUp;
 
     bool isAttacking;
     bool playerInRange;
+    bool alive;
 
     Color stored;
 
@@ -25,6 +26,7 @@ public class BasicEnemyAI : BaseEnemyAI, IDamage
     {
         GameManager.instance.updateEnemyAmount(1);
         stored = model.material.color;
+        alive = true;
     }
 
     void Update()
@@ -46,14 +48,7 @@ public class BasicEnemyAI : BaseEnemyAI, IDamage
             }
         }
         yield return new WaitForSeconds(attackRate);
-        if (playerInRange)
-        {
-            StartCoroutine(Attack());
-        }
-        else
-        {
-            isAttacking = false;
-        }
+        isAttacking = false;
     }
 
     public void TakeDamage(int amount)
@@ -62,34 +57,20 @@ public class BasicEnemyAI : BaseEnemyAI, IDamage
         StartCoroutine(flashRed());
         if (HP <= 0)
         {
-            //temp.color = Color.black;
             GameManager.instance.playerScript.AddDrops(gun, AmmoAddedOnDeath);
             if (effectGameGoal)
             {
                 GameManager.instance.updateGameGoal(-1);
                 GameManager.instance.updateEnemyAmount(-1);
             }
-            Destroy(gameObject);
-            //Add loot drops.
+            if (alive)
+            {
+                alive = false;
+                OnDeath();
+            }
         }
-        //CreatePopUp(new Vector3(transform.position.x + Random.Range(0, popUpPosRand), transform.position.y + Random.Range(0, popUpPosRand), transform.position.z + Random.Range(0, popUpPosRand)), amount.ToString());
     }
 
-    public void CreatePopUp(Vector3 position, string text)
-    {
-        //Randomize Position
-        //GameObject popUp = Instantiate(DamagePopUp, position, Quaternion.identity);
-        //TextMeshProUGUI temp = popUp.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        //if (temp != null)
-        //{
-        //    temp.text = text;
-        //}
-        //else
-        //{
-        //    Debug.Log("Enemy Error: Not finding text gameobject");
-        //}
-        // Critical will be yellow
-    }
     IEnumerator flashRed()
     {
         model.material.color = Color.red;
@@ -97,7 +78,7 @@ public class BasicEnemyAI : BaseEnemyAI, IDamage
         model.material.color = stored;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.tag == "Player")
         {

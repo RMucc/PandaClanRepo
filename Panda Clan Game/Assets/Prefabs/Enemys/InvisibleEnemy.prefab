@@ -101,7 +101,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -119,7 +119,8 @@ GameObject:
   - component: {fileID: 4082843708730262099}
   - component: {fileID: 6552325313151814438}
   - component: {fileID: 7353227639290688476}
-  m_Layer: 0
+  - component: {fileID: 8649566708059149952}
+  m_Layer: 6
   m_Name: InvisibleEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,10 +157,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 6552325313151814438}
   agent: {fileID: 6238920843736491151}
-  HP: 10
+  HP: 60
+  dropItemList:
+  - {fileID: 2983619795495937277, guid: 714ec059419c4fa419d0c20eb829d93f, type: 3}
+  itemPotentialCountToDrop: 0
   attackDamage: 0
   effectGameGoal: 1
-  AmmoStolenOnDeath: 0
+  AmmoStolenOnDeath: -10
+  itemCountToDrop: 0
 --- !u!195 &6238920843736491151
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -254,4 +259,25 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &8649566708059149952
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8687424609967327632}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.3
   m_Center: {x: 0, y: 0, z: 0}

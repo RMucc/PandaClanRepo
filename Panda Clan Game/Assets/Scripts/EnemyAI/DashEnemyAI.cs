@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class DashEnemyAI : BaseEnemyAI, IDamage
 {
     [SerializeField] bool effectGameGoal;
+    [SerializeField] int itemCountToDrop;
 
     [Header("Dash Variables\n")]
     [SerializeField] float TimeToWait;
@@ -29,6 +31,7 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
     bool readyToDestroy;
     bool dashing;
     bool exploding;
+    bool alive;
     Color storedColor;
 
 
@@ -41,6 +44,7 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
         StartCoroutine(Dash());
         dashing = false;
         exploding = false;
+        alive = true;
     }
 
     IEnumerator Dash()
@@ -87,6 +91,11 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
                 GameManager.instance.updateGameGoal(-1);
             }
             // Add grenades to players inventory.
+            if (alive)
+            {
+                alive = false;
+                OnDeath();
+            }
             Explode();
         }
     }

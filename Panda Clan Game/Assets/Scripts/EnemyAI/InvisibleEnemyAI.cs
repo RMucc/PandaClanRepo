@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class InvisbleEnemyAI : BaseEnemyAI, IDamage
 {
     [SerializeField] int attackDamage;
     [SerializeField] bool effectGameGoal;
     [SerializeField] int AmmoStolenOnDeath;
-
+    [SerializeField] int itemCountToDrop;
+    bool alive;
     Color stored;
 
     void Start()
     {
+        alive = true;
         GameManager.instance.updateEnemyAmount(1);
         stored = model.material.color;
     }
@@ -35,6 +38,11 @@ public class InvisbleEnemyAI : BaseEnemyAI, IDamage
             {
                 GameManager.instance.updateGameGoal(-1);
                 GameManager.instance.updateEnemyAmount(-1);
+            }
+            if (alive)
+            {
+                alive = false;
+                OnDeath();
             }
             Destroy(gameObject);
         }

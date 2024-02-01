@@ -101,7 +101,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -119,13 +119,14 @@ GameObject:
   - component: {fileID: 6750082122682554487}
   - component: {fileID: 1718076467476447341}
   - component: {fileID: 8188486880978293196}
-  m_Layer: 0
+  - component: {fileID: 1760533373024144645}
+  m_Layer: 6
   m_Name: 'DashEnemy '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &410966126186973951
 Transform:
   m_ObjectHideFlags: 0
@@ -156,19 +157,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 1718076467476447341}
   agent: {fileID: 308651904451800833}
-  HP: 5
+  HP: 20
+  dropItemList:
+  - {fileID: 2983619795495937277, guid: 714ec059419c4fa419d0c20eb829d93f, type: 3}
+  itemPotentialCountToDrop: 0
   effectGameGoal: 0
+  itemCountToDrop: 0
   TimeToWait: 3
   dashTime: 1
   speedMultiplier: 4
-  explosionRange: 10
+  explosionRange: 6
   explosionForce: 5
   explosionDamage: 30
-  timefromYellowToBlack: 0.2
-  tickCount: 3
+  timefromYellowToBlack: 0.1
+  tickCount: 7
   explosionEffect: {fileID: 5974255581125294848, guid: eba3b15c075cbba4bae37eb0758a42cd, type: 3}
-  showExplosionRange: 0
-  explosionRangeSP: {fileID: 0}
+  showExplosionRange: 1
+  explosionRangeSP: {fileID: 1760533373024144645}
 --- !u!195 &308651904451800833
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -263,4 +268,25 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &1760533373024144645
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6232163740477263120}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 4
   m_Center: {x: 0, y: 0, z: 0}

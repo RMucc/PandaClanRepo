@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &824953392856857011
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4082744139512332441}
+  m_Layer: 0
+  m_Name: AttackPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4082744139512332441
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824953392856857011}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7900714017035186299}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2236138064682025148
 GameObject:
   m_ObjectHideFlags: 0
@@ -14,7 +45,8 @@ GameObject:
   - component: {fileID: 6293781658207308078}
   - component: {fileID: 859505887435997918}
   - component: {fileID: 7619277489526645026}
-  m_Layer: 0
+  - component: {fileID: 223298226083435952}
+  m_Layer: 6
   m_Name: SwiftEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,6 +67,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6803695124833528565}
+  - {fileID: 4082744139512332441}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3773070297892477605
@@ -51,14 +84,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 859505887435997918}
   agent: {fileID: 5212780036080170378}
-  HP: 12
-  attackRate: 0
-  attackRange: 0
-  attackDamage: 0
-  AttackPos: {fileID: 0}
+  HP: 100
+  dropItemList:
+  - {fileID: 2983619795495937277, guid: 714ec059419c4fa419d0c20eb829d93f, type: 3}
+  itemPotentialCountToDrop: 0
+  attackRate: 0.5
+  attackRange: 1
+  attackDamage: 5
+  AttackPos: {fileID: 824953392856857011}
   gun: {fileID: 11400000, guid: ecdb7869593087345b258face1e020cc, type: 2}
   effectGameGoal: 1
-  AmmoAddedOnDeath: 5
+  AmmoAddedOnDeath: 45
+  popUpPosRand: 0
 --- !u!195 &5212780036080170378
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -69,7 +106,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1.5
-  m_Speed: 18
+  m_Speed: 13
   m_Acceleration: 15
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -153,6 +190,27 @@ CapsuleCollider:
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &223298226083435952
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2236138064682025148}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8644407498456160963
 GameObject:
@@ -255,7 +313,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}

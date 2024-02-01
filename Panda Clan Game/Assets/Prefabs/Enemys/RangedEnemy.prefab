@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6137008072175902084}
   - component: {fileID: 6799390034004411375}
   - component: {fileID: 2292042394208454121}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RangedEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 6799390034004411375}
   agent: {fileID: 4223591056742101865}
-  HP: 12
+  HP: 80
+  dropItemList:
+  - {fileID: 2983619795495937277, guid: 714ec059419c4fa419d0c20eb829d93f, type: 3}
+  itemPotentialCountToDrop: 0
   bullet: {fileID: 8262477620160788249, guid: 153c7fba034da9345a43d39a3eee9393, type: 3}
   shootPos: {fileID: 6516535372482501243}
   shootRate: 1

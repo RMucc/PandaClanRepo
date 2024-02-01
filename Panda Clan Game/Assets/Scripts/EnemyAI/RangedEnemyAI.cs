@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class RangedEnemyAI : BaseEnemyAI, IDamage
 {
@@ -16,7 +17,7 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
     [SerializeField] GameObject headPos;
 
     Vector3 playerDir;
-
+    bool alive;
     bool isShooting;
     bool playerInRange;
 
@@ -26,6 +27,7 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
     {
         GameManager.instance.updateEnemyAmount(1);
         stored = model.material.color;
+        alive = true;
     }
 
     void Update()
@@ -65,6 +67,11 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
             {
                 GameManager.instance.updateGameGoal(-1);
                 GameManager.instance.updateEnemyAmount(-1);
+            }
+            if (alive)
+            {
+                alive = false;
+                OnDeath();
             }
             Destroy(gameObject);
         }

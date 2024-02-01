@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject test1;
     [SerializeField] GameObject test2;
     [SerializeField] GameObject test3;
+    public Text totalLives;
     public GameObject damageScreen;
     public Image HPBar;
     public Image AMMOBar;
@@ -69,6 +70,7 @@ public class GameManager : MonoBehaviour
     #region UPDATE CODE
     void Update()
     {
+        totalLives.text = "Lives: " + playerScript.healthMax;
         if (Input.GetButtonDown("Cancel") && menuActive == null)
         {
             statePaused();

@@ -477,8 +477,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 if (ShotgunbulletsTotal >= gunList[bulletType].magazineSize)
                 {
                     gunList[bulletType].bulletsLeftInMag = gunList[bulletType].magazineSize;
-                    ShotgunbulletsTotal -= gunList[bulletType].magazineSize - gunList[bulletType].bulletsLeftInMag; //Had to add this to your reload
-                    //Before, it was taking a flat rate of magazine size instead of the difference between what's left in current mag and full mag -J.G 
+                    ShotgunbulletsTotal -= gunList[bulletType].magazineSize - gunList[bulletType].bulletsLeftInMag;
                 }
                 else if (ShotgunbulletsTotal > 0)
                 {
@@ -488,7 +487,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 else
                 {
                     print("Out of Ammo");
-                    // Notify player they are fully out of shotgun Ammo;
+                    //Out of Ammo text
                 }
                 break;
             case GameManager.BulletType.AR:
@@ -505,7 +504,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 else
                 {
                     print("Out of Ammo");
-                    // Notify player they are fully out of AR Ammo;
+                    //Out of Ammo text
                 }
                 break;
             case GameManager.BulletType.SMG:
@@ -522,7 +521,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 else
                 {
                     print("Out of Ammo");
-                    // Notify player they are fully out of SMG Ammo;
+                    //Out of Ammo text
                 }
                 break;
         }
@@ -646,6 +645,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     }
     #endregion
 
+    #region DAMAGE/RESPAWN
     public void TakeDamage(int amount)
     {
         HP -= amount;
@@ -676,7 +676,31 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         transform.position = GameManager.instance.playerSpawnPos.transform.position;
         controller.enabled = true;
     }
+    IEnumerator flashScreen()
+    {
+        try
+        {
+            GameManager.instance.damageScreen.SetActive(true);
+        }
+        catch (System.Exception)
+        {
+            print("error: damageScreen missing from GameManager");
+        }
 
+        yield return new WaitForSeconds(0.2f);
+
+        try
+        {
+            GameManager.instance.damageScreen.SetActive(false);
+        }
+        catch (System.Exception)
+        {
+            print("error: damageScreen missing from GameManager");
+        }
+    }
+    #endregion
+
+    #region UI 
     public void updatePlayerUI()
     {
         try // for debugging purposes
@@ -712,28 +736,6 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         GameManager.instance.StaminaWheel.fillAmount = playerStam / maxStam;
     }
 
-    IEnumerator flashScreen()
-    {
-        try
-        {
-            GameManager.instance.damageScreen.SetActive(true);
-        }
-        catch (System.Exception)
-        {
-            print("error: damageScreen missing from GameManager");
-        }
-
-        yield return new WaitForSeconds(0.2f);
-
-        try
-        {
-            GameManager.instance.damageScreen.SetActive(false);
-        }
-        catch (System.Exception)
-        {
-            print("error: damageScreen missing from GameManager");
-        }
-    }
     public void stFX()
     {
         if (playerStam == maxStam)
@@ -745,5 +747,5 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             GameManager.instance.showStamina();
         }
     }
-
+    #endregion
 }

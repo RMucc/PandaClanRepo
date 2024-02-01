@@ -17,9 +17,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject level1MenuWin;
     [SerializeField] GameObject menuLose;
-    [SerializeField] GameObject test1;
-    [SerializeField] GameObject test2;
-    [SerializeField] GameObject test3;
+    [SerializeField] GameObject test1; // OUT OF STAMINA
+    [SerializeField] GameObject test2; // OUT OF AMMO
+    [SerializeField] GameObject test3; // LOW HEALTH
+    [SerializeField] GameObject enemyLeft;
     public Text totalLives;
     public GameObject damageScreen;
     public Image HPBar;

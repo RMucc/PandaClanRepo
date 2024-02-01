@@ -38,7 +38,7 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
     // Start is called before the first frame update
     void Start()
     {
-        GameManager.instance.updateGameGoal(1);
+        GameManager.instance.updateEnemyAmount(1);
         storedColor = model.material.color;
         speed = agent.speed;
         StartCoroutine(Dash());
@@ -89,6 +89,7 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
             if (effectGameGoal)
             {
                 GameManager.instance.updateGameGoal(-1);
+                GameManager.instance.updateEnemyAmount(-1);
             }
             // Add grenades to players inventory.
             if (alive)
@@ -159,6 +160,9 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
         {
             Instantiate(explosionEffect, transform.position, Quaternion.LookRotation(transform.forward));
         }
+        GameManager.instance.updateEnemyAmount(-1);
+        GameManager.instance.updateGameGoal(-1);
+
         Destroy(gameObject);
     }
 

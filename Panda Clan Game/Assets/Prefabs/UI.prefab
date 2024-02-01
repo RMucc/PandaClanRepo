@@ -1275,7 +1275,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4065317097642415667
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1963,6 +1963,7 @@ MonoBehaviour:
   test2: {fileID: 2745982424826739851}
   test3: {fileID: 7962817272020418716}
   enemyLeft: {fileID: 0}
+  livesCount: {fileID: 0}
   totalLives: {fileID: 6929954252877649670}
   damageScreen: {fileID: 2090384934727963731}
   HPBar: {fileID: 4879394707167728381}
@@ -1977,6 +1978,7 @@ MonoBehaviour:
   levelTwo: 0
   enemyCount: 0
   enemyGoal: 0
+  ArrowToNext: {fileID: 0}
 --- !u!114 &462386581480823395
 MonoBehaviour:
   m_ObjectHideFlags: 0

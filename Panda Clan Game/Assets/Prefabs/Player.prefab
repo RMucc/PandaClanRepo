@@ -190,10 +190,10 @@ MonoBehaviour:
   gunPosition: {fileID: 4579559412246705608}
   cameraController: {fileID: 5258733471359811859}
   bulletType: 3
-  useCrit: 0
-  critRate: 0
-  critMultiplier: 0
-  popUpPosRand: 0
+  useCrit: 1
+  critRate: 5
+  critMultiplier: 5
+  popUpPosRand: 0.3
   DamagePopUp: {fileID: 3011575219265090607, guid: 8f2bffcb7d4e6974ea22d205069525a8, type: 3}
   ARbulletsTotal: 0
   ShotgunbulletsTotal: 0

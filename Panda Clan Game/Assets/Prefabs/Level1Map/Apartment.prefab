@@ -16,7 +16,7 @@ GameObject:
   m_Name: Window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &5376065218836101817
@@ -121,7 +121,7 @@ GameObject:
   m_Name: WindowFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &728983829388122794
@@ -223,7 +223,7 @@ GameObject:
   m_Name: Window (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &8473951547072433029
@@ -260,7 +260,7 @@ GameObject:
   m_Name: WindowFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &8448414314610410826
@@ -362,7 +362,7 @@ GameObject:
   m_Name: Apartment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7955033825371364866
@@ -373,7 +373,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7839680972212447212}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 50.375, y: -60.625, z: 36.375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -394,9 +394,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7955033825371364866}
     m_Modifications:
+    - target: {fileID: 3612913469545956670, guid: 5e8c14656a2c55943bba4cd51df1ab25, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5025498637047285477, guid: 5e8c14656a2c55943bba4cd51df1ab25, type: 3}
       propertyPath: m_Name
       value: ApartmentOuterWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 5025498637047285477, guid: 5e8c14656a2c55943bba4cd51df1ab25, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092998673768436236, guid: 5e8c14656a2c55943bba4cd51df1ab25, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6036542356207961959, guid: 5e8c14656a2c55943bba4cd51df1ab25, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6141575509262593170, guid: 5e8c14656a2c55943bba4cd51df1ab25, type: 3}
       propertyPath: m_LocalPosition.x
@@ -500,6 +516,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ApartmentFlooring
       objectReference: {fileID: 0}
+    - target: {fileID: 7225042099695025374, guid: 99a3d6bfefd3a524aa0422b8bbfa69fd, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -521,6 +541,18 @@ PrefabInstance:
     - target: {fileID: 3135948010653338255, guid: 9aabe5acfc7622747b84cc4274667ad4, type: 3}
       propertyPath: m_Name
       value: ApartmentWindow
+      objectReference: {fileID: 0}
+    - target: {fileID: 3135948010653338255, guid: 9aabe5acfc7622747b84cc4274667ad4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4073050221393655835, guid: 9aabe5acfc7622747b84cc4274667ad4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492073729672540023, guid: 9aabe5acfc7622747b84cc4274667ad4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5054902368868464693, guid: 9aabe5acfc7622747b84cc4274667ad4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -561,6 +593,10 @@ PrefabInstance:
     - target: {fileID: 5054902368868464693, guid: 9aabe5acfc7622747b84cc4274667ad4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8358214449525891944, guid: 9aabe5acfc7622747b84cc4274667ad4, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -620,9 +656,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1000655873039612474, guid: f07e39db6a7ac1949ad886f5efdf3bb8, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1494340453019240844, guid: f07e39db6a7ac1949ad886f5efdf3bb8, type: 3}
       propertyPath: m_Name
       value: ApartmentWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494340453019240844, guid: f07e39db6a7ac1949ad886f5efdf3bb8, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2039073630201665621, guid: f07e39db6a7ac1949ad886f5efdf3bb8, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3260461350996039078, guid: f07e39db6a7ac1949ad886f5efdf3bb8, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5053227549848442705, guid: f07e39db6a7ac1949ad886f5efdf3bb8, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6251321425695782417, guid: f07e39db6a7ac1949ad886f5efdf3bb8, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -642,6 +702,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7955033825371364866}
     m_Modifications:
+    - target: {fileID: 2322006559213711413, guid: 569cabdbc8130714ab650483c0a29a38, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2969448634323298415, guid: 569cabdbc8130714ab650483c0a29a38, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -682,9 +746,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3178209402598990218, guid: 569cabdbc8130714ab650483c0a29a38, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3258569461240844938, guid: 569cabdbc8130714ab650483c0a29a38, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4051978427999253522, guid: 569cabdbc8130714ab650483c0a29a38, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4219157168933156667, guid: 569cabdbc8130714ab650483c0a29a38, type: 3}
       propertyPath: m_Name
       value: ApartmentDoorPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 4219157168933156667, guid: 569cabdbc8130714ab650483c0a29a38, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4392887769075597851, guid: 569cabdbc8130714ab650483c0a29a38, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5167572283678560257, guid: 569cabdbc8130714ab650483c0a29a38, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7320966950773460377, guid: 569cabdbc8130714ab650483c0a29a38, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

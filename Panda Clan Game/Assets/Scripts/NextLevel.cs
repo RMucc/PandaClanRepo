@@ -28,7 +28,7 @@ public class NextLevel : MonoBehaviour
                 //Ask if player would like to leave or come back when ready
 
                 //Go to next scene
-                GameManager.instance.CallBeforeLoadingSceneTwo();
+                GameManager.instance.CallBeforeLoadingScene2();
                 GameManager.instance.LoadNextScene();
             }
             //If there are still enemies left, player cannot move on to the next level. Complete the wave first

@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     public bool isPaused;
     public static bool level1;
     public static bool level2;
+    public static bool isNotLevel1;
     public bool levelOne;
     public bool levelTwo;
     public int enemyCount;
@@ -52,7 +53,10 @@ public class GameManager : MonoBehaviour
     #region AWAKE CODE
     void Awake()
     {
-        level1 = true;
+        if(!isNotLevel1)
+        {
+            level1 = true;
+        }
         levelOne = level1;
         levelTwo = level2;
         instance = this;
@@ -120,16 +124,12 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Update Scene Bool
-    public void CallToTurnOnLevel2()
-    {
-        level2 = true;
-    }
-    public void CallToTurnOffLevel1()
+    public void CallBeforeLoadingScene2()
     {
         level1 = false;
+        level2 = true;
+        isNotLevel1 = true;
     }
-
-
     #endregion
 
     #region LOSE youSuck()

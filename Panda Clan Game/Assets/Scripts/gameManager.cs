@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject test2; // OUT OF AMMO
     [SerializeField] GameObject test3; // LOW HEALTH
     [SerializeField] GameObject enemyLeft;
+    [SerializeField] GameObject livesCount;
     public Text totalLives;
     public GameObject damageScreen;
     public Image HPBar;

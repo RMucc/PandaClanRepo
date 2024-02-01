@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject enemyLeft;
     [SerializeField] GameObject livesCount;
     public Text totalLives;
+    public Text waveCount;
     public GameObject damageScreen;
     public Image HPBar;
     public Image AMMOBar;

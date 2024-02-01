@@ -86,10 +86,12 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
         }
         if (HP <= 0)
         {
+            GameManager.instance.updateGameGoal(-1);
+            GameManager.instance.updateEnemyAmount(-1);
             if (effectGameGoal)
             {
-                GameManager.instance.updateGameGoal(-1);
-                GameManager.instance.updateEnemyAmount(-1);
+                //GameManager.instance.updateGameGoal(-1);
+                //GameManager.instance.updateEnemyAmount(-1);
             }
             // Add grenades to players inventory.
             if (alive)

@@ -40,14 +40,17 @@ public class Spawner : MonoBehaviour
     {
         if (wave == 1 && !isSpawning)
         {
+            GameManager.instance.waveCount.text = "Wave: 1/3";
             WaveSpawn(wave1EnemyAmount);
         }
         else if (wave == 2 && !isSpawning)
         {
+            GameManager.instance.waveCount.text = "Wave: 2/3";
             WaveSpawn(wave2EnemyAmount);
         }
         else if (wave == 3 && !isSpawning)
         {
+            GameManager.instance.waveCount.text = "Wave: 3/3";
             WaveSpawn(wave3EnemyAmount);
         }
         yield return new WaitForSeconds(timeBetweenSpawns);

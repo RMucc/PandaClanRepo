@@ -21,8 +21,6 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
     bool isShooting;
     bool playerInRange;
 
-    Color stored;
-
     void Start()
     {
         GameManager.instance.updateEnemyAmount(1);
@@ -35,17 +33,17 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
         agent.SetDestination(GameManager.instance.player.transform.position);
         if (!isShooting)
         {
-            StartCoroutine(shoot());
+            StartCoroutine(Shoot());
         }
 
         if (agent.remainingDistance < agent.stoppingDistance)
         {
             playerDir = GameManager.instance.player.transform.position - headPos.transform.position;
-            faceTarget();
+            FaceTarget();
         }
     }
 
-    IEnumerator shoot()
+    IEnumerator Shoot()
     {
         float x = Random.Range(-bulletSpread, bulletSpread);
         float y = Random.Range(-bulletSpread, bulletSpread);
@@ -59,31 +57,21 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
-        StartCoroutine(flashRed());
-        if (HP <= 0)
+        StartCoroutine(FlashRed());
+        if (HP <= 0 && alive)
         {
             GameManager.instance.playerScript.AddDrops(gun, AmmoAddedOnDeath);
-            if (effectGameGoal)
+            if (effectGameGoal && alive)
             {
                 GameManager.instance.updateGameGoal(-1);
                 GameManager.instance.updateEnemyAmount(-1);
             }
-            if (alive)
-            {
-                alive = false;
-                OnDeath();
-            }
-            Destroy(gameObject);
+            alive = false;
+            OnDeath();
         }
     }
-    IEnumerator flashRed()
-    {
-        model.material.color = Color.red;
-        yield return new WaitForSeconds(0.1f);
-        model.material.color = stored;
-    }
 
-    void faceTarget()
+    void FaceTarget()
     {
         Quaternion rot = Quaternion.LookRotation(playerDir);
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);

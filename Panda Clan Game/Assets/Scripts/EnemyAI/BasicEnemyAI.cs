@@ -20,7 +20,6 @@ public class BasicEnemyAI : BaseEnemyAI, IDamage
     bool playerInRange;
     bool alive;
 
-    Color stored;
 
     void Start()
     {
@@ -54,8 +53,8 @@ public class BasicEnemyAI : BaseEnemyAI, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
-        StartCoroutine(flashRed());
-        if (HP <= 0)
+        StartCoroutine(FlashRed());
+        if (HP <= 0 && alive)
         {
             GameManager.instance.playerScript.AddDrops(gun, AmmoAddedOnDeath);
             if (effectGameGoal)
@@ -63,19 +62,9 @@ public class BasicEnemyAI : BaseEnemyAI, IDamage
                 GameManager.instance.updateGameGoal(-1);
                 GameManager.instance.updateEnemyAmount(-1);
             }
-            if (alive)
-            {
-                alive = false;
-                OnDeath();
-            }
+            alive = false;
+            OnDeath();
         }
-    }
-
-    IEnumerator flashRed()
-    {
-        model.material.color = Color.red;
-        yield return new WaitForSeconds(0.1f);
-        model.material.color = stored;
     }
 
     private void OnTriggerStay(Collider other)

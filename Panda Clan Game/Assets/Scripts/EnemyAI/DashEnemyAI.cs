@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
@@ -28,7 +29,6 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
 
     float speed;
     bool playerInRange;
-    bool readyToDestroy;
     bool dashing;
     bool exploding;
     bool alive;
@@ -84,21 +84,16 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
             HP -= amount;
             StartCoroutine(flashRed());
         }
-        if (HP <= 0)
+        if (HP <= 0 && alive)
         {
-            GameManager.instance.updateGameGoal(-1);
-            GameManager.instance.updateEnemyAmount(-1);
             if (effectGameGoal)
             {
-                //GameManager.instance.updateGameGoal(-1);
-                //GameManager.instance.updateEnemyAmount(-1);
+                GameManager.instance.updateGameGoal(-1);
+                GameManager.instance.updateEnemyAmount(-1);
             }
             // Add grenades to players inventory.
-            if (alive)
-            {
-                alive = false;
-                OnDeath();
-            }
+            alive = false;
+            OnDeath();
             Explode();
         }
     }
@@ -112,13 +107,13 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
     void Explode()
     {
         exploding = true;
-        StartCoroutine(explodeFlash());
+        StartCoroutine(ExplodeFlash());
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             playerInRange = true;
         }
@@ -126,13 +121,13 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             playerInRange = false;
         }
     }
 
-    IEnumerator explodeFlash()
+    IEnumerator ExplodeFlash()
     {
         for (int i = tickCount; i > 0; i--)
         {
@@ -144,6 +139,7 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRange);
 
+        List<string> alreadyHit = new List<string>();
         foreach (Collider toDamage in colliders)
         {
             // Add Force
@@ -152,10 +148,10 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
             //{
             //    rb.AddExplosionForce(explosionForce, transform.position, explosionRange);
             //}
-            IDamage dmg = toDamage.GetComponent<IDamage>();
-            if (dmg != null && toDamage.gameObject.transform != this.transform)
+            if (toDamage.TryGetComponent<IDamage>(out IDamage dmg) && !alreadyHit.Contains(toDamage.gameObject.name))
             {
-                dmg.TakeDamage(explosionDamage / 2); // Becuase the range goes over both the player's controller and capsule collider causing this to run twice.
+                dmg.TakeDamage(explosionDamage);
+                alreadyHit.Add(toDamage.gameObject.name);
             }
         }
         if (explosionEffect != null)

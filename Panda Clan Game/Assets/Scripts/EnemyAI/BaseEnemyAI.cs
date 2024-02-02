@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class BaseEnemyAI : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class BaseEnemyAI : MonoBehaviour
     int amountSpawned;
     [SerializeField] List<GameObject> dropItemList;
     [SerializeField] int itemPotentialCountToDrop;
+    public Color stored;
+
 
 
     public void OnDeath()
@@ -25,5 +28,12 @@ public class BaseEnemyAI : MonoBehaviour
             }
         }
         Destroy(gameObject);
+    }
+
+    public IEnumerator FlashRed()
+    {
+        model.material.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        model.material.color = stored;
     }
 }

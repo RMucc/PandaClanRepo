@@ -23,15 +23,14 @@ public class InvisbleEnemyAI : BaseEnemyAI, IDamage
     void Update()
     {
         agent.SetDestination(GameManager.instance.player.transform.position);
-        //Check to see if player is within range and once in range will steal player ammo and despawn
     }
 
 
     public void TakeDamage(int amount)
     {
         HP -= amount;
-        StartCoroutine(flashRed());
-        if (HP <= 0)
+        StartCoroutine(FlashRed());
+        if (HP <= 0 && alive)
         {
             GameManager.instance.playerScript.AddDrops(null, Mathf.Abs(AmmoStolenOnDeath));
             if (effectGameGoal)
@@ -39,34 +38,27 @@ public class InvisbleEnemyAI : BaseEnemyAI, IDamage
                 GameManager.instance.updateGameGoal(-1);
                 GameManager.instance.updateEnemyAmount(-1);
             }
-            if (alive)
-            {
-                alive = false;
-                OnDeath();
-            }
-            Destroy(gameObject);
+            alive = false;
+            OnDeath();
         }
     }
-    IEnumerator flashRed()
-    {
-        model.material.color = Color.red;
-        yield return new WaitForSeconds(0.1f);
-        model.material.color = stored;
-    }
+
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             GameManager.instance.playerScript.AddDrops(null, AmmoStolenOnDeath);
             if (effectGameGoal)
             {
                 GameManager.instance.updateGameGoal(-1);
                 GameManager.instance.updateEnemyAmount(-1);
-
             }
             IDamage dmg = other.gameObject.GetComponent<IDamage>();
-            dmg.TakeDamage(attackDamage);
+            if (dmg != null)
+            {
+                dmg.TakeDamage(attackDamage);
+            }
             Destroy(gameObject);
         }
     }

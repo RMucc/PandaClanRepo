@@ -540,14 +540,12 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         Vector3 direction = Camera.main.transform.forward + new Vector3(x, y, 0);
         GameObject _bullet = Instantiate(gunList[bulletType].bullet, gunOut.transform.GetChild(0).transform.position, Quaternion.LookRotation(direction));
         Debug.DrawRay(shootPos.transform.position, direction * gunList[bulletType].shootDistance, Color.red, 1f);
-        RaycastHit hit;
-        if (Physics.Raycast(shootPos.transform.position, direction, out hit, gunList[bulletType].shootDistance))
+        if (Physics.Raycast(shootPos.transform.position, direction, out RaycastHit hit, gunList[bulletType].shootDistance))
         {
             EffectHolder = new ParticleSystem();
             EffectHolder = Instantiate(gunList[bulletType].bulletHitEffect, hit.point, Quaternion.Euler(0, 180, 0));
             Destroy(EffectHolder, 2);
-            IDamage dmg = hit.collider.GetComponent<IDamage>();
-            if (dmg != null && hit.collider.gameObject.transform != this.transform)
+            if (hit.collider.TryGetComponent<IDamage>(out IDamage dmg) && hit.collider.gameObject.transform != this.transform)
             {
                 solveCrit = Random.Range(1, critRate);
                 if (useCrit && solveCrit == 1)

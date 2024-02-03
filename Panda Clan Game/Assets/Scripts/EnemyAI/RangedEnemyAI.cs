@@ -17,16 +17,8 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
     [SerializeField] GameObject headPos;
 
     Vector3 playerDir;
-    bool alive;
     bool isShooting;
-    bool playerInRange;
 
-    void Start()
-    {
-        GameManager.instance.updateEnemyAmount(1);
-        stored = model.material.color;
-        alive = true;
-    }
 
     void Update()
     {

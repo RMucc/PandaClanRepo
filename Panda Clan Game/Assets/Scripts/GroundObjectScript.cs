@@ -27,12 +27,12 @@ public class GroundObjectScript : MonoBehaviour
     public void Start()
     {
         Physics.IgnoreLayerCollision(3, 6);
-        if (rb != null)
+        if (rb)
         {
             rb.velocity = transform.forward * objectForwardMovementSpeed;
             rb.velocity += transform.up * objectUpMovementSpeed;
         }
-        if (transform.parent == null)
+        if (!transform.parent)
         {
             floatSpeed = Random.Range(floatSpeedMin, floatSpeedMax);
             rotateSpeed = Random.Range(rotateSpeedMin, rotateSpeedMax);

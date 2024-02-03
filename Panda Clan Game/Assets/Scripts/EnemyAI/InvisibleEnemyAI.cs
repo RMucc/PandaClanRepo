@@ -10,15 +10,7 @@ public class InvisbleEnemyAI : BaseEnemyAI, IDamage
     [SerializeField] bool effectGameGoal;
     [SerializeField] int AmmoStolenOnDeath;
     [SerializeField] int itemCountToDrop;
-    bool alive;
-    Color stored;
 
-    void Start()
-    {
-        alive = true;
-        GameManager.instance.updateEnemyAmount(1);
-        stored = model.material.color;
-    }
 
     void Update()
     {
@@ -32,7 +24,7 @@ public class InvisbleEnemyAI : BaseEnemyAI, IDamage
         StartCoroutine(FlashRed());
         if (HP <= 0 && alive)
         {
-            GameManager.instance.playerScript.AddDrops(null, Mathf.Abs(AmmoStolenOnDeath));
+            GameManager.instance.playerScript.AddDrops(null, Mathf.Abs(AmmoStolenOnDeath)); //Using absolute value to add instead of subtract
             if (effectGameGoal)
             {
                 GameManager.instance.updateGameGoal(-1);

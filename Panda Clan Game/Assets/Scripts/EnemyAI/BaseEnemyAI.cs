@@ -8,13 +8,22 @@ public class BaseEnemyAI : MonoBehaviour
 {
     public Renderer model;
     public NavMeshAgent agent;
+    public Canvas healthUI;
     public int HP;
+    public int origHP;
+    public bool alive = true;
     int amountSpawned;
     [SerializeField] List<GameObject> dropItemList;
     [SerializeField] int itemPotentialCountToDrop;
     public Color stored;
 
 
+    void Start()
+    {
+        GameManager.instance.updateEnemyAmount(1);
+        stored = model.material.color;
+        origHP = HP;
+    }
 
     public void OnDeath()
     {
@@ -28,6 +37,19 @@ public class BaseEnemyAI : MonoBehaviour
             }
         }
         Destroy(gameObject);
+    }
+
+    public void CallUpdateUI()
+    {
+        healthUI.TryGetComponent<CanvasGroup>(out CanvasGroup cg);
+        if (cg.alpha == 0)
+        {
+            cg.alpha = 1;
+        }
+        if (healthUI.TryGetComponent<EnemyHealthUI>(out EnemyHealthUI yoy))
+        {
+            yoy.UpdateUI(HP, origHP);
+        }
     }
 
     public IEnumerator FlashRed()

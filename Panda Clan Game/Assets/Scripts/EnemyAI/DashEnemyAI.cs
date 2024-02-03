@@ -29,22 +29,15 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
 
     float speed;
     bool playerInRange;
-    bool dashing;
-    bool exploding;
-    bool alive;
-    Color storedColor;
+    bool dashing = false;
+    bool exploding = false;
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        GameManager.instance.updateEnemyAmount(1);
-        storedColor = model.material.color;
         speed = agent.speed;
         StartCoroutine(Dash());
-        dashing = false;
-        exploding = false;
-        alive = true;
     }
 
     IEnumerator Dash()
@@ -57,7 +50,7 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
         yield return new WaitForSeconds(dashTime);
         dashing = false;
         agent.velocity = Vector3.zero;
-        model.material.color = storedColor;
+        model.material.color = stored;
         agent.speed = speed;
         agent.acceleration = agent.speed;
         if (!exploding)
@@ -82,7 +75,7 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
         if (dashing) // player can only damage enemy if they are in dash mode
         {
             HP -= amount;
-            StartCoroutine(flashRed());
+            StartCoroutine(FlashRed());
         }
         if (HP <= 0 && alive)
         {
@@ -96,12 +89,6 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
             OnDeath();
             Explode();
         }
-    }
-    IEnumerator flashRed()
-    {
-        model.material.color = Color.red;
-        yield return new WaitForSeconds(0.1f);
-        model.material.color = storedColor;
     }
 
     void Explode()

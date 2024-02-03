@@ -18,15 +18,6 @@ public class BasicEnemyAI : BaseEnemyAI, IDamage
 
     bool isAttacking;
     bool playerInRange;
-    bool alive;
-
-
-    void Start()
-    {
-        GameManager.instance.updateEnemyAmount(1);
-        stored = model.material.color;
-        alive = true;
-    }
 
     void Update()
     {
@@ -53,6 +44,7 @@ public class BasicEnemyAI : BaseEnemyAI, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
+        CallUpdateUI();
         StartCoroutine(FlashRed());
         if (HP <= 0 && alive)
         {

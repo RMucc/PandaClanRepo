@@ -15,7 +15,7 @@ public class EnemyHealthUI : MonoBehaviour
     private void Update()
     {
         Quaternion rot = Quaternion.LookRotation(GameManager.instance.player.transform.position - transform.position);
-        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * 1);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * 100);
         healthWhite.fillAmount = Mathf.Lerp(healthWhite.fillAmount, healthRed.fillAmount, timeToDecrease);
     }
 

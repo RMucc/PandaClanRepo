@@ -40,6 +40,7 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
         StartCoroutine(Dash());
     }
 
+
     IEnumerator Dash()
     {
         yield return new WaitForSeconds(TimeToWait);
@@ -145,8 +146,11 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
         {
             Instantiate(explosionEffect, transform.position, Quaternion.LookRotation(transform.forward));
         }
-        GameManager.instance.updateEnemyAmount(-1);
-        GameManager.instance.updateGameGoal(-1);
+        if (effectGameGoal)
+        {
+            GameManager.instance.updateEnemyAmount(-1);
+            GameManager.instance.updateGameGoal(-1);
+        }
 
         Destroy(gameObject);
     }

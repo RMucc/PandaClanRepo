@@ -126,7 +126,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1500742070780517675
 Transform:
   m_ObjectHideFlags: 0
@@ -141,7 +141,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 448272077080500636}
-  - {fileID: 4514596278274753680}
+  - {fileID: 2307180082636444275}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5451177239631127164
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 6552325313151814438}
   agent: {fileID: 6238920843736491151}
-  healthUI: {fileID: 5385792037396005781}
+  healthUI: {fileID: 6061277992093816182}
   HP: 60
   origHP: 0
   alive: 1
@@ -167,7 +167,7 @@ MonoBehaviour:
   itemPotentialCountToDrop: 3
   stored: {r: 0, g: 0, b: 0, a: 0}
   attackDamage: 0
-  effectGameGoal: 0
+  effectGameGoal: 1
   AmmoStolenOnDeath: -10
   itemCountToDrop: 0
 --- !u!195 &6238920843736491151
@@ -286,7 +286,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.3
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1001 &8990798590219359426
+--- !u!1001 &7090472054958539297
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -336,7 +336,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4783573547232890962, guid: 08744cf83f58b834299d75ba94c6a152, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.059999943
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4783573547232890962, guid: 08744cf83f58b834299d75ba94c6a152, type: 3}
       propertyPath: m_LocalRotation.w
@@ -356,7 +356,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4783573547232890962, guid: 08744cf83f58b834299d75ba94c6a152, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -4.04
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4783573547232890962, guid: 08744cf83f58b834299d75ba94c6a152, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -383,13 +383,13 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 08744cf83f58b834299d75ba94c6a152, type: 3}
---- !u!224 &4514596278274753680 stripped
+--- !u!224 &2307180082636444275 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4783573547232890962, guid: 08744cf83f58b834299d75ba94c6a152, type: 3}
-  m_PrefabInstance: {fileID: 8990798590219359426}
+  m_PrefabInstance: {fileID: 7090472054958539297}
   m_PrefabAsset: {fileID: 0}
---- !u!223 &5385792037396005781 stripped
+--- !u!223 &6061277992093816182 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 3925897509763176279, guid: 08744cf83f58b834299d75ba94c6a152, type: 3}
-  m_PrefabInstance: {fileID: 8990798590219359426}
+  m_PrefabInstance: {fileID: 7090472054958539297}
   m_PrefabAsset: {fileID: 0}

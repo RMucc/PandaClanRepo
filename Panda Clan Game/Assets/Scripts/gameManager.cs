@@ -74,8 +74,11 @@ public class GameManager : MonoBehaviour
     #region UPDATE CODE
     void Update()
     {
-        totalLives.text = "Lives: " + playerScript.healthMax;
-        if (Input.GetButtonDown("Cancel") && menuActive == null)
+        if (totalLives)
+        {
+            totalLives.text = "Lives: " + playerScript.healthMax;
+        }
+        if (Input.GetButtonDown("Cancel") && !menuActive)
         {
             statePaused();
             menuActive = menuPause;

@@ -53,7 +53,7 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
         if (HP <= 0 && alive)
         {
             GameManager.instance.playerScript.AddDrops(gun, AmmoAddedOnDeath);
-            if (effectGameGoal && alive)
+            if (effectGameGoal)
             {
                 GameManager.instance.updateGameGoal(-1);
                 GameManager.instance.updateEnemyAmount(-1);

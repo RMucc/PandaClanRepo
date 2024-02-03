@@ -41,19 +41,23 @@ public class BaseEnemyAI : MonoBehaviour
 
     public void CallUpdateUI()
     {
-        healthUI.TryGetComponent<CanvasGroup>(out CanvasGroup cg);
-        if (cg.alpha == 0)
+        if (healthUI != null)
         {
-            cg.alpha = 1;
-        }
-        if (healthUI.TryGetComponent<EnemyHealthUI>(out EnemyHealthUI yoy))
-        {
-            yoy.UpdateUI(HP, origHP);
+            healthUI.TryGetComponent<CanvasGroup>(out CanvasGroup cg);
+            if (cg.alpha == 0)
+            {
+                cg.alpha = 1;
+            }
+            if (healthUI.TryGetComponent<EnemyHealthUI>(out EnemyHealthUI CanvasUI))
+            {
+                CanvasUI.UpdateUI(HP, origHP);
+            }
         }
     }
 
     public IEnumerator FlashRed()
     {
+        CallUpdateUI();
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
         model.material.color = stored;

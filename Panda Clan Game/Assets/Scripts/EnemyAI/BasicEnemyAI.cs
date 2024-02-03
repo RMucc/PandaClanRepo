@@ -44,7 +44,6 @@ public class BasicEnemyAI : BaseEnemyAI, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
-        CallUpdateUI();
         StartCoroutine(FlashRed());
         if (HP <= 0 && alive)
         {

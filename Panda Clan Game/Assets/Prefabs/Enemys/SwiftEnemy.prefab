@@ -98,7 +98,7 @@ MonoBehaviour:
   attackDamage: 5
   AttackPos: {fileID: 824953392856857011}
   gun: {fileID: 11400000, guid: ecdb7869593087345b258face1e020cc, type: 2}
-  effectGameGoal: 0
+  effectGameGoal: 1
   AmmoAddedOnDeath: 45
   popUpPosRand: 0
 --- !u!195 &5212780036080170378

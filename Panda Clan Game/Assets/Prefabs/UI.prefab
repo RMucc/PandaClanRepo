@@ -762,7 +762,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 'Lives:'
 --- !u!1 &608678979738744599
 GameObject:
   m_ObjectHideFlags: 0
@@ -1349,7 +1349,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: 'Enemies:'
 --- !u!1 &1543181723962493537
 GameObject:
   m_ObjectHideFlags: 0
@@ -1966,6 +1966,7 @@ MonoBehaviour:
   livesCount: {fileID: 0}
   totalLives: {fileID: 6929954252877649670}
   waveCount: {fileID: 5960643221034394496}
+  weapSwitch: {fileID: 0}
   damageScreen: {fileID: 2090384934727963731}
   HPBar: {fileID: 4879394707167728381}
   AMMOBar: {fileID: 2949480739589741392}
@@ -5428,7 +5429,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 112, y: 28}
+  m_AnchoredPosition: {x: -670, y: 461}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5008012420821076836
@@ -5486,13 +5487,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 55
+  m_fontSizeBase: 55
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -5522,7 +5523,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -50.472168, w: 0}
+  m_margin: {x: -80.32739, y: -79.01929, z: -117.65149, w: 55.272827}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

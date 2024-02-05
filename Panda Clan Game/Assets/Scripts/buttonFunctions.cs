@@ -41,7 +41,7 @@ public class buttonFunctions : MonoBehaviour
     //Shop Buttons
     public void buyShotgun()
     {
-        //playerScript.AddDrops()
+        //GameManager.instance.playerScript.AddDrops(GameManager.BulletType.Shotgun, )
     }
 
 

@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject livesCount;
     public Text totalLives;
     public Text waveCount;
+    public Text weapSwitch;
     public GameObject damageScreen;
     public Image HPBar;
     public Image AMMOBar;
@@ -198,13 +199,11 @@ public class GameManager : MonoBehaviour
     public void showReload()
     {
         reload.SetActive(true);
-        noReload.SetActive(false);
     }
 
     public void hideReload()
     {
         reload.SetActive(false);
-        noReload.SetActive(true);
     }
     #endregion
 

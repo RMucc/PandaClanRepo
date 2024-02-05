@@ -86,7 +86,7 @@ MonoBehaviour:
   model: {fileID: 859505887435997918}
   agent: {fileID: 5212780036080170378}
   healthUI: {fileID: 6519180926944478216}
-  HP: 100
+  HP: 70
   origHP: 0
   alive: 1
   dropItemList:

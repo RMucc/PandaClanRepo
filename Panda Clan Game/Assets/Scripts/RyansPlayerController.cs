@@ -222,7 +222,12 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             {
                 StamDash();
                 stUpdate();
-                if (canDash)
+                if (canDash && isSprinting)
+                {
+                    isDashing = true;
+                    StartCoroutine(DashForward());
+                }
+                else if (canDash)
                 {
                     isDashing = true;
                     StartCoroutine(DashForward());
@@ -245,7 +250,12 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             {
                 StamDash();
                 stUpdate();
-                if (canDash)
+                if (canDash && isSprinting)
+                {
+                    isDashing = true;
+                    StartCoroutine(DashBackward());
+                }
+                else if (canDash)
                 {
                     isDashing = true;
                     StartCoroutine(DashBackward());
@@ -268,7 +278,12 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             {
                 StamDash();
                 stUpdate();
-                if (canDash)
+                if (canDash && isSprinting)
+                {
+                    isDashing = true;
+                    StartCoroutine(DashRight());
+                }
+                else if (canDash)
                 {
                     isDashing = true;
                     StartCoroutine(DashRight());
@@ -291,7 +306,12 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             {
                 StamDash();
                 stUpdate();
-                if (canDash)
+                if (canDash && isSprinting)
+                {
+                    isDashing = true;
+                    StartCoroutine(DashLeft());
+                }
+                else if (canDash)
                 {
                     isDashing = true;
                     StartCoroutine(DashLeft());

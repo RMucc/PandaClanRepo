@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<RyansPlayerController>();
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
-        SaveManager.instance.LoadData();
+        //SaveManager.instance.LoadData();
     }
     #endregion
 
@@ -143,9 +143,7 @@ public class GameManager : MonoBehaviour
     public void CallBeforeLoadingScene2()
     {
         level1 = false;
-        SaveManager.instance.level1 = level1;
         level2 = true;
-        SaveManager.instance.level2 = level2;
     }
     #endregion
 

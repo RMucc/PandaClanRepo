@@ -100,7 +100,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     //Original Values
     private int originalHP;
     private float originalPlayerVel;
-    private float originalPlayerSpeed;
+    public float originalPlayerSpeed;
     private int originalHealthMax;
     private float originalPlayerStamina;
 

@@ -38,6 +38,16 @@ public class buttonFunctions : MonoBehaviour
 
     }
 
+    public void Save()
+    {
+        SaveManager.instance.SaveData();
+    }
+
+    public void Load()
+    {
+        SaveManager.instance.LoadData();
+    }
+
     //Shop Buttons
     public void buyShotgun()
     {

@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class SaveManager : MonoBehaviour
 {
@@ -29,6 +30,17 @@ public class SaveManager : MonoBehaviour
 
     private void Awake()
     {
+        if(SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            level1 = true;
+            level2 = false;
+            Debug.Log(level1);
+        }
+        else if(SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            level1 = false;
+            level2 = true;
+        }
         if (instance == null)
         {
             DontDestroyOnLoad(gameObject);
@@ -38,15 +50,15 @@ public class SaveManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        //player = GameObject.FindGameObjectWithTag("Player");
-        //playerScript = player.GetComponent<RyansPlayerController>();
-        //playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
-
-        //GameManager.instance.player = player;
-        //GameManager.instance.playerScript = playerScript;
-        //GameManager.instance.playerSpawnPos = playerSpawnPos;
-        StartCoroutine(Intialize());
+        if(level1)
+        {
+            Debug.Log("Loading Default Data");
+            LoadDefault();
+        }
+        else
+        {
+            LoadData();
+        }
     }
 
     public void SaveData()
@@ -55,15 +67,13 @@ public class SaveManager : MonoBehaviour
         FileStream file = File.Create(Application.persistentDataPath + "/playerInfo.dat");
 
         PlayerData data = new PlayerData();
-        data.HP = HP;
-        data.healthMax = healthMax;
-        //data.playerSpeed = playerSpeed;
+        data.HP = GameManager.instance.playerScript.HP;
+        data.healthMax = GameManager.instance.playerScript.healthMax;
+        data.playerSpeed = GameManager.instance.playerScript.originalPlayerSpeed;
         //data.maxStam = maxStam;
         //data.dashCost = dashCost;
         //data.stamDrain = stamDrain;
         //data.stamRegen = stamRegen;
-        data.level1 = level1;
-        data.level2 = level2;
 
         bf.Serialize(file, data);
         file.Close();
@@ -78,21 +88,34 @@ public class SaveManager : MonoBehaviour
             PlayerData data = (PlayerData)bf.Deserialize(file);
             file.Close();
 
+            //Load Data into SaveManager Variables
             HP = data.HP;
             healthMax = data.healthMax;
-            //playerSpeed = data.playerSpeed;
+            playerSpeed = data.playerSpeed;
             //maxStam = data.maxStam;
             //dashCost = data.dashCost;
             //stamDrain = data.stamDrain;
             //stamRegen = data.stamRegen;
-            level1 = data.level1;
-            level2 = data.level2;
+
+            //Load Data into GameManager Variables
+            StartCoroutine(Intialize());
         }    
     }
-    IEnumerator Intialize()
+
+    public void LoadDefault()
     {
-        yield return new WaitForSeconds(.5f);
-        LoadData();
+        HP = 100;
+        healthMax = 3;
+        playerSpeed = 10;
+        dashCost = 20;
+        stamDrain = 5;
+        stamRegen = 5;
+        SetData();
+    }
+
+    public void SetData()
+    {
+        Debug.Log("In SetData");
         GameManager.instance.playerScript.HP = HP;
         GameManager.instance.playerScript.healthMax = healthMax;
         //GameManager.instance.playerScript.playerSpeed = playerSpeed;
@@ -100,7 +123,22 @@ public class SaveManager : MonoBehaviour
         //GameManager.instance.playerScript.dashCost = dashCost;
         //GameManager.instance.playerScript.stamDrain = stamDrain;
         //GameManager.instance.playerScript.stamRegen = stamRegen;
+        GameManager.instance.level1 = level1;
+        Debug.Log(GameManager.instance.level1);
+        GameManager.instance.level2 = level2;
+    }
 
+    IEnumerator Intialize()
+    {
+        yield return new WaitForSeconds(.5f);
+        //LoadData();
+        GameManager.instance.playerScript.HP = HP;
+        GameManager.instance.playerScript.healthMax = healthMax;
+        //GameManager.instance.playerScript.playerSpeed = playerSpeed;
+        //GameManager.instance.playerScript.maxStam = maxStam;
+        //GameManager.instance.playerScript.dashCost = dashCost;
+        //GameManager.instance.playerScript.stamDrain = stamDrain;
+        //GameManager.instance.playerScript.stamRegen = stamRegen;
         GameManager.instance.level1 = level1;
         GameManager.instance.level2 = level2;
     }

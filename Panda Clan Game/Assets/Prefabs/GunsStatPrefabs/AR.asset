@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: AR
   m_EditorClassIdentifier: 
   shootDamage: 15
-  shootRate: 0.2
-  shootDistance: 25
+  shootRate: 0.22
+  shootDistance: 33
   bulletSpread: 0
-  reloadTime: 3
+  reloadTime: 1.5
   timeBetweenShots: 0
   bulletsPerTap: 1
   allowButtonHold: 1

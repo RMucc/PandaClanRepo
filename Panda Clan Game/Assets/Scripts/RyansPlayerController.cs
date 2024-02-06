@@ -496,7 +496,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             case GameManager.BulletType.Shotgun:
                 if (ShotgunbulletsTotal >= gunList[bulletType].magazineSize)
                 {
-                    gunList[bulletType].bulletsLeftInMag = gunList[bulletType].magazineSize;
+                    gunList[bulletType].bulletsLeftInMag += gunList[bulletType].magazineSize;
                     ShotgunbulletsTotal -= gunList[bulletType].magazineSize - gunList[bulletType].bulletsLeftInMag;
                 }
                 else if (ShotgunbulletsTotal > 0)
@@ -513,7 +513,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             case GameManager.BulletType.AR:
                 if (ARbulletsTotal >= gunList[bulletType].magazineSize)
                 {
-                    gunList[bulletType].bulletsLeftInMag = gunList[bulletType].magazineSize;
+                    gunList[bulletType].bulletsLeftInMag += gunList[bulletType].magazineSize;
                     ARbulletsTotal -= gunList[bulletType].magazineSize - gunList[bulletType].bulletsLeftInMag;
                 }
                 else if (ARbulletsTotal > 0)
@@ -530,7 +530,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             case GameManager.BulletType.SMG:
                 if (SMGbulletsTotal >= gunList[bulletType].magazineSize)
                 {
-                    gunList[bulletType].bulletsLeftInMag = gunList[bulletType].magazineSize;
+                    gunList[bulletType].bulletsLeftInMag += gunList[bulletType].magazineSize;
                     SMGbulletsTotal -= gunList[bulletType].magazineSize - gunList[bulletType].bulletsLeftInMag;
                 }
                 else if (SMGbulletsTotal > 0)
@@ -626,7 +626,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     }
 
     public void AddDrops(GunStats gun = null, int AmmoChange = 0)
-    {
+    {   
         if (gun != null && !gunList.ContainsKey(gun.bulletType))
         {
             gunList.Add(gun.bulletType, gun);
@@ -654,7 +654,6 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                     break;
                 case GameManager.BulletType.SMG:
                     SMGbulletsTotal += AmmoChange;
-                    gunList[bulletType].bulletsLeftInMag = gunList[bulletType].magazineSize;
                     activeWeapon = 3;
                     updatePlayerUI();
                     break;

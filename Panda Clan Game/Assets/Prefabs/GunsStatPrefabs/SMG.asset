@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72b1d1e87552d9649aad5d6f881cbfdc, type: 3}
   m_Name: SMG
   m_EditorClassIdentifier: 
-  shootDamage: 10
-  shootRate: 0.1
-  shootDistance: 10
+  shootDamage: 8
+  shootRate: 0.09
+  shootDistance: 20
   bulletSpread: 0.1
-  reloadTime: 2
+  reloadTime: 1
   timeBetweenShots: 0
   bulletsPerTap: 1
   allowButtonHold: 1
-  magazineSize: 15
-  bulletsLeftInMag: 15
+  magazineSize: 50
+  bulletsLeftInMag: 50
   cameraShakeDuration: 0
   cameraShakeMagnitude: 0
   bulletHitEffect: {fileID: 4795005520586895817, guid: 0b5937c7f85d8d54fa5dfa2258d0d6b3, type: 3}

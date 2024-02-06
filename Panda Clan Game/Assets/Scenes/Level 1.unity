@@ -935,18 +935,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1246693345538783231, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
-      propertyPath: m_Text
-      value: 'Enemies:'
-      objectReference: {fileID: 0}
     - target: {fileID: 3067573623821199699, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
       propertyPath: ArrowToNext
       value: 
       objectReference: {fileID: 1131874619}
-    - target: {fileID: 6929954252877649670, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
-      propertyPath: m_Text
-      value: 'Lives:'
-      objectReference: {fileID: 0}
     - target: {fileID: 7483503311532101132, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
       propertyPath: m_Name
       value: UI

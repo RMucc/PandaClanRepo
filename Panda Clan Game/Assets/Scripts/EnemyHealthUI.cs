@@ -23,7 +23,7 @@ public class EnemyHealthUI : MonoBehaviour
     {
         //Debug.Log("currHealth = " + _currHealth + "  original health = " + _origHealth + "   Divided curr/orig = " + (float)_currHealth / _origHealth);
         healthRed.fillAmount = (float)_currHealth / _origHealth;
-        Debug.Log(Mathf.Lerp(currHealth, _currHealth, timeToDecrease));
+        //->Debug.Log(Mathf.Lerp(currHealth, _currHealth, timeToDecrease));
         //healthWhite.fillAmount = Mathf.Lerp(currHealth/_origHealth, _currHealth/origHealth, timeToDecrease);
         //currHealth = _currHealth;
         //origHealth = _origHealth;

@@ -434,7 +434,7 @@ GameObject:
   - component: {fileID: 3145478056526319416}
   m_Layer: 0
   m_Name: RoadDivider
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -539,7 +539,7 @@ GameObject:
   - component: {fileID: 5662165250006750742}
   m_Layer: 0
   m_Name: Road
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -2469,7 +2469,7 @@ GameObject:
   - component: {fileID: 2118986209371626365}
   m_Layer: 0
   m_Name: Road (1)
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8

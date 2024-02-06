@@ -37,11 +37,11 @@ public class GameManager : MonoBehaviour
     //public GameObject nextLevel2;
 
     public bool isPaused;
-    public static bool level1;
-    public static bool level2;
-    public static bool isNotLevel1;
-    public bool levelOne;
-    public bool levelTwo;
+    public bool level1;
+    public bool level2;
+    //public bool isNotLevel1;
+    //public bool levelOne;
+    //public bool levelTwo;
     public int enemyCount;
     public int enemyGoal;
 
@@ -59,12 +59,6 @@ public class GameManager : MonoBehaviour
     #region AWAKE CODE
     void Awake()
     {
-        if (!isNotLevel1)
-        {
-            level1 = true;
-        }
-        levelOne = level1;
-        levelTwo = level2;
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<RyansPlayerController>();
@@ -148,8 +142,9 @@ public class GameManager : MonoBehaviour
     public void CallBeforeLoadingScene2()
     {
         level1 = false;
+        SaveManager.instance.level1 = level1;
         level2 = true;
-        isNotLevel1 = true;
+        SaveManager.instance.level2 = level2;
     }
     #endregion
 

@@ -15,8 +15,9 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     [Header("Player Movement Variables\n")]
     //Player Movement Variables
     [SerializeField] CharacterController controller;
-    [SerializeField] int HP;
-    [SerializeField] float playerSpeed;
+    public int HP;
+    public int healthMax;
+    public float playerSpeed;
     [SerializeField] float jumpHeight;
     [SerializeField] float jumpMax;
     [SerializeField] float gravity;
@@ -24,14 +25,14 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     Coroutine sprintRecover;
 
     [Header("Player Stamina/Regen Variables")]
-    [SerializeField] float maxStam = 100.0f;
-    [SerializeField] float dashCost = 20.0f;
+    public float maxStam = 100.0f;
+    public float dashCost = 20.0f;
     public bool isSprinting = false;
     public bool isStamRecovered = true;
-    [Range(0, 50)][SerializeField] float stamDrain = .1f;
-    [Range(0, 50)][SerializeField] float stamRegen = .1f;
+    [Range(0, 50)]public float stamDrain = .1f;
+    [Range(0, 50)]public float stamRegen = .1f;
 
-    [SerializeField] float playerSprintSpeed;
+    public float playerSprintSpeed;
     [SerializeField] float playerStam;
     //[SerializeField] float playerStamRecover;
 
@@ -113,10 +114,6 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     private float originalDashDebounce;
     [SerializeField] float dashCooldownTime;
     private bool canDash = true;
-
-    [Header("Stats Variables for Player\n")]
-    //Stat Variables for Player
-    public int healthMax;
 
     // Start is called before the first frame update
     void Start()

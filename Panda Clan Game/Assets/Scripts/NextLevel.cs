@@ -29,6 +29,7 @@ public class NextLevel : MonoBehaviour
 
                 //Go to next scene
                 GameManager.instance.CallBeforeLoadingScene2();
+                SaveManager.instance.SaveData();
                 GameManager.instance.LoadNextScene();
             }
             //If there are still enemies left, player cannot move on to the next level. Complete the wave first

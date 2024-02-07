@@ -28,7 +28,7 @@ public class NextLevel : MonoBehaviour
                 //Ask if player would like to leave or come back when ready
 
                 //Go to next scene
-                //GameManager.instance.CallBeforeLoadingScene2();
+                GameManager.instance.CallBeforeLoadingScene2();
                 SaveManager.instance.SaveData();
                 GameManager.instance.LoadNextScene();
             }

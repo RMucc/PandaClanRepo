@@ -16,6 +16,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     //Player Movement Variables
     [SerializeField] CharacterController controller;
     public int HP;
+    public int currHealth;
     public int healthMax;
     public float playerSpeed;
     [SerializeField] float jumpHeight;
@@ -98,7 +99,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
 
     [Header("Original Values\n")]
     //Original Values
-    private int originalHP;
+    public int originalHP;
     private float originalPlayerVel;
     public float originalPlayerSpeed;
     private int originalHealthMax;
@@ -124,6 +125,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         SMGbulletsTotalR = SMGbulletsTotal;
         originalHealthMax = healthMax;
         originalHP = HP;
+        currHealth = HP;
         originalPlayerSpeed = playerSpeed;
         playerStam = maxStam;
         originalPlayerStamina = playerStam;
@@ -131,6 +133,8 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         readyToShoot = true;
         isShooting = false;
         AddDrops(gunToAdd, ammoToAdd);
+        Debug.Log("Updating Player UI");
+        updatePlayerUI();
     }
 
     // Update is called once per frame
@@ -663,6 +667,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
+        currHealth = HP;
         StartCoroutine(flashScreen());
         updatePlayerUI();
 
@@ -684,6 +689,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     public void respawn()
     {
         HP = originalHP;
+        currHealth = HP;
         updatePlayerUI();
 
         controller.enabled = false;

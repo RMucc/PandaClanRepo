@@ -73,6 +73,7 @@ public class Spawner : MonoBehaviour
         if(spawnCount >= counter && enemies <= 0)
         {
             Debug.Log("Updating to next wave");
+            SaveManager.instance.SaveData();
             wave++;
             spawnCount = 0;
         }

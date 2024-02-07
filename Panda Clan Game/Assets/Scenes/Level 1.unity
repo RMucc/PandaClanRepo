@@ -939,10 +939,6 @@ PrefabInstance:
       propertyPath: ArrowToNext
       value: 
       objectReference: {fileID: 1131874619}
-    - target: {fileID: 5732243668597029823, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7483503311532101132, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
       propertyPath: m_Name
       value: UI

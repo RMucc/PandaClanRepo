@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     public int enemyGoal;
 
     public GameObject ArrowToNext;
+    private int temp;
 
     public enum BulletType
     {
@@ -59,11 +60,20 @@ public class GameManager : MonoBehaviour
     #region AWAKE CODE
     void Awake()
     {
-        instance = this;
+        temp = 5;
+        if (instance == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+        //instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<RyansPlayerController>();
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
-        //SaveManager.instance.LoadData();
     }
     #endregion
 
@@ -79,6 +89,19 @@ public class GameManager : MonoBehaviour
             statePaused();
             menuActive = menuPause;
             menuActive.SetActive(isPaused);
+        }
+        while(temp != 0)
+        {
+            Debug.Log(temp);
+            if(temp == 4)
+            {
+                SaveManager.instance.Load();
+                playerScript.updatePlayerUI();
+            }
+            level1 = SaveManager.instance.level1;
+            level2 = SaveManager.instance.level2;
+            new WaitForSeconds(1);
+            temp -= 1;
         }
     }
     #endregion
@@ -142,8 +165,8 @@ public class GameManager : MonoBehaviour
     #region Update Scene Bool
     public void CallBeforeLoadingScene2()
     {
-        level1 = false;
-        level2 = true;
+        SaveManager.instance.level1 = false;
+        SaveManager.instance.level2 = true;
     }
     #endregion
 

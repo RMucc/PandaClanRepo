@@ -935,13 +935,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2632518726965350509, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
+      propertyPath: m_Name
+      value: OPTION 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3067573623821199699, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
       propertyPath: ArrowToNext
       value: 
       objectReference: {fileID: 1131874619}
+    - target: {fileID: 3221079202410325870, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
+      propertyPath: m_text
+      value: +1 LIFE
+      objectReference: {fileID: 0}
+    - target: {fileID: 4120509155984815502, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
+      propertyPath: m_text
+      value: $100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5264378556810126526, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
+      propertyPath: m_text
+      value: R. REFILL
+      objectReference: {fileID: 0}
+    - target: {fileID: 7196881765240448450, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
+      propertyPath: m_Name
+      value: OPTION 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7483503311532101132, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7842605343560813581, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8765568798799223130, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
+      propertyPath: m_text
+      value: $50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

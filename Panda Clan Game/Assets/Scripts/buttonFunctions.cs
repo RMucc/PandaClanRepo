@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class buttonFunctions : MonoBehaviour
 {
+
     public RyansPlayerController playerScript;
 
     //Pause Screen Buttons
@@ -49,9 +50,10 @@ public class buttonFunctions : MonoBehaviour
     }
 
     //Shop Buttons
-    public void buyShotgun()
+    public void buyLives()
     {
-        //GameManager.instance.playerScript.AddDrops(GameManager.BulletType.Shotgun, )
+        //Forgo the shotgun buy lives
+
     }
 
 

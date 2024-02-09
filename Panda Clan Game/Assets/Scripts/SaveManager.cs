@@ -65,10 +65,10 @@ public class SaveManager : MonoBehaviour
         Debug.Log(data.HP);
         data.healthMax = GameManager.instance.playerScript.healthMax;
         data.playerSpeed = GameManager.instance.playerScript.originalPlayerSpeed;
-        //data.maxStam = maxStam;
-        //data.dashCost = dashCost;
-        //data.stamDrain = stamDrain;
-        //data.stamRegen = stamRegen;
+        data.maxStam = maxStam;
+        data.dashCost = dashCost;
+        data.stamDrain = stamDrain;
+        data.stamRegen = stamRegen;
         data.level1 = level1;
         data.level2 = level2;
 
@@ -105,10 +105,10 @@ public class SaveManager : MonoBehaviour
             Debug.Log(HP);
             healthMax = data.healthMax;
             playerSpeed = data.playerSpeed;
-            //maxStam = data.maxStam;
-            //dashCost = data.dashCost;
-            //stamDrain = data.stamDrain;
-            //stamRegen = data.stamRegen;
+            maxStam = data.maxStam;
+            dashCost = data.dashCost;
+            stamDrain = data.stamDrain;
+            stamRegen = data.stamRegen;
             level1 = data.level1;
             level2 = data.level2;
         }    
@@ -132,16 +132,16 @@ public class SaveManager : MonoBehaviour
         GameManager.instance.playerScript.HP = HP;
         Debug.Log(GameManager.instance.playerScript.HP);
         GameManager.instance.playerScript.healthMax = healthMax;
-        //GameManager.instance.playerScript.playerSpeed = playerSpeed;
-        //GameManager.instance.playerScript.maxStam = maxStam;
-        //GameManager.instance.playerScript.dashCost = dashCost;
-        //GameManager.instance.playerScript.stamDrain = stamDrain;
-        //GameManager.instance.playerScript.stamRegen = stamRegen;
+        GameManager.instance.playerScript.playerSpeed = playerSpeed;
+        GameManager.instance.playerScript.maxStam = maxStam;
+        GameManager.instance.playerScript.dashCost = dashCost;
+        GameManager.instance.playerScript.stamDrain = stamDrain;
+        GameManager.instance.playerScript.stamRegen = stamRegen;
         //GameManager.instance.level1 = level1;
         //GameManager.instance.level2 = level2;
     }
 
-    IEnumerator Intialize()
+    /*IEnumerator Intialize()
     {
         Debug.Log("Initializing data");
         yield return new WaitForSeconds(.5f);
@@ -155,7 +155,7 @@ public class SaveManager : MonoBehaviour
         //GameManager.instance.playerScript.stamRegen = stamRegen;
         GameManager.instance.level1 = level1;
         GameManager.instance.level2 = level2;
-    }
+    }*/
 }
 
 [Serializable]

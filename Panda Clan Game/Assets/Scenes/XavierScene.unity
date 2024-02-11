@@ -434,15 +434,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5913392083894742486, guid: ae2d54a112c67544d9e945049f3710fc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5913392083894742486, guid: ae2d54a112c67544d9e945049f3710fc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.96
+      value: 1.37
       objectReference: {fileID: 0}
     - target: {fileID: 5913392083894742486, guid: ae2d54a112c67544d9e945049f3710fc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.47
+      value: 8.23
       objectReference: {fileID: 0}
     - target: {fileID: 5913392083894742486, guid: ae2d54a112c67544d9e945049f3710fc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -557,6 +557,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RangedEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 4240346518832343959, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8369198999157408456, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.62
@@ -653,6 +657,7 @@ MonoBehaviour:
   stamninaVisable: {fileID: 0}
   menuPause: {fileID: 0}
   menuWin: {fileID: 0}
+  menuQuest: {fileID: 0}
   level1MenuWin: {fileID: 0}
   menuLose: {fileID: 0}
   test1: {fileID: 0}
@@ -660,22 +665,30 @@ MonoBehaviour:
   test3: {fileID: 0}
   enemyLeft: {fileID: 0}
   livesCount: {fileID: 0}
+  CurrCount: {fileID: 0}
+  shopKeeper: {fileID: 0}
+  menuShop: {fileID: 0}
+  mainInterface: {fileID: 0}
+  questPos: {fileID: 0}
+  inShop: 0
   totalLives: {fileID: 0}
   waveCount: {fileID: 0}
+  weapSwitch: {fileID: 0}
   damageScreen: {fileID: 0}
   HPBar: {fileID: 0}
   AMMOBar: {fileID: 0}
   AMMOReserve: {fileID: 0}
   StaminaWheel: {fileID: 0}
+  menuInteract: {fileID: 0}
   player: {fileID: 0}
   playerScript: {fileID: 0}
   playerSpawnPos: {fileID: 0}
   isPaused: 0
-  levelOne: 0
-  levelTwo: 0
+  level1: 0
+  level2: 0
   enemyCount: 0
   enemyGoal: 0
-  ArrowToNext: {fileID: 0}
+  arrowToNext: {fileID: 0}
 --- !u!1001 &407130183385992172
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -728,6 +741,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InvisibleEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 8687424609967327632, guid: de03c17f5dfcddc43a3a69fd09b91177, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -744,6 +761,10 @@ PrefabInstance:
     - target: {fileID: 2236138064682025148, guid: 063c27812b484d34fac3def3548f2c11, type: 3}
       propertyPath: m_Name
       value: SwiftEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236138064682025148, guid: 063c27812b484d34fac3def3548f2c11, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7900714017035186299, guid: 063c27812b484d34fac3def3548f2c11, type: 3}
       propertyPath: m_LocalPosition.x
@@ -842,6 +863,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 'DashEnemy '
       objectReference: {fileID: 0}
+    - target: {fileID: 6232163740477263120, guid: d994c8ed7832e5c4d953790060ca417a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -855,9 +880,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1347596504531929734, guid: fdf2348bab3f5104598fc3ae951ae530, type: 3}
+      propertyPath: m_Speed
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4461265607079146730, guid: fdf2348bab3f5104598fc3ae951ae530, type: 3}
       propertyPath: m_Name
       value: TankEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4461265607079146730, guid: fdf2348bab3f5104598fc3ae951ae530, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4626033140048238753, guid: fdf2348bab3f5104598fc3ae951ae530, type: 3}
       propertyPath: m_LocalPosition.x
@@ -865,7 +898,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4626033140048238753, guid: fdf2348bab3f5104598fc3ae951ae530, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 1.46
       objectReference: {fileID: 0}
     - target: {fileID: 4626033140048238753, guid: fdf2348bab3f5104598fc3ae951ae530, type: 3}
       propertyPath: m_LocalPosition.z

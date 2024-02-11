@@ -11,9 +11,9 @@ public class Spawner : MonoBehaviour
     [SerializeField] GameObject[] objectToSpawn;
     [SerializeField] float timeBetweenSpawns;
     [SerializeField] Transform[] spawnPos;
-    [SerializeField] int wave1EnemyAmount;
-    [SerializeField] int wave2EnemyAmount;
-    [SerializeField] int wave3EnemyAmount;
+    [SerializeField] int wave1EnemyAmount; //3
+    [SerializeField] int wave2EnemyAmount; //5
+    [SerializeField] int wave3EnemyAmount; //8
     private int totalEnemyAmount;
     private int enemies;
     private int spawnCount;
@@ -66,13 +66,13 @@ public class Spawner : MonoBehaviour
             int arrayPos = Random.Range(0, spawnPos.Length);
             int randEnemy = Random.Range(0, objectToSpawn.Length);
             GameObject enemySpawned = Instantiate(objectToSpawn[randEnemy], spawnPos[arrayPos].transform.position, spawnPos[arrayPos].transform.rotation);
-            Debug.Log(enemySpawned);
+            //Debug.Log(enemySpawned);
             spawnCount++;
             isSpawning = false;
         }
         if(spawnCount >= counter && enemies <= 0)
         {
-            Debug.Log("Updating to next wave");
+            //Debug.Log("Updating to next wave");
             SaveManager.instance.SaveData();
             wave++;
             spawnCount = 0;

@@ -60,9 +60,9 @@ public class SaveManager : MonoBehaviour
         FileStream file = File.Create(Application.persistentDataPath + "/playerInfo.dat");
 
         PlayerData data = new PlayerData();
-        Debug.Log(GameManager.instance.playerScript.currHealth);
+        //Debug.Log(GameManager.instance.playerScript.currHealth);
         data.HP = GameManager.instance.playerScript.currHealth;
-        Debug.Log(data.HP);
+        //Debug.Log(data.HP);
         data.healthMax = GameManager.instance.playerScript.healthMax;
         data.playerSpeed = GameManager.instance.playerScript.originalPlayerSpeed;
         data.maxStam = maxStam;
@@ -130,7 +130,7 @@ public class SaveManager : MonoBehaviour
     public void SetData()
     {
         GameManager.instance.playerScript.HP = HP;
-        Debug.Log(GameManager.instance.playerScript.HP);
+        //Debug.Log(GameManager.instance.playerScript.HP);
         GameManager.instance.playerScript.healthMax = healthMax;
         GameManager.instance.playerScript.playerSpeed = playerSpeed;
         GameManager.instance.playerScript.maxStam = maxStam;

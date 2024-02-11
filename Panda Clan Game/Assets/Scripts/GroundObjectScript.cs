@@ -11,9 +11,11 @@ public class GroundObjectScript : MonoBehaviour
     [SerializeField] float rotateSpeedMax;
     [SerializeField] float objectForwardMovementSpeed;
     [SerializeField] float objectUpMovementSpeed;
+    [SerializeField] int destroyAfterSeconds;
     float floatSpeed;
     float rotateSpeed;
     [SerializeField] bool startFloat;
+    [SerializeField] bool currency;
 
     [Header("-----  Components  -----\n")]
     [SerializeField] Rigidbody rb;
@@ -38,6 +40,10 @@ public class GroundObjectScript : MonoBehaviour
             rotateSpeed = Random.Range(rotateSpeedMin, rotateSpeedMax);
             initialPosition = transform.position;
         }
+        if (currency)
+        {
+            Destroy(gameObject, destroyAfterSeconds);
+        }
     }
 
     public void Update()
@@ -54,8 +60,9 @@ public class GroundObjectScript : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && currency)
         {
+            GameManager.instance.playerScript.Currency++;
             // Give player object
             Destroy(gameObject);
         }

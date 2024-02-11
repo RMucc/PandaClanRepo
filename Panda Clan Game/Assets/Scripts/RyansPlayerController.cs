@@ -11,10 +11,13 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     [SerializeField] GunStats gunToAdd;
     [SerializeField] int ammoToAdd;
 
-
+    [Header("Player Interact Variables\n")]
+    [SerializeField] int interactDistance;
+    public int Currency = 0;
+    public Transform cameraHolderPos;
     [Header("Player Movement Variables\n")]
     //Player Movement Variables
-    [SerializeField] CharacterController controller;
+    public CharacterController controller;
     public int HP;
     public int currHealth;
     public int healthMax;
@@ -30,8 +33,8 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     public float dashCost = 20.0f;
     public bool isSprinting = false;
     public bool isStamRecovered = true;
-    [Range(0, 50)]public float stamDrain = .1f;
-    [Range(0, 50)]public float stamRegen = .1f;
+    [Range(0, 50)] public float stamDrain = .1f;
+    [Range(0, 50)] public float stamRegen = .1f;
 
     public float playerSprintSpeed;
     [SerializeField] float playerStam;
@@ -59,13 +62,13 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     float cameraShakeDuration; // for camera shake
     float cameraShakeMagnitude; // for camera shake
     int activeWeapon;
-    GameObject gunOut;
+    public GameObject gunOut;
 
     [Header("Player Critical Damage Variables\n")]
     [SerializeField] bool useCrit;
     [SerializeField] int critRate; // The higher this number is the lower the crit chance since it's going to be based off of a random range of 1 to this int.
     [SerializeField] int critMultiplier; //The higher this number the lower the crit damage applied will be. Will crash if equal to 0.
-    int solveCrit;
+    bool solveCrit;
     int damageHolder;
 
     [SerializeField] float popUpPosRand;
@@ -133,45 +136,44 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         readyToShoot = true;
         isShooting = false;
         AddDrops(gunToAdd, ammoToAdd);
-        Debug.Log("Updating Player UI");
+        //Debug.Log("Updating Player UI");
         updatePlayerUI();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * gunList[bulletType].shootDistance, Color.green);
-        stFX();
-        if (gunList[bulletType].allowButtonHold && !isShooting)
+        if (!GameManager.instance.inShop)
         {
-            shooting = Input.GetButton("Shoot");
-        }
-        else
-        {
-            shooting = Input.GetButtonDown("Shoot");
-        }
-
-        if (Input.GetButtonDown("Reload") && gunList[bulletType].bulletsLeftInMag < gunList[bulletType].magazineSize && !reloading)
-        {
-            StartCoroutine(Reload());
-        }
-
-        if (readyToShoot && shooting && !reloading && gunList[bulletType].bulletsLeftInMag > 0)
-        {
-            for (int i = gunList[bulletType].bulletsPerTap; i > 0; i--)
+            stFX();
+            if (gunList[bulletType].allowButtonHold && !isShooting)
             {
-                StartCoroutine(Shoot());
+                shooting = Input.GetButton("Shoot");
             }
+            else
+            {
+                shooting = Input.GetButtonDown("Shoot");
+            }
+
+            if (Input.GetButtonDown("Reload") && gunList[bulletType].bulletsLeftInMag < gunList[bulletType].magazineSize && !reloading)
+            {
+                StartCoroutine(Reload());
+            }
+
+            if (readyToShoot && shooting && !reloading && gunList[bulletType].bulletsLeftInMag > 0)
+            {
+                for (int i = gunList[bulletType].bulletsPerTap; i > 0; i--)
+                {
+                    StartCoroutine(Shoot());
+                }
+            }
+            else if (gunList[bulletType].bulletsLeftInMag == 0 && !reloading)
+            {
+                StartCoroutine(Reload());
+            }
+            Interact();
+            Movement();
         }
-        else if (gunList[bulletType].bulletsLeftInMag == 0 && !reloading)
-        {
-            StartCoroutine(Reload());
-        }
-        //if (Input.GetButton("Shoot"))
-        //{
-        //    StartCoroutine(Shoot());
-        //}
-        Movement();
     }
 
     void Movement()
@@ -477,10 +479,10 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     }
     #endregion
 
-    #region Weapon System
+    #region Weapon and Interact System
     IEnumerator Reload()
     {
-        Debug.Log("Reload Called");
+        //Debug.Log("Reload Called");
         reloading = true;
         try
         {
@@ -551,7 +553,26 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         GameManager.instance.hideReload();
         updatePlayerUI();
     }
-
+    void Interact()
+    {
+        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * interactDistance, Color.green);
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, interactDistance))
+        {
+            if (hit.collider.TryGetComponent<IInteractable>(out IInteractable Inter) && hit.collider.gameObject.transform != this.transform)
+            {
+                updatePlayerUI(Inter.showNotiUI());
+                if (Input.GetButtonDown("Interact") && Inter.showNotiUI())
+                {
+                    updatePlayerUI(Inter.CallUse());
+                }
+            }
+            else
+            {
+                updatePlayerUI(false);
+            }
+        }
+        else { updatePlayerUI(false); }
+    }
     IEnumerator Shoot()
     {
         isShooting = true;
@@ -560,26 +581,32 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         float y = Random.Range(-gunList[bulletType].bulletSpread, gunList[bulletType].bulletSpread);
         Vector3 direction = Camera.main.transform.forward + new Vector3(x, y, 0);
         GameObject _bullet = Instantiate(gunList[bulletType].bullet, gunOut.transform.GetChild(0).transform.position, Quaternion.LookRotation(direction));
-        Debug.DrawRay(shootPos.transform.position, direction * gunList[bulletType].shootDistance, Color.red, 1f);
-        if (Physics.Raycast(shootPos.transform.position, direction, out RaycastHit hit, gunList[bulletType].shootDistance))
+        Debug.DrawRay(shootPos.transform.position, direction * gunList[bulletType].bulletDistance, Color.red, 1f);
+        if (Physics.Raycast(shootPos.transform.position, direction, out RaycastHit hit, gunList[bulletType].bulletDistance))
         {
-            EffectHolder = new ParticleSystem();
             EffectHolder = Instantiate(gunList[bulletType].bulletHitEffect, hit.point, Quaternion.Euler(0, 180, 0));
             Destroy(EffectHolder, 2);
             if (hit.collider.TryGetComponent<IDamage>(out IDamage dmg) && hit.collider.gameObject.transform != this.transform)
             {
-                solveCrit = Random.Range(1, critRate);
-                if (useCrit && solveCrit == 1)
+                solveCrit = Random.Range(1, critRate).Equals(1);
+                if (useCrit && solveCrit)
                 {
                     //Debug.Log("CRITICAL DAMAGE!   -Continued\n" + "Added Damage should be: " + (gunList[bulletType].shootDamage * (int)critMultiplier).ToString() + "\n" + "Crit Damage should be: " + (gunList[bulletType].shootDamage + (gunList[bulletType].shootDamage * (int)critMultiplier)).ToString() + "\n" + "Normal Damage should be: " + gunList[bulletType].shootDamage.ToString());
                     damageHolder = gunList[bulletType].shootDamage + (gunList[bulletType].shootDamage / critMultiplier);
-                    dmg.TakeDamage(gunList[bulletType].shootDamage + (gunList[bulletType].shootDamage / critMultiplier));
                 }
                 else
                 {
                     damageHolder = gunList[bulletType].shootDamage;
-                    dmg.TakeDamage(gunList[bulletType].shootDamage);
                 }
+                if (hit.distance > gunList[bulletType].damageRange)
+                {
+                    for (float i = hit.distance; i > gunList[bulletType].damageRange; i++)
+                    {
+                        damageHolder -= damageHolder / gunList[bulletType].damageDropOffRate;
+                        i -= 2;
+                    }
+                }
+                dmg.TakeDamage(damageHolder);
                 CreatePopUp(hit);
             }
         }
@@ -617,17 +644,16 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 temp.color = Color.black;
 
             }
-            else if (useCrit && solveCrit == 1)
+            else if (useCrit && solveCrit)
             {
                 temp.fontSize += 2;
                 temp.color = Color.yellow;
             }
         }
-        solveCrit = 0;
     }
 
-    public void AddDrops(GunStats gun = null, int AmmoChange = 0)
-    {   
+    public void AddDrops(GunStats gun = null, int AmmoChange = 0, GameManager.BulletType _bulletType = GameManager.BulletType.None)
+    {
         if (gun != null && !gunList.ContainsKey(gun.bulletType))
         {
             gunList.Add(gun.bulletType, gun);
@@ -639,7 +665,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             gunOut = Instantiate(gun.weaponPrefabSkin, gunPosition.transform);
         }
 
-        if (AmmoChange != 0)
+        if (AmmoChange != 0 && _bulletType == GameManager.BulletType.None)
         {
             switch (bulletType)
             {
@@ -656,6 +682,24 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 case GameManager.BulletType.SMG:
                     SMGbulletsTotal += AmmoChange;
                     activeWeapon = 3;
+                    updatePlayerUI();
+                    break;
+            }
+        }
+        else if (AmmoChange != 0 && _bulletType != GameManager.BulletType.None)
+        {
+            switch (_bulletType)
+            {
+                case GameManager.BulletType.Shotgun:
+                    ShotgunbulletsTotal += AmmoChange;
+                    updatePlayerUI();
+                    break;
+                case GameManager.BulletType.AR:
+                    ARbulletsTotal += AmmoChange;
+                    updatePlayerUI();
+                    break;
+                case GameManager.BulletType.SMG:
+                    SMGbulletsTotal += AmmoChange;
                     updatePlayerUI();
                     break;
             }
@@ -677,11 +721,13 @@ public class RyansPlayerController : MonoBehaviour, IDamage
 
             if (healthMax <= 0)
             {
+                GameManager.instance.UpdateLivesUI();
                 GameManager.instance.youSuck();
             }
             else
             {
                 respawn();
+                GameManager.instance.UpdateLivesUI();
             }
         }
     }
@@ -721,8 +767,16 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     #endregion
 
     #region UI 
-    public void updatePlayerUI()
+    public void updatePlayerUI(bool showInteractNoti = false)
     {
+        if (showInteractNoti)
+        {
+            GameManager.instance.menuInteract.SetActive(true);
+        }
+        else
+        {
+            GameManager.instance.menuInteract.SetActive(false);
+        }
         try // for debugging purposes
         {
             GameManager.instance.HPBar.fillAmount = (float)HP / originalHP;

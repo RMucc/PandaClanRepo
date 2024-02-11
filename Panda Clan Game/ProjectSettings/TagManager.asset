@@ -8,6 +8,8 @@ TagManager:
   - Player Spawn Pos
   - Level 2
   - Floor
+  - ShopKeep
+  - ArrowDown
   layers:
   - Default
   - TransparentFX

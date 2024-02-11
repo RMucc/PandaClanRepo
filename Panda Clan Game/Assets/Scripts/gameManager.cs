@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,14 +16,25 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject stamninaVisable;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
+    [SerializeField] GameObject menuQuest;
     [SerializeField] GameObject level1MenuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject test1; // OUT OF STAMINA
     [SerializeField] GameObject test2; // OUT OF AMMO
     [SerializeField] GameObject test3; // LOW HEALTH
     [SerializeField] GameObject enemyLeft;
-    [SerializeField] GameObject livesCount;
-    public Text totalLives;
+    public TextMeshProUGUI CurrCount;
+    public ShopKeepController shopKeeper;
+    public GameObject menuShop;
+    public CanvasGroup mainInterface;
+
+    [Header("----- ShopKeeperVariables -----")]
+
+    public Transform questPos;
+    public bool inShop = false;
+
+    //public Text totalLives;
+    [SerializeField] GameObject LivesObj;
     public Text waveCount;
     public Text weapSwitch;
     public GameObject damageScreen;
@@ -30,6 +42,7 @@ public class GameManager : MonoBehaviour
     public Image AMMOBar;
     public Image AMMOReserve;
     public Image StaminaWheel;
+    public GameObject menuInteract;
 
     public GameObject player;
     public RyansPlayerController playerScript;
@@ -45,7 +58,7 @@ public class GameManager : MonoBehaviour
     public int enemyCount;
     public int enemyGoal;
 
-    public GameObject ArrowToNext;
+    public GameObject arrowToNext;
     private int temp;
 
     public enum BulletType
@@ -74,26 +87,39 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<RyansPlayerController>();
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
+        shopKeeper = GameObject.FindGameObjectWithTag("ShopKeep").GetComponent<ShopKeepController>();
     }
     #endregion
+
+    public void UpdateLivesUI()
+    {
+        Debug.Log(playerScript.healthMax);
+        for (int i = LivesObj.transform.childCount - 1; i >= 0; i--)
+        {
+            if (i <= playerScript.healthMax - 1)
+            {
+                LivesObj.transform.GetChild(i).gameObject.SetActive(true);
+            }
+            else
+            {
+                LivesObj.transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+    }
 
     #region UPDATE CODE
     void Update()
     {
-        if (totalLives)
-        {
-            totalLives.text = "Lives: " + playerScript.healthMax;
-        }
         if (Input.GetButtonDown("Cancel") && !menuActive)
         {
             statePaused();
             menuActive = menuPause;
             menuActive.SetActive(isPaused);
         }
-        while(temp != 0)
+        while (temp != 0)
         {
-            Debug.Log(temp);
-            if(temp == 4)
+            //Debug.Log(temp);
+            if (temp == 4)
             {
                 SaveManager.instance.Load();
                 playerScript.updatePlayerUI();
@@ -131,14 +157,14 @@ public class GameManager : MonoBehaviour
     {
         enemyGoal += amount;
         //Should pull up a win menu that we can close out of so that we can move on to the next level
-        if (enemyGoal <= 0 && level1 == true)
+        if (enemyGoal <= 0 && level1)
         {
             statePaused();
             try
             {
-                if (ArrowToNext != null)
+                if (arrowToNext && shopKeeper)
                 {
-                    ArrowToNext.SetActive(true);
+                    shopKeeper.TurnOnWave();
                 }
                 menuActive = level1MenuWin;
                 menuActive.SetActive(true);
@@ -223,6 +249,15 @@ public class GameManager : MonoBehaviour
         reload.SetActive(false);
     }
     #endregion
+
+    public void OpenShopMenu()
+    {
+        CurrCount.text = playerScript.Currency.ToString();
+        inShop = true;
+        menuActive = menuShop;
+        menuActive.SetActive(true);
+    }
+
 
     #region TEST
 

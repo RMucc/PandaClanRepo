@@ -22,21 +22,24 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity;
-        float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity;
-
-        if(invertY)
+        if (!GameManager.instance.inShop)
         {
-            xRot += mouseY;
-        }
-        else
-        {
-            xRot -= mouseY;
-        }
+            float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity;
+            float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity;
 
-        xRot = Mathf.Clamp(xRot, lockVertMin, lockVertMax);
-        transform.localRotation = Quaternion.Euler(xRot, 0, 0);
-        transform.parent.Rotate(Vector3.up * mouseX);
+            if (invertY)
+            {
+                xRot += mouseY;
+            }
+            else
+            {
+                xRot -= mouseY;
+            }
+
+            xRot = Mathf.Clamp(xRot, lockVertMin, lockVertMax);
+            transform.localRotation = Quaternion.Euler(xRot, 0, 0);
+            transform.parent.Rotate(Vector3.up * mouseX);
+        }
     }
 
     public IEnumerator Shake(float duration, float magntiude)

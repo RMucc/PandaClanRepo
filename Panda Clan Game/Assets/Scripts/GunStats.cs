@@ -8,7 +8,9 @@ public class GunStats : ScriptableObject
 {
     public int shootDamage;
     public float shootRate;
-    public int shootDistance;
+    public int damageRange;
+    public int damageDropOffRate;
+    public int bulletDistance;
     public float bulletSpread;
     public float reloadTime;
     public float timeBetweenShots;

@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootDamage: 8
   shootRate: 0.09
-  shootDistance: 20
+  damageRange: 10
+  damageDropOffRate: 10
+  bulletDistance: 20
   bulletSpread: 0.1
   reloadTime: 1
   timeBetweenShots: 0

@@ -4886,6 +4886,9 @@ MonoBehaviour:
   rotateSpeedMax: 25
   objectForwardMovementSpeed: 5
   objectUpMovementSpeed: 7
+  destroyAfterSeconds: 10
+  startFloat: 0
+  currency: 1
   rb: {fileID: 5048350813564331890}
   sphereCollider: {fileID: 1370399794006646145}
 --- !u!33 &2298954914239672641

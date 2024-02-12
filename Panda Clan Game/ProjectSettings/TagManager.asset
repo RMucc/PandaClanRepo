@@ -10,14 +10,15 @@ TagManager:
   - Floor
   - ShopKeep
   - ArrowDown
+  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - MiniMap
   - Water
   - UI
-  - 
+  - Environment
   - 
   - 
   - 

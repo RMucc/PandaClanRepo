@@ -10,6 +10,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     [Header("Debugging")]
     [SerializeField] GunStats gunToAdd;
     [SerializeField] int ammoToAdd;
+    public bool invul;
 
     [Header("Player Interact Variables\n")]
     [SerializeField] int interactDistance;
@@ -494,60 +495,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         }
         yield return new WaitForSeconds(gunList[bulletType].reloadTime);
 
-        switch (bulletType)
-        {
-            case GameManager.BulletType.Shotgun:
-                if (ShotgunbulletsTotal >= gunList[bulletType].magazineSize)
-                {
-                    gunList[bulletType].bulletsLeftInMag += gunList[bulletType].magazineSize;
-                    ShotgunbulletsTotal -= gunList[bulletType].magazineSize - gunList[bulletType].bulletsLeftInMag;
-                }
-                else if (ShotgunbulletsTotal > 0)
-                {
-                    gunList[bulletType].bulletsLeftInMag += ShotgunbulletsTotal;
-                    ShotgunbulletsTotal = 0;
-                }
-                else
-                {
-                    print("Out of Ammo");
-                    //Out of Ammo text
-                }
-                break;
-            case GameManager.BulletType.AR:
-                if (ARbulletsTotal >= gunList[bulletType].magazineSize)
-                {
-                    gunList[bulletType].bulletsLeftInMag += gunList[bulletType].magazineSize;
-                    ARbulletsTotal -= gunList[bulletType].magazineSize - gunList[bulletType].bulletsLeftInMag;
-                }
-                else if (ARbulletsTotal > 0)
-                {
-                    gunList[bulletType].bulletsLeftInMag += ARbulletsTotal;
-                    ARbulletsTotal = 0;
-                }
-                else
-                {
-                    print("Out of Ammo");
-                    //Out of Ammo text
-                }
-                break;
-            case GameManager.BulletType.SMG:
-                if (SMGbulletsTotal >= gunList[bulletType].magazineSize)
-                {
-                    gunList[bulletType].bulletsLeftInMag += gunList[bulletType].magazineSize;
-                    SMGbulletsTotal -= gunList[bulletType].magazineSize - gunList[bulletType].bulletsLeftInMag;
-                }
-                else if (SMGbulletsTotal > 0)
-                {
-                    gunList[bulletType].bulletsLeftInMag += SMGbulletsTotal;
-                    SMGbulletsTotal = 0;
-                }
-                else
-                {
-                    print("Out of Ammo");
-                    //Out of Ammo text
-                }
-                break;
-        }
+
         gunList[bulletType].bulletsLeftInMag = gunList[bulletType].magazineSize;
         reloading = false;
         GameManager.instance.hideReload();
@@ -710,24 +658,32 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     #region DAMAGE/RESPAWN
     public void TakeDamage(int amount)
     {
-        HP -= amount;
-        currHealth = HP;
-        StartCoroutine(flashScreen());
-        updatePlayerUI();
-
-        if (HP <= 0)
+        if (invul)
         {
-            healthMax -= 1;
+            return;
+        }
+        else
+        {
 
-            if (healthMax <= 0)
+            HP -= amount;
+            currHealth = HP;
+            StartCoroutine(flashScreen());
+            updatePlayerUI();
+
+            if (HP <= 0)
             {
-                GameManager.instance.UpdateLivesUI();
-                GameManager.instance.youSuck();
-            }
-            else
-            {
-                respawn();
-                GameManager.instance.UpdateLivesUI();
+                healthMax -= 1;
+
+                if (healthMax <= 0)
+                {
+                    GameManager.instance.UpdateLivesUI();
+                    GameManager.instance.youSuck();
+                }
+                else
+                {
+                    respawn();
+                    GameManager.instance.UpdateLivesUI();
+                }
             }
         }
     }
@@ -782,21 +738,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             GameManager.instance.HPBar.fillAmount = (float)HP / originalHP;
             GameManager.instance.AMMOBar.fillAmount = gunList[bulletType].bulletsLeftInMag / (float)gunList[bulletType].magazineSize;
 
-            switch (activeWeapon)
-            {
-                case 1:
-                    GameManager.instance.AMMOReserve.fillAmount = ShotgunbulletsTotal / ShotgunbulletsTotalR;
-                    break;
 
-                case 2:
-                    GameManager.instance.AMMOReserve.fillAmount = ARbulletsTotal / ARbulletsTotalR;
-                    break;
-
-                case 3:
-                    GameManager.instance.AMMOReserve.fillAmount = SMGbulletsTotal / SMGbulletsTotalR;
-                    break;
-
-            }
 
         }
         catch (System.Exception e)

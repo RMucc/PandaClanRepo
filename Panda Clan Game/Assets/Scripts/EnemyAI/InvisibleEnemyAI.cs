@@ -31,6 +31,7 @@ public class InvisbleEnemyAI : BaseEnemyAI, IDamage
                 GameManager.instance.updateEnemyAmount(-1);
             }
             alive = false;
+            GameManager.instance.playerPoints += 120;
             OnDeath();
         }
     }

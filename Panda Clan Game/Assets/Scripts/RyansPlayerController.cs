@@ -10,6 +10,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     [Header("Debugging")]
     [SerializeField] GunStats gunToAdd;
     [SerializeField] int ammoToAdd;
+    public bool invul;
 
     [Header("Player Interact Variables\n")]
     [SerializeField] int interactDistance;
@@ -494,7 +495,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         }
         yield return new WaitForSeconds(gunList[bulletType].reloadTime);
 
-        
+
         gunList[bulletType].bulletsLeftInMag = gunList[bulletType].magazineSize;
         reloading = false;
         GameManager.instance.hideReload();
@@ -657,24 +658,32 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     #region DAMAGE/RESPAWN
     public void TakeDamage(int amount)
     {
-        HP -= amount;
-        currHealth = HP;
-        StartCoroutine(flashScreen());
-        updatePlayerUI();
-
-        if (HP <= 0)
+        if (invul)
         {
-            healthMax -= 1;
+            return;
+        }
+        else
+        {
 
-            if (healthMax <= 0)
+            HP -= amount;
+            currHealth = HP;
+            StartCoroutine(flashScreen());
+            updatePlayerUI();
+
+            if (HP <= 0)
             {
-                GameManager.instance.UpdateLivesUI();
-                GameManager.instance.youSuck();
-            }
-            else
-            {
-                respawn();
-                GameManager.instance.UpdateLivesUI();
+                healthMax -= 1;
+
+                if (healthMax <= 0)
+                {
+                    GameManager.instance.UpdateLivesUI();
+                    GameManager.instance.youSuck();
+                }
+                else
+                {
+                    respawn();
+                    GameManager.instance.UpdateLivesUI();
+                }
             }
         }
     }
@@ -729,7 +738,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             GameManager.instance.HPBar.fillAmount = (float)HP / originalHP;
             GameManager.instance.AMMOBar.fillAmount = gunList[bulletType].bulletsLeftInMag / (float)gunList[bulletType].magazineSize;
 
-           
+
 
         }
         catch (System.Exception e)

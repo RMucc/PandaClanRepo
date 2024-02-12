@@ -84,7 +84,6 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
             {
                 GameManager.instance.updateGameGoal(-1);
                 GameManager.instance.updateEnemyAmount(-1);
-                GameManager.instance.playerPoints += 1;
             }
             // Add grenades to players inventory.
             alive = false;

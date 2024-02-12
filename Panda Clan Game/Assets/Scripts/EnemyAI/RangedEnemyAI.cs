@@ -57,9 +57,9 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
             {
                 GameManager.instance.updateGameGoal(-1);
                 GameManager.instance.updateEnemyAmount(-1);
-                GameManager.instance.playerPoints += 200;
             }
             alive = false;
+            GameManager.instance.playerPoints += 200;
             OnDeath();
         }
     }

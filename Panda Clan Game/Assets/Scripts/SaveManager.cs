@@ -23,7 +23,7 @@ public class SaveManager : MonoBehaviour
     public float stamDrain;
     public float stamRegen;
     //Gun Variables
-
+    public GameManager.BulletType bullet;
     //Next Level Bool Variables
     public bool level1;
     public bool level2;
@@ -61,14 +61,17 @@ public class SaveManager : MonoBehaviour
 
         PlayerData data = new PlayerData();
         //Debug.Log(GameManager.instance.playerScript.currHealth);
+        //Player Variables
         data.HP = GameManager.instance.playerScript.currHealth;
-        //Debug.Log(data.HP);
         data.healthMax = GameManager.instance.playerScript.healthMax;
         data.playerSpeed = GameManager.instance.playerScript.originalPlayerSpeed;
         data.maxStam = maxStam;
         data.dashCost = dashCost;
         data.stamDrain = stamDrain;
         data.stamRegen = stamRegen;
+        //Player Gun Variables
+        data.bulletType = GameManager.instance.playerScript.bulletType;
+        //Level Variables
         data.level1 = level1;
         data.level2 = level2;
 
@@ -80,6 +83,7 @@ public class SaveManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
+            Debug.Log("Defualt Load");
             LoadDefault();
         }
         else
@@ -101,6 +105,7 @@ public class SaveManager : MonoBehaviour
             file.Close();
 
             //Load Data into SaveManager Variables
+            //Player Variables
             HP = data.HP;
             Debug.Log(HP);
             healthMax = data.healthMax;
@@ -109,6 +114,9 @@ public class SaveManager : MonoBehaviour
             dashCost = data.dashCost;
             stamDrain = data.stamDrain;
             stamRegen = data.stamRegen;
+            //Player Gun Variables
+            bullet = data.bulletType;
+            //Level Variables
             level1 = data.level1;
             level2 = data.level2;
         }    
@@ -124,11 +132,13 @@ public class SaveManager : MonoBehaviour
         stamRegen = 5;
         level1 = true;
         level2 = false;
+        bullet = GameManager.BulletType.SMG;
         SetData();
     }
 
     public void SetData()
     {
+        //Set Player Variables
         GameManager.instance.playerScript.HP = HP;
         //Debug.Log(GameManager.instance.playerScript.HP);
         GameManager.instance.playerScript.healthMax = healthMax;
@@ -137,8 +147,12 @@ public class SaveManager : MonoBehaviour
         GameManager.instance.playerScript.dashCost = dashCost;
         GameManager.instance.playerScript.stamDrain = stamDrain;
         GameManager.instance.playerScript.stamRegen = stamRegen;
-        //GameManager.instance.level1 = level1;
-        //GameManager.instance.level2 = level2;
+        //Set Player Gun Variables
+        GameManager.instance.playerScript.bulletType = bullet;
+        Debug.Log(bullet);
+        Debug.Log(GameManager.instance.playerScript.gunList[bullet]);
+        GameManager.instance.playerScript.AddDrops(GameManager.instance.playerScript.gunList[bullet], GameManager.instance.playerScript.gunList[bullet].magazineSize);
+        Debug.Log(GameManager.instance.playerScript.bulletType);
     }
 
     /*IEnumerator Intialize()
@@ -161,10 +175,6 @@ public class SaveManager : MonoBehaviour
 [Serializable]
 class PlayerData
 {
-    //public GameObject player;
-    //public RyansPlayerController playerScript;
-    //public GameObject playerSpawnPos;
-
     //Player Variables
     public int HP;
     public int healthMax;
@@ -174,7 +184,7 @@ class PlayerData
     public float stamDrain;
     public float stamRegen;
     //Gun Variables
-
+    public GameManager.BulletType bulletType;
     //Next Level Bool Variables
     public bool level1;
     public bool level2;

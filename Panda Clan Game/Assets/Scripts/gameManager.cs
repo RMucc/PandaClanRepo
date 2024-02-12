@@ -87,7 +87,10 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<RyansPlayerController>();
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
-        shopKeeper = GameObject.FindGameObjectWithTag("ShopKeep").GetComponent<ShopKeepController>();
+        if (GameObject.FindGameObjectWithTag("ShopKeep"))
+        {
+            shopKeeper = GameObject.FindGameObjectWithTag("ShopKeep").GetComponent<ShopKeepController>();
+        }
     }
     #endregion
 

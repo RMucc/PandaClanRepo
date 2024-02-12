@@ -56,7 +56,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     [SerializeField] Transform shootPos;
     [SerializeField] Transform gunPosition;
     [SerializeField] CameraController cameraController;
-    [SerializeField] GameManager.BulletType bulletType;
+    public GameManager.BulletType bulletType;
     ParticleSystem EffectHolder;
     float timeBetweenShots; // for burst weapons
     float cameraShakeDuration; // for camera shake
@@ -74,7 +74,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     [SerializeField] float popUpPosRand;
     [SerializeField] GameObject DamagePopUp;
 
-    Dictionary<GameManager.BulletType, GunStats> gunList;
+    public Dictionary<GameManager.BulletType, GunStats> gunList;
 
     bool readyToShoot;
     bool reloading;

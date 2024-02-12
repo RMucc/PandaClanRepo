@@ -494,60 +494,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         }
         yield return new WaitForSeconds(gunList[bulletType].reloadTime);
 
-        switch (bulletType)
-        {
-            case GameManager.BulletType.Shotgun:
-                if (ShotgunbulletsTotal >= gunList[bulletType].magazineSize)
-                {
-                    gunList[bulletType].bulletsLeftInMag += gunList[bulletType].magazineSize;
-                    ShotgunbulletsTotal -= gunList[bulletType].magazineSize - gunList[bulletType].bulletsLeftInMag;
-                }
-                else if (ShotgunbulletsTotal > 0)
-                {
-                    gunList[bulletType].bulletsLeftInMag += ShotgunbulletsTotal;
-                    ShotgunbulletsTotal = 0;
-                }
-                else
-                {
-                    print("Out of Ammo");
-                    //Out of Ammo text
-                }
-                break;
-            case GameManager.BulletType.AR:
-                if (ARbulletsTotal >= gunList[bulletType].magazineSize)
-                {
-                    gunList[bulletType].bulletsLeftInMag += gunList[bulletType].magazineSize;
-                    ARbulletsTotal -= gunList[bulletType].magazineSize - gunList[bulletType].bulletsLeftInMag;
-                }
-                else if (ARbulletsTotal > 0)
-                {
-                    gunList[bulletType].bulletsLeftInMag += ARbulletsTotal;
-                    ARbulletsTotal = 0;
-                }
-                else
-                {
-                    print("Out of Ammo");
-                    //Out of Ammo text
-                }
-                break;
-            case GameManager.BulletType.SMG:
-                if (SMGbulletsTotal >= gunList[bulletType].magazineSize)
-                {
-                    gunList[bulletType].bulletsLeftInMag += gunList[bulletType].magazineSize;
-                    SMGbulletsTotal -= gunList[bulletType].magazineSize - gunList[bulletType].bulletsLeftInMag;
-                }
-                else if (SMGbulletsTotal > 0)
-                {
-                    gunList[bulletType].bulletsLeftInMag += SMGbulletsTotal;
-                    SMGbulletsTotal = 0;
-                }
-                else
-                {
-                    print("Out of Ammo");
-                    //Out of Ammo text
-                }
-                break;
-        }
+        
         gunList[bulletType].bulletsLeftInMag = gunList[bulletType].magazineSize;
         reloading = false;
         GameManager.instance.hideReload();
@@ -782,21 +729,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             GameManager.instance.HPBar.fillAmount = (float)HP / originalHP;
             GameManager.instance.AMMOBar.fillAmount = gunList[bulletType].bulletsLeftInMag / (float)gunList[bulletType].magazineSize;
 
-            switch (activeWeapon)
-            {
-                case 1:
-                    GameManager.instance.AMMOReserve.fillAmount = ShotgunbulletsTotal / ShotgunbulletsTotalR;
-                    break;
-
-                case 2:
-                    GameManager.instance.AMMOReserve.fillAmount = ARbulletsTotal / ARbulletsTotalR;
-                    break;
-
-                case 3:
-                    GameManager.instance.AMMOReserve.fillAmount = SMGbulletsTotal / SMGbulletsTotalR;
-                    break;
-
-            }
+           
 
         }
         catch (System.Exception e)

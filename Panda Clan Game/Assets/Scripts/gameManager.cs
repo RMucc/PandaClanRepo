@@ -20,13 +20,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject level1MenuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject test1; // OUT OF STAMINA
-    [SerializeField] GameObject test2; // OUT OF AMMO
+    [SerializeField] GameObject test2; // UI MESSAGE 
     [SerializeField] GameObject test3; // LOW HEALTH
     [SerializeField] GameObject enemyLeft;
     public TextMeshProUGUI CurrCount;
     public ShopKeepController shopKeeper;
     public GameObject menuShop;
     public CanvasGroup mainInterface;
+
+    [Header("----- Point Tracker -----")]
+    public int playerPoints;
 
     [Header("----- ShopKeeperVariables -----")]
 
@@ -40,7 +43,6 @@ public class GameManager : MonoBehaviour
     public GameObject damageScreen;
     public Image HPBar;
     public Image AMMOBar;
-    public Image AMMOReserve;
     public Image StaminaWheel;
     public GameObject menuInteract;
 
@@ -73,6 +75,7 @@ public class GameManager : MonoBehaviour
     #region AWAKE CODE
     void Awake()
     {
+        playerPoints = 0; //Initialize points to show zero on start up
         temp = 5;
         if (instance == null)
         {

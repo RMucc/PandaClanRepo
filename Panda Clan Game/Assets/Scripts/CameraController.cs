@@ -12,12 +12,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] int lockVertMax;
     [SerializeField] bool invertY;
 
-    private float initialFOV;
-    [SerializeField] float timeBetweenTransition;
-    [SerializeField] float sprintFOV;
-
     float xRot;
-    public Animator camAnim;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +22,6 @@ public class CameraController : MonoBehaviour
         //Cursor Settings -Turns Visibility off and locks cursor in its start state
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        initialFOV = cam.fieldOfView;
     }
 
     // Update is called once per frame

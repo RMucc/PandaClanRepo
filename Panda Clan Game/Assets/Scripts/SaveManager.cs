@@ -23,6 +23,9 @@ public class SaveManager : MonoBehaviour
     public float stamDrain;
     public float stamRegen;
     //Gun Variables
+    [SerializeField] GunStats AR;
+    [SerializeField] GunStats SMG;
+    [SerializeField] GunStats Shotgun;
     public GameManager.BulletType bullet;
     //Next Level Bool Variables
     public bool level1;
@@ -88,6 +91,7 @@ public class SaveManager : MonoBehaviour
         }
         else
         {
+            //new WaitForSeconds(.25f);
             Debug.Log("Load Data");
             LoadData();
             Debug.Log("Set Data");
@@ -150,8 +154,18 @@ public class SaveManager : MonoBehaviour
         //Set Player Gun Variables
         GameManager.instance.playerScript.bulletType = bullet;
         Debug.Log(bullet);
-        Debug.Log(GameManager.instance.playerScript.gunList[bullet]);
-        GameManager.instance.playerScript.AddDrops(GameManager.instance.playerScript.gunList[bullet], GameManager.instance.playerScript.gunList[bullet].magazineSize);
+        if(bullet == GameManager.BulletType.AR)
+        {
+            GameManager.instance.playerScript.AddDrops(AR, 5);
+        }
+        else if(bullet == GameManager.BulletType.SMG)
+        {
+            GameManager.instance.playerScript.AddDrops(SMG, 45);
+        }
+        else if(bullet == GameManager.BulletType.Shotgun)
+        {
+            GameManager.instance.playerScript.AddDrops(Shotgun, 30);
+        }
         Debug.Log(GameManager.instance.playerScript.bulletType);
     }
 

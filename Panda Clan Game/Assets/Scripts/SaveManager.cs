@@ -156,15 +156,15 @@ public class SaveManager : MonoBehaviour
         Debug.Log(bullet);
         if(bullet == GameManager.BulletType.AR)
         {
-            GameManager.instance.playerScript.AddDrops(AR, 5);
+            GameManager.instance.playerScript.AddDrops(AR);
         }
         else if(bullet == GameManager.BulletType.SMG)
         {
-            GameManager.instance.playerScript.AddDrops(SMG, 45);
+            GameManager.instance.playerScript.AddDrops(SMG);
         }
         else if(bullet == GameManager.BulletType.Shotgun)
         {
-            GameManager.instance.playerScript.AddDrops(Shotgun, 30);
+            GameManager.instance.playerScript.AddDrops(Shotgun);
         }
         Debug.Log(GameManager.instance.playerScript.bulletType);
     }

@@ -168,6 +168,7 @@ public class buttonFunctions : MonoBehaviour
         GameManager.instance.shopKeeper.anim.SetBool("OnBuy", true);
         yield return new WaitForSeconds(.2f);
         GameManager.instance.shopKeeper.anim.SetBool("OnBuy", false);
+        Save();
     }
 
     IEnumerator CantAfford()

@@ -50,22 +50,6 @@ public class CameraController : MonoBehaviour
             xRot = Mathf.Clamp(xRot, lockVertMin, lockVertMax);
             transform.localRotation = Quaternion.Euler(xRot, 0, 0);
             transform.parent.Rotate(Vector3.up * mouseX);
-            if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift))
-            {
-                Debug.Log("W and Shift");
-                cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFOV, timeBetweenTransition);
-            }
-            else if (Input.GetKey(KeyCode.W))
-            {
-                Debug.Log("W");
-                cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, initialFOV, timeBetweenTransition);
-            }
-            else
-            {
-                Debug.Log("Idle");
-                camAnim.SetTrigger("idle");
-                cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, initialFOV, timeBetweenTransition);
-            }
         }
     }
 

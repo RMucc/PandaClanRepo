@@ -14042,6 +14042,10 @@ MonoBehaviour:
   jumpHeight: 12
   jumpMax: 2
   gravity: -45
+  cam: {fileID: 7823434160056594187}
+  camAnim: {fileID: 1335239157}
+  sprintFOV: 70
+  timeBetweenTransition: 0.25
   maxStam: 100
   dashCost: 20
   isSprinting: 0

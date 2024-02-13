@@ -29,6 +29,13 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     Coroutine sprint;
     Coroutine sprintRecover;
 
+    [Header("Player Camera Variables")]
+    [SerializeField] Camera cam;
+    public Animator camAnim;
+    [SerializeField] float sprintFOV;
+    private float initialFOV;
+    [SerializeField] float timeBetweenTransition;
+
     [Header("Player Stamina/Regen Variables")]
     public float maxStam = 100.0f;
     public float dashCost = 20.0f;
@@ -123,6 +130,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
+        initialFOV = cam.fieldOfView;
         gunList = new Dictionary<GameManager.BulletType, GunStats>();
         ARbulletsTotalR = ARbulletsTotal;
         ShotgunbulletsTotalR = ShotgunbulletsTotal;
@@ -137,7 +145,6 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         readyToShoot = true;
         isShooting = false;
         AddDrops(gunToAdd, ammoToAdd);
-        //Debug.Log("Updating Player UI");
         updatePlayerUI();
     }
 
@@ -188,6 +195,15 @@ public class RyansPlayerController : MonoBehaviour, IDamage
 
         move = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
         controller.Move(move * playerSpeed * Time.deltaTime);
+        if(!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.D))
+        {
+            camAnim.SetTrigger("idle");
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, initialFOV, timeBetweenTransition);
+        }
+        else if(Input.GetKeyDown(KeyCode.W) && Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, initialFOV, timeBetweenTransition);
+        }
         //Jump Input
         #region Jump Input
         if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
@@ -208,6 +224,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             {
                 isSprinting = true;
                 Sprinting();
+                cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFOV, timeBetweenTransition);
             }
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
@@ -215,6 +232,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             isSprinting = false;
             playerSpeed = originalPlayerSpeed;
             sprintRecover = StartCoroutine(SprintRecover());
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, initialFOV, timeBetweenTransition);
         }
         #endregion
         //Forward Dash Input
@@ -503,8 +521,8 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     }
     void Interact()
     {
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * interactDistance, Color.green);
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, interactDistance))
+        Debug.DrawRay(cam.transform.position, cam.transform.forward * interactDistance, Color.green);
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, interactDistance))
         {
             if (hit.collider.TryGetComponent<IInteractable>(out IInteractable Inter) && hit.collider.gameObject.transform != this.transform)
             {
@@ -527,7 +545,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         readyToShoot = false;
         float x = Random.Range(-gunList[bulletType].bulletSpread, gunList[bulletType].bulletSpread);
         float y = Random.Range(-gunList[bulletType].bulletSpread, gunList[bulletType].bulletSpread);
-        Vector3 direction = Camera.main.transform.forward + new Vector3(x, y, 0);
+        Vector3 direction = cam.transform.forward + new Vector3(x, y, 0);
         GameObject _bullet = Instantiate(gunList[bulletType].bullet, gunOut.transform.GetChild(0).transform.position, Quaternion.LookRotation(direction));
         Debug.DrawRay(shootPos.transform.position, direction * gunList[bulletType].bulletDistance, Color.red, 1f);
         if (Physics.Raycast(shootPos.transform.position, direction, out RaycastHit hit, gunList[bulletType].bulletDistance))

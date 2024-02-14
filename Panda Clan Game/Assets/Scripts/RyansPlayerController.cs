@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.UIElements;
+using Unity.VisualScripting;
+using System.ComponentModel;
 
 public class RyansPlayerController : MonoBehaviour, IDamage
 {
@@ -156,6 +158,11 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         if (!GameManager.instance.inShop)
         {
             stFX();
+            if (!gunList.ContainsKey(bulletType))
+            {
+                bulletType = GameManager.BulletType.SMG;
+                //AddDrops(gunToAdd, ammoToAdd);
+            }
             if (gunList[bulletType].allowButtonHold && !isShooting)
             {
                 shooting = Input.GetButton("Shoot");
@@ -200,17 +207,17 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         controller.Move(move * playerSpeed * Time.deltaTime);
         if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift))
         {
-            Debug.Log("W and Shift");
+            //Debug.Log("W and Shift");
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFOV, timeBetweenTransition);
         }
         else if (Input.GetKey(KeyCode.W))
         {
-            Debug.Log("W");
+            //Debug.Log("W");
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, initialFOV, timeBetweenTransition);
         }
         else
         {
-            Debug.Log("Idle");
+            //Debug.Log("Idle");
             camAnim.SetTrigger("idle");
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, initialFOV, timeBetweenTransition);
         }

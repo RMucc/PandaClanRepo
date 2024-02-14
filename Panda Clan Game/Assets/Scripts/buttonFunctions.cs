@@ -32,6 +32,12 @@ public class buttonFunctions : MonoBehaviour
         GameManager.instance.stateResume();
     }
 
+    public void gamestart()
+    {   //Will change later on
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GameManager.instance.stateResume();
+    }
+
     public void Quit()
     {
         Application.Quit();

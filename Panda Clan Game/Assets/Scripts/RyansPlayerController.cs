@@ -196,7 +196,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         }
 
         move = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
-        transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + (leanCurve.Evaluate(Input.GetAxis("Horizontal") + 100)));
+        //transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + (leanCurve.Evaluate(Input.GetAxis("Horizontal") + 100)));
         controller.Move(move * playerSpeed * Time.deltaTime);
         if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift))
         {

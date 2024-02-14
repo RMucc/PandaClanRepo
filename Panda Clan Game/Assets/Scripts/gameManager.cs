@@ -15,13 +15,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject reload;
     [SerializeField] GameObject stamninaVisable;
     [SerializeField] GameObject menuPause;
+    [SerializeField] GameObject menuScores;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuQuest;
     [SerializeField] GameObject level1MenuWin;
     [SerializeField] GameObject menuLose;
-    [SerializeField] GameObject test1; // OUT OF STAMINA
-    [SerializeField] GameObject test2; // UI MESSAGE 
-    [SerializeField] GameObject test3; // LOW HEALTH
+    //[SerializeField] GameObject test1;
+    //[SerializeField] GameObject test2;
+    //[SerializeField] GameObject test3;
     [SerializeField] GameObject enemyLeft;
     public TextMeshProUGUI CurrCount;
     public ShopKeepController shopKeeper;
@@ -267,30 +268,30 @@ public class GameManager : MonoBehaviour
 
     #region TEST
 
-    public void showTEST1()
-    {
-        test1.SetActive(true);
-        test2.SetActive(false);
-        test3.SetActive(false);
-    }
-    public void hideTESTS()
-    {
-        test1.SetActive(false);
-        test2.SetActive(false);
-        test3.SetActive(false);
-    }
-    public void showTEST2()
-    {
-        test1.SetActive(false);
-        test2.SetActive(true);
-        test3.SetActive(false);
-    }
-    public void showTEST3()
-    {
-        test1.SetActive(false);
-        test2.SetActive(false);
-        test3.SetActive(true);
-    }
+    //public void showTEST1()
+    //{
+    //    test1.SetActive(true);
+    //    test2.SetActive(false);
+    //    test3.SetActive(false);
+    //}
+    //public void hideTESTS()
+    //{
+    //    test1.SetActive(false);
+    //    test2.SetActive(false);
+    //    test3.SetActive(false);
+    //}
+    //public void showTEST2()
+    //{
+    //    test1.SetActive(false);
+    //    test2.SetActive(true);
+    //    test3.SetActive(false);
+    //}
+    //public void showTEST3()
+    //{
+    //    test1.SetActive(false);
+    //    test2.SetActive(false);
+    //    test3.SetActive(true);
+    //}
     #endregion
 
 

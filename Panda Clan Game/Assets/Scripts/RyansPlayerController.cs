@@ -158,9 +158,10 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         if (!GameManager.instance.inShop)
         {
             stFX();
-            if (gunList[bulletType] == null)
+            if (!gunList.ContainsKey(bulletType))
             {
-                return;
+                bulletType = GameManager.BulletType.SMG;
+                //AddDrops(gunToAdd, ammoToAdd);
             }
             if (gunList[bulletType].allowButtonHold && !isShooting)
             {
@@ -206,17 +207,17 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         controller.Move(move * playerSpeed * Time.deltaTime);
         if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift))
         {
-            Debug.Log("W and Shift");
+            //Debug.Log("W and Shift");
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFOV, timeBetweenTransition);
         }
         else if (Input.GetKey(KeyCode.W))
         {
-            Debug.Log("W");
+            //Debug.Log("W");
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, initialFOV, timeBetweenTransition);
         }
         else
         {
-            Debug.Log("Idle");
+            //Debug.Log("Idle");
             camAnim.SetTrigger("idle");
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, initialFOV, timeBetweenTransition);
         }

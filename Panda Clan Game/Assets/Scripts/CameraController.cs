@@ -5,15 +5,20 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    [SerializeField] Camera cam;
+
     [SerializeField] int sensitivity;
     [SerializeField] int lockVertMin;
     [SerializeField] int lockVertMax;
     [SerializeField] bool invertY;
+
     float xRot;
 
     // Start is called before the first frame update
     void Start()
     {
+        cam.orthographic = false;
+        cam.ResetProjectionMatrix();
         //Cursor Settings -Turns Visibility off and locks cursor in its start state
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 173592965728386790}
   - component: {fileID: 2643327467098302677}
   - component: {fileID: 5336043352205631617}
+  - component: {fileID: 6712399137843226452}
   m_Layer: 0
   m_Name: metaCrate1
   m_TagString: Untagged
@@ -26,13 +27,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8576058870768181881}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.000000053385083, y: 0.7071068, z: -0.7071068, w: 0.000000053385083}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
   m_LocalPosition: {x: -26.966, y: 1.3059417, z: -19.25}
-  m_LocalScale: {x: 2.612404, y: 2.765679, z: 2.7581096}
+  m_LocalScale: {x: 2.6124043, y: 2.7656786, z: 2.7581093}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: -180}
 --- !u!33 &2643327467098302677
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -83,3 +84,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &6712399137843226452
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8576058870768181881}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.6306823, y: 0.63068235, z: 0.80791914}
+  m_Center: {x: 0.43549863, y: 0.00000005192753, z: 0.030382954}

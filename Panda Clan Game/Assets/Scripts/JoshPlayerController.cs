@@ -9,12 +9,13 @@ using UnityEngine.UIElements;
 // can use this player if they so choose
 public class JoshPlayerController : MonoBehaviour
 {
-    /*public class PlayerController : MonoBehaviour, IDamage
+    public class PlayerController : MonoBehaviour //IDamage
     {
         #region Player Debugging
 
         #endregion
 
+        #region Player Movement Variables
         [Header("Player Movement Variables\n")]
         public CharacterController controller;
         public int HP;
@@ -26,88 +27,163 @@ public class JoshPlayerController : MonoBehaviour
         [SerializeField] float gravity;
         Coroutine sprint;
         Coroutine sprintRecover;
+        public float playerSprintSpeed;
+        [SerializeField] float playerStam;
 
-        #region Speed & Sprint Variables 
-        [Header("----- Player Speed & Sprint Settings -----")]
-        [SerializeField] float playerSpeed;
-        [SerializeField] float sprintSpeed;
-        float playerSpeedOrig;
-        bool isSprinting;
+        //Player Private Variables
+        private Vector3 playerVel;
+        private Vector3 move;
+        private Vector3 dashMove;
+        private int jumpCount;
+
+        [Header("Dashing Values\n")]
+        //Dashing Variables
+        [SerializeField] float dashSpeed;
+        [SerializeField] float dashDuration;
+        [SerializeField] float dashDebounce;
+        [SerializeField] bool isDashing;
+        private float dashCount;
+        private float originalDashDebounce;
+        [SerializeField] float dashCooldownTime;
+        private bool canDash = true;
         #endregion
 
-        #region Jump Variables 
-        [Header("----- Player Jump Settings -----")]
-        public KeyCode jumpKey = KeyCode.Space;
-        [SerializeField] int jumpMax;
-        [SerializeField] float jumpHeight;
-        [Range(-25.0f, 0)] public float gravity;
+        #region Original Values
+        [Header("Original Values\n")]
+        public int originalHP;
+        private float originalPlayerVel;
+        public float originalPlayerSpeed;
+        private int originalHealthMax;
+        private float originalPlayerStamina;
         #endregion
 
-        #region Dash 
-        [Header("----- Player Dash Settings -----")]
-        [SerializeField] float dashForce;
-        [SerializeField] float dashUpwardForce;
-        [SerializeField] float dashTime;
-        [SerializeField] int dashMax;
-        public KeyCode dashKey = KeyCode.E;
-        //private bool isdashing; //commenting out for now cause annoying warning - use this for bullet time or immunity frames 
-        private int dashCount;
+        #region Player Interact Variables
+        [Header("Player Interact Variables\n")]
+        [SerializeField] int interactDistance;
+        public int Currency = 0;
+        public Transform cameraHolderPos;
+        #endregion
+
+        #region Player Stamina/Regen Variables 
+        [Header("Player Stamina/Regen Variables")]
+        public float maxStam = 100.0f;
+        public float dashCost = 20.0f;
+        public bool isSprinting = false;
+        public bool isStamRecovered = true;
+        [Range(0, 50)] public float stamDrain = .1f;
+        [Range(0, 50)] public float stamRegen = .1f;
+        #endregion
+
+        #region Player Camera Variables
+        [Header("Player Camera Variables")]
+        [SerializeField] Camera cam;
+        public Animator camAnim;
+        [SerializeField] float sprintFOV;
+        private float initialFOV;
+        [SerializeField] float timeBetweenTransition;
         #endregion
 
         #region Gun Variables 
         [Header("----- Player Gun Settings -----")]
-        [SerializeField] List<GunStats> gunList = new List<GunStats>();
-        [SerializeField] GameObject gunModel;
+        public Dictionary<GameManager.BulletType, GunStats> gunList; [SerializeField] GameObject gunModel;
+
+        //Common Stats
         [SerializeField] int shootDamage;
         [SerializeField] float shootRate;
-        [SerializeField] int shootDist;
-        [SerializeField] int CurMag;
-        [SerializeField] int MaxMag;
-        [SerializeField] int CurAmmo;
-        [SerializeField] int MaxAmmo;
+        [SerializeField] int shootDistance;
+        int activeWeapon;
+        public GameObject gunOut;
+
+
+        //Bullet Characteristics
+        [SerializeField] float bulletSpread;
+        [SerializeField] float reloadTime;
+        [SerializeField] int bulletsPerTap;
+        [SerializeField] bool allowButtonHold;
+        [SerializeField] int magazineSize;
+        [SerializeField] int bulletsLeftInMag;
+        [SerializeField] ParticleSystem bulletHitEffect;
+        [SerializeField] GameObject bullet;
+        public GameManager.BulletType bulletType;
+        ParticleSystem EffectHolder;
+
+
+        //Shooting Positions
+        [SerializeField] Transform shootPos;
+        [SerializeField] Transform gunPosition;
+        [SerializeField] CameraController cameraController;
+
+
+        //Burst Weapon Characteristics
+        float timeBetweenShots;
+
+        //Camera Shake
+        float cameraShakeDuration;
+        float cameraShakeMagnitude;
+
+        //Enemy Visual Damage
+        [SerializeField] float popUpPosRand;
+        [SerializeField] GameObject DamagePopUp;
+
+        //Shooting Bools
+        bool readyToShoot;
+        bool reloading;
+        bool shooting;
         #endregion
 
-        Vector3 move;
-        Vector3 playerVel;
-        public bool groundedPlayer;
-        int jumpCount;
+        #region Player Critical Damage Variables
+        [Header("Player Critical Damage Variables\n")]
+        [SerializeField] bool useCrit;
+        [SerializeField] int critRate; // The higher this number is the lower the crit chance since it's going to be based off of a random range of 1 to this int.
+        [SerializeField] int critMultiplier; //The higher this number the lower the crit damage applied will be. Will crash if equal to 0.
+        bool solveCrit;
+        int damageHolder;
+        #endregion
+
+        #region Player Total Ammo Variables
+        [Header("Player Total Ammo Variables\n")]
+        [SerializeField] int ARbulletsTotal;
+        [SerializeField] int ShotgunbulletsTotal;
+        [SerializeField] int SMGbulletsTotal;
+        float ARbulletsTotalR;       //These are needed so I can use division for fillamount
+        float ShotgunbulletsTotalR;  //These are needed so I can use division for fillamount
+        float SMGbulletsTotalR;      //These are needed so I can use division for fillamount
+        #endregion
+
+        #region Bool Values
+        [Header("Bool Values\n")]
+        bool groundedPlayer;
         bool isShooting;
-        int HPOrig;
-        int selectedGun;
-
-        float gravityCurr;
-        float startJumpHeight;
-
-        bool isFlashing;
         bool magIsEmpty;
-
         bool isReloading;
-
-
+        bool isFlashing;
+        #endregion
 
         // Start is called before the first frame update 
         void Start()
         {
-            HPOrig = HP;
-            playerSpeedOrig = playerSpeed;
-            gravityCurr = gravity;
-            startJumpHeight = jumpHeight;
-            // wip 
-            //MaxPistolAmmo = PistolAmmoCapacity;
-            //MaxPistolMag = PistolMagCapacity;
-            //CurrPistolAmmo = MaxPistolAmmo;
-            //CurrPistolMag = MaxPistolMag;
-            //updateAmmoText();
-            // wip
-
-            respawn();  // moved down to bottom of start.  if UI doesn't exist in scene player original speed is not set
-            canTP = safeTP.canTP;
+            //On Start this is what is set up at the beginning of the game
+            initialFOV = cam.fieldOfView;
+            ARbulletsTotalR = ARbulletsTotal;
+            ShotgunbulletsTotalR = ShotgunbulletsTotal;
+            SMGbulletsTotalR = SMGbulletsTotal;
+            originalHealthMax = healthMax;
+            originalHP = HP;
+            currHealth = HP;
+            originalPlayerSpeed = playerSpeed;
+            playerStam = maxStam;
+            originalPlayerStamina = playerStam;
+            originalDashDebounce = dashDebounce;
+            readyToShoot = true;
+            isShooting = false;
+            //AddDrops(gunToAdd, ammoToAdd);
+            //updatePlayerUI();
         }
 
         // Update is called once per frame 
         void Update()
         {
-            if (!GameManager.instance.isPaused)
+            /*if (!GameManager.instance.isPaused)
             {
                 movement();
                 TPCheck();
@@ -131,9 +207,11 @@ public class JoshPlayerController : MonoBehaviour
                     }
 
                 }
-            }
-        }
+            }*/
 
+
+        }
+        /*
         void movement()
         {
             move = Input.GetAxis("Horizontal") * transform.right
@@ -482,6 +560,8 @@ public class JoshPlayerController : MonoBehaviour
             gravity = gravityCurr;
             jumpHeight = startJumpHeight;
         }
-    }*/
+
+        */
+    }
 
 }

@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuQuest;
     [SerializeField] GameObject level1MenuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] GameObject menuMain;
     //[SerializeField] GameObject test1;
     //[SerializeField] GameObject test2;
     //[SerializeField] GameObject test3;

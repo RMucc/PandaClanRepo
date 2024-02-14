@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.UIElements;
+using Unity.VisualScripting;
+using System.ComponentModel;
 
 public class RyansPlayerController : MonoBehaviour, IDamage
 {
@@ -156,6 +158,10 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         if (!GameManager.instance.inShop)
         {
             stFX();
+            if (gunList[bulletType] == null)
+            {
+                return;
+            }
             if (gunList[bulletType].allowButtonHold && !isShooting)
             {
                 shooting = Input.GetButton("Shoot");

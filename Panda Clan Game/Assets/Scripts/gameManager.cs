@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuQuest;
     [SerializeField] GameObject level1MenuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] GameObject menuStart;
     //[SerializeField] GameObject test1;
     //[SerializeField] GameObject test2;
     //[SerializeField] GameObject test3;
@@ -76,6 +77,8 @@ public class GameManager : MonoBehaviour
     #region AWAKE CODE
     void Awake()
     {
+
+
         playerPoints = 0; //Initialize points to show zero on start up
         temp = 5;
         if (instance == null)

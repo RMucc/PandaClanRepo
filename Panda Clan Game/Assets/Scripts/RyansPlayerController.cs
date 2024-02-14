@@ -16,6 +16,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     [SerializeField] int interactDistance;
     public int Currency = 0;
     public Transform cameraHolderPos;
+
     [Header("Player Movement Variables\n")]
     //Player Movement Variables
     public CharacterController controller;
@@ -26,6 +27,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     [SerializeField] float jumpHeight;
     [SerializeField] float jumpMax;
     [SerializeField] float gravity;
+    [SerializeField] AnimationCurve leanCurve;
     Coroutine sprint;
     Coroutine sprintRecover;
 
@@ -187,6 +189,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         }
 
         move = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
+        transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + (leanCurve.Evaluate(Input.GetAxis("Horizontal") + 100)));
         controller.Move(move * playerSpeed * Time.deltaTime);
         //Jump Input
         #region Jump Input

@@ -5453,7 +5453,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToSpawn:
   - {fileID: 8687424609967327632, guid: de03c17f5dfcddc43a3a69fd09b91177, type: 3}
-  - {fileID: 4240346518832343959, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+  - {fileID: 2851117764573291377, guid: a30b5470b44bc1a4e82465c806bcaf8f, type: 3}
   - {fileID: 2236138064682025148, guid: 063c27812b484d34fac3def3548f2c11, type: 3}
   timeBetweenSpawns: 1
   spawnPos:

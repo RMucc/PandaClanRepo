@@ -649,7 +649,7 @@ public class JoshPlayerController : MonoBehaviour, IDamage
     #region UI 
     public void updatePlayerUI(bool showInteractNoti = false)
     {
-        if (GameManager.instance != null)
+        if (GameManager.instance != null && SaveManager.instance != null)
         {
             if (showInteractNoti)
                 GameManager.instance.menuInteract.SetActive(true);
@@ -668,7 +668,7 @@ public class JoshPlayerController : MonoBehaviour, IDamage
         }
         else
         {
-            Debug.LogError("GameManager.instance is null! Ensure GameManager is properly initialized.");
+            Debug.LogError("GameManager.instance or SaveManager.instance is null! Ensure they are in the scene");
         }
     }
 

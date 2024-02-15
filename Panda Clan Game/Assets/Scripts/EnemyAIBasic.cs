@@ -9,12 +9,11 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] Renderer model;
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator anim;
-    [SerializeField] LineRenderer lazerSight;
     [SerializeField] Transform shootPos; //Position for him to shoot from
     [SerializeField] Transform headPos;
 
     [Header("----- Enemy Stats -----")]
-    [Range(1, 10)][SerializeField] int HP;
+    [Range(1, 200)][SerializeField] int HP;
     [SerializeField] int fov;
     [SerializeField] int fovshoot;
     [SerializeField] int targetFaceSpeed;
@@ -134,8 +133,6 @@ public class enemyAI : MonoBehaviour, IDamage
         HP -= amount;
         agent.SetDestination(GameManager.instance.player.transform.position);
 
-        StartCoroutine(flashRed());
-
         if (HP <= 0)
         {
             GameManager.instance.updateGameGoal(-1);
@@ -143,17 +140,6 @@ public class enemyAI : MonoBehaviour, IDamage
         }
     }
 
-    IEnumerator flashRed()
-    {
-        lazerSight.enabled = true;
-        lazerSight.SetPosition(0, shootPos.position);
-        lazerSight.SetPosition(1, GameManager.instance.player.transform.position);
-        model.material.color = Color.red;
-        yield return new WaitForSeconds(0.1f);
-        model.material.color = Color.white;
-        lazerSight.enabled = false;
-        isShooting = false;
-    }
 
     private void OnTriggerEnter(Collider other)
     {

@@ -186,7 +186,7 @@ public class JoshPlayerController : MonoBehaviour, IDamage
     // Update is called once per frame 
     void Update()
     {
-        if (!GameManager.instance.inShop)
+        if (GameManager.instance != null && !GameManager.instance.inShop)
         {
             stFX();
             if (!gunList.ContainsKey(bulletType))
@@ -649,27 +649,29 @@ public class JoshPlayerController : MonoBehaviour, IDamage
     #region UI 
     public void updatePlayerUI(bool showInteractNoti = false)
     {
-        if (showInteractNoti)
+        if (GameManager.instance != null)
         {
-            GameManager.instance.menuInteract.SetActive(true);
+            if (showInteractNoti)
+                GameManager.instance.menuInteract.SetActive(true);
+            else
+                GameManager.instance.menuInteract.SetActive(false);
+
+            try // for debugging purposes
+            {
+                GameManager.instance.HPBar.fillAmount = (float)HP / originalHP;
+                GameManager.instance.AMMOBar.fillAmount = gunList[bulletType].bulletsLeftInMag / (float)gunList[bulletType].magazineSize;
+            }
+            catch (System.Exception e)
+            {
+                print("error : missing HPBar");
+            }
         }
         else
         {
-            GameManager.instance.menuInteract.SetActive(false);
-        }
-        try // for debugging purposes
-        {
-            GameManager.instance.HPBar.fillAmount = (float)HP / originalHP;
-            GameManager.instance.AMMOBar.fillAmount = gunList[bulletType].bulletsLeftInMag / (float)gunList[bulletType].magazineSize;
-
-
-
-        }
-        catch (System.Exception e)
-        {
-            print("error : missing HPBar");
+            Debug.LogError("GameManager.instance is null! Ensure GameManager is properly initialized.");
         }
     }
+
     public void stUpdate()
     {
 

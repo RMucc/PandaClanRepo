@@ -927,7 +927,7 @@ MonoBehaviour:
   shootPos: {fileID: 9069482512635317320}
   shootRate: 1
   gun: {fileID: 11400000, guid: 9cdfbf8351e13cd44b51e9059de153e2, type: 2}
-  effectGameGoal: 0
+  effectGameGoal: 1
   AmmoAddedOnDeath: 0
   playerFaceSpeed: 100
   bulletSpread: 2

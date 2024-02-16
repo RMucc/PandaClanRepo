@@ -4926,10 +4926,10 @@ MonoBehaviour:
   reload: {fileID: 7048678129812433692}
   stamninaVisable: {fileID: 608678979738744599}
   menuPause: {fileID: 5732243668597029823}
-  menuScores: {fileID: 3294523680296045964}
+  menuScores: {fileID: 0}
   menuWin: {fileID: 6703908020812874568}
   menuQuest: {fileID: 5906120729815505372, guid: 386584d389396d145b2f8750fa99bf38, type: 3}
-  level1MenuWin: {fileID: 2572799131719730613}
+  levelMenuWin: {fileID: 2572799131719730613}
   menuLose: {fileID: 7128515560032646281}
   menuMain: {fileID: 2000289250690463182}
   enemyLeft: {fileID: 0}
@@ -4954,6 +4954,8 @@ MonoBehaviour:
   isPaused: 0
   level1: 0
   level2: 0
+  level3: 0
+  level4: 0
   enemyCount: 0
   enemyGoal: 0
   arrowToNext: {fileID: 246949896251263255, guid: ccf7981b0fc685e4b8ad8986d26fa4ac, type: 3}
@@ -5200,7 +5202,7 @@ GameObject:
   - component: {fileID: 4056163173048382331}
   - component: {fileID: 1715946976759886990}
   m_Layer: 5
-  m_Name: Level 1 Win Menu
+  m_Name: Level Win Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

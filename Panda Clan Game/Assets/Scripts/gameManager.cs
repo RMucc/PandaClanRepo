@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject menuScores;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuQuest;
-    [SerializeField] GameObject level1MenuWin;
+    [SerializeField] GameObject levelMenuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuMain;
     //[SerializeField] GameObject test1;
@@ -56,6 +56,8 @@ public class GameManager : MonoBehaviour
     public bool isPaused;
     public bool level1;
     public bool level2;
+    public bool level3;
+    public bool level4;
     //public bool isNotLevel1;
     //public bool levelOne;
     //public bool levelTwo;
@@ -134,6 +136,8 @@ public class GameManager : MonoBehaviour
             }
             level1 = SaveManager.instance.level1;
             level2 = SaveManager.instance.level2;
+            level3 = SaveManager.instance.level3;
+            level4 = SaveManager.instance.level4;
             new WaitForSeconds(1);
             temp -= 1;
         }
@@ -174,21 +178,58 @@ public class GameManager : MonoBehaviour
                 {
                     shopKeeper.TurnOnWave();
                 }
-                menuActive = level1MenuWin;
+                menuActive = levelMenuWin;
                 menuActive.SetActive(true);
             }
             catch (System.Exception e)
             {
-                Debug.LogWarning("error: level1MenuWin not found");
+                Debug.LogWarning("error: levelMenuWin not found");
             }
         }
-        //Should pull up the win menu (No level after this so give option to restart or leave)
-        if (enemyGoal <= 0 && level2 == true)
+        //Should pull up a win menu that we can close out of so that we can move on to the next level
+        else if (enemyGoal <= 0 && level2 == true)
+        {
+            statePaused();
+            try
+            {
+                /*if (arrowToNext && shopKeeper)
+                {
+                    shopKeeper.TurnOnWave();
+                }*/
+                menuActive = levelMenuWin;
+                menuActive.SetActive(true);
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogWarning("error: levelMenuWin not found");
+            }
+        }
+        //Should pull up a win menu that we can close out of so that we can move on to the next level
+        else if (enemyGoal <= 0 && level3 == true)
+        {
+            statePaused();
+            try
+            {
+                /*if (arrowToNext && shopKeeper)
+                {
+                    shopKeeper.TurnOnWave();
+                }*/
+                menuActive = levelMenuWin;
+                menuActive.SetActive(true);
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogWarning("error: levelMenuWin not found");
+            }
+        }
+        //Should pull up a win menu that we can close out of so that we can move on to the next level
+        else if (enemyGoal <= 0 && level4 == true)
         {
             statePaused();
             menuActive = menuWin;
             menuActive.SetActive(true);
         }
+        //Should pull up the win menu (No level after this so give option to restart or leave)
     }
     public void updateEnemyAmount(int amount)
     {
@@ -197,10 +238,45 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region Update Scene Bool
+    public void CheckScene()
+    {
+        if (level1 == true)
+        {
+            CallBeforeLoadingScene2();
+        }
+        else if (level2 == true)
+        {
+            CallBeforeLoadingScene3();
+        }
+        else if (level3 == true)
+        {
+            CallBeforeLoadingScene4();
+        }
+        else if (level4 == true)
+        {
+
+        }
+    }
     public void CallBeforeLoadingScene2()
     {
         SaveManager.instance.level1 = false;
         SaveManager.instance.level2 = true;
+        SaveManager.instance.level3 = false;
+        SaveManager.instance.level4 = false;
+    }
+    public void CallBeforeLoadingScene3()
+    {
+        SaveManager.instance.level1 = false;
+        SaveManager.instance.level2 = false;
+        SaveManager.instance.level3 = true;
+        SaveManager.instance.level4 = false;
+    }
+    public void CallBeforeLoadingScene4()
+    {
+        SaveManager.instance.level1 = false;
+        SaveManager.instance.level2 = false;
+        SaveManager.instance.level3 = false;
+        SaveManager.instance.level4 = true;
     }
     #endregion
 

@@ -49,6 +49,7 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
+        agent.SetDestination(GameManager.instance.player.transform.position);
         StartCoroutine(FlashRed());
         if (HP <= 0 && alive)
         {

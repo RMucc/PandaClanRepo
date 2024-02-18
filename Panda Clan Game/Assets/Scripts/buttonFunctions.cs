@@ -15,7 +15,7 @@ public class buttonFunctions : MonoBehaviour
     [SerializeField] GunStats AK;
     [SerializeField] GunStats SMG;
     [SerializeField] GunStats shotgun;
-
+    public HighscoreTable _topScore;
 
 
     public RyansPlayerController playerScript;
@@ -30,6 +30,11 @@ public class buttonFunctions : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         GameManager.instance.stateResume();
+    }
+
+    public void scoreEnter()
+    {
+        
     }
 
     public void gamestart()

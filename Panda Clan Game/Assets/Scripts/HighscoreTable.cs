@@ -10,10 +10,11 @@ public class HighscoreTable : MonoBehaviour
     private Transform entryTemplate;
     private List<HighscoreEntry> highscoreEntryList;
     private List<Transform> highscoreEntryTransformList;
-
+    
+    //Make button that accepts highscore and restarts game
     private void Awake()
     {
-        //AddHighscoreEntry(1000, "JSG"); Test score
+        AddHighscoreEntry(1001, "JSG");
 
         entryContainer = transform.Find("highscoreEntryContainer");
         entryTemplate = entryContainer.Find("highscoreEntryTemplate");
@@ -86,7 +87,7 @@ public class HighscoreTable : MonoBehaviour
 
     }
 
-    private void AddHighscoreEntry(int score, string name) { 
+    public void AddHighscoreEntry(int score, string name) { 
         HighscoreEntry highscoreEntry= new HighscoreEntry { score= score, name = name };
 
         string jsonString = PlayerPrefs.GetString("highscoreTable");
@@ -103,6 +104,8 @@ public class HighscoreTable : MonoBehaviour
     {
         public List<HighscoreEntry> highscoreEntryList;
     }
+
+    
 
 
     [System.Serializable]

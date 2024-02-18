@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Windows;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject levelMenuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuMain;
+    [SerializeField] GameObject menuEnter;
     //[SerializeField] GameObject test1;
     //[SerializeField] GameObject test2;
     //[SerializeField] GameObject test3;
@@ -29,7 +31,7 @@ public class GameManager : MonoBehaviour
     public ShopKeepController shopKeeper;
     public GameObject menuShop;
     public CanvasGroup mainInterface;
-
+    
     [Header("----- Point Tracker -----")]
     public int playerPoints;
 
@@ -51,6 +53,8 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public RyansPlayerController playerScript;
     public GameObject playerSpawnPos;
+    public HighscoreTable topScore;
+    private string nameInput;
     //public GameObject nextLevel2;
 
     public bool isPaused;
@@ -78,7 +82,7 @@ public class GameManager : MonoBehaviour
 
     #region AWAKE CODE
     void Awake()
-    {
+    {   
         playerPoints = 0; //Initialize points to show zero on start up
         temp = 5;
         if (instance == null)
@@ -120,7 +124,7 @@ public class GameManager : MonoBehaviour
     #region UPDATE CODE
     void Update()
     {
-        if (Input.GetButtonDown("Cancel") && !menuActive)
+        if (UnityEngine.Input.GetButtonDown("Cancel") && !menuActive)
         {
             statePaused();
             menuActive = menuPause;
@@ -342,6 +346,11 @@ public class GameManager : MonoBehaviour
         menuActive.SetActive(true);
     }
 
+    //public void ReadStringInput(string s)
+    //{
+    //    
+    //    topScore.AddHighscoreEntry(playerPoints, s);
+    //}
 
     #region TEST
 

@@ -14,7 +14,7 @@ public class HighscoreTable : MonoBehaviour
     //Make button that accepts highscore and restarts game
     private void Awake()
     {
-        AddHighscoreEntry(1001, "JSG");
+        //AddHighscoreEntry(1001, "JSG");
 
         entryContainer = transform.Find("highscoreEntryContainer");
         entryTemplate = entryContainer.Find("highscoreEntryTemplate");

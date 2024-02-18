@@ -8,17 +8,19 @@ public class HighscoreTable : MonoBehaviour
 {
     private Transform entryContainer;
     private Transform entryTemplate;
-    //private List<HighscoreEntry> highscoreEntryList;
+    private List<HighscoreEntry> highscoreEntryList;
     private List<Transform> highscoreEntryTransformList;
 
     private void Awake()
     {
+        //AddHighscoreEntry(1000, "JSG"); Test score
+
         entryContainer = transform.Find("highscoreEntryContainer");
         entryTemplate = entryContainer.Find("highscoreEntryTemplate");
 
         entryTemplate.gameObject.SetActive(false);
 
-        AddHighscoreEntry(100000, "GAM");
+        
 
         string jsonString = PlayerPrefs.GetString("highscoreTable");
         Highscores highscores = JsonUtility.FromJson<Highscores>(jsonString);
@@ -41,7 +43,13 @@ public class HighscoreTable : MonoBehaviour
             CreateHighscoreEntryTransformation(highscoreEntry, entryContainer, highscoreEntryTransformList);
         }
 
+        //Highscores highscores = new Highscores { highscoreEntryList = highscoreEntryList };
+        //string json = JsonUtility.ToJson(highscores);
+        //PlayerPrefs.SetString("highscoreTable", json);
+        //PlayerPrefs.Save();
+        //Debug.Log(PlayerPrefs.GetString("highscoreTable"));
 
+       
     }
 
     private void CreateHighscoreEntryTransformation(HighscoreEntry highscoreEntry, Transform container, List<Transform> transformList)

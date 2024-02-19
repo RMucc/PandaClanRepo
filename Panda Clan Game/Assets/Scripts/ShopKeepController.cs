@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
@@ -27,6 +28,7 @@ public class ShopKeepController : InteractableClass
         transform.SetPositionAndRotation(pos1.position, pos1.rotation);
         interactPhase = interactPhases.secondToEnd;
         InteractTaskOpen = true;
+        GameManager.instance.OnLevel1Finished += TurnOnWave;
     }
 
 
@@ -38,65 +40,47 @@ public class ShopKeepController : InteractableClass
                 IntiateMission();
                 break;
             case interactPhases.firstToEnd:
-                OpenStore();
+                InstantiateStore();
                 break;
             case interactPhases.end:
-                inStore();
+                OpenStore();
                 return;
         }
     }
-    void IntiateMission() // Notify the player to kill all enemies first
+    public void IntiateMission() // Notify the player to kill all enemies first
     {
         if (anim.GetBool("EnemiesRemain"))
         {
-            Debug.Log("Kill all the enemies first");
             InteractTaskOpen = false;
             Instantiate(questNoti, GameManager.instance.questPos.position, GameManager.instance.questPos.rotation, GameManager.instance.transform.parent);
             StartCoroutine(WaitSeconds(5));
         }
     }
 
-    public void TurnOnWave() // Get player's attention after enemys killed
+    public void TurnOnWave(object sender, EventArgs e) // Get player's attention after enemys killed
     {
         anim.SetBool("EnemiesRemain", false);
-        currentArrow = Instantiate(GameManager.instance.arrowToNext, ArrowDownPos.position, Quaternion.identity);
-        if (!currentArrow.activeSelf) { currentArrow.SetActive(true); }
+        GameManager.instance.InstantiateArrow(ArrowDownPos);
         InteractTaskOpen = true;
         interactPhase--;
     }
 
 
-    void OpenStore() // Places shopkeep in position to have the store be avaible for the player
+    void InstantiateStore() // Places shopkeep in position to have the store be avaible for the player
     {
-        Destroy(currentArrow);
-        anim.SetBool("playerInteract", true); // when dialogue is implemented
+        GameManager.instance.InstantiateArrow(null, false);
         anim.SetBool("ShopMade", true);
-        timeElapsed = 0;
         transform.SetPositionAndRotation(pos2.position, pos2.rotation);
-        currentArrow = Instantiate(GameManager.instance.arrowToNext, ArrowDownPos.position, Quaternion.identity);
-        if (!currentArrow.activeSelf) { currentArrow.SetActive(true); }
-        Destroy(BagsToDestroy);
+        GameManager.instance.InstantiateArrow(ArrowDownPos);
+        if(BagsToDestroy) { Destroy(BagsToDestroy); }
         interactPhase--;
-        do
-        {
-            timeElapsed += Time.deltaTime;
-        } while (timeElapsed >= 1f);
         anim.SetBool("playerInteract", false);
     }
 
-    void inStore() // Opening the store menu
+    void OpenStore() // Opening the store menu
     {
-        if (currentArrow) { Destroy(currentArrow); }
         InteractTaskOpen = false;
-        GameManager.instance.OpenShopMenu();
-        timeElapsed = 0;
-        Camera.main.transform.parent = inShopCamPos;
-        Camera.main.transform.position = Vector3.zero;
-        Camera.main.transform.rotation = Quaternion.Euler(0f, 80f, 0f);
-        GameManager.instance.mainInterface.alpha = 0f;
-        //GameManager.instance.playerScript.controller.enabled = false;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.Confined;
+        GameManager.instance.OpenOrCloseShopMenu(true, inShopCamPos);
     }
 
     IEnumerator WaitSeconds(int seconds)

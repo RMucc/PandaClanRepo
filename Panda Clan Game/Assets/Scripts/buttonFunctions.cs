@@ -176,19 +176,16 @@ public class buttonFunctions : MonoBehaviour
     {
         if (GameManager.instance.menuShop.activeSelf)
         {
-            GameManager.instance.menuShop.SetActive(false);
-            GameManager.instance.inShop = false;
-            Camera.main.transform.parent = GameManager.instance.player.transform;
-            Camera.main.transform.SetPositionAndRotation(GameManager.instance.playerScript.cameraHolderPos.position, GameManager.instance.playerScript.cameraHolderPos.rotation);
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-            GameManager.instance.mainInterface.alpha = 1f;
-            GameManager.instance.playerScript.gunOut.SetActive(true);
-            //GameManager.instance.playerScript.controller.enabled = true;
-            GameManager.instance.shopKeeper.InteractTaskOpen = true;
-            GameManager.instance.shopKeeper.anim.SetBool("", true);
+            GameManager.instance.OpenOrCloseShopMenu(false);
+
+            //Camera.main.transform.parent = GameManager.instance.player.transform;
+            //Camera.main.transform.SetPositionAndRotation(GameManager.instance.playerScript.cameraHolderPos.position, GameManager.instance.playerScript.cameraHolderPos.rotation);
+            //Cursor.visible = false;
+            //Cursor.lockState = CursorLockMode.Locked;
+            //GameManager.instance.mainInterface.alpha = 1f;
+            //GameManager.instance.playerScript.gunOut.SetActive(true);
+            //GameManager.instance.shopKeeper.InteractTaskOpen = true;
         }
-        else { StartCoroutine(CantAfford()); }
     }
 
     IEnumerator SucessfulPurchase()

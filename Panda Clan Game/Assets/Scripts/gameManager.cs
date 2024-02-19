@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Windows;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -31,16 +32,18 @@ public class GameManager : MonoBehaviour
     public ShopKeepController shopKeeper;
     public GameObject menuShop;
     public CanvasGroup mainInterface;
-    
+    public event EventHandler OnLevel1Finished;
+    GameObject currentArrow;
+
     [Header("----- Point Tracker -----")]
     public int playerPoints;
+
 
     [Header("----- ShopKeeperVariables -----")]
 
     public Transform questPos;
     public bool inShop = false;
 
-    //public Text totalLives;
     [SerializeField] GameObject LivesObj;
     public Text waveCount;
     public Text weapSwitch;
@@ -82,7 +85,7 @@ public class GameManager : MonoBehaviour
 
     #region AWAKE CODE
     void Awake()
-    {   
+    {
         playerPoints = 0; //Initialize points to show zero on start up
         temp = 5;
         if (instance == null)
@@ -168,6 +171,17 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
+
+    public void InstantiateArrow(Transform transform = null, bool turnOn = true)
+    {
+        if (currentArrow) { Destroy(currentArrow); }
+        if (turnOn)
+        {
+            currentArrow = Instantiate(arrowToNext, transform.position, Quaternion.identity);
+            if (!currentArrow.activeSelf) { currentArrow.SetActive(true); }
+        }
+    }
+
     #region GAME GOAL
     public void updateGameGoal(int amount)
     {
@@ -178,10 +192,7 @@ public class GameManager : MonoBehaviour
             statePaused();
             try
             {
-                if (arrowToNext && shopKeeper)
-                {
-                    shopKeeper.TurnOnWave();
-                }
+                OnLevel1Finished?.Invoke(this, EventArgs.Empty);
                 menuActive = levelMenuWin;
                 menuActive.SetActive(true);
             }
@@ -338,12 +349,30 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    public void OpenShopMenu()
+    public void OpenOrCloseShopMenu(bool Open, Transform inShopCamPos = null)
     {
-        CurrCount.text = playerScript.Currency.ToString();
-        inShop = true;
         menuActive = menuShop;
-        menuActive.SetActive(true);
+        menuActive.SetActive(Open);
+        inShop = Open;
+        Cursor.visible = Open;
+        if (Open)
+        {
+            mainInterface.alpha = 0f;
+            if (currentArrow) { InstantiateArrow(null, false); }
+            CurrCount.text = playerScript.Currency.ToString();
+            Cursor.lockState = CursorLockMode.Confined;
+            Camera.main.transform.parent = inShopCamPos;
+            Camera.main.transform.position = Vector3.zero;
+            Camera.main.transform.rotation = Quaternion.Euler(0f, 80f, 0f);
+        }
+        else
+        {
+            mainInterface.alpha = 1f;
+            Camera.main.transform.parent = player.transform;
+            Camera.main.transform.SetPositionAndRotation(playerScript.cameraHolderPos.position, playerScript.cameraHolderPos.rotation);
+            Cursor.lockState = CursorLockMode.Locked;
+            shopKeeper.InteractTaskOpen = true;
+        }
     }
 
     //public void ReadStringInput(string s)

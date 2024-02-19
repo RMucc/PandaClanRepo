@@ -2035,41 +2035,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3626994719864149076, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -0.00004386902
-      objectReference: {fileID: 0}
-    - target: {fileID: 4441250272787154124, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4441250272787154124, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4441250272787154124, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.76369655
+    - target: {fileID: 6271003788589176158, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
+      propertyPath: m_Name
+      value: MiniMap
       objectReference: {fileID: 0}
     - target: {fileID: 7483503311532101132, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
       propertyPath: m_Name
       value: UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 7842605343560813581, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9077601033217747996, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9077601033217747996, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9077601033217747996, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: -17
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13887,14 +13859,6 @@ PrefabInstance:
     - target: {fileID: 3986848277775222772, guid: ae2d54a112c67544d9e945049f3710fc, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 4835735788126555325, guid: ae2d54a112c67544d9e945049f3710fc, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8639433583950129636, guid: ae2d54a112c67544d9e945049f3710fc, type: 3}
-      propertyPath: Currency
-      value: 600
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

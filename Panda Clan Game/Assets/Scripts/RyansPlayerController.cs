@@ -54,26 +54,11 @@ public class RyansPlayerController : MonoBehaviour, IDamage
 
     [Header("Player Gun Variables\n")]
     //Player Gun Variables
-    [SerializeField] int shootDamage;
-    [SerializeField] float shootRate;
-    [SerializeField] int shootDistance;
-    [SerializeField] float bulletSpread;
-    [SerializeField] float reloadTime;
-    [SerializeField] int bulletsPerTap;
-    [SerializeField] bool allowButtonHold;
-    [SerializeField] int magazineSize;
-    [SerializeField] int bulletsLeftInMag;
-    [SerializeField] ParticleSystem bulletHitEffect;
-    [SerializeField] GameObject bullet;
     [SerializeField] Transform shootPos;
     [SerializeField] Transform gunPosition;
     [SerializeField] CameraController cameraController;
     public GameManager.BulletType bulletType;
     ParticleSystem EffectHolder;
-    float timeBetweenShots; // for burst weapons
-    float cameraShakeDuration; // for camera shake
-    float cameraShakeMagnitude; // for camera shake
-    //int activeWeapon;
     public GameObject gunOut;
 
     [Header("Player Critical Damage Variables\n")]
@@ -596,7 +581,6 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 CreatePopUp(hit);
             }
         }
-        //StartCoroutine(cameraController.Shake(cameraShakeDuration, cameraShakeMagnitude)); For potential future camera shake
         Destroy(_bullet, gunList[bulletType].BulletExistanceTime); // Destorying the "bullet" after a certain amount of time dependent on the variable in the gunStats variable
         yield return new WaitForSeconds(gunList[bulletType].shootRate);
         isShooting = false;

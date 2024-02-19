@@ -49,6 +49,7 @@ public class CameraController : MonoBehaviour
 
     public IEnumerator Shake(float duration, float magntiude)
     {
+        Debug.Log("Shake");
         Vector3 originalPos = transform.localPosition;
         float elapsed = 0f;
 

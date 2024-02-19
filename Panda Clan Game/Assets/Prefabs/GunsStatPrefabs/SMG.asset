@@ -23,9 +23,9 @@ MonoBehaviour:
   bulletsPerTap: 1
   allowButtonHold: 1
   magazineSize: 50
-  bulletsLeftInMag: 50
-  cameraShakeDuration: 0
-  cameraShakeMagnitude: 0
+  bulletsLeftInMag: 25
+  cameraShakeDuration: 1
+  cameraShakeMagnitude: 5
   bulletHitEffect: {fileID: 4795005520586895817, guid: 0b5937c7f85d8d54fa5dfa2258d0d6b3, type: 3}
   bullet: {fileID: 8262477620160788249, guid: e7b64788644515747a7b718564f4f9c0, type: 3}
   bulletType: 2

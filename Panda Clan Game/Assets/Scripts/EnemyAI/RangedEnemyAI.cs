@@ -15,6 +15,7 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
     [SerializeField] int playerFaceSpeed;
     [SerializeField] float bulletSpread;
     [SerializeField] GameObject headPos;
+    [SerializeField] Animator anim;
 
     Vector3 playerDir;
     bool isShooting;
@@ -25,6 +26,8 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
         agent.SetDestination(GameManager.instance.player.transform.position);
         if (!isShooting)
         {
+            anim.SetFloat("Speed", agent.velocity.normalized.magnitude); //magnitude because we want the animations to be simplified for any direction
+            
             StartCoroutine(Shoot());
         }
 

@@ -482,7 +482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8639433583950129636, guid: f3d8d0892b708484a9be34bfb5807563, type: 3}
       propertyPath: invul
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10775,10 +10775,10 @@ Animator:
   m_GameObject: {fileID: 5524567102159661743}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 535511bb156e7f54f83f305d96a1c4ce, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f724347a9fc2b5c4d87cc926b91f85cf, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -11828,8 +11828,8 @@ MonoBehaviour:
   model: {fileID: 7836256143486158937}
   agent: {fileID: 3953202203410019370}
   healthUI: {fileID: 8749384981918218757}
-  HP: 500
-  origHP: 500
+  HP: 100
+  origHP: 100
   alive: 1
   dropItemList: []
   itemPotentialCountToDrop: 0
@@ -11843,6 +11843,7 @@ MonoBehaviour:
   playerFaceSpeed: 600
   bulletSpread: 0
   headPos: {fileID: 5043056611554168789}
+  anim: {fileID: 6838624489579080581}
 --- !u!1 &8263186076021105057
 GameObject:
   m_ObjectHideFlags: 0
@@ -11976,9 +11977,9 @@ MonoBehaviour:
   model: {fileID: 2863589650272902397}
   agent: {fileID: 2152881383680000113}
   healthUI: {fileID: 8526359828046848812}
-  HP: 200
-  origHP: 200
-  alive: 0
+  HP: 1
+  origHP: 1
+  alive: 1
   dropItemList: []
   itemPotentialCountToDrop: 0
   stored: {r: 0, g: 0, b: 0, a: 0}

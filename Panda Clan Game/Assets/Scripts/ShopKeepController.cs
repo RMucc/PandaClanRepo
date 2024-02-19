@@ -90,16 +90,10 @@ public class ShopKeepController : InteractableClass
         InteractTaskOpen = false;
         GameManager.instance.OpenShopMenu();
         timeElapsed = 0;
-        Camera.main.transform.parent = transform.parent;
-        do
-        {
-            timeElapsed += Time.deltaTime;
-            float percentageComplete = timeElapsed / toPositionDuration;
-            Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, inShopCamPos.position, percentageComplete);
-            Camera.main.transform.rotation = Quaternion.Lerp(Camera.main.transform.rotation, inShopCamPos.rotation, percentageComplete);
-        } while (Camera.main.transform.position != inShopCamPos.position);
+        Camera.main.transform.parent = inShopCamPos;
+        Camera.main.transform.position = Vector3.zero;
+        Camera.main.transform.rotation = Quaternion.Euler(0f, 80f, 0f);
         GameManager.instance.mainInterface.alpha = 0f;
-        GameManager.instance.playerScript.gunOut.SetActive(false);
         //GameManager.instance.playerScript.controller.enabled = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;

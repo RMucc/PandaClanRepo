@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class buttonFunctions : MonoBehaviour
 {
@@ -16,10 +18,24 @@ public class buttonFunctions : MonoBehaviour
     [SerializeField] GunStats SMG;
     [SerializeField] GunStats shotgun;
 
-
+    [SerializeField] Color selectedColor;
+    [SerializeField] Color unselectedColor;
+    [SerializeField] int switchTimeInSeconds;
+    [SerializeField] Button defaultButton;
+    [SerializeField] CanvasGroup defaultSubMenu;
+    [SerializeField] List<Button> buttons;
+    CanvasGroup activeMenu;
+    Button buttonPressed;
 
     public RyansPlayerController playerScript;
 
+    private void Start()
+    {
+        defaultButton.GetComponent<Image>().color = selectedColor;
+        activeMenu = defaultSubMenu;
+        activeMenu.alpha = 1.0f;
+        activeMenu.interactable = true;
+    }
     //Pause Screen Buttons
     public void resume()
     {
@@ -116,42 +132,43 @@ public class buttonFunctions : MonoBehaviour
         else { StartCoroutine(CantAfford()); }
     }
 
-    public void buyAKammo()
+    public void OpenSubMenu(GameObject menuToShow)
     {
-        if (GameManager.instance.playerScript.Currency >= AKammoPrice)
+        if (!menuToShow.Equals(activeMenu))
         {
-            GameManager.instance.playerScript.Currency -= AKammoPrice;
-            GameManager.instance.playerScript.AddDrops(null, 10, GameManager.BulletType.AR);
-            StartCoroutine(SucessfulPurchase());
+            if (menuToShow.TryGetComponent<CanvasGroup>(out CanvasGroup CG))
+            {
+                HighlightButton(EventSystem.current.currentSelectedGameObject.GetComponent<Image>());
+                float elapsedTime = 0;
+                activeMenu.interactable = false;
+                while (elapsedTime <= switchTimeInSeconds)
+                {
+                    elapsedTime += Time.deltaTime;
+                    activeMenu.alpha = Mathf.Lerp(1, 0, elapsedTime / switchTimeInSeconds);
+                    CG.alpha = Mathf.Lerp(0, 1, elapsedTime / switchTimeInSeconds);
+                }
+                activeMenu = CG;
+                activeMenu.interactable = true;
+            }
         }
-        else { StartCoroutine(CantAfford()); }
+    } 
+    
+    void HighlightButton(Image buttonImage)
+    {
+        buttonImage.color = selectedColor;
+        foreach (Button button in buttons)
+        {
+            if (!button.gameObject.Equals(buttonImage.gameObject))
+            {
+                button.GetComponent<Image>().color = unselectedColor;
+            }
+        }
     }
 
-    public void buySMGammo()
-    {
-        if (GameManager.instance.playerScript.Currency >= SMGammoPrice)
-        {
-            GameManager.instance.playerScript.Currency -= SMGammoPrice;
-            GameManager.instance.playerScript.AddDrops(null, 10, GameManager.BulletType.SMG);
-            StartCoroutine(SucessfulPurchase());
-        }
-        else { StartCoroutine(CantAfford()); }
-    }
-
-    public void buyShotgunAmmo()
-    {
-        if (GameManager.instance.playerScript.Currency >= shotgunAmmoPrice)
-        {
-            GameManager.instance.playerScript.Currency -= shotgunAmmoPrice;
-            GameManager.instance.playerScript.AddDrops(null, 10, GameManager.BulletType.Shotgun);
-            StartCoroutine(SucessfulPurchase());
-        }
-        else { StartCoroutine(CantAfford()); }
-    }
 
     public void CloseShopMenu()
     {
-        if(GameManager.instance.menuShop.activeSelf)
+        if (GameManager.instance.menuShop.activeSelf)
         {
             GameManager.instance.menuShop.SetActive(false);
             GameManager.instance.inShop = false;

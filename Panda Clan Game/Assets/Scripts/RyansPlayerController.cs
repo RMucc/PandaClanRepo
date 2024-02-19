@@ -640,9 +640,12 @@ public class RyansPlayerController : MonoBehaviour, IDamage
 
     public void AddDrops(GunStats gun = null, int AmmoChange = 0, GameManager.BulletType _bulletType = GameManager.BulletType.None)
     {
-        if (gun != null && !gunList.ContainsKey(gun.bulletType))
+        if (gun != null)
         {
-            gunList.Add(gun.bulletType, gun);
+            if (!gunList.ContainsKey(gun.bulletType))
+            {
+                gunList.Add(gun.bulletType, gun);
+            }
             bulletType = gun.bulletType;
             if (gunOut != null)
             {

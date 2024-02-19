@@ -86,7 +86,7 @@ public class SaveManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
-            Debug.Log("Defualt Load");
+            //Debug.Log("Defualt Load");
             LoadDefault();
         }
         else
@@ -153,8 +153,9 @@ public class SaveManager : MonoBehaviour
         GameManager.instance.playerScript.stamRegen = stamRegen;
         //Set Player Gun Variables
         GameManager.instance.playerScript.bulletType = bullet;
-        Debug.Log(bullet);
-        if(bullet == GameManager.BulletType.AR)
+        //Debug.Log(bullet);
+
+        if (bullet == GameManager.BulletType.AR)
         {
             GameManager.instance.playerScript.AddDrops(AR);
         }
@@ -166,7 +167,7 @@ public class SaveManager : MonoBehaviour
         {
             GameManager.instance.playerScript.AddDrops(Shotgun);
         }
-        Debug.Log(GameManager.instance.playerScript.bulletType);
+        //Debug.Log(GameManager.instance.playerScript.bulletType);
     }
 
     /*IEnumerator Intialize()

@@ -33,21 +33,21 @@ public class JoshPlayerController : MonoBehaviour, IDamage
     [SerializeField] float playerStam;
 
     //Player Private Variables
-    private Vector3 playerVel;
+    //private Vector3 playerVel;
     private Vector3 move;
     private Vector3 dashMove;
-    private int jumpCount;
+    //private int jumpCount;
 
     [Header("Dashing Values\n")]
     //Dashing Variables
     [SerializeField] float dashSpeed;
     [SerializeField] float dashDuration;
     [SerializeField] float dashDebounce;
-    [SerializeField] bool isDashing;
+    //[SerializeField] bool isDashing;
     private float dashCount;
     private float originalDashDebounce;
     [SerializeField] float dashCooldownTime;
-    private bool canDash = true;
+    //private bool canDash = true;
     #endregion
 
     #region Player Interact Variables
@@ -102,7 +102,7 @@ public class JoshPlayerController : MonoBehaviour, IDamage
     [SerializeField] int shootDamage;
     [SerializeField] float shootRate;
     [SerializeField] int shootDistance;
-    int activeWeapon;
+    //int activeWeapon;
     public GameObject gunOut;
 
 
@@ -230,8 +230,8 @@ public class JoshPlayerController : MonoBehaviour, IDamage
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer)
         {
-            jumpCount = 0;
-            playerVel.y = 0;
+            //jumpCount = 0;
+            //playerVel.y = 0;
         }
 
         move = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
@@ -277,11 +277,11 @@ public class JoshPlayerController : MonoBehaviour, IDamage
             playerStam -= dashCost;
             //stUpdate();
 
-            canDash = true;
+            //canDash = true;
         }
         else
         {
-            canDash = false;
+            //canDash = false;
         }
     }
     #endregion
@@ -400,7 +400,7 @@ public class JoshPlayerController : MonoBehaviour, IDamage
         cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, initialFOV, timeBetweenTransition);
         stUpdate();
         yield return new WaitForSeconds(dashCooldownTime);
-        isDashing = false;
+        //isDashing = false;
     }
     #endregion
 
@@ -543,17 +543,17 @@ public class JoshPlayerController : MonoBehaviour, IDamage
             {
                 case GameManager.BulletType.Shotgun:
                     ShotgunbulletsTotal += AmmoChange;
-                    activeWeapon = 1;
+                    //activeWeapon = 1;
                     updatePlayerUI();
                     break;
                 case GameManager.BulletType.AR:
                     ARbulletsTotal += AmmoChange;
-                    activeWeapon = 2;
+                    //activeWeapon = 2;
                     updatePlayerUI();
                     break;
                 case GameManager.BulletType.SMG:
                     SMGbulletsTotal += AmmoChange;
-                    activeWeapon = 3;
+                    //activeWeapon = 3;
                     updatePlayerUI();
                     break;
             }
@@ -663,7 +663,7 @@ public class JoshPlayerController : MonoBehaviour, IDamage
             }
             catch (System.Exception e)
             {
-                print("error : missing HPBar");
+                print(e + "error : missing HPBar");
             }
         }
         else

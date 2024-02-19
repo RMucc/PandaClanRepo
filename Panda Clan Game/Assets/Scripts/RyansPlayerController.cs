@@ -73,7 +73,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     float timeBetweenShots; // for burst weapons
     float cameraShakeDuration; // for camera shake
     float cameraShakeMagnitude; // for camera shake
-    int activeWeapon;
+    //int activeWeapon;
     public GameObject gunOut;
 
     [Header("Player Critical Damage Variables\n")]
@@ -660,17 +660,17 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             {
                 case GameManager.BulletType.Shotgun:
                     ShotgunbulletsTotal += AmmoChange;
-                    activeWeapon = 1;
+                    //activeWeapon = 1;
                     updatePlayerUI();
                     break;
                 case GameManager.BulletType.AR:
                     ARbulletsTotal += AmmoChange;
-                    activeWeapon = 2;
+                    //activeWeapon = 2;
                     updatePlayerUI();
                     break;
                 case GameManager.BulletType.SMG:
                     SMGbulletsTotal += AmmoChange;
-                    activeWeapon = 3;
+                    //activeWeapon = 3;
                     updatePlayerUI();
                     break;
             }
@@ -784,7 +784,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         }
         catch (System.Exception e)
         {
-            print("error : missing HPBar");
+            print(e + " error : missing HPBar");
         }
     }
     public void stUpdate()

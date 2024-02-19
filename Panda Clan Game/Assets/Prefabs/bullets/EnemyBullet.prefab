@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2265805568539338910}
-  - component: {fileID: 9051790865802575938}
+  - component: {fileID: -6317573522444220912}
   - component: {fileID: -1912986696621586975}
   - component: {fileID: 5517720576255389114}
   - component: {fileID: 5924560335193182015}
@@ -35,7 +35,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9051790865802575938
+--- !u!114 &-6317573522444220912
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,11 +44,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8262477620160788249}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9c5ef3088c306f4094c1d4d7a7eb352, type: 3}
+  m_Script: {fileID: 11500000, guid: fa17790d5786d4f4aabc5b64cf8d2730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: -1912986696621586975}
-  speed: 60
+  enemySpeed: 60
   destroyTime: 3
   damage: 10
   enemyBullet: 1

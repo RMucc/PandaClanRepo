@@ -162,9 +162,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunToAdd: {fileID: 11400000, guid: ecdb7869593087345b258face1e020cc, type: 2}
   ammoToAdd: 30
-  invul: 1
+  invul: 0
   interactDistance: 5
-  Currency: 200
+  Currency: 0
   cameraHolderPos: {fileID: 2491488919954809445}
   controller: {fileID: 1805210307232445748}
   HP: 100
@@ -174,6 +174,12 @@ MonoBehaviour:
   jumpHeight: 12
   jumpMax: 2
   gravity: -45
+  leanCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   cam: {fileID: 315687000291518258}
   camAnim: {fileID: 7343086226249413027}
   sprintFOV: 70

@@ -377,7 +377,7 @@ public class GameManager : MonoBehaviour
     //    test1.SetActive(false);
     //    test2.SetActive(false);
     //    test3.SetActive(true);
-    //}
+    //}/
     #endregion
 
 

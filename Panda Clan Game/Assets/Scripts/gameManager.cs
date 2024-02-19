@@ -187,7 +187,7 @@ public class GameManager : MonoBehaviour
             }
             catch (System.Exception e)
             {
-                Debug.LogWarning("error: levelMenuWin not found");
+                Debug.LogWarning(e + "error: levelMenuWin not found");
             }
         }
         //Should pull up a win menu that we can close out of so that we can move on to the next level
@@ -205,7 +205,7 @@ public class GameManager : MonoBehaviour
             }
             catch (System.Exception e)
             {
-                Debug.LogWarning("error: levelMenuWin not found");
+                Debug.LogWarning(e + "error: levelMenuWin not found");
             }
         }
         //Should pull up a win menu that we can close out of so that we can move on to the next level
@@ -223,7 +223,7 @@ public class GameManager : MonoBehaviour
             }
             catch (System.Exception e)
             {
-                Debug.LogWarning("error: levelMenuWin not found");
+                Debug.LogWarning(e + "error: levelMenuWin not found");
             }
         }
         //Should pull up a win menu that we can close out of so that we can move on to the next level

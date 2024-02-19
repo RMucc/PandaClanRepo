@@ -17,7 +17,7 @@ public class BasicEnemyAI : BaseEnemyAI, IDamage
     [SerializeField] float popUpPosRand;
 
     bool isAttacking;
-    bool playerInRange;
+    //bool playerInRange;
 
     void Update()
     {
@@ -63,7 +63,7 @@ public class BasicEnemyAI : BaseEnemyAI, IDamage
     {
         if (other.tag == "Player")
         {
-            playerInRange = true;
+            //playerInRange = true;
             if (!isAttacking)
             {
                 StartCoroutine(Attack());
@@ -75,7 +75,7 @@ public class BasicEnemyAI : BaseEnemyAI, IDamage
     {
         if (other.tag == "Player")
         {
-            playerInRange = false;
+            //playerInRange = false;
         }
     }
 }

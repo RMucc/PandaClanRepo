@@ -65,6 +65,9 @@ public class GameManager : MonoBehaviour
     public bool level2;
     public bool level3;
     public bool level4;
+    public bool level5;
+    public bool level6;
+    public bool level7;
     //public bool isNotLevel1;
     //public bool levelOne;
     //public bool levelTwo;
@@ -275,16 +278,16 @@ public class GameManager : MonoBehaviour
     public void CallBeforeLoadingScene2()
     {
         SaveManager.instance.level1 = false;
-        SaveManager.instance.level2 = true;
-        SaveManager.instance.level3 = false;
+        SaveManager.instance.level2 = false;
+        SaveManager.instance.level3 = true;
         SaveManager.instance.level4 = false;
     }
     public void CallBeforeLoadingScene3()
     {
         SaveManager.instance.level1 = false;
         SaveManager.instance.level2 = false;
-        SaveManager.instance.level3 = true;
-        SaveManager.instance.level4 = false;
+        SaveManager.instance.level3 = false;
+        SaveManager.instance.level4 = true;
     }
     public void CallBeforeLoadingScene4()
     {

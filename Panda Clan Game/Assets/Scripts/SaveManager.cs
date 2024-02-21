@@ -32,6 +32,9 @@ public class SaveManager : MonoBehaviour
     public bool level2;
     public bool level3;
     public bool level4;
+    public bool level5;
+    public bool level6;
+    public bool level7;
 
     private void Awake()
     {
@@ -81,6 +84,9 @@ public class SaveManager : MonoBehaviour
         data.level2 = level2;
         data.level3 = level3;
         data.level4 = level4;
+        data.level5 = level5;
+        data.level6 = level6;
+        data.level7 = level7;
 
         bf.Serialize(file, data);
         file.Close();
@@ -129,6 +135,9 @@ public class SaveManager : MonoBehaviour
             level2 = data.level2;
             level3 = data.level3;
             level4 = data.level4;
+            level5 = data.level5;
+            level6 = data.level6;
+            level7 = data.level7;
         }    
     }
 
@@ -144,6 +153,9 @@ public class SaveManager : MonoBehaviour
         level2 = false;
         level3 = false;
         level4 = false;
+        level5 = false;
+        level6 = false;
+        level7 = false;
         bullet = GameManager.BulletType.SMG;
         SetData();
     }
@@ -213,4 +225,7 @@ class PlayerData
     public bool level2;
     public bool level3;
     public bool level4;
+    public bool level5;
+    public bool level6;
+    public bool level7;
 }

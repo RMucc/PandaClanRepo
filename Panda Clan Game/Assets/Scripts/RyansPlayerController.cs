@@ -514,8 +514,6 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     #region Dash Cooldown IEnumerator
     IEnumerator DashCoolDown()
     {
-        //cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, initialFOV, timeBetweenTransition);
-        //StopCoroutine(cameraSprint);
         cameraInitial = StartCoroutine(CameraInitial());
         stUpdate();
         yield return new WaitForSeconds(dashCooldownTime);
@@ -526,7 +524,6 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     #region Camera Sprint FOV IEumerator
     IEnumerator CameraSprint()
     {
-        Debug.Log("Camera Sprinting");
         while(isSprinting)
         {
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFOV, timeBetweenTransition);
@@ -538,7 +535,6 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     #region Camera Initial FOV IEumerator
     IEnumerator CameraInitial()
     {
-        Debug.Log("Camera Initial");
         while(!isSprinting)
         {
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, initialFOV, timeBetweenTransition);

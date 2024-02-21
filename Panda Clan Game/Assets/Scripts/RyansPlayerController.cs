@@ -213,7 +213,6 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             if (sprintRecover != null)
             {
                 StopCoroutine(sprintRecover);
-                StopCoroutine(cameraInitial);
             }
             if(cameraSprint != null)
             {
@@ -445,6 +444,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         if (playerStam >= maxStam)
         {
             isStamRecovered = true;
+            StopCoroutine(cameraInitial);
             StopCoroutine(sprintRecover);
         }
     }
@@ -456,8 +456,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         float startTime = Time.time;
         while (Time.time < startTime + dashDuration)
         {
-            //cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFOV, timeBetweenTransition);
-            cameraSprint = StartCoroutine(CameraSprint());
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFOV, timeBetweenTransition);
             controller.Move(transform.forward * dashSpeed * Time.deltaTime);
             yield return null;
         }
@@ -471,8 +470,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         float startTime = Time.time;
         while (Time.time < startTime + dashDuration)
         {
-            //cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFOV, timeBetweenTransition);
-            cameraSprint = StartCoroutine(CameraSprint());
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFOV, timeBetweenTransition);
             controller.Move(-transform.forward * dashSpeed * Time.deltaTime);
             yield return null;
         }
@@ -486,8 +484,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         float startTime = Time.time;
         while (Time.time < startTime + dashDuration)
         {
-            //cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFOV, timeBetweenTransition);
-            cameraSprint = StartCoroutine(CameraSprint());
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFOV, timeBetweenTransition);
             controller.Move(transform.right * dashSpeed * Time.deltaTime);
             yield return null;
         }
@@ -502,8 +499,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         float startTime = Time.time;
         while (Time.time < startTime + dashDuration)
         {
-            //cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFOV, timeBetweenTransition);
-            cameraSprint = StartCoroutine(CameraSprint());
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFOV, timeBetweenTransition);
             controller.Move(-transform.right * dashSpeed * Time.deltaTime);
             yield return null;
         }
@@ -518,16 +514,17 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         stUpdate();
         yield return new WaitForSeconds(dashCooldownTime);
         isDashing = false;
+        StopCoroutine(cameraInitial);
     }
     #endregion
 
     #region Camera Sprint FOV IEumerator
     IEnumerator CameraSprint()
     {
-        while(isSprinting)
+        while(isSprinting || isDashing)
         {
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFOV, timeBetweenTransition);
-            yield return null;
+            yield return new WaitForSeconds(0);
         }
     }
     #endregion
@@ -535,10 +532,10 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     #region Camera Initial FOV IEumerator
     IEnumerator CameraInitial()
     {
-        while(!isSprinting)
+        while(!isSprinting || !isDashing)
         {
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, initialFOV, timeBetweenTransition);
-            yield return null;
+            yield return new WaitForSeconds(0);
         }
     }
     #endregion

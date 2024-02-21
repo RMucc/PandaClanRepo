@@ -39,6 +39,8 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     [SerializeField] float sprintFOV;
     private float initialFOV;
     [SerializeField] float timeBetweenTransition;
+    Coroutine cameraSprint;
+    Coroutine cameraInitial;
 
     [Header("Player Stamina/Regen Variables")]
     public float maxStam = 100.0f;
@@ -190,21 +192,11 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         move = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
         //transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + (leanCurve.Evaluate(Input.GetAxis("Horizontal") + 100)));
         controller.Move(move * playerSpeed * Time.deltaTime);
-        if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftShift))
-        {
-            //Debug.Log("W and Shift");
-            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFOV, timeBetweenTransition);
-        }
-        else if (Input.GetKey(KeyCode.W))
-        {
-            //Debug.Log("W");
-            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, initialFOV, timeBetweenTransition);
-        }
-        else
+
+        if(!Input.GetKey(KeyCode.W) || !Input.GetKey(KeyCode.A) || !Input.GetKey(KeyCode.S) || !Input.GetKey(KeyCode.D))
         {
             //Debug.Log("Idle");
             camAnim.SetTrigger("idle");
-            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, initialFOV, timeBetweenTransition);
         }
         //Jump Input
         #region Jump Input
@@ -221,17 +213,37 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             if (sprintRecover != null)
             {
                 StopCoroutine(sprintRecover);
+                StopCoroutine(cameraInitial);
+            }
+            if(cameraSprint != null)
+            {
+                StopCoroutine(cameraSprint);
+            }
+            if(cameraInitial != null)
+            {
+                StopCoroutine(cameraInitial);
             }
             if (playerStam > 0)
             {
                 isSprinting = true;
+                cameraSprint = StartCoroutine(CameraSprint());
                 Sprinting();
             }
+        }
+        if (playerStam <= 0)
+        {
+            isSprinting = false;
+            playerSpeed = originalPlayerSpeed;
+            StopCoroutine(cameraSprint);
+            cameraInitial = StartCoroutine(CameraInitial());
+            sprintRecover = StartCoroutine(SprintRecover());
         }
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             isSprinting = false;
             playerSpeed = originalPlayerSpeed;
+            StopCoroutine(cameraSprint);
+            cameraInitial = StartCoroutine(CameraInitial());
             sprintRecover = StartCoroutine(SprintRecover());
         }
         #endregion
@@ -410,6 +422,8 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 isStamRecovered = false;
                 isSprinting = false;
                 StopCoroutine(sprint);
+                StopCoroutine(cameraSprint);
+                cameraInitial = StartCoroutine(CameraInitial());
             }
             yield return new WaitForSeconds(.1f);
         }
@@ -442,7 +456,8 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         float startTime = Time.time;
         while (Time.time < startTime + dashDuration)
         {
-            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFOV, timeBetweenTransition);
+            //cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFOV, timeBetweenTransition);
+            cameraSprint = StartCoroutine(CameraSprint());
             controller.Move(transform.forward * dashSpeed * Time.deltaTime);
             yield return null;
         }
@@ -456,7 +471,8 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         float startTime = Time.time;
         while (Time.time < startTime + dashDuration)
         {
-            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFOV, timeBetweenTransition);
+            //cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFOV, timeBetweenTransition);
+            cameraSprint = StartCoroutine(CameraSprint());
             controller.Move(-transform.forward * dashSpeed * Time.deltaTime);
             yield return null;
         }
@@ -470,7 +486,8 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         float startTime = Time.time;
         while (Time.time < startTime + dashDuration)
         {
-            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFOV, timeBetweenTransition);
+            //cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFOV, timeBetweenTransition);
+            cameraSprint = StartCoroutine(CameraSprint());
             controller.Move(transform.right * dashSpeed * Time.deltaTime);
             yield return null;
         }
@@ -485,7 +502,8 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         float startTime = Time.time;
         while (Time.time < startTime + dashDuration)
         {
-            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFOV, timeBetweenTransition);
+            //cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFOV, timeBetweenTransition);
+            cameraSprint = StartCoroutine(CameraSprint());
             controller.Move(-transform.right * dashSpeed * Time.deltaTime);
             yield return null;
         }
@@ -496,10 +514,36 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     #region Dash Cooldown IEnumerator
     IEnumerator DashCoolDown()
     {
-        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, initialFOV, timeBetweenTransition);
+        //cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, initialFOV, timeBetweenTransition);
+        //StopCoroutine(cameraSprint);
+        cameraInitial = StartCoroutine(CameraInitial());
         stUpdate();
         yield return new WaitForSeconds(dashCooldownTime);
         isDashing = false;
+    }
+    #endregion
+
+    #region Camera Sprint FOV IEumerator
+    IEnumerator CameraSprint()
+    {
+        Debug.Log("Camera Sprinting");
+        while(isSprinting)
+        {
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFOV, timeBetweenTransition);
+            yield return null;
+        }
+    }
+    #endregion
+
+    #region Camera Initial FOV IEumerator
+    IEnumerator CameraInitial()
+    {
+        Debug.Log("Camera Initial");
+        while(!isSprinting)
+        {
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, initialFOV, timeBetweenTransition);
+            yield return null;
+        }
     }
     #endregion
 
@@ -626,9 +670,16 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     {
         if (gun != null)
         {
-            if (!gunList.ContainsKey(gun.bulletType))
+            try
             {
-                gunList.Add(gun.bulletType, gun);
+                if (!gunList.ContainsKey(gun.bulletType))
+                {
+                    gunList.Add(gun.bulletType, gun);
+                }
+            }
+            catch (System.Exception)
+            {
+
             }
             bulletType = gun.bulletType;
             if (gunOut != null)

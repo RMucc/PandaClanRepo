@@ -2064,6 +2064,38 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 4586840666342162443, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586840666342162443, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586840666342162443, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1680934034}
+    - target: {fileID: 4586840666342162443, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586840666342162443, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586840666342162443, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: UnityEngine.AudioSource, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4586840666342162443, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5732243668597029823, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6271003788589176158, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
       propertyPath: m_Name
       value: MiniMap
@@ -2086,8 +2118,16 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6990555653031369151, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
       insertIndex: -1
       addedObject: {fileID: 767437412}
+    - targetCorrespondingSourceObject: {fileID: 3485061028866162316, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1680934035}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
+--- !u!224 &280814818 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3485061028866162316, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
+  m_PrefabInstance: {fileID: 280814817}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &289123212
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11420,12 +11460,12 @@ GameObject:
   - component: {fileID: 1680934035}
   - component: {fileID: 1680934034}
   m_Layer: 0
-  m_Name: Audio Source
+  m_Name: SoundMenuClick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &1680934034
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11436,8 +11476,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 00d579798cc26c14fa5b6913fd31bd01, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -11449,7 +11489,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -11530,12 +11570,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1680934033}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 165.15439, y: -36.8, z: -29.30421}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 82.349976, y: -128.9, z: -33.62}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 280814818}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1696484850
 PrefabInstance:
@@ -15092,4 +15132,3 @@ SceneRoots:
   - {fileID: 1254613571}
   - {fileID: 609397992}
   - {fileID: 1258115753}
-  - {fileID: 1680934035}

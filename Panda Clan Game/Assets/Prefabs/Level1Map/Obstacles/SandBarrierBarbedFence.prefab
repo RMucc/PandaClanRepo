@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8877287926583766580}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SandBarrierBarbedFence
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &8877287926583766580
@@ -26,7 +26,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -14.906491, y: -0.029006481, z: -18.414038}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.1725998, y: 1.7167, z: 1.1636002}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1060894852145288408}
@@ -87,6 +87,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: SandBarrier_28_v1 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7623966026763679639, guid: 6bd58a91f46646a47919500c5c0a8f1e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7623966026763679639, guid: 6bd58a91f46646a47919500c5c0a8f1e, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7623966026763679639, guid: 6bd58a91f46646a47919500c5c0a8f1e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -108,6 +120,22 @@ PrefabInstance:
     - target: {fileID: 3610847829610787667, guid: 64f6d47daecb6544fa77015ee159cc40, type: 3}
       propertyPath: m_Name
       value: BarbedWireFence_36_v1 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3610847829610787667, guid: 64f6d47daecb6544fa77015ee159cc40, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3610847829610787667, guid: 64f6d47daecb6544fa77015ee159cc40, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3610847829610787667, guid: 64f6d47daecb6544fa77015ee159cc40, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6437734346468155165, guid: 64f6d47daecb6544fa77015ee159cc40, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6437734346468155165, guid: 64f6d47daecb6544fa77015ee159cc40, type: 3}
       propertyPath: m_LocalPosition.x
@@ -149,6 +177,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8666070943414165078, guid: 64f6d47daecb6544fa77015ee159cc40, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -170,6 +202,22 @@ PrefabInstance:
     - target: {fileID: 3610847829610787667, guid: 64f6d47daecb6544fa77015ee159cc40, type: 3}
       propertyPath: m_Name
       value: BarbedWireFence_36_v1 (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3610847829610787667, guid: 64f6d47daecb6544fa77015ee159cc40, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3610847829610787667, guid: 64f6d47daecb6544fa77015ee159cc40, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3610847829610787667, guid: 64f6d47daecb6544fa77015ee159cc40, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6437734346468155165, guid: 64f6d47daecb6544fa77015ee159cc40, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6437734346468155165, guid: 64f6d47daecb6544fa77015ee159cc40, type: 3}
       propertyPath: m_LocalPosition.x
@@ -211,16 +259,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8666070943414165078, guid: 64f6d47daecb6544fa77015ee159cc40, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 7461620394781744329, guid: 64f6d47daecb6544fa77015ee159cc40, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3610847829610787667, guid: 64f6d47daecb6544fa77015ee159cc40, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 94312014554636430}
   m_SourcePrefab: {fileID: 100100000, guid: 64f6d47daecb6544fa77015ee159cc40, type: 3}
 --- !u!4 &2918430472361499162 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6437734346468155165, guid: 64f6d47daecb6544fa77015ee159cc40, type: 3}
   m_PrefabInstance: {fileID: 8203082742357329159}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4885133128230270548 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3610847829610787667, guid: 64f6d47daecb6544fa77015ee159cc40, type: 3}
+  m_PrefabInstance: {fileID: 8203082742357329159}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &94312014554636430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4885133128230270548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 478319b49a70ce64bafa218518343151, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageAmount: 10
 --- !u!1001 &9009953494776005488
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -272,6 +346,18 @@ PrefabInstance:
     - target: {fileID: 7623966026763679639, guid: 6bd58a91f46646a47919500c5c0a8f1e, type: 3}
       propertyPath: m_Name
       value: SandBarrier_28_v1 (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7623966026763679639, guid: 6bd58a91f46646a47919500c5c0a8f1e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7623966026763679639, guid: 6bd58a91f46646a47919500c5c0a8f1e, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7623966026763679639, guid: 6bd58a91f46646a47919500c5c0a8f1e, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

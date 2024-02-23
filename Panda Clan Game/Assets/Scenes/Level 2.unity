@@ -697,30 +697,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BarbedWireFence_36_v1 (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 3610847829610787667, guid: 64f6d47daecb6544fa77015ee159cc40, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3610847829610787667, guid: 64f6d47daecb6544fa77015ee159cc40, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3610847829610787667, guid: 64f6d47daecb6544fa77015ee159cc40, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6437734346468155165, guid: 64f6d47daecb6544fa77015ee159cc40, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.1636
-      objectReference: {fileID: 0}
-    - target: {fileID: 6437734346468155165, guid: 64f6d47daecb6544fa77015ee159cc40, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.7167
-      objectReference: {fileID: 0}
-    - target: {fileID: 6437734346468155165, guid: 64f6d47daecb6544fa77015ee159cc40, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.1726
-      objectReference: {fileID: 0}
     - target: {fileID: 6437734346468155165, guid: 64f6d47daecb6544fa77015ee159cc40, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.2200012
@@ -3491,49 +3467,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1877095599}
     m_Modifications:
-    - target: {fileID: 1496334455110694119, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1496334455110694119, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4885133128230270548, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4885133128230270548, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6564306201802973556, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6564306201802973556, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6596736854684772544, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
       propertyPath: m_Name
       value: SandBarrierBarbedFence (11)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6596736854684772544, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6596736854684772544, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7345983972193155222, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7345983972193155222, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8877287926583766580, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5951,85 +5887,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 671808531}
     m_Modifications:
-    - target: {fileID: 689936749338663761, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_IsTrigger
+    - target: {fileID: 1060894852145288408, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
+      propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1496334455110694119, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1496334455110694119, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_NavMeshLayer
+    - target: {fileID: 2918430472361499162, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
+      propertyPath: m_LocalScale.y
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1496334455110694119, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 3434683987206919571, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4885133128230270548, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4885133128230270548, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4885133128230270548, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6564306201802973556, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6564306201802973556, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6564306201802973556, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6596736854684772544, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
       propertyPath: m_Name
       value: SandBarrierBarbedFence (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6596736854684772544, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6596736854684772544, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7345983972193155222, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7345983972193155222, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7345983972193155222, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8877287926583766580, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.1726
-      objectReference: {fileID: 0}
-    - target: {fileID: 8877287926583766580, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.7167
-      objectReference: {fileID: 0}
-    - target: {fileID: 8877287926583766580, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.1636
       objectReference: {fileID: 0}
     - target: {fileID: 8877287926583766580, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6074,55 +5942,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7345983972193155222, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 898942918}
-    - targetCorrespondingSourceObject: {fileID: 4885133128230270548, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 898942917}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
 --- !u!4 &898942914 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8877287926583766580, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
   m_PrefabInstance: {fileID: 898942913}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &898942915 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4885133128230270548, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-  m_PrefabInstance: {fileID: 898942913}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &898942916 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7345983972193155222, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-  m_PrefabInstance: {fileID: 898942913}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &898942917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 898942915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 478319b49a70ce64bafa218518343151, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageAmount: 10
---- !u!114 &898942918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 898942916}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 478319b49a70ce64bafa218518343151, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageAmount: 10
 --- !u!1001 &904553885
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11626,6 +11452,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 671808531}
     m_Modifications:
+    - target: {fileID: 1060894852145288408, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1496334455110694119, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -11637,6 +11467,10 @@ PrefabInstance:
     - target: {fileID: 1496334455110694119, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2918430472361499162, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4885133128230270548, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
       propertyPath: m_Layer
@@ -13812,6 +13646,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 671808531}
     m_Modifications:
+    - target: {fileID: 1060894852145288408, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1496334455110694119, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -13823,6 +13661,10 @@ PrefabInstance:
     - target: {fileID: 1496334455110694119, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2918430472361499162, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4885133128230270548, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
       propertyPath: m_Layer
@@ -15379,77 +15221,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 671808531}
     m_Modifications:
-    - target: {fileID: 1496334455110694119, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1496334455110694119, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1496334455110694119, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4885133128230270548, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4885133128230270548, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4885133128230270548, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6564306201802973556, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6564306201802973556, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6564306201802973556, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 6596736854684772544, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
       propertyPath: m_Name
       value: SandBarrierBarbedFence
-      objectReference: {fileID: 0}
-    - target: {fileID: 6596736854684772544, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6596736854684772544, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7345983972193155222, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7345983972193155222, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7345983972193155222, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8877287926583766580, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.1725998
-      objectReference: {fileID: 0}
-    - target: {fileID: 8877287926583766580, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.7167
-      objectReference: {fileID: 0}
-    - target: {fileID: 8877287926583766580, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.1636002
       objectReference: {fileID: 0}
     - target: {fileID: 8877287926583766580, guid: 86dc04d4e58c3624f823e8a71b61ce2c, type: 3}
       propertyPath: m_LocalPosition.x

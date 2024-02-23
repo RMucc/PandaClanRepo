@@ -34,6 +34,9 @@ public class GameManager : MonoBehaviour
     public CanvasGroup mainInterface;
     public event EventHandler OnLevel1Finished;
     GameObject currentArrow;
+    [SerializeField] float pushDuration;
+    [SerializeField] int pushBackSpeed;
+    Coroutine pushBack;
 
     [Header("----- Point Tracker -----")]
     public int playerPoints;
@@ -337,6 +340,29 @@ public class GameManager : MonoBehaviour
         {
             print("error: Variable staminaVisable might not be assigned");
         }
+    }
+    #endregion
+
+    #region ObstaclePushBack
+    public void PushBack()
+    {
+        pushBack = StartCoroutine(PushBackIEnumerator());
+    }
+    IEnumerator PushBackIEnumerator()
+    {
+
+        float startTime = Time.time;
+        while (Time.time < startTime + pushDuration)
+        {
+            playerScript.controller.Move(-playerScript.transform.forward * pushBackSpeed * Time.deltaTime);
+            yield return null;
+        }
+        StopPushBack();
+    }
+
+    public void StopPushBack()
+    {
+        StopCoroutine(pushBack);
     }
     #endregion
 

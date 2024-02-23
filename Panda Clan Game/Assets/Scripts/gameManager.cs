@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
     public Text waveCount;
     public Text weapSwitch;
     public GameObject damageScreen;
+    public GameObject GodScreen;
     public Image HPBar;
     public Image AMMOBar;
     public Image StaminaWheel;

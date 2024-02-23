@@ -18,14 +18,12 @@ MonoBehaviour:
   damageDropOffRate: 10
   bulletDistance: 12
   bulletSpread: 0.3
-  reloadTime: 2.77
+  reloadTime: 1
   timeBetweenShots: 0.5
   bulletsPerTap: 8
   allowButtonHold: 0
   magazineSize: 8
   bulletsLeftInMag: 8
-  cameraShakeDuration: 0
-  cameraShakeMagnitude: 0
   bulletHitEffect: {fileID: 4795005520586895817, guid: 5a0d6e30b8b210446898f46ca9fa976d, type: 3}
   bullet: {fileID: 8262477620160788249, guid: 7c0aa55b1c752f646a18c1b0c17fd581, type: 3}
   bulletType: 1

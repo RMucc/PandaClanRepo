@@ -16,8 +16,22 @@ public class RyansPlayerController : MonoBehaviour, IDamage
 
     [Header("Audio")]
     [SerializeField] AudioSource src;
+    [SerializeField] AudioSource invulSound;
     [SerializeField] AudioSource WeapSrc;
-    public AudioClip pain, revive;
+    [SerializeField] AudioSource SHOTSrc;
+    [SerializeField] AudioSource bbComeback;
+
+    [Header("Audio Files")]
+    public AudioClip pain;
+    public AudioClip revive;
+    public AudioClip jump;
+    public AudioClip uziReload;
+    public AudioClip ARReload;
+    public AudioClip shotgun;
+    public AudioClip shotgunReload;
+    public AudioClip getShotgun;
+    public AudioClip uziShoot;
+    public AudioClip metal;
 
     [Header("Player Interact Variables\n")]
     [SerializeField] int interactDistance;
@@ -126,6 +140,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
+        
         initialFOV = cam.fieldOfView;
         gunList = new Dictionary<GameManager.BulletType, GunStats>();
         ARbulletsTotalR = ARbulletsTotal;
@@ -207,6 +222,8 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         #region Jump Input
         if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
         {
+            src.clip = jump;
+            src.Play();
             playerVel.y = jumpHeight;
             jumpCount++;
         }
@@ -548,6 +565,21 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     #region Weapon and Interact System
     IEnumerator Reload()
     {
+        if (bulletType == GameManager.BulletType.SMG)
+        {
+            WeapSrc.clip = uziReload;
+            WeapSrc.Play();
+        }
+        else if (bulletType == GameManager.BulletType.AR)
+        {
+            WeapSrc.clip = ARReload;
+            WeapSrc.Play();
+        }
+        else if (bulletType == GameManager.BulletType.Shotgun)
+        {
+            WeapSrc.clip = shotgunReload;
+            WeapSrc.Play();
+        }
         //Debug.Log("Reload Called");
         reloading = true;
         try
@@ -559,7 +591,6 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             print("error: Reload couldn't be shown");
         }
         yield return new WaitForSeconds(gunList[bulletType].reloadTime);
-
 
         gunList[bulletType].bulletsLeftInMag = gunList[bulletType].magazineSize;
         reloading = false;
@@ -589,6 +620,17 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     IEnumerator Shoot()
     {
         isShooting = true;
+        if (bulletType == GameManager.BulletType.Shotgun)
+        {
+            
+            SHOTSrc.clip = shotgun;
+            SHOTSrc.Play();
+        }
+        else if (bulletType != GameManager.BulletType.Shotgun)
+        {
+            WeapSrc.clip = uziShoot;
+            WeapSrc.Play();
+        }
         readyToShoot = false;
         float x = Random.Range(-gunList[bulletType].bulletSpread, gunList[bulletType].bulletSpread);
         float y = Random.Range(-gunList[bulletType].bulletSpread, gunList[bulletType].bulletSpread);
@@ -693,17 +735,16 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             {
                 case GameManager.BulletType.Shotgun:
                     ShotgunbulletsTotal += AmmoChange;
-                    //activeWeapon = 1;
+                    src.clip = getShotgun;
+                    src.Play();
                     updatePlayerUI();
                     break;
                 case GameManager.BulletType.AR:
                     ARbulletsTotal += AmmoChange;
-                    //activeWeapon = 2;
                     updatePlayerUI();
                     break;
                 case GameManager.BulletType.SMG:
                     SMGbulletsTotal += AmmoChange;
-                    //activeWeapon = 3;
                     updatePlayerUI();
                     break;
             }
@@ -734,6 +775,9 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     {
         if (invul)
         {
+            StartCoroutine(GodScreen());
+            invulSound.clip = metal;
+            invulSound.Play();
             return;
         }
         else
@@ -758,6 +802,8 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 else
                 {
                     respawn();
+                    bbComeback.clip = revive;
+                    bbComeback.Play();
                     GameManager.instance.UpdateLivesUI();
                 }
             }
@@ -794,6 +840,29 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         catch (System.Exception)
         {
             print("error: damageScreen missing from GameManager");
+        }
+    }
+
+    IEnumerator GodScreen()
+    {
+        try
+        {
+            GameManager.instance.GodScreen.SetActive(true);
+        }
+        catch (System.Exception)
+        {
+            print("error: GodScreen missing from GameManager");
+        }
+
+        yield return new WaitForSeconds(0.2f);
+
+        try
+        {
+            GameManager.instance.GodScreen.SetActive(false);
+        }
+        catch (System.Exception)
+        {
+            print("error: GodScreen missing from GameManager");
         }
     }
     #endregion

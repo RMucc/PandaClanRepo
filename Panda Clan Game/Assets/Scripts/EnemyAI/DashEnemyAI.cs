@@ -26,8 +26,8 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
     [SerializeField] bool showExplosionRange;
     [SerializeField] SphereCollider explosionRangeSP;
 
-    [SerializeField] Animator anim;
-    [SerializeField] int animSpeedTrans;
+    //[SerializeField] Animator anim;
+    //[SerializeField] int animSpeedTrans;
 
 
 
@@ -72,8 +72,8 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
     // Update is called once per frame
     void Update()
     {
-        float animSpeed = agent.velocity.normalized.magnitude;
-        anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans));
+        //float animSpeed = agent.velocity.normalized.magnitude;
+        //anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans));
         
         
         agent.SetDestination(GameManager.instance.player.transform.position);

@@ -14,6 +14,11 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     [SerializeField] int ammoToAdd;
     public bool invul;
 
+    [Header("Audio")]
+    [SerializeField] AudioSource src;
+    [SerializeField] AudioSource WeapSrc;
+    public AudioClip pain, revive;
+
     [Header("Player Interact Variables\n")]
     [SerializeField] int interactDistance;
     public int Currency = 0;
@@ -737,6 +742,8 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             HP -= amount;
             currHealth = HP;
             StartCoroutine(flashScreen());
+            src.clip = pain;
+            src.Play();
             updatePlayerUI();
 
             if (HP <= 0)

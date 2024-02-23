@@ -26,6 +26,10 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
     [SerializeField] bool showExplosionRange;
     [SerializeField] SphereCollider explosionRangeSP;
 
+    //[SerializeField] Animator anim;
+    //[SerializeField] int animSpeedTrans;
+
+
 
     float speed;
     bool playerInRange;
@@ -48,14 +52,19 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
         model.material.color = Color.black;
         agent.speed *= speedMultiplier;
         agent.acceleration = agent.speed;
+
+
         yield return new WaitForSeconds(dashTime);
         dashing = false;
         agent.velocity = Vector3.zero;
         model.material.color = stored;
         agent.speed = speed;
         agent.acceleration = agent.speed;
+
+
         if (!exploding)
         {
+            //Roll Animation
             StartCoroutine(Dash());
         }
     }
@@ -63,9 +72,14 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
     // Update is called once per frame
     void Update()
     {
+        //float animSpeed = agent.velocity.normalized.magnitude;
+        //anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), animSpeed, Time.deltaTime * animSpeedTrans));
+        
+        
         agent.SetDestination(GameManager.instance.player.transform.position);
         if (playerInRange && dashing && !exploding)
         {
+            //Go into a ball
             Explode();
         }
         ShowRange();

@@ -4,10 +4,9 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
 
-public class RangedEnemyAI : BaseEnemyAI, IDamage
+public class CapsureRanged : BaseEnemyAI, IDamage
 {
     [Header("----- Components -----")]
-    [SerializeField] Animator anim;
     [SerializeField] Transform shootPos; //Position for him to shoot from
     [SerializeField] Transform headPos;
     [SerializeField] bool effectGameGoal;
@@ -40,25 +39,13 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
     {
         agent.SetDestination(GameManager.instance.player.transform.position);
 
-        if(anim)
-        {
-            if (!isShooting)
-            {
-                anim.SetBool("isShooting", false);
-            }
-            else
-            {
-                anim.SetBool("isShooting", true);
-            }
-        }
-
         if (agent.remainingDistance < agent.stoppingDistance)
         {
             playerDir = GameManager.instance.player.transform.position - headPos.transform.position;
             FaceTarget();
         }
 
-      
+
     }
 
     IEnumerator Shoot()

@@ -6,19 +6,35 @@ using UnityEngine.UIElements;
 
 public class RangedEnemyAI : BaseEnemyAI, IDamage
 {
-    [SerializeField] GameObject bullet;
-    [SerializeField] Transform shootPos;
-    [SerializeField] float shootRate;
-    [SerializeField] GunStats gun;
+    [Header("----- Components -----")]
+    [SerializeField] Animator anim;
+    [SerializeField] Transform shootPos; //Position for him to shoot from
+    [SerializeField] Transform headPos;
     [SerializeField] bool effectGameGoal;
+
+
+    [Header("----- Enemy Stats -----")]
+    [SerializeField] float shootRate;
+    [SerializeField] int fov;
+    [SerializeField] int fovshoot;
+    [SerializeField] float bulletSpread;
+    [SerializeField] int targetFaceSpeed;
+    [SerializeField] int animspeedTrans;
     [SerializeField] int AmmoAddedOnDeath;
     [SerializeField] int playerFaceSpeed;
-    [SerializeField] float bulletSpread;
-    [SerializeField] GameObject headPos;
-    [SerializeField] Animator anim;
+
+
+    [Header("----- Gun Attributes -----")]
+    [SerializeField] GameObject bullet;
+    [Range(0.1f, 2)][SerializeField] float shootrate;
+    [SerializeField] GunStats gun;
 
     Vector3 playerDir;
     bool isShooting;
+    bool playerInRange;
+    float angleToPlayer;
+    Vector3 startingPos;
+    float stoppingDistOrig;
 
 
     void Update()
@@ -26,9 +42,11 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
         agent.SetDestination(GameManager.instance.player.transform.position);
         if (!isShooting)
         {
-            anim.SetFloat("Speed", agent.velocity.normalized.magnitude); //magnitude because we want the animations to be simplified for any direction
-            
-            StartCoroutine(Shoot());
+            anim.SetBool("isShooting", false);
+        }
+        else
+        {
+            anim.SetBool("isShooting", true);
         }
 
         if (agent.remainingDistance < agent.stoppingDistance)
@@ -68,9 +86,61 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
         }
     }
 
+    bool canSeePlayer()
+    {
+        playerDir = GameManager.instance.player.transform.position - headPos.position;
+        angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
+
+        Debug.Log(angleToPlayer);
+        Debug.DrawRay(headPos.position, playerDir);
+
+        RaycastHit hit;
+        if (Physics.Raycast(headPos.position, playerDir, out hit))
+        {
+            if (hit.collider.CompareTag("Player") && angleToPlayer <= fov)
+            {
+
+                agent.SetDestination(GameManager.instance.player.transform.position);
+
+                if (angleToPlayer <= fovshoot && !isShooting)
+                    StartCoroutine(Shoot());
+
+                if (agent.remainingDistance < agent.stoppingDistance)
+                {
+                    FaceTarget();
+                }
+
+                agent.stoppingDistance = stoppingDistOrig;
+
+                return true;
+            }
+
+            Debug.Log(hit.transform.name);
+        }
+
+        return false;
+    }
+
     void FaceTarget()
     {
         Quaternion rot = Quaternion.LookRotation(playerDir);
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
+            agent.stoppingDistance = 0;
+        }
     }
 }

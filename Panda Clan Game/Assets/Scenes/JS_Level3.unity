@@ -1769,6 +1769,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 153be0a497b19f44e850fb1bff8501ad, type: 3}
+--- !u!4 &225233455 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6806603147041139166, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+  m_PrefabInstance: {fileID: 1687150529}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &320091807
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3844,6 +3849,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28994f573ce134144802887d0aa319b2, type: 3}
+--- !u!223 &647662280 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 1793341281245668365, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+  m_PrefabInstance: {fileID: 1687150529}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &658722895
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4720,6 +4730,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 153be0a497b19f44e850fb1bff8501ad, type: 3}
+--- !u!4 &1022442320 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6516535372482501243, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+  m_PrefabInstance: {fileID: 1687150529}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1025718786
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6988,6 +7003,55 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 153be0a497b19f44e850fb1bff8501ad, type: 3}
+--- !u!1 &1366408137 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4240346518832343959, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+  m_PrefabInstance: {fileID: 1687150529}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1366408139 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6799390034004411375, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+  m_PrefabInstance: {fileID: 1687150529}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &1366408141 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 4223591056742101865, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+  m_PrefabInstance: {fileID: 1687150529}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1366408144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1366408137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4be47b1ebd9074c69a35f9b82f5f2ed9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 1366408139}
+  agent: {fileID: 1366408141}
+  healthUI: {fileID: 647662280}
+  HP: 104
+  origHP: 104
+  alive: 1
+  dropItemList: []
+  itemPotentialCountToDrop: 0
+  stored: {r: 0, g: 0, b: 0, a: 0}
+  shootPos: {fileID: 1022442320}
+  headPos: {fileID: 225233455}
+  effectGameGoal: 0
+  shootRate: 1
+  fov: 360
+  fovshoot: 180
+  bulletSpread: 1
+  targetFaceSpeed: 300
+  animspeedTrans: 0
+  AmmoAddedOnDeath: 0
+  playerFaceSpeed: 300
+  bullet: {fileID: 8262477620160788249, guid: 153c7fba034da9345a43d39a3eee9393, type: 3}
+  gun: {fileID: 11400000, guid: 9cdfbf8351e13cd44b51e9059de153e2, type: 2}
 --- !u!1001 &1370203090
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7909,6 +7973,87 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 361b58894dce53745b0a2d9406c22ba7, type: 3}
+--- !u!1001 &1687150529
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2924825895792774001, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+      propertyPath: fov
+      value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 2924825895792774001, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+      propertyPath: origHP
+      value: 84
+      objectReference: {fileID: 0}
+    - target: {fileID: 2924825895792774001, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+      propertyPath: headPos
+      value: 
+      objectReference: {fileID: 225233455}
+    - target: {fileID: 2924825895792774001, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+      propertyPath: fovshoot
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2924825895792774001, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+      propertyPath: bulletSpread
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4240346518832343959, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+      propertyPath: m_Name
+      value: RangedEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8369198999157408456, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.7750797
+      objectReference: {fileID: 0}
+    - target: {fileID: 8369198999157408456, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 8369198999157408456, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.292057
+      objectReference: {fileID: 0}
+    - target: {fileID: 8369198999157408456, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8369198999157408456, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8369198999157408456, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8369198999157408456, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8369198999157408456, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8369198999157408456, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8369198999157408456, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 2924825895792774001, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4240346518832343959, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 1366408144}
+  m_SourcePrefab: {fileID: 100100000, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
 --- !u!1001 &1743997384
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15526,6 +15671,7 @@ GameObject:
   - component: {fileID: 7452835389180476390}
   - component: {fileID: 7452835389180476391}
   - component: {fileID: 7452835389180476393}
+  - component: {fileID: 7452835389180476394}
   m_Layer: 0
   m_Name: Robot_Soldier_Blue
   m_TagString: Untagged
@@ -15986,18 +16132,20 @@ MonoBehaviour:
   dropItemList: []
   itemPotentialCountToDrop: 0
   stored: {r: 0, g: 0, b: 0, a: 0}
-  bullet: {fileID: 8262477620160788249, guid: 153c7fba034da9345a43d39a3eee9393, type: 3}
-  shootPos: {fileID: 1452872700}
-  shootRate: 1
-  gun: {fileID: 11400000, guid: 9cdfbf8351e13cd44b51e9059de153e2, type: 2}
-  effectGameGoal: 0
-  AmmoAddedOnDeath: 5
-  playerFaceSpeed: 10
-  bulletSpread: 1
-  headPos: {fileID: 7365348506689900528}
   anim: {fileID: 7452835389180476390}
+  shootPos: {fileID: 1452872700}
+  headPos: {fileID: 7365348506689900528}
+  effectGameGoal: 0
+  shootRate: 1
   fov: 360
   fovshoot: 90
+  bulletSpread: 1
+  targetFaceSpeed: 0
+  animspeedTrans: 0
+  AmmoAddedOnDeath: 5
+  playerFaceSpeed: 10
+  bullet: {fileID: 8262477620160788249, guid: 153c7fba034da9345a43d39a3eee9393, type: 3}
+  gun: {fileID: 11400000, guid: 9cdfbf8351e13cd44b51e9059de153e2, type: 2}
 --- !u!195 &7452835389180476393
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -16012,7 +16160,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 600
-  m_StoppingDistance: 5
+  m_StoppingDistance: 15
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -16020,6 +16168,27 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!135 &7452835389180476394
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7367526678013595162}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 42.38953
+  m_Center: {x: -0.000000004816951, y: 1, z: 7.389534}
 --- !u!137 &7480516359012372416
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -16794,18 +16963,20 @@ MonoBehaviour:
   dropItemList: []
   itemPotentialCountToDrop: 0
   stored: {r: 0, g: 0, b: 0, a: 0}
-  bullet: {fileID: 8262477620160788249, guid: 153c7fba034da9345a43d39a3eee9393, type: 3}
-  shootPos: {fileID: 3136771728490368088}
-  shootRate: 1
-  gun: {fileID: 11400000, guid: 9cdfbf8351e13cd44b51e9059de153e2, type: 2}
-  effectGameGoal: 1
-  AmmoAddedOnDeath: 0
-  playerFaceSpeed: 100
-  bulletSpread: 2
-  headPos: {fileID: 6426060634991589625}
   anim: {fileID: 7637364415176740370}
+  shootPos: {fileID: 3136771728490368088}
+  headPos: {fileID: 6426060634991589625}
+  effectGameGoal: 1
+  shootRate: 1
   fov: 0
   fovshoot: 0
+  bulletSpread: 2
+  targetFaceSpeed: 0
+  animspeedTrans: 0
+  AmmoAddedOnDeath: 0
+  playerFaceSpeed: 100
+  bullet: {fileID: 8262477620160788249, guid: 153c7fba034da9345a43d39a3eee9393, type: 3}
+  gun: {fileID: 11400000, guid: 9cdfbf8351e13cd44b51e9059de153e2, type: 2}
 --- !u!195 &7821361161352933051
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -17580,3 +17751,4 @@ SceneRoots:
   - {fileID: 541708321}
   - {fileID: 1219478071}
   - {fileID: 50921270}
+  - {fileID: 1687150529}

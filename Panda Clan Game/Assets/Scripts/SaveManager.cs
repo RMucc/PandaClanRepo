@@ -99,9 +99,18 @@ public class SaveManager : MonoBehaviour
             //Debug.Log("Defualt Load");
             LoadDefault();
         }
-        else
+        if (SceneManager.GetActiveScene().buildIndex == 1)
         {
-            //new WaitForSeconds(.25f);
+            GameManager.instance.interfaceForStory.SetActive(false);
+            LoadDefault();
+            /*Debug.Log("Load Data");
+            LoadData();
+            Debug.Log("Set Data");
+            SetData();*/
+        }
+        else if (SceneManager.GetActiveScene().buildIndex != 0 && SceneManager.GetActiveScene().buildIndex != 1)
+        {
+            GameManager.instance.interfaceForStory.SetActive(true);
             Debug.Log("Load Data");
             LoadData();
             Debug.Log("Set Data");
@@ -111,7 +120,7 @@ public class SaveManager : MonoBehaviour
 
     public void LoadData()
     {
-        if(File.Exists(Application.persistentDataPath + "/playerInfo.dat"))
+        if (File.Exists(Application.persistentDataPath + "/playerInfo.dat"))
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
@@ -156,7 +165,7 @@ public class SaveManager : MonoBehaviour
         level5 = false;
         level6 = false;
         level7 = false;
-        bullet = GameManager.BulletType.SMG;
+        bullet = GameManager.BulletType.None;
         SetData();
     }
 
@@ -186,6 +195,10 @@ public class SaveManager : MonoBehaviour
         else if(bullet == GameManager.BulletType.Shotgun)
         {
             GameManager.instance.playerScript.AddDrops(Shotgun);
+        }
+        else if (bullet == GameManager.BulletType.None)
+        {
+
         }
         //Debug.Log(GameManager.instance.playerScript.bulletType);
     }

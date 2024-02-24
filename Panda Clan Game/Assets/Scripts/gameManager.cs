@@ -32,6 +32,10 @@ public class GameManager : MonoBehaviour
     public ShopKeepController shopKeeper;
     public GameObject menuShop;
     public CanvasGroup mainInterface;
+    public GameObject Interact;
+    public GameObject Story1;
+    public GameObject Story1Reminder;
+    public GameObject interfaceForStory;
     public event EventHandler OnLevel1Finished;
     GameObject currentArrow;
     [SerializeField] float pushDuration;
@@ -63,6 +67,10 @@ public class GameManager : MonoBehaviour
     public HighscoreTable topScore;
     private string nameInput;
     //public GameObject nextLevel2;
+
+    public bool Story1Bool;
+
+    public bool grabGunBool;
 
     public bool isPaused;
     public bool level1;
@@ -276,22 +284,46 @@ public class GameManager : MonoBehaviour
         }
         else if (level4 == true)
         {
-
+            CallBeforeLoadingScene5();
         }
+        else if (level5 == true)
+        {
+            CallBeforeLoadingScene6();
+        }
+        else if (level6 == true)
+        {
+            CallBeforeLoadingScene7();
+        }
+    }
+    public void CallBeforeLoadingScene1()
+    {
+        SaveManager.instance.level1 = true;
+        SaveManager.instance.level2 = false;
+        SaveManager.instance.level3 = false;
+        SaveManager.instance.level4 = false;
+        SaveManager.instance.level5 = false;
+        SaveManager.instance.level6 = false;
+        SaveManager.instance.level7 = false;
     }
     public void CallBeforeLoadingScene2()
     {
         SaveManager.instance.level1 = false;
-        SaveManager.instance.level2 = false;
-        SaveManager.instance.level3 = true;
+        SaveManager.instance.level2 = true;
+        SaveManager.instance.level3 = false;
         SaveManager.instance.level4 = false;
+        SaveManager.instance.level5 = false;
+        SaveManager.instance.level6 = false;
+        SaveManager.instance.level7 = false;
     }
     public void CallBeforeLoadingScene3()
     {
         SaveManager.instance.level1 = false;
         SaveManager.instance.level2 = false;
-        SaveManager.instance.level3 = false;
-        SaveManager.instance.level4 = true;
+        SaveManager.instance.level3 = true;
+        SaveManager.instance.level4 = false;
+        SaveManager.instance.level5 = false;
+        SaveManager.instance.level6 = false;
+        SaveManager.instance.level7 = false;
     }
     public void CallBeforeLoadingScene4()
     {
@@ -299,6 +331,39 @@ public class GameManager : MonoBehaviour
         SaveManager.instance.level2 = false;
         SaveManager.instance.level3 = false;
         SaveManager.instance.level4 = true;
+        SaveManager.instance.level5 = false;
+        SaveManager.instance.level6 = false;
+        SaveManager.instance.level7 = false;
+    }
+    public void CallBeforeLoadingScene5()
+    {
+        SaveManager.instance.level1 = false;
+        SaveManager.instance.level2 = false;
+        SaveManager.instance.level3 = false;
+        SaveManager.instance.level4 = false;
+        SaveManager.instance.level5 = true;
+        SaveManager.instance.level6 = false;
+        SaveManager.instance.level7 = false;
+    }
+    public void CallBeforeLoadingScene6()
+    {
+        SaveManager.instance.level1 = false;
+        SaveManager.instance.level2 = false;
+        SaveManager.instance.level3 = false;
+        SaveManager.instance.level4 = false;
+        SaveManager.instance.level5 = false;
+        SaveManager.instance.level6 = true;
+        SaveManager.instance.level7 = false;
+    }
+    public void CallBeforeLoadingScene7()
+    {
+        SaveManager.instance.level1 = false;
+        SaveManager.instance.level2 = false;
+        SaveManager.instance.level3 = false;
+        SaveManager.instance.level4 = false;
+        SaveManager.instance.level5 = false;
+        SaveManager.instance.level6 = false;
+        SaveManager.instance.level7 = true;
     }
     #endregion
 

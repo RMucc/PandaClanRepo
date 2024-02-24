@@ -36,20 +36,26 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
     float stoppingDistOrig;
 
 
+    void Start()
+    {
+        isShooting = false;
+    }
     void Update()
     {
         agent.SetDestination(GameManager.instance.player.transform.position);
 
-        if(anim)
+        if (anim && !isShooting)
         {
-            if (!isShooting)
-            {
-                anim.SetBool("isShooting", false);
-            }
-            else
-            {
-                anim.SetBool("isShooting", true);
-            }
+            anim.SetBool("isShooting", false);
+        }
+        else if (anim)
+        {
+            anim.SetBool("isShooting", true);
+        }
+
+        if (!isShooting)
+        {
+            StartCoroutine(Shoot());
         }
 
         if (agent.remainingDistance < agent.stoppingDistance)
@@ -57,16 +63,14 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
             playerDir = GameManager.instance.player.transform.position - headPos.transform.position;
             FaceTarget();
         }
-
-      
     }
 
     IEnumerator Shoot()
     {
+        isShooting = true;
         float x = Random.Range(-bulletSpread, bulletSpread);
         float y = Random.Range(-bulletSpread, bulletSpread);
         Vector3 direction = shootPos.transform.forward + new Vector3(x, y, 0);
-        isShooting = true;
         Instantiate(bullet, shootPos.position, Quaternion.LookRotation(direction));
         yield return new WaitForSeconds(shootRate);
         isShooting = false;

@@ -140,7 +140,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
-        
+
         initialFOV = cam.fieldOfView;
         gunList = new Dictionary<GameManager.BulletType, GunStats>();
         ARbulletsTotalR = ARbulletsTotal;
@@ -170,36 +170,40 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 bulletType = GameManager.BulletType.SMG;
                 AddDrops(gunToAdd, ammoToAdd);
             }
-            if(bulletType == GameManager.BulletType.None)
+            if (bulletType == GameManager.BulletType.None)
             {
             }
             else
             {
-                if (gunList[bulletType].allowButtonHold && !isShooting)
+                if (gunList.ContainsKey(bulletType))
                 {
-                    shooting = Input.GetButton("Shoot");
-                }
-                else
-                {
-                    shooting = Input.GetButtonDown("Shoot");
-                }
-
-                if (Input.GetButtonDown("Reload") && gunList[bulletType].bulletsLeftInMag < gunList[bulletType].magazineSize && !reloading)
-                {
-                    StartCoroutine(Reload());
-                }
-
-                if (readyToShoot && shooting && !reloading && gunList[bulletType].bulletsLeftInMag > 0)
-                {
-                    for (int i = gunList[bulletType].bulletsPerTap; i > 0; i--)
+                    if (gunList[bulletType].allowButtonHold && !isShooting)
                     {
-                        StartCoroutine(Shoot());
+                        shooting = Input.GetButton("Shoot");
+                    }
+                    else
+                    {
+                        shooting = Input.GetButtonDown("Shoot");
+                    }
+
+                    if (Input.GetButtonDown("Reload") && gunList[bulletType].bulletsLeftInMag < gunList[bulletType].magazineSize && !reloading)
+                    {
+                        StartCoroutine(Reload());
+                    }
+
+                    if (readyToShoot && shooting && !reloading && gunList[bulletType].bulletsLeftInMag > 0)
+                    {
+                        for (int i = gunList[bulletType].bulletsPerTap; i > 0; i--)
+                        {
+                            StartCoroutine(Shoot());
+                        }
+                    }
+                    else if (gunList[bulletType].bulletsLeftInMag == 0 && !reloading)
+                    {
+                        StartCoroutine(Reload());
                     }
                 }
-                else if (gunList[bulletType].bulletsLeftInMag == 0 && !reloading)
-                {
-                    StartCoroutine(Reload());
-                }
+
             }
             Interact();
             Movement();
@@ -219,7 +223,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         //transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z + (leanCurve.Evaluate(Input.GetAxis("Horizontal") + 100)));
         controller.Move(move * playerSpeed * Time.deltaTime);
 
-        if(!Input.GetKey(KeyCode.W) || !Input.GetKey(KeyCode.A) || !Input.GetKey(KeyCode.S) || !Input.GetKey(KeyCode.D))
+        if (!Input.GetKey(KeyCode.W) || !Input.GetKey(KeyCode.A) || !Input.GetKey(KeyCode.S) || !Input.GetKey(KeyCode.D))
         {
             //Debug.Log("Idle");
             camAnim.SetTrigger("idle");
@@ -242,11 +246,11 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             {
                 StopCoroutine(sprintRecover);
             }
-            if(cameraSprint != null)
+            if (cameraSprint != null)
             {
                 StopCoroutine(cameraSprint);
             }
-            if(cameraInitial != null)
+            if (cameraInitial != null)
             {
                 StopCoroutine(cameraInitial);
             }
@@ -549,7 +553,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     #region Camera Sprint FOV IEumerator
     IEnumerator CameraSprint()
     {
-        while(isSprinting || isDashing)
+        while (isSprinting || isDashing)
         {
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, sprintFOV, timeBetweenTransition);
             yield return new WaitForSeconds(0);
@@ -560,7 +564,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     #region Camera Initial FOV IEumerator
     IEnumerator CameraInitial()
     {
-        while(!isSprinting || !isDashing)
+        while (!isSprinting || !isDashing)
         {
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, initialFOV, timeBetweenTransition);
             yield return new WaitForSeconds(0);
@@ -628,7 +632,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         isShooting = true;
         if (bulletType == GameManager.BulletType.Shotgun)
         {
-            
+
             SHOTSrc.clip = shotgun;
             SHOTSrc.Play();
         }
@@ -887,11 +891,11 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         try // for debugging purposes
         {
             GameManager.instance.HPBar.fillAmount = (float)HP / originalHP;
-            if(bulletType == GameManager.BulletType.None)
+            if (bulletType == GameManager.BulletType.None)
             {
 
             }
-            else
+            else if (gunList.ContainsKey(bulletType))
             {
                 GameManager.instance.AMMOBar.fillAmount = gunList[bulletType].bulletsLeftInMag / (float)gunList[bulletType].magazineSize;
             }

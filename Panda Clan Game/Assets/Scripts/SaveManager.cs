@@ -55,7 +55,7 @@ public class SaveManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             instance = this;
         }
-        else if(instance != this)
+        else if (instance != this)
         {
             Destroy(gameObject);
         }
@@ -146,7 +146,7 @@ public class SaveManager : MonoBehaviour
             level5 = data.level5;
             level6 = data.level6;
             level7 = data.level7;
-        }    
+        }
     }
 
     public void LoadDefault()
@@ -172,7 +172,8 @@ public class SaveManager : MonoBehaviour
     {
         //Set Player Variables
         GameManager.instance.playerScript.HP = HP;
-        //Debug.Log(GameManager.instance.playerScript.HP);
+        Debug.Log(GameManager.instance.playerScript.HP);
+        Debug.Log(HP);
         GameManager.instance.playerScript.healthMax = healthMax;
         GameManager.instance.playerScript.playerSpeed = playerSpeed;
         GameManager.instance.playerScript.maxStam = maxStam;
@@ -187,11 +188,11 @@ public class SaveManager : MonoBehaviour
         {
             GameManager.instance.playerScript.AddDrops(AR);
         }
-        else if(bullet == GameManager.BulletType.SMG)
+        else if (bullet == GameManager.BulletType.SMG)
         {
             GameManager.instance.playerScript.AddDrops(SMG);
         }
-        else if(bullet == GameManager.BulletType.Shotgun)
+        else if (bullet == GameManager.BulletType.Shotgun)
         {
             GameManager.instance.playerScript.AddDrops(Shotgun);
         }

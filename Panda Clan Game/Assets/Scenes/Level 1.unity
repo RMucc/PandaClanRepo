@@ -2495,6 +2495,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8639433583950129636, guid: ae2d54a112c67544d9e945049f3710fc, type: 3}
+      propertyPath: SMG
+      value: 
+      objectReference: {fileID: 11400000, guid: ecdb7869593087345b258face1e020cc, type: 2}
+    - target: {fileID: 8639433583950129636, guid: ae2d54a112c67544d9e945049f3710fc, type: 3}
+      propertyPath: gunToAdd
+      value: 
+      objectReference: {fileID: 11400000, guid: ecdb7869593087345b258face1e020cc, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13224,6 +13232,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorLocation: {fileID: 287793036}
+  SMG: {fileID: 11400000, guid: ecdb7869593087345b258face1e020cc, type: 2}
+  bullet: 0
 --- !u!1 &2024617259
 GameObject:
   m_ObjectHideFlags: 0

@@ -155,7 +155,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         originalDashDebounce = dashDebounce;
         readyToShoot = true;
         isShooting = false;
-        AddDrops(gunToAdd, ammoToAdd);
+        //AddDrops(gunToAdd, ammoToAdd);
         updatePlayerUI();
     }
 
@@ -165,35 +165,41 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         if (!GameManager.instance.inShop)
         {
             stFX();
-            if (!gunList.ContainsKey(bulletType))
+            if (!gunList.ContainsKey(bulletType) && SaveManager.instance.level1 == false)
             {
                 bulletType = GameManager.BulletType.SMG;
-                //AddDrops(gunToAdd, ammoToAdd);
+                AddDrops(gunToAdd, ammoToAdd);
             }
-            if (gunList[bulletType].allowButtonHold && !isShooting)
+            if(bulletType == GameManager.BulletType.None)
             {
-                shooting = Input.GetButton("Shoot");
             }
             else
             {
-                shooting = Input.GetButtonDown("Shoot");
-            }
-
-            if (Input.GetButtonDown("Reload") && gunList[bulletType].bulletsLeftInMag < gunList[bulletType].magazineSize && !reloading)
-            {
-                StartCoroutine(Reload());
-            }
-
-            if (readyToShoot && shooting && !reloading && gunList[bulletType].bulletsLeftInMag > 0)
-            {
-                for (int i = gunList[bulletType].bulletsPerTap; i > 0; i--)
+                if (gunList[bulletType].allowButtonHold && !isShooting)
                 {
-                    StartCoroutine(Shoot());
+                    shooting = Input.GetButton("Shoot");
                 }
-            }
-            else if (gunList[bulletType].bulletsLeftInMag == 0 && !reloading)
-            {
-                StartCoroutine(Reload());
+                else
+                {
+                    shooting = Input.GetButtonDown("Shoot");
+                }
+
+                if (Input.GetButtonDown("Reload") && gunList[bulletType].bulletsLeftInMag < gunList[bulletType].magazineSize && !reloading)
+                {
+                    StartCoroutine(Reload());
+                }
+
+                if (readyToShoot && shooting && !reloading && gunList[bulletType].bulletsLeftInMag > 0)
+                {
+                    for (int i = gunList[bulletType].bulletsPerTap; i > 0; i--)
+                    {
+                        StartCoroutine(Shoot());
+                    }
+                }
+                else if (gunList[bulletType].bulletsLeftInMag == 0 && !reloading)
+                {
+                    StartCoroutine(Reload());
+                }
             }
             Interact();
             Movement();
@@ -881,10 +887,14 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         try // for debugging purposes
         {
             GameManager.instance.HPBar.fillAmount = (float)HP / originalHP;
-            GameManager.instance.AMMOBar.fillAmount = gunList[bulletType].bulletsLeftInMag / (float)gunList[bulletType].magazineSize;
+            if(bulletType == GameManager.BulletType.None)
+            {
 
-
-
+            }
+            else
+            {
+                GameManager.instance.AMMOBar.fillAmount = gunList[bulletType].bulletsLeftInMag / (float)gunList[bulletType].magazineSize;
+            }
         }
         catch (System.Exception e)
         {

@@ -5,6 +5,8 @@ using UnityEngine;
 public class GrabGun : MonoBehaviour
 {
     [SerializeField] GameObject doorLocation;
+    [SerializeField] GunStats SMG;
+    public GameManager.BulletType bullet;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -13,6 +15,8 @@ public class GrabGun : MonoBehaviour
             GameManager.instance.InstantiateArrow(null, false);
             GameManager.instance.InstantiateArrow(doorLocation.transform);
             GameManager.instance.grabGunBool = true;
+            bullet = GameManager.BulletType.SMG;
+            GameManager.instance.playerScript.AddDrops(SMG, 30);
             Destroy(gameObject);
         }
     }

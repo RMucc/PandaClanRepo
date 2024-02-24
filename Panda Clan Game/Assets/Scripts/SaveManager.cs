@@ -110,7 +110,6 @@ public class SaveManager : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().buildIndex != 0 && SceneManager.GetActiveScene().buildIndex != 1)
         {
-            GameManager.instance.interfaceForStory.SetActive(true);
             Debug.Log("Load Data");
             LoadData();
             Debug.Log("Set Data");

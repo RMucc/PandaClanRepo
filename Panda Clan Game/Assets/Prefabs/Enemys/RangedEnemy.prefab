@@ -63,15 +63,20 @@ MonoBehaviour:
   - {fileID: 2983619795495937277, guid: 714ec059419c4fa419d0c20eb829d93f, type: 3}
   itemPotentialCountToDrop: 3
   stored: {r: 0, g: 0, b: 0, a: 0}
-  bullet: {fileID: 8262477620160788249, guid: 153c7fba034da9345a43d39a3eee9393, type: 3}
+  anim: {fileID: 0}
   shootPos: {fileID: 6516535372482501243}
-  shootRate: 1
-  gun: {fileID: 11400000, guid: 9cdfbf8351e13cd44b51e9059de153e2, type: 2}
+  headPos: {fileID: 6806603147041139166}
   effectGameGoal: 1
+  shootRate: 1
+  fov: 360
+  fovshoot: 90
+  bulletSpread: 1
+  targetFaceSpeed: 0
+  animspeedTrans: 0
   AmmoAddedOnDeath: 5
   playerFaceSpeed: 100
-  bulletSpread: 0
-  headPos: {fileID: 6010052193166790481}
+  bullet: {fileID: 8262477620160788249, guid: 153c7fba034da9345a43d39a3eee9393, type: 3}
+  gun: {fileID: 11400000, guid: 9cdfbf8351e13cd44b51e9059de153e2, type: 2}
 --- !u!195 &4223591056742101865
 NavMeshAgent:
   m_ObjectHideFlags: 0

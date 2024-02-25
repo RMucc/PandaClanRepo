@@ -37,6 +37,11 @@ public class GameManager : MonoBehaviour
     public GameObject Story1Reminder;
     public GameObject interfaceForStory;
     public event EventHandler OnLevel1Finished;
+    public event EventHandler OnLevel2Finished;
+    public event EventHandler OnLevel3Finished;
+    public event EventHandler OnLevel4Finished;
+    public event EventHandler OnLevel5Finished;
+    public event EventHandler OnLevel6Finished;
     GameObject currentArrow;
     [SerializeField] float pushDuration;
     [SerializeField] int pushBackSpeed;

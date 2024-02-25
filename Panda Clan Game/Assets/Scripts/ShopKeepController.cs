@@ -11,9 +11,6 @@ public class ShopKeepController : InteractableClass
     interactPhases interactPhase;
     [SerializeField] GameObject questNoti;
     [SerializeField] Transform headPos;
-    [SerializeField] Transform pos1;
-    [SerializeField] Transform pos2;
-    [SerializeField] GameObject BagsToDestroy;
     [SerializeField] Transform ArrowDownPos;
     [SerializeField] Transform inShopCamPos;
     [SerializeField] float toPositionDuration;
@@ -24,8 +21,6 @@ public class ShopKeepController : InteractableClass
 
     void Start()
     {
-        anim = GetComponent<Animator>();
-        transform.SetPositionAndRotation(pos1.position, pos1.rotation);
         interactPhase = interactPhases.secondToEnd;
         InteractTaskOpen = true;
         GameManager.instance.OnLevel1Finished += TurnOnWave;
@@ -70,11 +65,10 @@ public class ShopKeepController : InteractableClass
     {
         GameManager.instance.InstantiateArrow(null, false);
         anim.SetBool("ShopMade", true);
-        transform.SetPositionAndRotation(pos2.position, pos2.rotation);
         GameManager.instance.InstantiateArrow(ArrowDownPos);
-        if(BagsToDestroy) { Destroy(BagsToDestroy); }
         interactPhase--;
         anim.SetBool("playerInteract", false);
+        OpenStore();
     }
 
     void OpenStore() // Opening the store menu

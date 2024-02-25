@@ -272,7 +272,7 @@ public class GameManager : MonoBehaviour
             statePaused();
             try
             {
-                //OnLevelFinished?.Invoke(this, EventArgs.Empty);
+                OnLevelFinished?.Invoke(this, EventArgs.Empty);
                 menuActive = levelMenuWin;
                 menuActive.SetActive(true);
             }
@@ -528,7 +528,7 @@ public class GameManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Confined;
             Camera.main.transform.parent = inShopCamPos;
             Camera.main.transform.position = Vector3.zero;
-            Camera.main.transform.rotation = Quaternion.Euler(0f, 80f, 0f);
+            Camera.main.transform.localRotation = Quaternion.Euler(0, 0, 0);
         }
         else
         {

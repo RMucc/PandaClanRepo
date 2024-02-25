@@ -45,10 +45,7 @@ public class GameManager : MonoBehaviour
     public GameObject Story9;
     public GameObject Story10;
     public GameObject interfaceForStory;
-    public event EventHandler OnLevel2Finished;
-    public event EventHandler OnLevel4Finished;
-    public event EventHandler OnLevel5Finished;
-    public event EventHandler OnLevel6Finished;
+    public event EventHandler OnLevelFinished;
     GameObject currentArrow;
     [SerializeField] float pushDuration;
     [SerializeField] int pushBackSpeed;
@@ -260,7 +257,7 @@ public class GameManager : MonoBehaviour
             statePaused();
             try
             {
-                OnLevel2Finished?.Invoke(this, EventArgs.Empty);
+                OnLevelFinished?.Invoke(this, EventArgs.Empty);
                 menuActive = levelMenuWin;
                 menuActive.SetActive(true);
             }
@@ -275,6 +272,7 @@ public class GameManager : MonoBehaviour
             statePaused();
             try
             {
+                //OnLevelFinished?.Invoke(this, EventArgs.Empty);
                 menuActive = levelMenuWin;
                 menuActive.SetActive(true);
             }
@@ -286,6 +284,7 @@ public class GameManager : MonoBehaviour
         //Should pull up a win menu that we can close out of so that we can move on to the next level
         else if (enemyGoal <= 0 && level4 == true)
         {
+            //OnLevelFinished?.Invoke(this, EventArgs.Empty);
             statePaused();
             menuActive = levelMenuWin;
             menuActive.SetActive(true);
@@ -293,6 +292,7 @@ public class GameManager : MonoBehaviour
         //Should pull up a win menu that we can close out of so that we can move on to the next level
         else if (enemyGoal <= 0 && level5 == true)
         {
+            //OnLevelFinished?.Invoke(this, EventArgs.Empty);
             statePaused();
             menuActive = levelMenuWin;
             menuActive.SetActive(true);
@@ -300,6 +300,7 @@ public class GameManager : MonoBehaviour
         //Should pull up a win menu that we can close out of so that we can move on to the next level
         else if (enemyGoal <= 0 && level6 == true)
         {
+            //OnLevelFinished?.Invoke(this, EventArgs.Empty);
             statePaused();
             menuActive = levelMenuWin;
             menuActive.SetActive(true);
@@ -307,12 +308,29 @@ public class GameManager : MonoBehaviour
         //Should pull up a win menu because we won
         else if (enemyGoal <= 0 && level7 == true)
         {
+            //OnLevelFinished?.Invoke(this, EventArgs.Empty);
             statePaused();
             menuActive = menuWin;
             menuActive.SetActive(true);
         }
         //Should pull up the win menu (No level after this so give option to restart or leave)
     }
+
+    void TurnOnWinMenu()
+    {
+        statePaused();
+        try
+        {
+            OnLevelFinished?.Invoke(this, EventArgs.Empty);
+            menuActive = levelMenuWin;
+            menuActive.SetActive(true);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogWarning(e + "error: levelMenuWin not found");
+        }
+    }
+
     public void updateEnemyAmount(int amount)
     {
         enemyCount += amount;

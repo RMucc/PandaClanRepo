@@ -45,10 +45,7 @@ public class GameManager : MonoBehaviour
     public GameObject Story9;
     public GameObject Story10;
     public GameObject interfaceForStory;
-    public event EventHandler OnLevel2Finished;
-    public event EventHandler OnLevel4Finished;
-    public event EventHandler OnLevel5Finished;
-    public event EventHandler OnLevel6Finished;
+    public event EventHandler OnLevelFinished;
     GameObject currentArrow;
     [SerializeField] float pushDuration;
     [SerializeField] int pushBackSpeed;
@@ -243,76 +240,56 @@ public class GameManager : MonoBehaviour
         //Should pull up a win menu that we can close out of so that we can move on to the next level
         if (enemyGoal <= 0 && level1)
         {
-            statePaused();
-            try
-            {
-                menuActive = levelMenuWin;
-                menuActive.SetActive(true);
-            }
-            catch (System.Exception e)
-            {
-                Debug.LogWarning(e + "error: levelMenuWin not found");
-            }
+            TurnOnWinMenu();
         }
         //Should pull up a win menu that we can close out of so that we can move on to the next level
-        else if (enemyGoal <= 0 && level2 == true)
+        else if (enemyGoal <= 0 && level2)
         {
-            statePaused();
-            try
-            {
-                OnLevel2Finished?.Invoke(this, EventArgs.Empty);
-                menuActive = levelMenuWin;
-                menuActive.SetActive(true);
-            }
-            catch (System.Exception e)
-            {
-                Debug.LogWarning(e + "error: levelMenuWin not found");
-            }
+            TurnOnWinMenu();
         }
         //Should pull up a win menu that we can close out of so that we can move on to the next level
-        else if (enemyGoal <= 0 && level3 == true)
+        else if (enemyGoal <= 0 && level3)
         {
-            statePaused();
-            try
-            {
-                menuActive = levelMenuWin;
-                menuActive.SetActive(true);
-            }
-            catch (System.Exception e)
-            {
-                Debug.LogWarning(e + "error: levelMenuWin not found");
-            }
+            TurnOnWinMenu();
         }
         //Should pull up a win menu that we can close out of so that we can move on to the next level
-        else if (enemyGoal <= 0 && level4 == true)
+        else if (enemyGoal <= 0 && level4)
         {
-            statePaused();
-            menuActive = levelMenuWin;
-            menuActive.SetActive(true);
+            TurnOnWinMenu();
         }
         //Should pull up a win menu that we can close out of so that we can move on to the next level
-        else if (enemyGoal <= 0 && level5 == true)
+        else if (enemyGoal <= 0 && level5)
         {
-            statePaused();
-            menuActive = levelMenuWin;
-            menuActive.SetActive(true);
+            TurnOnWinMenu();
         }
         //Should pull up a win menu that we can close out of so that we can move on to the next level
-        else if (enemyGoal <= 0 && level6 == true)
+        else if (enemyGoal <= 0 && level6)
         {
-            statePaused();
-            menuActive = levelMenuWin;
-            menuActive.SetActive(true);
+            TurnOnWinMenu();
         }
         //Should pull up a win menu because we won
-        else if (enemyGoal <= 0 && level7 == true)
+        else if (enemyGoal <= 0 && level7)
         {
-            statePaused();
-            menuActive = menuWin;
-            menuActive.SetActive(true);
+            TurnOnWinMenu();
         }
         //Should pull up the win menu (No level after this so give option to restart or leave)
     }
+
+    void TurnOnWinMenu()
+    {
+        statePaused();
+        try
+        {
+            OnLevelFinished?.Invoke(this, EventArgs.Empty);
+            menuActive = levelMenuWin;
+            menuActive.SetActive(true);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogWarning(e + "error: levelMenuWin not found");
+        }
+    }
+
     public void updateEnemyAmount(int amount)
     {
         enemyCount += amount;

@@ -923,15 +923,20 @@ MonoBehaviour:
   dropItemList: []
   itemPotentialCountToDrop: 0
   stored: {r: 0, g: 0, b: 0, a: 0}
-  bullet: {fileID: 8262477620160788249, guid: 153c7fba034da9345a43d39a3eee9393, type: 3}
+  anim: {fileID: 0}
   shootPos: {fileID: 9069482512635317320}
-  shootRate: 1
-  gun: {fileID: 11400000, guid: 9cdfbf8351e13cd44b51e9059de153e2, type: 2}
+  headPos: {fileID: 7966858154412939288}
   effectGameGoal: 1
+  shootRate: 1
+  fov: 0
+  fovshoot: 0
+  bulletSpread: 2
+  targetFaceSpeed: 0
+  animspeedTrans: 0
   AmmoAddedOnDeath: 0
   playerFaceSpeed: 100
-  bulletSpread: 2
-  headPos: {fileID: 2429454608670265507}
+  bullet: {fileID: 8262477620160788249, guid: 153c7fba034da9345a43d39a3eee9393, type: 3}
+  gun: {fileID: 11400000, guid: 9cdfbf8351e13cd44b51e9059de153e2, type: 2}
 --- !u!95 &4045384479661353875
 Animator:
   serializedVersion: 5

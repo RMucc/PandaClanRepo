@@ -7728,7 +7728,7 @@ Transform:
   m_GameObject: {fileID: 1158092374}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -6, y: 0, z: -43}
+  m_LocalPosition: {x: -6, y: 12.8, z: -43.8}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -14845,18 +14845,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1040228081794126571, guid: 93b9f1993d3093a48bae4e87fb14f189, type: 3}
-      propertyPath: AR
-      value: 
-      objectReference: {fileID: 11400000, guid: 9cdfbf8351e13cd44b51e9059de153e2, type: 2}
-    - target: {fileID: 1040228081794126571, guid: 93b9f1993d3093a48bae4e87fb14f189, type: 3}
-      propertyPath: SMG
-      value: 
-      objectReference: {fileID: 11400000, guid: ecdb7869593087345b258face1e020cc, type: 2}
-    - target: {fileID: 1040228081794126571, guid: 93b9f1993d3093a48bae4e87fb14f189, type: 3}
-      propertyPath: Shotgun
-      value: 
-      objectReference: {fileID: 11400000, guid: 5b74d9c815388054d93c580de7b26970, type: 2}
     - target: {fileID: 8538632120979916389, guid: 93b9f1993d3093a48bae4e87fb14f189, type: 3}
       propertyPath: m_Name
       value: SaveManager

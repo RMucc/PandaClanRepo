@@ -165,7 +165,10 @@ public class SaveManager : MonoBehaviour
         level6 = false;
         level7 = false;
         bullet = GameManager.BulletType.None;
-        SetData();
+        if(SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            SetData();
+        }
     }
 
     public void SetData()

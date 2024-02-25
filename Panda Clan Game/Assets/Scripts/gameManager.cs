@@ -93,6 +93,7 @@ public class GameManager : MonoBehaviour
     public bool Story10Bool;
 
     public bool isPaused;
+    public bool level0;
     public bool level1;
     public bool level2;
     public bool level3;
@@ -134,7 +135,14 @@ public class GameManager : MonoBehaviour
         }
         //instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
-        playerScript = player.GetComponent<RyansPlayerController>();
+        if(SceneManager.GetActiveScene().buildIndex == 0)
+        {
+
+        }
+        else
+        {
+            playerScript = player.GetComponent<RyansPlayerController>();
+        }
         playerSpawnPos = GameObject.FindGameObjectWithTag("Player Spawn Pos");
         if (GameObject.FindGameObjectWithTag("ShopKeep"))
         {

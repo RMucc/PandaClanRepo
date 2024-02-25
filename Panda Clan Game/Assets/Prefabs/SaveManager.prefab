@@ -51,5 +51,14 @@ MonoBehaviour:
   dashCost: 20
   stamDrain: 5
   stamRegen: 5
+  AR: {fileID: 11400000, guid: 9cdfbf8351e13cd44b51e9059de153e2, type: 2}
+  SMG: {fileID: 11400000, guid: ecdb7869593087345b258face1e020cc, type: 2}
+  Shotgun: {fileID: 11400000, guid: 5b74d9c815388054d93c580de7b26970, type: 2}
+  bullet: 0
   level1: 1
   level2: 0
+  level3: 0
+  level4: 0
+  level5: 0
+  level6: 0
+  level7: 0

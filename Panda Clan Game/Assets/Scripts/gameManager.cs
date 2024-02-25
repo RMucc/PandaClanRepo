@@ -45,7 +45,6 @@ public class GameManager : MonoBehaviour
     public GameObject Story9;
     public GameObject Story10;
     public GameObject interfaceForStory;
-    public event EventHandler OnLevel1Finished;
     public event EventHandler OnLevel2Finished;
     public event EventHandler OnLevel3Finished;
     public event EventHandler OnLevel4Finished;
@@ -240,7 +239,6 @@ public class GameManager : MonoBehaviour
             statePaused();
             try
             {
-                OnLevel1Finished?.Invoke(this, EventArgs.Empty);
                 menuActive = levelMenuWin;
                 menuActive.SetActive(true);
             }
@@ -255,10 +253,6 @@ public class GameManager : MonoBehaviour
             statePaused();
             try
             {
-                /*if (arrowToNext && shopKeeper)
-                {
-                    shopKeeper.TurnOnWave();
-                }*/
                 menuActive = levelMenuWin;
                 menuActive.SetActive(true);
             }
@@ -273,10 +267,7 @@ public class GameManager : MonoBehaviour
             statePaused();
             try
             {
-                /*if (arrowToNext && shopKeeper)
-                {
-                    shopKeeper.TurnOnWave();
-                }*/
+                OnLevel3Finished?.Invoke(this, EventArgs.Empty);
                 menuActive = levelMenuWin;
                 menuActive.SetActive(true);
             }

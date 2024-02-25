@@ -28,6 +28,8 @@ public class Story6Script : MonoBehaviour
 
         if (GameManager.instance.enemyGoal <= 0)
         {
+            GameManager.instance.Story6Bool = true;
+            GameManager.instance.InstantiateArrow(null, false);
             GameManager.instance.InstantiateArrow(bossLocation.transform);
         }
     }

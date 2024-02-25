@@ -28,6 +28,7 @@ public class Story4Script : MonoBehaviour
 
         if (GameManager.instance.enemyGoal <= 0)
         {
+            GameManager.instance.InstantiateArrow(null, false);
             GameManager.instance.InstantiateArrow(mapLocation.transform);
         }
     }

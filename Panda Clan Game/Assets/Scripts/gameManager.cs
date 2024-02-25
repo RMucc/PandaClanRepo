@@ -225,7 +225,10 @@ public class GameManager : MonoBehaviour
 
     public void InstantiateArrow(Transform transform = null, bool turnOn = true)
     {
-        if (currentArrow) { Destroy(currentArrow); }
+        if (currentArrow) 
+        {
+            Destroy(currentArrow); 
+        }
         if (turnOn)
         {
             currentArrow = Instantiate(arrowToNext, transform.position, Quaternion.identity);

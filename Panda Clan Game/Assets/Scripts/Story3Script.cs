@@ -28,6 +28,7 @@ public class Story3Script : MonoBehaviour
 
         if (GameManager.instance.enemyGoal <= 0)
         {
+            GameManager.instance.InstantiateArrow(null, false);
             GameManager.instance.InstantiateArrow(laptopLocation.transform);
         }
     }

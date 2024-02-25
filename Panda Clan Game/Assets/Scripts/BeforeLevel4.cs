@@ -13,13 +13,17 @@ public class BeforeLevel4 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(GameManager.instance.Story4Bool == true)
+        {
+            gameObject.GetComponent<BoxCollider>().enabled = true;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Trigger Entered");
             if (GameManager.instance.Story4Bool == true)
             {
                 Debug.Log("Moving On To Next Level!");

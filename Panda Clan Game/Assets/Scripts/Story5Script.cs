@@ -28,6 +28,8 @@ public class Story5Script : MonoBehaviour
 
         if (GameManager.instance.enemyGoal <= 0)
         {
+            GameManager.instance.Story5Bool = true;
+            GameManager.instance.InstantiateArrow(null, false);
             GameManager.instance.InstantiateArrow(tunnelLocation.transform);
         }
     }

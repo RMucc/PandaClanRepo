@@ -16,7 +16,7 @@ MonoBehaviour:
   shootRate: 0
   damageRange: 8
   damageDropOffRate: 10
-  bulletDistance: 12
+  bulletDistance: 15
   bulletSpread: 0.3
   reloadTime: 1
   timeBetweenShots: 0.5

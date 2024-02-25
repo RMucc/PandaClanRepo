@@ -35,6 +35,15 @@ public class GameManager : MonoBehaviour
     public GameObject Interact;
     public GameObject Story1;
     public GameObject Story1Reminder;
+    public GameObject Story2;
+    public GameObject Story3;
+    public GameObject Story4;
+    public GameObject Story5;
+    public GameObject Story6;
+    public GameObject Story7;
+    public GameObject Story8;
+    public GameObject Story9;
+    public GameObject Story10;
     public GameObject interfaceForStory;
     public event EventHandler OnLevel1Finished;
     public event EventHandler OnLevel2Finished;
@@ -74,8 +83,16 @@ public class GameManager : MonoBehaviour
     //public GameObject nextLevel2;
 
     public bool Story1Bool;
-
     public bool grabGunBool;
+    public bool Story2Bool;
+    public bool Story3Bool;
+    public bool Story4Bool;
+    public bool Story5Bool;
+    public bool Story6Bool;
+    public bool Story7Bool;
+    public bool Story8Bool;
+    public bool Story9Bool;
+    public bool Story10Bool;
 
     public bool isPaused;
     public bool level1;
@@ -165,6 +182,9 @@ public class GameManager : MonoBehaviour
             level2 = SaveManager.instance.level2;
             level3 = SaveManager.instance.level3;
             level4 = SaveManager.instance.level4;
+            level5 = SaveManager.instance.level5;
+            level6 = SaveManager.instance.level6;
+            level7 = SaveManager.instance.level7;
             new WaitForSeconds(1);
             temp -= 1;
         }
@@ -178,6 +198,14 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
+    }
+
+    public void simpleResume()
+    {
+        isPaused = !isPaused;
+        Time.timeScale = 1;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void stateResume()
@@ -259,6 +287,27 @@ public class GameManager : MonoBehaviour
         }
         //Should pull up a win menu that we can close out of so that we can move on to the next level
         else if (enemyGoal <= 0 && level4 == true)
+        {
+            statePaused();
+            menuActive = levelMenuWin;
+            menuActive.SetActive(true);
+        }
+        //Should pull up a win menu that we can close out of so that we can move on to the next level
+        else if (enemyGoal <= 0 && level5 == true)
+        {
+            statePaused();
+            menuActive = levelMenuWin;
+            menuActive.SetActive(true);
+        }
+        //Should pull up a win menu that we can close out of so that we can move on to the next level
+        else if (enemyGoal <= 0 && level6 == true)
+        {
+            statePaused();
+            menuActive = levelMenuWin;
+            menuActive.SetActive(true);
+        }
+        //Should pull up a win menu because we won
+        else if (enemyGoal <= 0 && level7 == true)
         {
             statePaused();
             menuActive = menuWin;

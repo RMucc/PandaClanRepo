@@ -36,7 +36,7 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
     float stoppingDistOrig;
 
 
-    void Start()
+    void Awake()
     {
         isShooting = false;
     }

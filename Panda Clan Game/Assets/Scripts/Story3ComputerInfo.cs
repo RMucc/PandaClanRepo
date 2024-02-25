@@ -23,7 +23,6 @@ public class Story3ComputerInfo : MonoBehaviour
         {
             Debug.Log("Happening");
             GameManager.instance.Story3Bool = true;
-            GameManager.instance.InstantiateArrow(null, false);
             GameManager.instance.InstantiateArrow(FireExitLocation.transform);
             GameManager.instance.Story4.SetActive(true);
         }

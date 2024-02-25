@@ -5,6 +5,7 @@ using UnityEngine;
 public class Story2Script : MonoBehaviour
 {
     public bool continueBool;
+    [SerializeField] Transform doorPosistions;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +16,7 @@ public class Story2Script : MonoBehaviour
     }
     private void Update()
     {
-        if(continueBool == false)
+        if (continueBool == false)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -23,6 +24,10 @@ public class Story2Script : MonoBehaviour
                 GameManager.instance.Story2.SetActive(false);
                 GameManager.instance.simpleResume();
             }
+        }
+        if (GameManager.instance.enemyGoal <= 0)
+        {
+            GameManager.instance.InstantiateArrow(doorPosistions);
         }
     }
 }

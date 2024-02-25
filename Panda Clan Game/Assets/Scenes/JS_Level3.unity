@@ -8001,6 +8001,10 @@ PrefabInstance:
       propertyPath: bulletSpread
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4223591056742101865, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4240346518832343959, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
       propertyPath: m_Name
       value: RangedEnemy
@@ -15667,6 +15671,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7365160809249129110}
+  - component: {fileID: 7452835389180476395}
   - component: {fileID: 7452835389180476392}
   - component: {fileID: 7452835389180476390}
   - component: {fileID: 7452835389180476391}
@@ -16160,7 +16165,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 600
-  m_StoppingDistance: 15
+  m_StoppingDistance: 10
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -16189,6 +16194,32 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 42.38953
   m_Center: {x: -0.000000004816951, y: 1, z: 7.389534}
+--- !u!114 &7452835389180476395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7367526678013595162}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20f3ed3ff4530ec449abd15c70b6a9f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  model: {fileID: 7480896884844671950}
+  agent: {fileID: 7452835389180476393}
+  anim: {fileID: 7452835389180476390}
+  shootPos: {fileID: 1452872700}
+  headPos: {fileID: 7365348506689900528}
+  HP: 110
+  fov: 360
+  fovshoot: 180
+  targetFaceSpeed: 300
+  animspeedTrans: 0
+  roamDist: 0
+  roamPauseTimer: 0
+  bullet: {fileID: 8262477620160788249, guid: 153c7fba034da9345a43d39a3eee9393, type: 3}
+  shootrate: 0.92
 --- !u!137 &7480516359012372416
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0

@@ -10,13 +10,9 @@ public class ShopKeepController : InteractableClass
     public Animator anim;
     interactPhases interactPhase;
     [SerializeField] GameObject questNoti;
-    [SerializeField] Transform headPos;
     [SerializeField] Transform ArrowDownPos;
     [SerializeField] Transform inShopCamPos;
     [SerializeField] float toPositionDuration;
-    float timeElapsed;
-
-    GameObject currentArrow;
 
 
     void Start()
@@ -55,7 +51,6 @@ public class ShopKeepController : InteractableClass
     public void TurnOnWave(object sender, EventArgs e) // Get player's attention after enemys killed
     {
         anim.SetBool("EnemiesRemain", false);
-        GameManager.instance.InstantiateArrow(ArrowDownPos);
         InteractTaskOpen = true;
         interactPhase--;
     }
@@ -63,9 +58,7 @@ public class ShopKeepController : InteractableClass
 
     void InstantiateStore() // Places shopkeep in position to have the store be avaible for the player
     {
-        GameManager.instance.InstantiateArrow(null, false);
         anim.SetBool("ShopMade", true);
-        GameManager.instance.InstantiateArrow(ArrowDownPos);
         interactPhase--;
         anim.SetBool("playerInteract", false);
         OpenStore();

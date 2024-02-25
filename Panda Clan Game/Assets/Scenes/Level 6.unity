@@ -17551,9 +17551,9 @@ MonoBehaviour:
   - {fileID: 1639937907}
   - {fileID: 1101410881}
   - {fileID: 532546208}
-  wave1EnemyAmount: 4
-  wave2EnemyAmount: 8
-  wave3EnemyAmount: 10
+  wave1EnemyAmount: 2
+  wave2EnemyAmount: 2
+  wave3EnemyAmount: 2
 --- !u!4 &1379798226
 Transform:
   m_ObjectHideFlags: 0

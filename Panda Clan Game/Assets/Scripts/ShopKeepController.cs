@@ -23,7 +23,7 @@ public class ShopKeepController : InteractableClass
     {
         interactPhase = interactPhases.secondToEnd;
         InteractTaskOpen = true;
-        GameManager.instance.OnLevel3Finished += TurnOnWave;
+        GameManager.instance.OnLevel2Finished += TurnOnWave;
     }
 
 

@@ -46,7 +46,6 @@ public class GameManager : MonoBehaviour
     public GameObject Story10;
     public GameObject interfaceForStory;
     public event EventHandler OnLevel2Finished;
-    public event EventHandler OnLevel3Finished;
     public event EventHandler OnLevel4Finished;
     public event EventHandler OnLevel5Finished;
     public event EventHandler OnLevel6Finished;
@@ -261,6 +260,7 @@ public class GameManager : MonoBehaviour
             statePaused();
             try
             {
+                OnLevel2Finished?.Invoke(this, EventArgs.Empty);
                 menuActive = levelMenuWin;
                 menuActive.SetActive(true);
             }
@@ -275,7 +275,6 @@ public class GameManager : MonoBehaviour
             statePaused();
             try
             {
-                OnLevel3Finished?.Invoke(this, EventArgs.Empty);
                 menuActive = levelMenuWin;
                 menuActive.SetActive(true);
             }

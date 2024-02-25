@@ -6565,7 +6565,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToSpawn:
   - {fileID: 8687424609967327632, guid: de03c17f5dfcddc43a3a69fd09b91177, type: 3}
-  - {fileID: 2851117764573291377, guid: a30b5470b44bc1a4e82465c806bcaf8f, type: 3}
+  - {fileID: 4461265607079146730, guid: fdf2348bab3f5104598fc3ae951ae530, type: 3}
   - {fileID: 2236138064682025148, guid: 063c27812b484d34fac3def3548f2c11, type: 3}
   - {fileID: 6232163740477263120, guid: d994c8ed7832e5c4d953790060ca417a, type: 3}
   timeBetweenSpawns: 1

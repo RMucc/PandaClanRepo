@@ -10,7 +10,7 @@ public class Story7Script : MonoBehaviour
     void Start()
     {
         continueBool = false;
-        Debug.Log("Pausing Game and Activating Story3");
+        //Debug.Log("Pausing Game and Activating Story3");
         GameManager.instance.Story9.SetActive(true);
         GameManager.instance.statePaused();
     }

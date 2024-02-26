@@ -330,7 +330,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aa235591225fbf4787685561c3a3829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 1718076467476447341}
+  modelList:
+  - {fileID: 1718076467476447341}
+  - {fileID: 6436924847956214516}
   agent: {fileID: 308651904451800833}
   healthUI: {fileID: 265053263874750886}
   HP: 22
@@ -339,7 +341,7 @@ MonoBehaviour:
   dropItemList:
   - {fileID: 2983619795495937277, guid: 714ec059419c4fa419d0c20eb829d93f, type: 3}
   itemPotentialCountToDrop: 3
-  stored: {r: 0, g: 0, b: 0, a: 0}
+  storedColors: []
   effectGameGoal: 1
   itemCountToDrop: 0
   TimeToWait: 3

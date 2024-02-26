@@ -565,7 +565,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3124704970688230867}
-  - component: {fileID: 7821361160163603537}
+  - component: {fileID: 286015323764639541}
   - component: {fileID: 7637364415854892281}
   - component: {fileID: 8608337469930009554}
   - component: {fileID: 7661043045162448160}
@@ -585,9 +585,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2202247188349967668}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.7241567, z: -0, w: 0.6896356}
+  m_LocalRotation: {x: 0, y: -0.7241538, z: 0, w: 0.68963856}
   m_LocalPosition: {x: -13.835331, y: 0, z: 10.798488}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5296565743977293288}
@@ -600,7 +600,7 @@ Transform:
   - {fileID: 781000924747414732}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -92.797, z: 0}
---- !u!114 &7821361160163603537
+--- !u!114 &286015323764639541
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -609,14 +609,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2202247188349967668}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c69444a257f78884e8778ee9c73be7ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 98b501d12b48204449c5de3ba6fa0eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   model: {fileID: 5564450102664211476}
   agent: {fileID: 8608337469930009554}
   healthUI: {fileID: 3283289960702547090}
-  HP: 100
-  origHP: 100
+  HP: 300
+  origHP: 1000
   alive: 1
   dropItemList: []
   itemPotentialCountToDrop: 0
@@ -633,8 +633,30 @@ MonoBehaviour:
   animspeedTrans: 0
   AmmoAddedOnDeath: 0
   playerFaceSpeed: 100
-  bullet: {fileID: 8262477620160788249, guid: 153c7fba034da9345a43d39a3eee9393, type: 3}
+  teleportInterval: 7
+  teleportPositions:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  enemySpawnPositions:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  enemysToSpawn:
+  - {fileID: 2236138064682025148, guid: 063c27812b484d34fac3def3548f2c11, type: 3}
+  - {fileID: 4461265607079146730, guid: fdf2348bab3f5104598fc3ae951ae530, type: 3}
+  - {fileID: 4240346518832343959, guid: 27a24c564818fca45b7f36ea70f62fab, type: 3}
+  - {fileID: 6232163740477263120, guid: d994c8ed7832e5c4d953790060ca417a, type: 3}
+  laserShootPositions:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  lazerBullet: {fileID: 5500536782421731269, guid: 533dc83e277a3da4aaa727f9c982c07e, type: 3}
   gun: {fileID: 11400000, guid: 9cdfbf8351e13cd44b51e9059de153e2, type: 2}
+  bullet: {fileID: 8262477620160788249, guid: 153c7fba034da9345a43d39a3eee9393, type: 3}
 --- !u!95 &7637364415854892281
 Animator:
   serializedVersion: 5
@@ -698,9 +720,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 1.5
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 1.25, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!135 &287909802170052030
 SphereCollider:
   m_ObjectHideFlags: 0

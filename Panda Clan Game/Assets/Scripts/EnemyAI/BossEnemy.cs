@@ -24,17 +24,33 @@ public class BossEnemyAI : BaseEnemyAI, IDamage
     [SerializeField] int playerFaceSpeed;
 
     [Header("----- Stage variables -----")]
-    [SerializeField] int teleportInterval;
-    [SerializeField] List<Transform> teleportPositions;
     [SerializeField] List<Transform> enemySpawnPositions;
     [SerializeField] List<GameObject> enemysToSpawn;
+    int enemyLimit;
 
-    //[Header("----- Lazer Cannon Variables -----")]
-    //[SerializeField] List<GameObject> LaserShootPositions;
-    //[SerializeField] GameObject LazerBullet;
+    [Header("----- Sentry Variables -----")]
+    [SerializeField] List<Transform> sentryShootPositions;
+    [SerializeField] GameObject sentryBullet;
+    [SerializeField] float timeBetweenSentryShots;
+    [SerializeField] float sentryResetTime;
+    bool sentryFiringStarted = false;
+
+    [Header("----- Teleport Variables -----")]
+    [SerializeField] int teleportIntervalMax;
+    [SerializeField] int teleportIntervalMin;
+    [SerializeField] List<Transform> teleportPositions;
+    [SerializeField] ParticleSystem chargingBackback;
+    [SerializeField] ParticleSystem teleportParticles;
+    [SerializeField] ParticleSystem afterTeleportParticles;
+    [SerializeField] float desiredPhaseTime;
+    [SerializeField] AnimationCurve alphaCurve;
+
+    float elapsedTime;
+    bool startTimer = false;
+    bool canShoot;
 
 
-    //[Header("----- Gun Attributes -----")]
+    [Header("----- Gun Attributes -----")]
     [SerializeField] GunStats gun;
     [SerializeField] GameObject bullet;
 
@@ -49,25 +65,74 @@ public class BossEnemyAI : BaseEnemyAI, IDamage
     void Awake()
     {
         isShooting = false;
-        StartCoroutine(Teleport());
+        StartCoroutine(TeleportAndEnemySpawn());
+        enemyLimit = Random.Range(30, 60);
+        canShoot = true;
     }
 
-    IEnumerator Teleport()
+    IEnumerator TeleportAndEnemySpawn()
     {
-        yield return new WaitForSeconds(teleportInterval);
+        yield return new WaitForSeconds(Random.Range(teleportIntervalMin, teleportIntervalMax));
+        canShoot = false;
+        agent.enabled = false;
+        chargingBackback.Play();
+        yield return new WaitForSeconds(chargingBackback.main.duration);
+        teleportParticles.Play();
+        yield return new WaitForSeconds(teleportParticles.main.duration / 2);
+        foreach (Renderer model in modelList)
+        {
+            model.enabled = false;
+        }
+        yield return new WaitForSeconds(teleportParticles.main.duration / 2);
+        foreach (Renderer model in modelList)
+        {
+            model.enabled = true;
+        }
         int chosenPositions = Random.Range(0, teleportPositions.Count - 1);
-        transform.position = teleportPositions[chosenPositions].position;
+        transform.position = teleportPositions[chosenPositions].position; // TELEPORTS HERE
+
+
+        //startTimer = true;
+        float startTime = Time.time;
+        elapsedTime = 0;
+        //foreach (Renderer model in modelList)
+        //{
+        //    model.enabled = true;
+        //}
+        //while (startTimer)
+        //{
+        //    modelList[0].material.color = new Color(modelList[0].material.color.r, modelList[0].material.color.g, modelList[0].material.color.b, Mathf.Lerp(0, 1, elapsedTime / desiredPhaseTime));
+        //}
+        while (teleportParticles.particleCount != 0)
+        {
+            yield return new WaitForSeconds(.2f);
+        }
+        canShoot = true;
+        agent.enabled = true;
 
         int enemyToSpawn = Random.Range(0, enemysToSpawn.Count - 1);
         for (int i = 0; i < enemySpawnPositions[chosenPositions].childCount; i++)
         {
-            GameManager.instance.updateGameGoal(1);
-            Instantiate(enemysToSpawn[enemyToSpawn], enemySpawnPositions[chosenPositions].GetChild(i).transform.position, enemySpawnPositions[chosenPositions].GetChild(i).transform.rotation);
+            if (GameManager.instance.enemyGoal <= enemyLimit)
+            {
+                GameManager.instance.updateGameGoal(1);
+                Instantiate(enemysToSpawn[enemyToSpawn], enemySpawnPositions[chosenPositions].GetChild(i).transform.position, enemySpawnPositions[chosenPositions].GetChild(i).transform.rotation);
+            }
         }
-        StartCoroutine(Teleport());
+        StartCoroutine(TeleportAndEnemySpawn());
     }
+
     void Update()
     {
+
+        //if (startTimer)
+        //{
+        //    elapsedTime += Time.deltaTime;
+        //    if (elapsedTime >= desiredPhaseTime)
+        //    {
+        //        startTimer = false;
+        //    }
+        //}
         agent.SetDestination(GameManager.instance.player.transform.position);
 
         if (anim && !isShooting)
@@ -79,7 +144,7 @@ public class BossEnemyAI : BaseEnemyAI, IDamage
             anim.SetBool("isShooting", true);
         }
 
-        if (!isShooting)
+        if (!isShooting && canShoot)
         {
             StartCoroutine(Shoot());
         }
@@ -107,10 +172,11 @@ public class BossEnemyAI : BaseEnemyAI, IDamage
         HP -= amount;
         agent.SetDestination(GameManager.instance.player.transform.position);
         StartCoroutine(FlashRed());
-        //if (HP > origHP/2)
-        //{
-
-        //}
+        if (HP <= origHP / 2 && !sentryFiringStarted)
+        {
+            sentryFiringStarted = true;
+            StartCoroutine(FireSentrys());
+        }
         if (HP <= 0 && alive)
         {
             GameManager.instance.playerScript.AddDrops(gun, AmmoAddedOnDeath);
@@ -124,11 +190,16 @@ public class BossEnemyAI : BaseEnemyAI, IDamage
         }
     }
 
-    //IEnumerator shootLazers()
-    //{
-    //    yield return new WaitForSeconds(1);
-    //    In
-    //}
+    IEnumerator FireSentrys()
+    {
+        foreach (Transform item in sentryShootPositions)
+        {
+            yield return new WaitForSeconds(timeBetweenSentryShots);
+            Instantiate(sentryBullet, item.position, item.rotation);
+        }
+        yield return new WaitForSeconds(sentryResetTime);
+        StartCoroutine(FireSentrys());
+    }
 
     bool canSeePlayer()
     {

@@ -12,10 +12,18 @@ public class Bullet : MonoBehaviour
     [SerializeField] int destroyTime;
     [SerializeField] int damage;
     [SerializeField] bool enemyBullet;
+    [SerializeField] bool sentryBullet;
 
     void Start()
     {
-        rb.velocity = transform.forward * speed;
+        if (enemyBullet)
+        {
+            rb.velocity = (GameManager.instance.player.transform.position - transform.position).normalized * speed;
+        }
+        else
+        {
+            rb.velocity = transform.forward * speed;
+        }
         Destroy(gameObject, destroyTime);
     }
 
@@ -28,8 +36,12 @@ public class Bullet : MonoBehaviour
         if (damageable != null && other.gameObject.tag == "Player" && enemyBullet)
         {
             damageable.TakeDamage(damage);
+            Destroy(gameObject);
         }
 
-        Destroy(gameObject);
+        if (!sentryBullet)
+        {
+            Destroy(gameObject);
+        }
     }
 }

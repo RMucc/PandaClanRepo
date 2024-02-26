@@ -49,7 +49,10 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
     {
         yield return new WaitForSeconds(TimeToWait);
         dashing = true;
-        model.material.color = Color.black;
+        foreach (Renderer model in modelList)
+        {
+            model.material.color = Color.black;
+        }
         agent.speed *= speedMultiplier;
         agent.acceleration = agent.speed;
 
@@ -57,7 +60,10 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
         yield return new WaitForSeconds(dashTime);
         dashing = false;
         agent.velocity = Vector3.zero;
-        model.material.color = stored;
+        for (int i = 0; i < modelList.Count; i++)
+        {
+            modelList[i].material.color = storedColors[i];
+        }
         agent.speed = speed;
         agent.acceleration = agent.speed;
 
@@ -133,9 +139,15 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
     {
         for (int i = tickCount; i > 0; i--)
         {
-            model.material.color = Color.yellow;
+            foreach (Renderer model in modelList)
+            {
+                model.material.color = Color.yellow;
+            }
             yield return new WaitForSeconds(timefromYellowToBlack);
-            model.material.color = Color.black;
+            foreach (Renderer model in modelList)
+            {
+                model.material.color = Color.black;
+            }
             yield return new WaitForSeconds(timefromYellowToBlack);
         }
 

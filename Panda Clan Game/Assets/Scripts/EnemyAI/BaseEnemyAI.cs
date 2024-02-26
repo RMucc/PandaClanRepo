@@ -6,22 +6,26 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class BaseEnemyAI : MonoBehaviour
 {
-    public Renderer model;
+    public List<Renderer> modelList;
     public NavMeshAgent agent;
     public Canvas healthUI;
     [Range(1, 1000)][SerializeField] public int HP;
-    public int origHP;
     public bool alive = true;
-    int amountSpawned;
     [SerializeField] List<GameObject> dropItemList;
     [SerializeField] int itemPotentialCountToDrop;
-    public Color stored;
+
+    [HideInInspector]
+    public List<Color> storedColors;
+    public int origHP;
 
 
     void Start()
     {
         GameManager.instance.updateEnemyAmount(1);
-        stored = model.material.color;
+        foreach (Renderer model in modelList)
+        {
+            storedColors.Add(model.material.color);
+        }
         origHP = HP;
     }
 
@@ -58,8 +62,14 @@ public class BaseEnemyAI : MonoBehaviour
     public IEnumerator FlashRed()
     {
         CallUpdateUI();
-        model.material.color = Color.red;
+        foreach (Renderer model in modelList)
+        {
+            model.material.color = Color.red;
+        }
         yield return new WaitForSeconds(0.1f);
-        model.material.color = stored;
+        for (int i = 0; i < modelList.Count; i++)
+        {
+            modelList[i].material.color = storedColors[i];
+        }
     }
 }

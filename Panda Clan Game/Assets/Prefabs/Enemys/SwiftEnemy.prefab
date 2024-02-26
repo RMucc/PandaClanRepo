@@ -84,16 +84,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba8bfa3eebb11b47acc0592bc78e8f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 859505887435997918}
+  modelList:
+  - {fileID: 859505887435997918}
+  - {fileID: 3406111773686870595}
   agent: {fileID: 5212780036080170378}
   healthUI: {fileID: 6519180926944478216}
   HP: 70
-  origHP: 0
   alive: 1
   dropItemList:
   - {fileID: 2983619795495937277, guid: 714ec059419c4fa419d0c20eb829d93f, type: 3}
   itemPotentialCountToDrop: 3
-  stored: {r: 0, g: 0, b: 0, a: 0}
+  storedColors: []
+  origHP: 0
   attackRate: 0.5
   attackRange: 1
   attackDamage: 5
@@ -101,7 +103,6 @@ MonoBehaviour:
   gun: {fileID: 11400000, guid: ecdb7869593087345b258face1e020cc, type: 2}
   effectGameGoal: 1
   AmmoAddedOnDeath: 45
-  popUpPosRand: 0
 --- !u!195 &5212780036080170378
 NavMeshAgent:
   m_ObjectHideFlags: 0

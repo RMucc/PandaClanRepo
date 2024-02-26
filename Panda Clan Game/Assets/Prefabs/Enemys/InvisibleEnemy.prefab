@@ -330,16 +330,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b95a3b24d569bfa43a3faad1850e87fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 6552325313151814438}
+  modelList:
+  - {fileID: 6552325313151814438}
+  - {fileID: 3093316608439912232}
   agent: {fileID: 6238920843736491151}
   healthUI: {fileID: 6061277992093816182}
   HP: 70
-  origHP: 0
   alive: 1
   dropItemList:
   - {fileID: 2983619795495937277, guid: 714ec059419c4fa419d0c20eb829d93f, type: 3}
   itemPotentialCountToDrop: 3
-  stored: {r: 0, g: 0, b: 0, a: 0}
+  storedColors: []
+  origHP: 0
   attackDamage: 0
   effectGameGoal: 1
   AmmoStolenOnDeath: -10

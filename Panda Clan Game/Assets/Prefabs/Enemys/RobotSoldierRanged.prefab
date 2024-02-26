@@ -914,15 +914,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c69444a257f78884e8778ee9c73be7ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 8408993980785961623}
+  modelList:
+  - {fileID: 8408993980785961623}
+  - {fileID: 7199972437412668239}
+  - {fileID: 3721054542317970373}
+  - {fileID: 7303176539736519518}
+  - {fileID: 4508317465061254677}
   agent: {fileID: 5687957072128849435}
   healthUI: {fileID: 2692180551472895302}
   HP: 100
-  origHP: 100
   alive: 1
   dropItemList: []
   itemPotentialCountToDrop: 0
-  stored: {r: 0, g: 0, b: 0, a: 0}
+  storedColors: []
+  origHP: 100
   anim: {fileID: 0}
   shootPos: {fileID: 9069482512635317320}
   headPos: {fileID: 7966858154412939288}

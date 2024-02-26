@@ -110,9 +110,9 @@ public class SaveManager : MonoBehaviour
         }
         else if (SceneManager.GetActiveScene().buildIndex != 0 && SceneManager.GetActiveScene().buildIndex != 1)
         {
-            Debug.Log("Load Data");
+            //Debug.Log("Load Data");
             LoadData();
-            Debug.Log("Set Data");
+            //Debug.Log("Set Data");
             SetData();
         }
     }
@@ -129,7 +129,7 @@ public class SaveManager : MonoBehaviour
             //Load Data into SaveManager Variables
             //Player Variables
             HP = data.HP;
-            Debug.Log(HP);
+            //Debug.Log(HP);
             healthMax = data.healthMax;
             playerSpeed = data.playerSpeed;
             maxStam = data.maxStam;
@@ -175,8 +175,8 @@ public class SaveManager : MonoBehaviour
     {
         //Set Player Variables
         GameManager.instance.playerScript.HP = HP;
-        Debug.Log(GameManager.instance.playerScript.HP);
-        Debug.Log(HP);
+        //Debug.Log(GameManager.instance.playerScript.HP);
+        //Debug.Log(HP);
         GameManager.instance.playerScript.healthMax = healthMax;
         GameManager.instance.playerScript.playerSpeed = playerSpeed;
         GameManager.instance.playerScript.maxStam = maxStam;

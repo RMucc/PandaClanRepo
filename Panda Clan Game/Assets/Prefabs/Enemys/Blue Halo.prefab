@@ -1096,7 +1096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c69444a257f78884e8778ee9c73be7ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 4197708815898589703}
+  modelList: []
   agent: {fileID: 4135117475507852086}
   healthUI: {fileID: 0}
   HP: 100
@@ -1104,7 +1104,7 @@ MonoBehaviour:
   alive: 1
   dropItemList: []
   itemPotentialCountToDrop: 0
-  stored: {r: 0, g: 0, b: 0, a: 0}
+  storedColors: []
   anim: {fileID: 8201200995519857606}
   shootPos: {fileID: 2164582125466682166}
   headPos: {fileID: 551495035278136373}

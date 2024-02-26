@@ -34,7 +34,12 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
     float angleToPlayer;
     Vector3 startingPos;
     float stoppingDistOrig;
+    bool isDead = false; // Flag to track if the enemy is dead
 
+    void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
 
     void Awake()
     {
@@ -44,25 +49,42 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
     {
         agent.SetDestination(GameManager.instance.player.transform.position);
 
-        if (anim && !isShooting)
+        if (playerInRange)
         {
-            anim.SetBool("isShooting", false);
-        }
-        else if (anim)
-        {
-            anim.SetBool("isShooting", true);
+            if (canSeePlayer())
+            {
+                if (agent.remainingDistance < agent.stoppingDistance)
+                {
+                    playerDir = GameManager.instance.player.transform.position - headPos.transform.position;
+                    FaceTarget();
+                }
+
+                if (!isDead)
+                {
+                    if (!isShooting)
+                    {
+                        anim.SetBool("isShooting", false);
+                    }
+                    else if (isShooting)
+                    {
+                        anim.SetBool("isShooting", true);
+                    }
+
+                    if (!isShooting)
+                    {
+                        StartCoroutine(Shoot());
+                    }
+                }
+
+                else
+                {
+                    // Play death animation or perform any other actions
+                    anim.SetBool("isDead", true);
+                }
+            }
         }
 
-        if (!isShooting)
-        {
-            StartCoroutine(Shoot());
-        }
-
-        if (agent.remainingDistance < agent.stoppingDistance)
-        {
-            playerDir = GameManager.instance.player.transform.position - headPos.transform.position;
-            FaceTarget();
-        }
+        
     }
 
     IEnumerator Shoot()
@@ -90,7 +112,9 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
                 GameManager.instance.updateEnemyAmount(-1);
             }
             alive = false;
+            isDead = true;
             GameManager.instance.playerPoints += 200;
+            anim.SetBool("isDead", true);
             OnDeath();
         }
     }

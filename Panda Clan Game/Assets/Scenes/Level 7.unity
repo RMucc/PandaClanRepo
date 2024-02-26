@@ -2263,7 +2263,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 286015323764639541, guid: 64d9624bacf4cc94498dd4925c818c9e, type: 3}
       propertyPath: HP
-      value: 500
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 286015323764639541, guid: 64d9624bacf4cc94498dd4925c818c9e, type: 3}
       propertyPath: sentryBullet

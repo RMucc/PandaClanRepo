@@ -10,7 +10,6 @@ public class ShopKeepController : InteractableClass
     public Animator anim;
     interactPhases interactPhase;
     [SerializeField] GameObject questNoti;
-    [SerializeField] Transform ArrowDownPos;
     [SerializeField] Transform inShopCamPos;
     [SerializeField] float toPositionDuration;
 

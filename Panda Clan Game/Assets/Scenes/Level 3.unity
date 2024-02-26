@@ -2085,9 +2085,9 @@ MonoBehaviour:
   - {fileID: 369420071}
   - {fileID: 1640143279}
   - {fileID: 1829900543}
-  wave1EnemyAmount: 1
-  wave2EnemyAmount: 1
-  wave3EnemyAmount: 1
+  wave1EnemyAmount: 5
+  wave2EnemyAmount: 9
+  wave3EnemyAmount: 11
 --- !u!65 &397450900
 BoxCollider:
   m_ObjectHideFlags: 0

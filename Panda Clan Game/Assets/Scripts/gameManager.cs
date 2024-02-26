@@ -517,13 +517,13 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    public void OpenOrCloseShopMenu(bool Open, Transform inShopCamPos = null)
+    public void OpenOrCloseShopMenu(bool openOrClose, Transform inShopCamPos = null)
     {
         menuActive = menuShop;
-        menuActive.SetActive(Open);
-        inShop = Open;
-        Cursor.visible = Open;
-        if (Open)
+        menuActive.SetActive(openOrClose);
+        inShop = openOrClose;
+        Cursor.visible = openOrClose;
+        if (openOrClose)
         {
             mainInterface.alpha = 0f;
             if (currentArrow) { InstantiateArrow(null, false); }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class Story4Script : MonoBehaviour
         Debug.Log("Pausing Game and Activating Story3");
         GameManager.instance.Story5.SetActive(true);
         GameManager.instance.statePaused();
+        GameManager.instance.OnLevelFinished += ActivateNextArrow;
     }
     private void Update()
     {
@@ -25,11 +27,10 @@ public class Story4Script : MonoBehaviour
                 GameManager.instance.simpleResume();
             }
         }
+    }
 
-        if (GameManager.instance.enemyGoal <= 0)
-        {
-            GameManager.instance.InstantiateArrow(null, false);
+    void ActivateNextArrow(object sender, EventArgs e)
+    {
             GameManager.instance.InstantiateArrow(mapLocation.transform);
-        }
     }
 }

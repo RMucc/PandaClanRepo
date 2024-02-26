@@ -13,7 +13,7 @@ public class enemyAI : MonoBehaviour, IDamage
     [SerializeField] Transform headPos;
 
     [Header("----- Enemy Stats -----")]
-    [Range(1, 200)][SerializeField] int HP;
+    [Range(1, 800)][SerializeField] int HP;
     [SerializeField] int fov;
     [SerializeField] int fovshoot;
     [SerializeField] int targetFaceSpeed;

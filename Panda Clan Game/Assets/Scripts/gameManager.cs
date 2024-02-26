@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     public GameObject Story10;
     public GameObject interfaceForStory;
     public event EventHandler OnLevelFinished;
-    GameObject currentArrow;
+    [SerializeField] GameObject currentArrow;
     [SerializeField] float pushDuration;
     [SerializeField] int pushBackSpeed;
     Coroutine pushBack;
@@ -287,7 +287,7 @@ public class GameManager : MonoBehaviour
         //Should pull up a win menu that we can close out of so that we can move on to the next level
         else if (enemyGoal <= 0 && level4 == true)
         {
-            //OnLevelFinished?.Invoke(this, EventArgs.Empty);
+            OnLevelFinished?.Invoke(this, EventArgs.Empty);
             statePaused();
             menuActive = levelMenuWin;
             menuActive.SetActive(true);
@@ -295,7 +295,7 @@ public class GameManager : MonoBehaviour
         //Should pull up a win menu that we can close out of so that we can move on to the next level
         else if (enemyGoal <= 0 && level5 == true)
         {
-            //OnLevelFinished?.Invoke(this, EventArgs.Empty);
+            OnLevelFinished?.Invoke(this, EventArgs.Empty);
             statePaused();
             menuActive = levelMenuWin;
             menuActive.SetActive(true);
@@ -303,7 +303,7 @@ public class GameManager : MonoBehaviour
         //Should pull up a win menu that we can close out of so that we can move on to the next level
         else if (enemyGoal <= 0 && level6 == true)
         {
-            //OnLevelFinished?.Invoke(this, EventArgs.Empty);
+            OnLevelFinished?.Invoke(this, EventArgs.Empty);
             statePaused();
             menuActive = levelMenuWin;
             menuActive.SetActive(true);
@@ -311,7 +311,7 @@ public class GameManager : MonoBehaviour
         //Should pull up a win menu because we won
         else if (enemyGoal <= 0 && level7 == true)
         {
-            //OnLevelFinished?.Invoke(this, EventArgs.Empty);
+            OnLevelFinished?.Invoke(this, EventArgs.Empty);
             statePaused();
             menuActive = menuWin;
             menuActive.SetActive(true);

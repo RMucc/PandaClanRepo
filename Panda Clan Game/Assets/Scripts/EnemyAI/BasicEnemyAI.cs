@@ -14,7 +14,6 @@ public class BasicEnemyAI : BaseEnemyAI, IDamage
     [SerializeField] GunStats gun;
     [SerializeField] bool effectGameGoal;
     [SerializeField] int AmmoAddedOnDeath;
-    [SerializeField] float popUpPosRand;
 
     bool isAttacking;
     //bool playerInRange;

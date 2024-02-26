@@ -9,8 +9,9 @@ public class BaseEnemyAI : MonoBehaviour
     public Renderer model;
     public NavMeshAgent agent;
     public Canvas healthUI;
-    [Range(1, 200)][SerializeField] public int HP;
-    [Range(1, 200)][SerializeField] public int origHP; public bool alive = true;
+    [Range(1, 1000)][SerializeField] public int HP;
+    public int origHP;
+    public bool alive = true;
     int amountSpawned;
     [SerializeField] List<GameObject> dropItemList;
     [SerializeField] int itemPotentialCountToDrop;

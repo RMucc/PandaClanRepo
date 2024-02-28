@@ -1978,7 +1978,7 @@ PrefabInstance:
       objectReference: {fileID: 6239829689798125485, guid: 5609c1ae466c3644bae9d6b9eae7204e, type: 3}
     - target: {fileID: 286015323764639541, guid: 64d9624bacf4cc94498dd4925c818c9e, type: 3}
       propertyPath: shootRate
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 286015323764639541, guid: 64d9624bacf4cc94498dd4925c818c9e, type: 3}
       propertyPath: sentryBullet

@@ -9920,7 +9920,7 @@ MonoBehaviour:
   rb: {fileID: 5243176846441246822}
   speed: 40
   destroyTime: 8
-  damage: 30
+  damage: 10
   enemyBullet: 1
   sentryBullet: 1
 --- !u!1 &7829593933550262423

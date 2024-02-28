@@ -20,6 +20,7 @@ public class Story2Script : MonoBehaviour
     {
         if (continueBool == false)
         {
+            GameManager.instance.statePaused();
             if (Input.GetKeyDown(KeyCode.E))
             {
                 continueBool = true;

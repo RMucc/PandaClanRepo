@@ -131,9 +131,17 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     [SerializeField] float dashDebounce;
     [SerializeField] bool isDashing;
     private float dashCount;
+    private float dashMax;
     private float originalDashDebounce;
     [SerializeField] float dashCooldownTime;
     private bool canDash = true;
+    private bool reset;
+    private bool firstButtonPressedW;
+    private bool firstButtonPressedA;
+    private bool firstButtonPressedS;
+    private bool firstButtonPressedD;
+    private float timeOfFirstButton;
+    private float timeBeforeNoDash;
 
     // Start is called before the first frame update
     void Start()
@@ -153,6 +161,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         originalDashDebounce = dashDebounce;
         readyToShoot = true;
         isShooting = false;
+        timeBeforeNoDash = .6f;
         //AddDrops(gunToAdd, ammoToAdd);
         updatePlayerUI();
     }
@@ -278,10 +287,29 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         #endregion
         //Forward Dash Input
         #region Forward Dash Input
-        if (Input.GetKeyDown(KeyCode.W) && !isDashing && isStamRecovered && GameManager.instance.isPaused == false)
+        if (Input.GetKeyDown(KeyCode.W) && GameManager.instance.isPaused == false && firstButtonPressedW)
         {
+            if (Time.time - timeOfFirstButton < timeBeforeNoDash)
+            {
+                StamDash();
+                stUpdate();
+                if (canDash && isSprinting)
+                {
+                    isDashing = true;
+                    StartCoroutine(DashForward());
+                }
+                else if (canDash)
+                {
+                    isDashing = true;
+                    StartCoroutine(DashForward());
+                    sprintRecover = StartCoroutine(SprintRecover());
+                }
+            }
+
+            reset = true;
+
             //Set Dash Count to how many taps you want minus 1
-            if (dashDebounce > 0 && dashCount == 1)
+            /*if (dashDebounce > 0 && dashCount == 1)
             {
                 StamDash();
                 stUpdate();
@@ -301,15 +329,40 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             {
                 dashDebounce = originalDashDebounce;
                 dashCount += 1;
-            }
+            }*/
+        }
+        if (Input.GetKeyDown(KeyCode.W) && !isDashing && isStamRecovered && GameManager.instance.isPaused == false && !firstButtonPressedW)
+        {
+            firstButtonPressedW = true;
+            timeOfFirstButton = Time.time;
         }
         #endregion
         //Backward Dash Input
         #region Backward Dash Input
-        if (Input.GetKeyDown(KeyCode.S) && !isDashing && isStamRecovered && GameManager.instance.isPaused == false)
+        if (Input.GetKeyDown(KeyCode.S) && GameManager.instance.isPaused == false && firstButtonPressedS)
         {
+
+            if (Time.time - timeOfFirstButton < timeBeforeNoDash)
+            {
+                StamDash();
+                stUpdate();
+                if (canDash && isSprinting)
+                {
+                    isDashing = true;
+                    StartCoroutine(DashBackward());
+                }
+                else if (canDash)
+                {
+                    isDashing = true;
+                    StartCoroutine(DashBackward());
+                    sprintRecover = StartCoroutine(SprintRecover());
+                }
+            }
+
+            reset = true;
+
             //Set Dash Count to how many taps you want minus 1
-            if (dashDebounce > 0 && dashCount == 1)
+            /*if (dashDebounce > 0 && dashCount == 1)
             {
                 StamDash();
                 stUpdate();
@@ -329,15 +382,40 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             {
                 dashDebounce = originalDashDebounce;
                 dashCount += 1;
-            }
+            }*/
+        }
+        if (Input.GetKeyDown(KeyCode.S) && !isDashing && isStamRecovered && GameManager.instance.isPaused == false && !firstButtonPressedS)
+        {
+            firstButtonPressedS = true;
+            timeOfFirstButton = Time.time;
         }
         #endregion
         //Right Dash Input
         #region Right Dash Input
-        if (Input.GetKeyDown(KeyCode.D) && !isDashing && isStamRecovered && GameManager.instance.isPaused == false)
+        if (Input.GetKeyDown(KeyCode.D) && GameManager.instance.isPaused == false && firstButtonPressedD)
         {
+
+            if (Time.time - timeOfFirstButton < timeBeforeNoDash)
+            {
+                StamDash();
+                stUpdate();
+                if (canDash && isSprinting)
+                {
+                    isDashing = true;
+                    StartCoroutine(DashRight());
+                }
+                else if (canDash)
+                {
+                    isDashing = true;
+                    StartCoroutine(DashRight());
+                    sprintRecover = StartCoroutine(SprintRecover());
+                }
+            }
+
+            reset = true;
+
             //Set Dash Count to how many taps you want minus 1
-            if (dashDebounce > 0 && dashCount == 1)
+            /*if (dashDebounce > 0 && dashCount == 1)
             {
                 StamDash();
                 stUpdate();
@@ -357,15 +435,40 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             {
                 dashDebounce = originalDashDebounce;
                 dashCount += 1;
-            }
+            }*/
+        }
+        if (Input.GetKeyDown(KeyCode.D) && !isDashing && isStamRecovered && GameManager.instance.isPaused == false && !firstButtonPressedD)
+        {
+            firstButtonPressedD = true;
+            timeOfFirstButton = Time.time;
         }
         #endregion
         //Left Dash Input
         #region Left Dash Input
-        if (Input.GetKeyDown(KeyCode.A) && !isDashing && isStamRecovered && GameManager.instance.isPaused == false)
+        if (Input.GetKeyDown(KeyCode.A) && GameManager.instance.isPaused == false && firstButtonPressedA)
         {
+
+            if (Time.time - timeOfFirstButton < timeBeforeNoDash)
+            {
+                StamDash();
+                stUpdate();
+                if (canDash && isSprinting)
+                {
+                    isDashing = true;
+                    StartCoroutine(DashLeft());
+                }
+                else if (canDash)
+                {
+                    isDashing = true;
+                    StartCoroutine(DashLeft());
+                    sprintRecover = StartCoroutine(SprintRecover());
+                }
+            }
+
+            reset = true;
+
             //Set Dash Count to how many taps you want minus 1
-            if (dashDebounce > 0 && dashCount == 1)
+            /*if (dashDebounce > 0 && dashCount == 1)
             {
                 StamDash();
                 stUpdate();
@@ -385,7 +488,23 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             {
                 dashDebounce = originalDashDebounce;
                 dashCount += 1;
-            }
+            }*/
+        }
+        if (Input.GetKeyDown(KeyCode.A) && !isDashing && isStamRecovered && GameManager.instance.isPaused == false && !firstButtonPressedA)
+        {
+            firstButtonPressedA = true;
+            timeOfFirstButton = Time.time;
+        }
+        #endregion
+        //ResetDoublePress
+        #region ResetDoublePress
+        if (reset)
+        {
+            firstButtonPressedW = false;
+            firstButtonPressedA = false;
+            firstButtonPressedS = false;
+            firstButtonPressedD = false;
+            reset = false;
         }
         #endregion
         playerVel.y += gravity * Time.deltaTime;
@@ -547,6 +666,16 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         StopCoroutine(cameraInitial);
     }
     #endregion
+
+    IEnumerator DashBetweenPress()
+    {
+        float startTime = Time.time;
+        while (Time.time < startTime + .5f)
+        {
+
+        }
+        yield return new WaitForSeconds(0);
+    }
 
     #region Camera Sprint FOV IEumerator
     IEnumerator CameraSprint()

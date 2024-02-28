@@ -38,7 +38,7 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
 
     void Start()
     {
-        anim = GetComponent<Animator>();
+        TryGetComponent<Animator>(out anim);
     }
 
     void Awake()
@@ -63,11 +63,11 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
                 {
                     if (!isShooting)
                     {
-                        anim.SetBool("isShooting", false);
+                        if (anim) { anim.SetBool("isShooting", false); }
                     }
                     else if (isShooting)
                     {
-                        anim.SetBool("isShooting", true);
+                        if (anim) { anim.SetBool("isShooting", true); }
                     }
 
                     if (!isShooting)
@@ -79,7 +79,7 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
                 else
                 {
                     // Play death animation or perform any other actions
-                    anim.SetBool("isDead", true);
+                    if (anim) { anim.SetBool("isDead", true); }
                 }
             }
         }
@@ -114,7 +114,7 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
             alive = false;
             isDead = true;
             GameManager.instance.playerPoints += 200;
-            anim.SetBool("isDead", true);
+            if (anim) anim.SetBool("isDead", true);
             OnDeath();
         }
     }

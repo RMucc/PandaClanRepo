@@ -106,14 +106,12 @@ public class RyansPlayerController : MonoBehaviour, IDamage
     float SMGbulletsTotalR;      //These are needed so I can use division for fillamount
 
 
-    [Header("Player Private Variables\n")]
     //Player Private Variables
     private Vector3 playerVel;
     private Vector3 move;
     private Vector3 dashMove;
     private int jumpCount;
 
-    [Header("Bool Values\n")]
     //Bool Values
     private bool groundedPlayer;
     private bool isShooting;

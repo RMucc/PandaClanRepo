@@ -61,6 +61,8 @@ public class BossEnemyAI : BaseEnemyAI, IDamage
     Vector3 startingPos;
     float stoppingDistOrig;
 
+    bool doOnce = true;
+
 
     void Awake()
     {
@@ -72,6 +74,12 @@ public class BossEnemyAI : BaseEnemyAI, IDamage
 
     IEnumerator TeleportAndEnemySpawn()
     {
+        yield return new WaitForSeconds(.1f);
+        if (doOnce)
+        {
+            GameManager.instance.updateGameGoal(1);
+            doOnce = false;
+        }
         yield return new WaitForSeconds(Random.Range(teleportIntervalMin, teleportIntervalMax));
         canShoot = false;
         agent.enabled = false;
@@ -92,17 +100,9 @@ public class BossEnemyAI : BaseEnemyAI, IDamage
         transform.position = teleportPositions[chosenPositions].position; // TELEPORTS HERE
 
 
-        //startTimer = true;
         float startTime = Time.time;
         elapsedTime = 0;
-        //foreach (Renderer model in modelList)
-        //{
-        //    model.enabled = true;
-        //}
-        //while (startTimer)
-        //{
-        //    modelList[0].material.color = new Color(modelList[0].material.color.r, modelList[0].material.color.g, modelList[0].material.color.b, Mathf.Lerp(0, 1, elapsedTime / desiredPhaseTime));
-        //}
+
         while (teleportParticles.particleCount != 0)
         {
             yield return new WaitForSeconds(.2f);
@@ -110,13 +110,12 @@ public class BossEnemyAI : BaseEnemyAI, IDamage
         canShoot = true;
         agent.enabled = true;
 
-        int enemyToSpawn = Random.Range(0, enemysToSpawn.Count - 1);
         for (int i = 0; i < enemySpawnPositions[chosenPositions].childCount; i++)
         {
             if (GameManager.instance.enemyGoal <= enemyLimit)
             {
                 GameManager.instance.updateGameGoal(1);
-                Instantiate(enemysToSpawn[enemyToSpawn], enemySpawnPositions[chosenPositions].GetChild(i).transform.position, enemySpawnPositions[chosenPositions].GetChild(i).transform.rotation);
+                Instantiate(enemysToSpawn[Random.Range(0, enemysToSpawn.Count - 1)], enemySpawnPositions[chosenPositions].GetChild(i).transform.position, enemySpawnPositions[chosenPositions].GetChild(i).transform.rotation);
             }
         }
         StartCoroutine(TeleportAndEnemySpawn());
@@ -125,15 +124,10 @@ public class BossEnemyAI : BaseEnemyAI, IDamage
     void Update()
     {
 
-        //if (startTimer)
-        //{
-        //    elapsedTime += Time.deltaTime;
-        //    if (elapsedTime >= desiredPhaseTime)
-        //    {
-        //        startTimer = false;
-        //    }
-        //}
-        agent.SetDestination(GameManager.instance.player.transform.position);
+        if (agent.enabled)
+        {
+            agent.SetDestination(GameManager.instance.player.transform.position);
+        }
 
         if (anim && !isShooting)
         {
@@ -149,10 +143,13 @@ public class BossEnemyAI : BaseEnemyAI, IDamage
             StartCoroutine(Shoot());
         }
 
-        if (agent.remainingDistance < agent.stoppingDistance)
+        if (agent.enabled)
         {
-            playerDir = GameManager.instance.player.transform.position - headPos.transform.position;
-            FaceTarget();
+            if (agent.remainingDistance < agent.stoppingDistance)
+            {
+                playerDir = GameManager.instance.player.transform.position - headPos.transform.position;
+                FaceTarget();
+            }
         }
     }
 
@@ -162,7 +159,11 @@ public class BossEnemyAI : BaseEnemyAI, IDamage
         float x = Random.Range(-bulletSpread, bulletSpread);
         float y = Random.Range(-bulletSpread, bulletSpread);
         Vector3 direction = shootPos.transform.forward + new Vector3(x, y, 0);
-        Instantiate(bullet, shootPos.position, Quaternion.LookRotation(direction));
+        for (int i = 0; i < 3; i++)
+        {
+            Instantiate(bullet, shootPos.position, Quaternion.LookRotation(direction));
+            yield return new WaitForSeconds(.5f);
+        }
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
@@ -170,7 +171,7 @@ public class BossEnemyAI : BaseEnemyAI, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
-        agent.SetDestination(GameManager.instance.player.transform.position);
+        if (agent.enabled) { agent.SetDestination(GameManager.instance.player.transform.position); }
         StartCoroutine(FlashRed());
         if (HP <= origHP / 2 && !sentryFiringStarted)
         {

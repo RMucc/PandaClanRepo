@@ -228,17 +228,17 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         }
         //Jump Input
         #region Jump Input
-        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
+        /*if (Input.GetButtonDown("Jump") && jumpCount < jumpMax && GameManager.instance.isPaused == false)
         {
             src.clip = jump;
             src.Play();
             playerVel.y = jumpHeight;
             jumpCount++;
-        }
+        }*/
         #endregion
         //Sprint Input
         #region Sprint Input
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !isShooting && isStamRecovered)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !isShooting && isStamRecovered && GameManager.instance.isPaused == false)
         {
             if (sprintRecover != null)
             {
@@ -259,7 +259,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 Sprinting();
             }
         }
-        if (playerStam <= 0)
+        if (playerStam <= 0 && GameManager.instance.isPaused == false)
         {
             isSprinting = false;
             playerSpeed = originalPlayerSpeed;
@@ -267,7 +267,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
             cameraInitial = StartCoroutine(CameraInitial());
             sprintRecover = StartCoroutine(SprintRecover());
         }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
+        if (Input.GetKeyUp(KeyCode.LeftShift) && GameManager.instance.isPaused == false)
         {
             isSprinting = false;
             playerSpeed = originalPlayerSpeed;
@@ -278,7 +278,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         #endregion
         //Forward Dash Input
         #region Forward Dash Input
-        if (Input.GetKeyDown(KeyCode.W) && !isDashing && isStamRecovered)
+        if (Input.GetKeyDown(KeyCode.W) && !isDashing && isStamRecovered && GameManager.instance.isPaused == false)
         {
             //Set Dash Count to how many taps you want minus 1
             if (dashDebounce > 0 && dashCount == 1)
@@ -306,7 +306,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         #endregion
         //Backward Dash Input
         #region Backward Dash Input
-        if (Input.GetKeyDown(KeyCode.S) && !isDashing && isStamRecovered)
+        if (Input.GetKeyDown(KeyCode.S) && !isDashing && isStamRecovered && GameManager.instance.isPaused == false)
         {
             //Set Dash Count to how many taps you want minus 1
             if (dashDebounce > 0 && dashCount == 1)
@@ -334,7 +334,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         #endregion
         //Right Dash Input
         #region Right Dash Input
-        if (Input.GetKeyDown(KeyCode.D) && !isDashing && isStamRecovered)
+        if (Input.GetKeyDown(KeyCode.D) && !isDashing && isStamRecovered && GameManager.instance.isPaused == false)
         {
             //Set Dash Count to how many taps you want minus 1
             if (dashDebounce > 0 && dashCount == 1)
@@ -362,7 +362,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         #endregion
         //Left Dash Input
         #region Left Dash Input
-        if (Input.GetKeyDown(KeyCode.A) && !isDashing && isStamRecovered)
+        if (Input.GetKeyDown(KeyCode.A) && !isDashing && isStamRecovered && GameManager.instance.isPaused == false)
         {
             //Set Dash Count to how many taps you want minus 1
             if (dashDebounce > 0 && dashCount == 1)

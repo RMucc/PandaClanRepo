@@ -197,7 +197,7 @@ public class GameManager : MonoBehaviour
     #region PAUSE/RESUME MENU CODE
     public void statePaused() //Reuseable for shops and other screens I guess
     {
-        isPaused = !isPaused;
+        isPaused = true;
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
@@ -205,7 +205,7 @@ public class GameManager : MonoBehaviour
 
     public void simpleResume()
     {
-        isPaused = !isPaused;
+        isPaused = false;
         Time.timeScale = 1;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -213,7 +213,7 @@ public class GameManager : MonoBehaviour
 
     public void stateResume()
     {
-        isPaused = !isPaused;
+        isPaused = false;
         Time.timeScale = 1;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;

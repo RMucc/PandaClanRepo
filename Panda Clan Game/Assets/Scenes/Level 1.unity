@@ -1282,7 +1282,7 @@ Transform:
   m_GameObject: {fileID: 287793036}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0000009536743, y: 5.875, z: -19.795408}
+  m_LocalPosition: {x: 0.0000009536743, y: 5.875, z: -19.625}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6397,10 +6397,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
-    - target: {fileID: 7483503311532101132, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11276,7 +11272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffad0b51931af44eb523f43d3ccbc7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorLocation: {fileID: 965731111}
+  doorLocation: {fileID: 287793036}
   SMG: {fileID: 11400000, guid: ecdb7869593087345b258face1e020cc, type: 2}
   bullet: 0
 --- !u!1 &1649881198

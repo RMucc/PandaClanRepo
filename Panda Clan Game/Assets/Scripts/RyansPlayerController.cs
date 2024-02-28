@@ -287,9 +287,9 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         #endregion
         //Forward Dash Input
         #region Forward Dash Input
-        if (Input.GetKeyDown(KeyCode.W) && GameManager.instance.isPaused == false && firstButtonPressedW)
+        if (Input.GetKeyDown(KeyCode.W) && !isDashing && isStamRecovered && GameManager.instance.isPaused == false)
         {
-            if (Time.time - timeOfFirstButton < timeBeforeNoDash)
+            if (Time.time - timeOfFirstButton < timeBeforeNoDash && firstButtonPressedW == true && firstButtonPressedA == false && firstButtonPressedD == false && firstButtonPressedS == false)
             {
                 StamDash();
                 stUpdate();
@@ -339,10 +339,10 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         #endregion
         //Backward Dash Input
         #region Backward Dash Input
-        if (Input.GetKeyDown(KeyCode.S) && GameManager.instance.isPaused == false && firstButtonPressedS)
+        if (Input.GetKeyDown(KeyCode.S) && !isDashing && isStamRecovered && GameManager.instance.isPaused == false)
         {
 
-            if (Time.time - timeOfFirstButton < timeBeforeNoDash)
+            if (Time.time - timeOfFirstButton < timeBeforeNoDash && firstButtonPressedW == false && firstButtonPressedA == false && firstButtonPressedD == false && firstButtonPressedS == true)
             {
                 StamDash();
                 stUpdate();
@@ -392,10 +392,10 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         #endregion
         //Right Dash Input
         #region Right Dash Input
-        if (Input.GetKeyDown(KeyCode.D) && GameManager.instance.isPaused == false && firstButtonPressedD)
+        if (Input.GetKeyDown(KeyCode.D) && !isDashing && isStamRecovered && GameManager.instance.isPaused == false)
         {
 
-            if (Time.time - timeOfFirstButton < timeBeforeNoDash)
+            if (Time.time - timeOfFirstButton < timeBeforeNoDash && firstButtonPressedW == false && firstButtonPressedA == false && firstButtonPressedD == true && firstButtonPressedS == false)
             {
                 StamDash();
                 stUpdate();
@@ -445,10 +445,10 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         #endregion
         //Left Dash Input
         #region Left Dash Input
-        if (Input.GetKeyDown(KeyCode.A) && GameManager.instance.isPaused == false && firstButtonPressedA)
+        if (Input.GetKeyDown(KeyCode.A) && !isDashing && isStamRecovered && GameManager.instance.isPaused == false)
         {
 
-            if (Time.time - timeOfFirstButton < timeBeforeNoDash)
+            if (Time.time - timeOfFirstButton < timeBeforeNoDash && firstButtonPressedW == false && firstButtonPressedA == true && firstButtonPressedD == false && firstButtonPressedS == false)
             {
                 StamDash();
                 stUpdate();

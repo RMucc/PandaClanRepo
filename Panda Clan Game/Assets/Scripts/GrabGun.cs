@@ -16,7 +16,7 @@ public class GrabGun : MonoBehaviour
             GameManager.instance.InstantiateArrow(doorLocation.transform);
             GameManager.instance.grabGunBool = true;
             bullet = GameManager.BulletType.SMG;
-            GameManager.instance.playerScript.AddDrops(SMG, 30);
+            GameManager.instance.playerScript.AddDrops(SMG);
             Destroy(gameObject);
         }
     }

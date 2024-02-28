@@ -11276,7 +11276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffad0b51931af44eb523f43d3ccbc7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorLocation: {fileID: 965731111}
+  doorLocation: {fileID: 287793036}
   SMG: {fileID: 11400000, guid: ecdb7869593087345b258face1e020cc, type: 2}
   bullet: 0
 --- !u!1 &1649881198

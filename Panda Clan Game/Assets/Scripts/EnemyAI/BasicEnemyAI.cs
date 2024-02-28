@@ -21,10 +21,12 @@ public class BasicEnemyAI : BaseEnemyAI, IDamage
     void Update()
     {
         agent.SetDestination(GameManager.instance.player.transform.position);
+        FaceTarget();
     }
 
     IEnumerator Attack()
     {
+        Debug.Log("Attacked");
         isAttacking = true;
         Debug.DrawRay(AttackPos.transform.position, AttackPos.transform.forward * attackRange, Color.red, .5f);
         RaycastHit hit;
@@ -60,7 +62,7 @@ public class BasicEnemyAI : BaseEnemyAI, IDamage
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && canSeePlayer())
         {
             //playerInRange = true;
             if (!isAttacking)

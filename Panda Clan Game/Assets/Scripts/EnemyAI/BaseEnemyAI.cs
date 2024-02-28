@@ -18,6 +18,13 @@ public class BaseEnemyAI : MonoBehaviour
     public List<Color> storedColors;
     public int origHP;
 
+    public Vector3 playerDir;
+    [SerializeField] protected int playerFaceSpeed;
+    public Transform headPos;
+    [SerializeField] int fov;
+    float angleToPlayer;
+
+
 
     void Start()
     {
@@ -71,5 +78,38 @@ public class BaseEnemyAI : MonoBehaviour
         {
             modelList[i].material.color = storedColors[i];
         }
+    }
+
+    public void FaceTarget()
+    {
+        playerDir = (GameManager.instance.player.transform.position) - headPos.position;
+        Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z));
+        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);
+    }
+
+
+
+    protected bool canSeePlayer()
+    {
+        playerDir = GameManager.instance.player.transform.position - headPos.position;
+        angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
+
+        Debug.Log(angleToPlayer);
+        Debug.DrawRay(headPos.position, playerDir);
+
+        RaycastHit hit;
+        if (Physics.Raycast(headPos.position, playerDir, out hit))
+        {
+            if (hit.collider.CompareTag("Player") && angleToPlayer <= fov)
+            {
+
+                agent.SetDestination(GameManager.instance.player.transform.position);
+
+                return true;
+            }
+
+            Debug.Log(hit.transform.name);
+        }
+        return false;
     }
 }

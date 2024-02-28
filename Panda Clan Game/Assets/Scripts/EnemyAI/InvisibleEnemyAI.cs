@@ -15,6 +15,10 @@ public class InvisbleEnemyAI : BaseEnemyAI, IDamage
     void Update()
     {
         agent.SetDestination(GameManager.instance.player.transform.position);
+        if (agent.remainingDistance < agent.stoppingDistance)
+        {
+            FaceTarget();
+        }
     }
 
 

@@ -60,9 +60,9 @@ public class DashEnemyAI : BaseEnemyAI, IDamage
         yield return new WaitForSeconds(dashTime);
         dashing = false;
         agent.velocity = Vector3.zero;
-        for (int i = 0; i < modelList.Count; i++)
+        foreach (KeyValuePair<Renderer, Color> entry in meshesToColors)
         {
-            modelList[i].material.color = storedColors[i];
+            entry.Key.material.color = entry.Value;
         }
         agent.speed = speed;
         agent.acceleration = agent.speed;

@@ -137,7 +137,14 @@ public class SaveManager : MonoBehaviour
             stamDrain = data.stamDrain;
             stamRegen = data.stamRegen;
             //Player Gun Variables
-            bullet = data.bulletType;
+            if (GameManager.instance.debugMode)
+            {
+                bullet = GameManager.instance.playerScript.bulletType;
+            }
+            else
+            {
+                bullet = data.bulletType;
+            }
             //Level Variables
             level1 = data.level1;
             level2 = data.level2;
@@ -165,7 +172,7 @@ public class SaveManager : MonoBehaviour
         level6 = false;
         level7 = false;
         bullet = GameManager.BulletType.None;
-        if(SceneManager.GetActiveScene().buildIndex != 0)
+        if (SceneManager.GetActiveScene().buildIndex != 0)
         {
             SetData();
         }

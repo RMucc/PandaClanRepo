@@ -11,6 +11,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    [Header("----- Debug Mode -----")]
+    public bool debugMode;
+
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject textActive;
     [SerializeField] GameObject noReload;
@@ -132,7 +135,7 @@ public class GameManager : MonoBehaviour
         }
         //instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
-        if(SceneManager.GetActiveScene().buildIndex == 0)
+        if (SceneManager.GetActiveScene().buildIndex == 0)
         {
 
         }
@@ -225,9 +228,15 @@ public class GameManager : MonoBehaviour
 
     public void InstantiateArrow(Transform transform = null, bool turnOn = true)
     {
-        if (currentArrow) 
+        StartCoroutine(waitTime(transform, turnOn));
+    }
+
+    IEnumerator waitTime(Transform transform = null, bool turnOn = true)
+    {
+        if (currentArrow)
         {
-            Destroy(currentArrow); 
+            yield return new WaitForSeconds(1);
+            Destroy(currentArrow);
         }
         if (turnOn)
         {

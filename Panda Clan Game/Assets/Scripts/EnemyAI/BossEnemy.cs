@@ -7,21 +7,17 @@ using UnityEngine.UIElements;
 public class BossEnemyAI : BaseEnemyAI, IDamage
 {
     [Header("----- Components -----")]
-    [SerializeField] Animator anim;
     [SerializeField] Transform shootPos; //Position for him to shoot from
-    [SerializeField] Transform headPos;
     [SerializeField] bool effectGameGoal;
 
 
     [Header("----- Enemy Stats -----")]
     [SerializeField] float shootRate;
-    [SerializeField] int fov;
     [SerializeField] int fovshoot;
     [SerializeField] float bulletSpread;
     [SerializeField] int targetFaceSpeed;
     [SerializeField] int animspeedTrans;
     [SerializeField] int AmmoAddedOnDeath;
-    [SerializeField] int playerFaceSpeed;
 
     [Header("----- Stage variables -----")]
     [SerializeField] List<Transform> enemySpawnPositions;
@@ -54,7 +50,6 @@ public class BossEnemyAI : BaseEnemyAI, IDamage
     [SerializeField] GunStats gun;
     [SerializeField] GameObject bullet;
 
-    Vector3 playerDir;
     bool isShooting;
     bool playerInRange;
     float angleToPlayer;
@@ -202,46 +197,7 @@ public class BossEnemyAI : BaseEnemyAI, IDamage
         StartCoroutine(FireSentrys());
     }
 
-    bool canSeePlayer()
-    {
-        playerDir = GameManager.instance.player.transform.position - headPos.position;
-        angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
 
-        Debug.Log(angleToPlayer);
-        Debug.DrawRay(headPos.position, playerDir);
-
-        RaycastHit hit;
-        if (Physics.Raycast(headPos.position, playerDir, out hit))
-        {
-            if (hit.collider.CompareTag("Player") && angleToPlayer <= fov)
-            {
-
-                agent.SetDestination(GameManager.instance.player.transform.position);
-
-                if (angleToPlayer <= fovshoot && !isShooting)
-                    StartCoroutine(Shoot());
-
-                if (agent.remainingDistance < agent.stoppingDistance)
-                {
-                    FaceTarget();
-                }
-
-                agent.stoppingDistance = stoppingDistOrig;
-
-                return true;
-            }
-
-            Debug.Log(hit.transform.name);
-        }
-
-        return false;
-    }
-
-    void FaceTarget()
-    {
-        Quaternion rot = Quaternion.LookRotation(playerDir);
-        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);
-    }
 
     private void OnTriggerEnter(Collider other)
     {

@@ -7,39 +7,28 @@ using UnityEngine.UIElements;
 public class RangedEnemyAI : BaseEnemyAI, IDamage
 {
     [Header("----- Components -----")]
-    [SerializeField] Animator anim;
     [SerializeField] Transform shootPos; //Position for him to shoot from
-    [SerializeField] Transform headPos;
     [SerializeField] bool effectGameGoal;
 
 
     [Header("----- Enemy Stats -----")]
     [SerializeField] float shootRate;
-    [SerializeField] int fov;
     [SerializeField] int fovshoot;
     [SerializeField] float bulletSpread;
     [SerializeField] int targetFaceSpeed;
     [SerializeField] int animspeedTrans;
     [SerializeField] int AmmoAddedOnDeath;
-    [SerializeField] int playerFaceSpeed;
 
 
     [Header("----- Gun Attributes -----")]
     [SerializeField] GameObject bullet;
     [SerializeField] GunStats gun;
 
-    Vector3 playerDir;
     bool isShooting;
     bool playerInRange;
-    float angleToPlayer;
     Vector3 startingPos;
     float stoppingDistOrig;
-    bool isDead = false; // Flag to track if the enemy is dead
 
-    void Start()
-    {
-        TryGetComponent<Animator>(out anim);
-    }
 
     void Awake()
     {
@@ -53,39 +42,29 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
         {
             if (canSeePlayer())
             {
-                if (agent.remainingDistance < agent.stoppingDistance)
+                if (alive)
                 {
-                    playerDir = GameManager.instance.player.transform.position - headPos.transform.position;
-                    FaceTarget();
-                }
-
-                if (!isDead)
-                {
-                    if (!isShooting)
+                    if (!isShooting && canSeePlayer())
                     {
                         if (anim) { anim.SetBool("isShooting", false); }
+                        StartCoroutine(Shoot());
+                        agent.stoppingDistance = stoppingDistOrig;
                     }
-                    else if (isShooting)
+                    else
                     {
                         if (anim) { anim.SetBool("isShooting", true); }
                     }
-
-                    if (!isShooting)
-                    {
-                        StartCoroutine(Shoot());
-                    }
                 }
-
-                else
+                else if (anim)
                 {
                     // Play death animation or perform any other actions
-                    if (anim) { anim.SetBool("isDead", true); }
+                    anim.SetBool("isDead", true);
                 }
             }
         }
-
-        
     }
+
+
 
     IEnumerator Shoot()
     {
@@ -112,53 +91,13 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
                 GameManager.instance.updateEnemyAmount(-1);
             }
             alive = false;
-            isDead = true;
             GameManager.instance.playerPoints += 200;
             if (anim) anim.SetBool("isDead", true);
             OnDeath();
         }
     }
 
-    bool canSeePlayer()
-    {
-        playerDir = GameManager.instance.player.transform.position - headPos.position;
-        angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
 
-        Debug.Log(angleToPlayer);
-        Debug.DrawRay(headPos.position, playerDir);
-
-        RaycastHit hit;
-        if (Physics.Raycast(headPos.position, playerDir, out hit))
-        {
-            if (hit.collider.CompareTag("Player") && angleToPlayer <= fov)
-            {
-
-                agent.SetDestination(GameManager.instance.player.transform.position);
-
-                if (angleToPlayer <= fovshoot && !isShooting)
-                    StartCoroutine(Shoot());
-
-                if (agent.remainingDistance < agent.stoppingDistance)
-                {
-                    FaceTarget();
-                }
-
-                agent.stoppingDistance = stoppingDistOrig;
-
-                return true;
-            }
-
-            Debug.Log(hit.transform.name);
-        }
-
-        return false;
-    }
-
-    void FaceTarget()
-    {
-        Quaternion rot = Quaternion.LookRotation(playerDir);
-        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * playerFaceSpeed);
-    }
 
     private void OnTriggerEnter(Collider other)
     {

@@ -79,6 +79,19 @@ public class buttonFunctions : MonoBehaviour
 
     }
 
+    public void menu()
+    {
+        SaveManager.instance.level1 = true;
+        SaveManager.instance.level2 = false;
+        SaveManager.instance.level3 = false;
+        SaveManager.instance.level4 = false;
+        SaveManager.instance.level5 = false;
+        SaveManager.instance.level6 = false;
+        SaveManager.instance.level7 = false;
+        SaveManager.instance.SaveData();
+        SceneManager.LoadScene("Level 0");
+    }
+
     public void Save()
     {
         SaveManager.instance.SaveData();

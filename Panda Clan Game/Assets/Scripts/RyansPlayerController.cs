@@ -198,7 +198,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                         StartCoroutine(Reload());
                     }
 
-                    if (readyToShoot && shooting && !reloading && gunList[bulletType].bulletsLeftInMag > 0)
+                    if (readyToShoot && shooting && !reloading && gunList[bulletType].bulletsLeftInMag > 0 && GameManager.instance.isPaused == false)
                     {
                         for (int i = gunList[bulletType].bulletsPerTap; i > 0; i--) //Multiple bullets per shot
                         {
@@ -248,30 +248,34 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         #endregion
         //Sprint Input
         #region Sprint Input
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !isShooting && isStamRecovered && GameManager.instance.isPaused == false)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !isShooting && isStamRecovered == true && GameManager.instance.isPaused == false)
         {
-            if (sprintRecover != null)
+            if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
             {
-                StopCoroutine(sprintRecover);
-            }
-            if (cameraSprint != null)
-            {
-                StopCoroutine(cameraSprint);
-            }
-            if (cameraInitial != null)
-            {
-                StopCoroutine(cameraInitial);
-            }
-            if (playerStam > 0)
-            {
-                isSprinting = true;
-                cameraSprint = StartCoroutine(CameraSprint());
-                Sprinting();
+                if (sprintRecover != null)
+                {
+                    StopCoroutine(sprintRecover);
+                }
+                if (cameraSprint != null)
+                {
+                    StopCoroutine(cameraSprint);
+                }
+                if (cameraInitial != null)
+                {
+                    StopCoroutine(cameraInitial);
+                }
+                if (playerStam > 0)
+                {
+                    isSprinting = true;
+                    cameraSprint = StartCoroutine(CameraSprint());
+                    Sprinting();
+                }
             }
         }
         if (playerStam <= 0 && GameManager.instance.isPaused == false)
         {
             isSprinting = false;
+            isStamRecovered = false;
             playerSpeed = originalPlayerSpeed;
             StopCoroutine(cameraSprint);
             cameraInitial = StartCoroutine(CameraInitial());

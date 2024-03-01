@@ -2156,8 +2156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectToSpawn:
-  - {fileID: 4461265607079146730, guid: fdf2348bab3f5104598fc3ae951ae530, type: 3}
-  - {fileID: 2236138064682025148, guid: 063c27812b484d34fac3def3548f2c11, type: 3}
+  - {fileID: 3167873111120421516, guid: 82e269868358d43e8aca129e8619f624, type: 3}
   timeBetweenSpawns: 1
   spawnPos:
   - {fileID: 1694658431}
@@ -7069,6 +7068,10 @@ PrefabInstance:
     - target: {fileID: 846779610046603133, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3067573623821199699, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
+      propertyPath: debugMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7483503311532101132, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
       propertyPath: m_Name

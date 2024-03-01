@@ -7,7 +7,6 @@ using UnityEngine.UIElements;
 public class RangedEnemyAI : BaseEnemyAI, IDamage
 {
     [Header("----- Components -----")]
-    [SerializeField] Animator anim;
     [SerializeField] Transform shootPos; //Position for him to shoot from
     [SerializeField] bool effectGameGoal;
 
@@ -30,10 +29,6 @@ public class RangedEnemyAI : BaseEnemyAI, IDamage
     Vector3 startingPos;
     float stoppingDistOrig;
 
-    void Start()
-    {
-        TryGetComponent<Animator>(out anim);
-    }
 
     void Awake()
     {

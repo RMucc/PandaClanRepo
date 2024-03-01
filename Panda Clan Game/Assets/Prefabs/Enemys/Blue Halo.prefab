@@ -1020,8 +1020,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2702730499294591365}
-  - component: {fileID: 6459915017106141057}
   - component: {fileID: 6115208957268918378}
+  - component: {fileID: 6459915017106141057}
   - component: {fileID: 8201200995519857606}
   - component: {fileID: 4458073164292900973}
   - component: {fileID: 4135117475507852086}
@@ -1058,6 +1058,48 @@ Transform:
   - {fileID: 968734519879145512}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -180.809, z: 0}
+--- !u!114 &6115208957268918378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3167873111120421516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c69444a257f78884e8778ee9c73be7ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 8201200995519857606}
+  modelList:
+  - {fileID: 5056203054258310708}
+  - {fileID: 2891821054087745114}
+  - {fileID: 4197708815898589703}
+  - {fileID: 426690237866370388}
+  - {fileID: 1984142577147727705}
+  - {fileID: 302720170784094973}
+  - {fileID: 5667058746939770511}
+  agent: {fileID: 4135117475507852086}
+  healthUI: {fileID: 7382014901306794610}
+  HP: 100
+  alive: 1
+  dropItemList: []
+  itemPotentialCountToDrop: 0
+  origHP: 100
+  playerDir: {x: 0, y: 0, z: 0}
+  playerFaceSpeed: 10
+  headPos: {fileID: 551495035278136373}
+  fov: 360
+  shootPos: {fileID: 2164582125466682166}
+  effectGameGoal: 0
+  shootRate: 1
+  fovshoot: 90
+  bulletSpread: 1
+  targetFaceSpeed: 0
+  animspeedTrans: 0
+  AmmoAddedOnDeath: 5
+  bullet: {fileID: 8262477620160788249, guid: 153c7fba034da9345a43d39a3eee9393, type: 3}
+  gun: {fileID: 11400000, guid: 9cdfbf8351e13cd44b51e9059de153e2, type: 2}
 --- !u!114 &6459915017106141057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1084,41 +1126,6 @@ MonoBehaviour:
   roamPauseTimer: 0
   bullet: {fileID: 8262477620160788249, guid: 153c7fba034da9345a43d39a3eee9393, type: 3}
   shootrate: 0.92
---- !u!114 &6115208957268918378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3167873111120421516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c69444a257f78884e8778ee9c73be7ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  modelList: []
-  agent: {fileID: 4135117475507852086}
-  healthUI: {fileID: 0}
-  HP: 100
-  origHP: 100
-  alive: 1
-  dropItemList: []
-  itemPotentialCountToDrop: 0
-  storedColors: []
-  anim: {fileID: 8201200995519857606}
-  shootPos: {fileID: 2164582125466682166}
-  headPos: {fileID: 551495035278136373}
-  effectGameGoal: 0
-  shootRate: 1
-  fov: 360
-  fovshoot: 90
-  bulletSpread: 1
-  targetFaceSpeed: 0
-  animspeedTrans: 0
-  AmmoAddedOnDeath: 5
-  playerFaceSpeed: 10
-  bullet: {fileID: 8262477620160788249, guid: 153c7fba034da9345a43d39a3eee9393, type: 3}
-  gun: {fileID: 11400000, guid: 9cdfbf8351e13cd44b51e9059de153e2, type: 2}
 --- !u!95 &8201200995519857606
 Animator:
   serializedVersion: 5

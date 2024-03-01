@@ -7,7 +7,6 @@ using UnityEngine.UIElements;
 public class BossEnemyAI : BaseEnemyAI, IDamage
 {
     [Header("----- Components -----")]
-    [SerializeField] Animator anim;
     [SerializeField] Transform shootPos; //Position for him to shoot from
     [SerializeField] bool effectGameGoal;
 

@@ -191,13 +191,14 @@ public class RyansPlayerController : MonoBehaviour, IDamage
 
                     if (readyToShoot && shooting && !reloading && gunList[bulletType].bulletsLeftInMag > 0)
                     {
-                        for (int i = gunList[bulletType].bulletsPerTap; i > 0; i--)
+                        for (int i = gunList[bulletType].bulletsPerTap; i > 0; i--) //Multiple bullets per shot
                         {
                             StartCoroutine(Shoot());
                         }
                     }
-                    else if (gunList[bulletType].bulletsLeftInMag == 0 && !reloading)
+                    else if (gunList[bulletType].bulletsLeftInMag <= 0 && !reloading)
                     {
+                        Debug.Log(gunList[bulletType].bulletsLeftInMag);
                         StartCoroutine(Reload());
                     }
                 }
@@ -735,6 +736,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                 Destroy(gunOut);
             }
             gunOut = Instantiate(gun.weaponPrefabSkin, gunPosition.transform);
+            updatePlayerUI();
         }
 
         if (AmmoChange != 0 && _bulletType == GameManager.BulletType.None)

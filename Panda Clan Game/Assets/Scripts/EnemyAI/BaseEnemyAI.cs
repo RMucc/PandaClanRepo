@@ -6,6 +6,8 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class BaseEnemyAI : MonoBehaviour
 {
+    [SerializeField] protected Animator anim;
+    public Dictionary<Renderer, Color> meshesToColors;
     public List<Renderer> modelList;
     public NavMeshAgent agent;
     public Canvas healthUI;
@@ -15,11 +17,10 @@ public class BaseEnemyAI : MonoBehaviour
     [SerializeField] int itemPotentialCountToDrop;
 
     [HideInInspector]
-    public List<Color> storedColors;
     public int origHP;
 
     public Vector3 playerDir;
-    [SerializeField] protected int playerFaceSpeed;
+    [SerializeField] public int playerFaceSpeed;
     public Transform headPos;
     [SerializeField] int fov;
     float angleToPlayer;
@@ -28,10 +29,12 @@ public class BaseEnemyAI : MonoBehaviour
 
     void Start()
     {
+        if (anim) { TryGetComponent<Animator>(out anim); }
+        meshesToColors = new(); 
         GameManager.instance.updateEnemyAmount(1);
         foreach (Renderer model in modelList)
         {
-            storedColors.Add(model.material.color);
+            meshesToColors.Add(model, model.material.color);
         }
         origHP = HP;
     }
@@ -74,9 +77,10 @@ public class BaseEnemyAI : MonoBehaviour
             model.material.color = Color.red;
         }
         yield return new WaitForSeconds(0.1f);
-        for (int i = 0; i < modelList.Count; i++)
+
+        foreach (KeyValuePair<Renderer, Color> entry in meshesToColors)
         {
-            modelList[i].material.color = storedColors[i];
+            entry.Key.material.color = entry.Value;
         }
     }
 
@@ -94,8 +98,6 @@ public class BaseEnemyAI : MonoBehaviour
         playerDir = GameManager.instance.player.transform.position - headPos.position;
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
 
-        Debug.Log(angleToPlayer);
-        Debug.DrawRay(headPos.position, playerDir);
 
         RaycastHit hit;
         if (Physics.Raycast(headPos.position, playerDir, out hit))

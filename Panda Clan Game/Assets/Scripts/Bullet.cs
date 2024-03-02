@@ -13,6 +13,8 @@ public class Bullet : MonoBehaviour
     [SerializeField] int damage;
     [SerializeField] bool enemyBullet;
     [SerializeField] bool sentryBullet;
+    [SerializeField] bool playerBullet;
+
 
     void Start()
     {

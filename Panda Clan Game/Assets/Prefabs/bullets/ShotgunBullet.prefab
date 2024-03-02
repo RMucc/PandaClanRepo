@@ -53,6 +53,7 @@ MonoBehaviour:
   damage: 10
   enemyBullet: 0
   sentryBullet: 0
+  playerBullet: 1
 --- !u!54 &-1912986696621586975
 Rigidbody:
   m_ObjectHideFlags: 0

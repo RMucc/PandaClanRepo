@@ -198,7 +198,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
                     }
                     else if (gunList[bulletType].bulletsLeftInMag <= 0 && !reloading)
                     {
-                        Debug.Log(gunList[bulletType].bulletsLeftInMag);
+                        //Debug.Log(gunList[bulletType].bulletsLeftInMag);
                         StartCoroutine(Reload());
                     }
                 }
@@ -644,7 +644,7 @@ public class RyansPlayerController : MonoBehaviour, IDamage
         float x = Random.Range(-gunList[bulletType].bulletSpread, gunList[bulletType].bulletSpread);
         float y = Random.Range(-gunList[bulletType].bulletSpread, gunList[bulletType].bulletSpread);
         Vector3 direction = cam.transform.forward + new Vector3(x, y, 0);
-        GameObject _bullet = Instantiate(gunList[bulletType].bullet, gunOut.transform.GetChild(0).transform.position, Quaternion.LookRotation(direction));
+        GameObject _bullet = Instantiate(gunList[bulletType].bullet, shootPos.transform.position, Quaternion.LookRotation(direction));
         Debug.DrawRay(shootPos.transform.position, direction * gunList[bulletType].bulletDistance, Color.red, 1f);
         if (Physics.Raycast(shootPos.transform.position, direction, out RaycastHit hit, gunList[bulletType].bulletDistance))
         {

@@ -11,7 +11,7 @@ public class Story3Script : MonoBehaviour
     void Start()
     {
         continueBool = false;
-        Debug.Log("Pausing Game and Activating Story3");
+        //Debug.Log("Pausing Game and Activating Story3");
         GameManager.instance.Story3.SetActive(true);
         GameManager.instance.statePaused();
         GameManager.instance.OnLevelFinished += ActivateNextArrow;

@@ -12,8 +12,6 @@ public class Bullet : MonoBehaviour
     [SerializeField] int destroyTime;
     [SerializeField] int damage;
     [SerializeField] bool enemyBullet;
-    [SerializeField] bool sentryBullet;
-    [SerializeField] bool playerBullet;
 
 
     void Start()
@@ -41,9 +39,5 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (!sentryBullet)
-        {
-            Destroy(gameObject);
-        }
     }
 }

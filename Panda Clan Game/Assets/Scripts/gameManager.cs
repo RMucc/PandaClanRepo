@@ -93,7 +93,6 @@ public class GameManager : MonoBehaviour
     public bool Story10Bool;
 
     public bool isPaused;
-    public bool level0;
     public bool level1;
     public bool level2;
     public bool level3;

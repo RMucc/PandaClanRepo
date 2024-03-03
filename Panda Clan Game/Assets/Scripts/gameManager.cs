@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
     Coroutine pushBack;
 
     [Header("----- Point Tracker -----")]
-    public int playerPoints;
+    //public int playerPoints;
 
 
     [Header("----- ShopKeeperVariables -----")]
@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
     #region AWAKE CODE
     void Awake()
     {
-        playerPoints = 0; //Initialize points to show zero on start up
+        //playerPoints = 0; //Initialize points to show zero on start up
         temp = 5;
         if (instance == null)
         {

@@ -181,7 +181,6 @@ public class BossEnemyAI : BaseEnemyAI, IDamage
                 GameManager.instance.updateGameGoal(-GameManager.instance.enemyGoal);
             }
             alive = false;
-            GameManager.instance.playerPoints += 200;
             OnDeath();
         }
     }

@@ -2779,6 +2779,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: ecdb7869593087345b258face1e020cc, type: 2}
     - target: {fileID: 8639433583950129636, guid: ae2d54a112c67544d9e945049f3710fc, type: 3}
+      propertyPath: invul
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8639433583950129636, guid: ae2d54a112c67544d9e945049f3710fc, type: 3}
       propertyPath: gunToAdd
       value: 
       objectReference: {fileID: 11400000, guid: ecdb7869593087345b258face1e020cc, type: 2}
@@ -6401,12 +6405,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2000289250690463182, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2745982424826739851, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7483503311532101132, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3294523680296045964, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
+    - {fileID: 7962817272020418716, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
+    - {fileID: 2745982424826739851, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
+    - {fileID: 9193261306662253820, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e213eaa915a84c047a4077a1d2bc4002, type: 3}

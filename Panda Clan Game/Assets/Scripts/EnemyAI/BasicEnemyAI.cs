@@ -55,7 +55,6 @@ public class BasicEnemyAI : BaseEnemyAI, IDamage
                 GameManager.instance.updateEnemyAmount(-1);
             }
             alive = false;
-            GameManager.instance.playerPoints += 175;
             OnDeath();
         }
     }

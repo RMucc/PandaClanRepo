@@ -7,11 +7,11 @@ using TMPro;
 public class PointsUI : MonoBehaviour
 {
 
-    public Text playerScore;
+    //public Text playerScore;
 
     // Update is called once per frame
     void Update()
     {
-        playerScore.text = "Score: " + GameManager.instance.playerPoints;
+        //playerScore.text = "Score: " + GameManager.instance.playerPoints;
     }
 }
